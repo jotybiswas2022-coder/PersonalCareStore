@@ -36,6 +36,15 @@ Route::post('/to-let/post', [FrontendToLetController::class, 'store'])->name('to
 
 /*
 |--------------------------------------------------------------------------
+| BasaFinder Frontend Pages
+|--------------------------------------------------------------------------
+*/
+Route::view('/search', 'frontend.search')->name('search');
+Route::view('/property/{id?}', 'frontend.property-detail')->name('property-detail');
+Route::view('/post-property', 'frontend.post-property')->name('post-property');
+
+/*
+|--------------------------------------------------------------------------
 | Authenticated User Routes (Breeze)
 |--------------------------------------------------------------------------
 */

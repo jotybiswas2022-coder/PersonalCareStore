@@ -1,94 +1,102 @@
-@php $s = settings(); @endphp
-<footer style="background: linear-gradient(180deg, #1B5E20 0%, #0D3B1E 100%); margin-top: auto;">
-    <style>
-        @media (max-width: 768px) {
-            .footer-grid { grid-template-columns: 1fr !important; gap: 2rem !important; }
-        }
-        @media (min-width: 769px) and (max-width: 1024px) {
-            .footer-grid { grid-template-columns: 1fr 1fr !important; gap: 2rem !important; }
-        }
-    </style>
-    {{-- Decorative top border --}}
-    <div style="height: 4px; background: linear-gradient(90deg, #FFD166, #2E8B57, #FFD166);"></div>
-
-    <div style="max-width: 1280px; margin: 0 auto; padding: 3.5rem 1.5rem 2rem;">
-        <!-- ── Main grid ── -->
-        <div class="footer-grid" style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 2.5rem;">
-            {{-- Brand column --}}
-            <div>
-                <div style="display: flex; align-items: center; gap: 0.625rem; margin-bottom: 1rem;">
-                    <span style="width: 2rem; height: 2rem; background: #FFD166; border-radius: 0.5rem; display: flex; align-items: center; justify-content: center; color: #212529; font-weight: 800; font-size: 0.9375rem;">P</span>
-                    <span style="color: #ffffff; font-size: 1.25rem; font-weight: 700; letter-spacing: -0.02em;">PersonalCareStore</span>
+<footer class="footer">
+    <div class="footer-wave">
+        <svg viewBox="0 0 1440 60" preserveAspectRatio="none"><path d="M0,30 C360,60 720,0 1080,30 C1260,45 1350,30 1440,30 L1440,60 L0,60 Z" fill="var(--secondary)"/></svg>
+    </div>
+    <div class="footer-main">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <span class="logo-icon">B</span>
+                        <span>BasaFinder</span>
+                    </div>
+                    <p class="footer-desc">Bangladesh's most trusted rental property marketplace. Find your perfect home with confidence.</p>
+                    <div class="footer-social">
+                        <a href="#" aria-label="Facebook"><svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+                        <a href="#" aria-label="Twitter"><svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+                        <a href="#" aria-label="Instagram"><svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
+                        <a href="#" aria-label="LinkedIn"><svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+                    </div>
                 </div>
-                <p style="color: rgba(255,255,255,0.6); font-size: 0.875rem; line-height: 1.7; margin-bottom: 1.25rem; max-width: 24rem;">
-                    Your trusted destination for premium personal care and home care products. Quality you can trust, delivered with care.
-                </p>
-                {{-- Social icons --}}
-                <div style="display: flex; gap: 0.625rem;">
-                    <a href="#" style="width: 2.125rem; height: 2.125rem; background: rgba(255,255,255,0.08); border-radius: 0.5rem; display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.6); text-decoration: none; transition: all 0.2s;" onmouseover="this.style.background='#FFD166'; this.style.color='#212529'" onmouseout="this.style.background='rgba(255,255,255,0.08)'; this.style.color='rgba(255,255,255,0.6)'" aria-label="Facebook">
-                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-                    </a>
-                    <a href="#" style="width: 2.125rem; height: 2.125rem; background: rgba(255,255,255,0.08); border-radius: 0.5rem; display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.6); text-decoration: none; transition: all 0.2s;" onmouseover="this.style.background='#FFD166'; this.style.color='#212529'" onmouseout="this.style.background='rgba(255,255,255,0.08)'; this.style.color='rgba(255,255,255,0.6)'" aria-label="Twitter">
-                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/></svg>
-                    </a>
-                    <a href="#" style="width: 2.125rem; height: 2.125rem; background: rgba(255,255,255,0.08); border-radius: 0.5rem; display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.6); text-decoration: none; transition: all 0.2s;" onmouseover="this.style.background='#FFD166'; this.style.color='#212529'" onmouseout="this.style.background='rgba(255,255,255,0.08)'; this.style.color='rgba(255,255,255,0.6)'" aria-label="Instagram">
-                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126C21.319 1.347 20.651.935 19.86.63c-.765-.297-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227-.224.562-.479.96-.899 1.382-.419.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421-.569-.224-.96-.479-1.379-.899-.421-.419-.69-.824-.9-1.38-.165-.42-.359-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.844 0-3.196.016-3.586.061-4.861.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06l.045.03zm0 3.678a6.162 6.162 0 100 12.324 6.162 6.162 0 100-12.324zM12 16c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm7.846-10.405a1.441 1.441 0 11-2.882 0 1.441 1.441 0 012.882 0z"/></svg>
-                    </a>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <a href="{{ route('home') }}">Home</a>
+                    <a href="{{ route('search') }}">Browse Properties</a>
+                    <a href="{{ route('post-property') }}">Post Property</a>
+                    <a href="{{ route('home') }}#categories">Categories</a>
+                    <a href="{{ route('home') }}#properties">Featured Properties</a>
                 </div>
-            </div>
-
-            {{-- Quick Links --}}
-            <div>
-                <h4 style="color: #ffffff; font-size: 0.9375rem; font-weight: 600; margin-bottom: 1.125rem;">Quick Links</h4>
-                <div style="display: flex; flex-direction: column; gap: 0.625rem;">
-                    <a href="#" style="color: rgba(255,255,255,0.6); text-decoration: none; font-size: 0.875rem; transition: all 0.2s;" onmouseover="this.style.color='#FFD166'; this.style.paddingLeft='4px'" onmouseout="this.style.color='rgba(255,255,255,0.6)'; this.style.paddingLeft='0'">Products</a>
-                    <a href="#" style="color: rgba(255,255,255,0.6); text-decoration: none; font-size: 0.875rem; transition: all 0.2s;" onmouseover="this.style.color='#FFD166'; this.style.paddingLeft='4px'" onmouseout="this.style.color='rgba(255,255,255,0.6)'; this.style.paddingLeft='0'">Cart</a>
-                    <a href="#" style="color: rgba(255,255,255,0.6); text-decoration: none; font-size: 0.875rem; transition: all 0.2s;" onmouseover="this.style.color='#FFD166'; this.style.paddingLeft='4px'" onmouseout="this.style.color='rgba(255,255,255,0.6)'; this.style.paddingLeft='0'">Track Order</a>
-    @auth
-        <a href="#" style="color: rgba(255,255,255,0.6); text-decoration: none; font-size: 0.875rem; transition: all 0.2s;" onmouseover="this.style.color='#FFD166'; this.style.paddingLeft='4px'" onmouseout="this.style.color='rgba(255,255,255,0.6)'; this.style.paddingLeft='0'">My Orders</a>
-    @endauth
+                <div class="footer-col">
+                    <h4>Property Types</h4>
+                    <a href="{{ route('search') }}">Flats & Apartments</a>
+                    <a href="{{ route('search') }}">Houses & Villas</a>
+                    <a href="{{ route('search') }}">Sublets</a>
+                    <a href="{{ route('search') }}">Bachelor Mess</a>
+                    <a href="{{ route('search') }}">Offices & Commercial</a>
                 </div>
-            </div>
-
-            {{-- Support --}}
-            <div>
-                <h4 style="color: #ffffff; font-size: 0.9375rem; font-weight: 600; margin-bottom: 1.125rem;">Support</h4>
-                <div style="display: flex; flex-direction: column; gap: 0.625rem;">
-                    @if($s && $s->contact_phone)
-                        <a href="tel:{{ $s->contact_phone }}" style="color: rgba(255,255,255,0.6); text-decoration: none; font-size: 0.875rem; transition: all 0.2s;" onmouseover="this.style.color='#FFD166'" onmouseout="this.style.color='rgba(255,255,255,0.6)'">{{ $s->contact_phone }}</a>
-                    @endif
-                    @if($s && $s->contact_email)
-                        <a href="mailto:{{ $s->contact_email }}" style="color: rgba(255,255,255,0.6); text-decoration: none; font-size: 0.875rem; transition: all 0.2s;" onmouseover="this.style.color='#FFD166'" onmouseout="this.style.color='rgba(255,255,255,0.6)'">{{ $s->contact_email }}</a>
-                    @endif
-                    @if($s && $s->contact_address)
-                        <span style="color: rgba(255,255,255,0.5); font-size: 0.8125rem; line-height: 1.5;">{{ $s->contact_address }}</span>
-                    @endif
+                <div class="footer-col">
+                    <h4>Support</h4>
+                    <a href="#">Help Center</a>
+                    <a href="#">Safety Tips</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Contact Us</a>
                 </div>
-            </div>
-
-            {{-- Contact --}}
-            <div>
-                <h4 style="color: #ffffff; font-size: 0.9375rem; font-weight: 600; margin-bottom: 1.125rem;">Business Hours</h4>
-                <div style="display: flex; flex-direction: column; gap: 0.5rem;">
-                    @if($s && $s->contact_hours)
-                        <span style="color: rgba(255,255,255,0.6); font-size: 0.875rem; line-height: 1.5;">{!! nl2br(e($s->contact_hours)) !!}</span>
-                    @else
-                        <span style="color: rgba(255,255,255,0.6); font-size: 0.875rem;">Sat - Thu: 9 AM - 8 PM</span>
-                    @endif
-                    <span style="color: rgba(255,255,255,0.4); font-size: 0.8125rem; margin-top: 0.25rem;">Friday: Closed</span>
+                <div class="footer-col">
+                    <h4>Download App</h4>
+                    <p style="color: rgba(255,255,255,0.5); font-size: 0.8125rem; margin-bottom: 1rem; line-height: 1.5;">Find properties on the go with our mobile app.</p>
+                    <div class="footer-app-badges">
+                        <a href="#" class="app-badge">
+                            <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/></svg>
+                            App Store
+                        </a>
+                        <a href="#" class="app-badge">
+                            <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 01-.61-.92V2.734a1 1 0 01.609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.807 1.626a1 1 0 010 1.732l-2.807 1.626L15.206 12l2.492-2.492zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg>
+                            Google Play
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
-
-        <!-- ── Bottom bar ── -->
-        <div style="margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.08); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;">
-            <p style="color: rgba(255,255,255,0.4); font-size: 0.8125rem;">
-                &copy; {{ date('Y') }} PersonalCareStore. All rights reserved.
-            </p>
-            <div style="display: flex; gap: 1.25rem;">
-                <a href="#" style="color: rgba(255,255,255,0.4); text-decoration: none; font-size: 0.8125rem; transition: color 0.2s;" onmouseover="this.style.color='#ffffff'" onmouseout="this.style.color='rgba(255,255,255,0.4)'">Privacy Policy</a>
-                <a href="#" style="color: rgba(255,255,255,0.4); text-decoration: none; font-size: 0.8125rem; transition: color 0.2s;" onmouseover="this.style.color='#ffffff'" onmouseout="this.style.color='rgba(255,255,255,0.4)'">Terms of Service</a>
+    </div>
+    <div class="footer-bottom">
+        <div class="container">
+            <div class="footer-bottom-inner">
+                <p>&copy; {{ date('Y') }} BasaFinder. All rights reserved.</p>
+                <div class="footer-bottom-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Cookie Policy</a>
+                </div>
             </div>
         </div>
     </div>
 </footer>
+
+<style>
+.footer { margin-top: auto; }
+.footer-wave svg { display: block; width: 100%; height: 40px; }
+.footer-main { background: var(--secondary); padding: 4rem 0 2rem; }
+.footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1.5fr; gap: 2.5rem; }
+@media (max-width: 1024px) { .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; } }
+@media (max-width: 640px) { .footer-grid { grid-template-columns: 1fr; gap: 1.5rem; } }
+.footer-logo { display: flex; align-items: center; gap: 0.625rem; margin-bottom: 1rem; }
+.footer-logo .logo-icon { width: 2rem; height: 2rem; background: linear-gradient(135deg, var(--primary), #1D4ED8); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #fff; font-weight: 800; font-size: 1rem; }
+.footer-logo span:last-child { color: #fff; font-size: 1.25rem; font-weight: 700; letter-spacing: -0.02em; }
+.footer-desc { color: rgba(255,255,255,0.5); font-size: 0.875rem; line-height: 1.7; margin-bottom: 1.5rem; max-width: 24rem; }
+.footer-social { display: flex; gap: 0.625rem; }
+.footer-social a { width: 2.125rem; height: 2.125rem; background: rgba(255,255,255,0.08); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.5); text-decoration: none; transition: all 0.2s; }
+.footer-social a:hover { background: var(--primary); color: #fff; transform: translateY(-2px); }
+.footer-col h4 { color: #fff; font-size: 0.9375rem; font-weight: 600; margin-bottom: 1.125rem; }
+.footer-col a { display: block; color: rgba(255,255,255,0.5); text-decoration: none; font-size: 0.875rem; margin-bottom: 0.625rem; transition: all 0.2s; }
+.footer-col a:hover { color: var(--accent); padding-left: 4px; }
+.footer-app-badges { display: flex; flex-direction: column; gap: 0.625rem; }
+.app-badge { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(255,255,255,0.08); color: #fff; padding: 0.625rem 1rem; border-radius: 8px; font-size: 0.8125rem; font-weight: 500; text-decoration: none; transition: all 0.2s; }
+.app-badge:hover { background: rgba(255,255,255,0.15); transform: translateY(-1px); }
+.footer-bottom { background: #0B1121; padding: 1.25rem 0; border-top: 1px solid rgba(255,255,255,0.05); }
+.footer-bottom-inner { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+.footer-bottom-inner p { color: rgba(255,255,255,0.3); font-size: 0.8125rem; }
+.footer-bottom-links { display: flex; gap: 1.25rem; }
+.footer-bottom-links a { color: rgba(255,255,255,0.3); text-decoration: none; font-size: 0.8125rem; transition: color 0.2s; }
+.footer-bottom-links a:hover { color: var(--accent); }
+</style>
