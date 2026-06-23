@@ -557,13 +557,13 @@
                     just for you. Quality you can trust, delivered to your doorstep.
                 </p>
                 <div class="hero-actions">
-                    <a href="{{ route('products.index') }}" class="btn-primary">
+                    <a href="#" class="btn-primary">
                         Shop Now
                         <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
                         </svg>
                     </a>
-                    <a href="{{ route('track-order.index') }}" class="btn-secondary">
+                    <a href="#" class="btn-secondary">
                         Track Order
                     </a>
                 </div>
@@ -678,7 +678,7 @@
         <div class="cta-inner">
             <h2>Ready to Elevate Your Self-Care?</h2>
             <p>Browse our collection and discover products that will transform your daily routine. Start shopping today!</p>
-            <a href="{{ route('products.index') }}" class="btn-cta">
+            <a href="#" class="btn-cta">
                 Start Shopping
                 <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6"/>

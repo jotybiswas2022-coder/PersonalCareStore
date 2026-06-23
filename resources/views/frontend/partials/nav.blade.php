@@ -14,26 +14,26 @@
     </div>
 
     {{-- Mobile cart icon (visible only on mobile, always accessible) --}}
-    <a href="{{ route('cart.index') }}" class="mobile-cart" aria-label="View cart">
+    <a href="#" class="mobile-cart" aria-label="View cart">
         <svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
             <path d="M9 20a1 1 0 100 2 1 1 0 000-2zM20 20a1 1 0 100 2 1 1 0 000-2z"/>
             <path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/>
         </svg>
-        <span class="mobile-cart-badge">{{ $cartCount }}</span>
+        <span class="mobile-cart-badge">{{ $cartCount ?? 0 }}</span>
     </a>
 
     {{-- Desktop nav links --}}
     <div id="navLinks" style="display: flex; align-items: center; gap: 0.5rem;">
-        <a href="{{ route('products.index') }}" style="color: rgba(255,255,255,0.85); text-decoration: none; padding: 0.5rem 0.875rem; border-radius: 0.5rem; font-size: 0.875rem; font-weight: 500; transition: all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.12)'; this.style.color='#ffffff'" onmouseout="this.style.background='transparent'; this.style.color='rgba(255,255,255,0.85)'">Products</a>
-        <a href="{{ route('cart.index') }}" style="color: rgba(255,255,255,0.85); text-decoration: none; padding: 0.5rem 0.875rem; border-radius: 0.5rem; font-size: 0.875rem; font-weight: 500; transition: all 0.2s; display: flex; align-items: center; gap: 0.375rem; position: relative;" onmouseover="this.style.background='rgba(255,255,255,0.12)'; this.style.color='#ffffff'" onmouseout="this.style.background='transparent'; this.style.color='rgba(255,255,255,0.85)'">
+        <a href="#" style="color: rgba(255,255,255,0.85); text-decoration: none; padding: 0.5rem 0.875rem; border-radius: 0.5rem; font-size: 0.875rem; font-weight: 500; transition: all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.12)'; this.style.color='#ffffff'" onmouseout="this.style.background='transparent'; this.style.color='rgba(255,255,255,0.85)'">Products</a>
+        <a href="#" style="color: rgba(255,255,255,0.85); text-decoration: none; padding: 0.5rem 0.875rem; border-radius: 0.5rem; font-size: 0.875rem; font-weight: 500; transition: all 0.2s; display: flex; align-items: center; gap: 0.375rem; position: relative;" onmouseover="this.style.background='rgba(255,255,255,0.12)'; this.style.color='#ffffff'" onmouseout="this.style.background='transparent'; this.style.color='rgba(255,255,255,0.85)'">
             Cart
-            <span style="background: #FFD166; color: #212529; font-size: 0.6875rem; font-weight: 700; padding: 0.0625rem 0.4375rem; border-radius: 9999px; min-width: 1.25rem; text-align: center;">{{ $cartCount }}</span>
+            <span style="background: #FFD166; color: #212529; font-size: 0.6875rem; font-weight: 700; padding: 0.0625rem 0.4375rem; border-radius: 9999px; min-width: 1.25rem; text-align: center;">{{ $cartCount ?? 0 }}</span>
         </a>
-        <a href="{{ route('track-order.index') }}" style="color: rgba(255,255,255,0.85); text-decoration: none; padding: 0.5rem 0.875rem; border-radius: 0.5rem; font-size: 0.875rem; font-weight: 500; transition: all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.12)'; this.style.color='#ffffff'" onmouseout="this.style.background='transparent'; this.style.color='rgba(255,255,255,0.85)'">Track Order</a>
+        <a href="#" style="color: rgba(255,255,255,0.85); text-decoration: none; padding: 0.5rem 0.875rem; border-radius: 0.5rem; font-size: 0.875rem; font-weight: 500; transition: all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.12)'; this.style.color='#ffffff'" onmouseout="this.style.background='transparent'; this.style.color='rgba(255,255,255,0.85)'">Track Order</a>
 
         @auth
             <div class="nav-divider" style="width: 1px; height: 1.5rem; background: rgba(255,255,255,0.2); margin: 0 0.25rem;"></div>
-            <a href="{{ route('orders.index') }}" style="color: rgba(255,255,255,0.85); text-decoration: none; padding: 0.5rem 0.875rem; border-radius: 0.5rem; font-size: 0.875rem; font-weight: 500; transition: all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.12)'; this.style.color='#ffffff'" onmouseout="this.style.background='transparent'; this.style.color='rgba(255,255,255,0.85)'">My Orders</a>
+            <a href="#" style="color: rgba(255,255,255,0.85); text-decoration: none; padding: 0.5rem 0.875rem; border-radius: 0.5rem; font-size: 0.875rem; font-weight: 500; transition: all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.12)'; this.style.color='#ffffff'" onmouseout="this.style.background='transparent'; this.style.color='rgba(255,255,255,0.85)'">My Orders</a>
             <a href="{{ route('profile.edit') }}" style="color: rgba(255,255,255,0.85); text-decoration: none; padding: 0.5rem 0.875rem; border-radius: 0.5rem; font-size: 0.875rem; font-weight: 500; transition: all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.12)'; this.style.color='#ffffff'" onmouseout="this.style.background='transparent'; this.style.color='rgba(255,255,255,0.85)'">Profile</a>
             @if(Auth::user()->is_admin)
                 <a href="{{ route('admin.dashboard') }}" style="background: #FFD166; color: #212529; text-decoration: none; font-size: 0.8125rem; font-weight: 600; padding: 0.5rem 1rem; border-radius: 0.5rem; transition: all 0.2s; box-shadow: 0 2px 8px rgba(255,209,102,0.3);" onmouseover="this.style.background='#F0C14B'; this.style.transform='translateY(-1px)'; this.style.boxShadow='0 4px 12px rgba(255,209,102,0.4)'" onmouseout="this.style.background='#FFD166'; this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 8px rgba(255,209,102,0.3)'">

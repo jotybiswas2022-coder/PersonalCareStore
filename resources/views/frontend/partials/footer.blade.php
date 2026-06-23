@@ -41,10 +41,11 @@
             <div>
                 <h4 style="color: #ffffff; font-size: 0.9375rem; font-weight: 600; margin-bottom: 1.125rem;">Quick Links</h4>
                 <div style="display: flex; flex-direction: column; gap: 0.625rem;">
-                    <a href="{{ route('products.index') }}" style="color: rgba(255,255,255,0.6); text-decoration: none; font-size: 0.875rem; transition: all 0.2s;" onmouseover="this.style.color='#FFD166'; this.style.paddingLeft='4px'" onmouseout="this.style.color='rgba(255,255,255,0.6)'; this.style.paddingLeft='0'">Products</a>
-                    <a href="{{ route('cart.index') }}" style="color: rgba(255,255,255,0.6); text-decoration: none; font-size: 0.875rem; transition: all 0.2s;" onmouseover="this.style.color='#FFD166'; this.style.paddingLeft='4px'" onmouseout="this.style.color='rgba(255,255,255,0.6)'; this.style.paddingLeft='0'">Cart</a>
-                    <a href="{{ route('track-order.index') }}" style="color: rgba(255,255,255,0.6); text-decoration: none; font-size: 0.875rem; transition: all 0.2s;" onmouseover="this.style.color='#FFD166'; this.style.paddingLeft='4px'" onmouseout="this.style.color='rgba(255,255,255,0.6)'; this.style.paddingLeft='0'">Track Order</a>    @auth
-        <a href="{{ route('orders.index') }}" style="color: rgba(255,255,255,0.6); text-decoration: none; font-size: 0.875rem; transition: all 0.2s;" onmouseover="this.style.color='#FFD166'; this.style.paddingLeft='4px'" onmouseout="this.style.color='rgba(255,255,255,0.6)'; this.style.paddingLeft='0'">My Orders</a>
+                    <a href="#" style="color: rgba(255,255,255,0.6); text-decoration: none; font-size: 0.875rem; transition: all 0.2s;" onmouseover="this.style.color='#FFD166'; this.style.paddingLeft='4px'" onmouseout="this.style.color='rgba(255,255,255,0.6)'; this.style.paddingLeft='0'">Products</a>
+                    <a href="#" style="color: rgba(255,255,255,0.6); text-decoration: none; font-size: 0.875rem; transition: all 0.2s;" onmouseover="this.style.color='#FFD166'; this.style.paddingLeft='4px'" onmouseout="this.style.color='rgba(255,255,255,0.6)'; this.style.paddingLeft='0'">Cart</a>
+                    <a href="#" style="color: rgba(255,255,255,0.6); text-decoration: none; font-size: 0.875rem; transition: all 0.2s;" onmouseover="this.style.color='#FFD166'; this.style.paddingLeft='4px'" onmouseout="this.style.color='rgba(255,255,255,0.6)'; this.style.paddingLeft='0'">Track Order</a>
+    @auth
+        <a href="#" style="color: rgba(255,255,255,0.6); text-decoration: none; font-size: 0.875rem; transition: all 0.2s;" onmouseover="this.style.color='#FFD166'; this.style.paddingLeft='4px'" onmouseout="this.style.color='rgba(255,255,255,0.6)'; this.style.paddingLeft='0'">My Orders</a>
     @endauth
                 </div>
             </div>

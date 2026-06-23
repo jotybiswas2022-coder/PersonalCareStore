@@ -67,11 +67,6 @@
                         Send Message
                     </button>
 
-                    <div style="text-align: center; margin-top: 1rem;">
-                        <a href="{{ route('contact.my-messages') }}" style="color: #2E8B57; font-size: 0.8125rem; text-decoration: none; font-weight: 500;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">
-                            View my previous messages &rarr;
-                        </a>
-                    </div>
                 </form>
             </div>
 
