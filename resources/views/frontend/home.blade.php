@@ -792,7 +792,7 @@
    ═══════════════════════════════════════════ */
 .testimonials-section {
     padding: 6rem 0 8rem;
-    background: linear-gradient(180deg, var(--navy) 0%, var(--secondary) 100%);
+    background: var(--secondary);
     position: relative;
     overflow: hidden;
 }
@@ -892,20 +892,29 @@
    FAQ
    ═══════════════════════════════════════════ */
 .faq-section {
-    padding: 6rem 0;
-    background: var(--bg);
+    padding: 6rem 0 4rem;
+    background: linear-gradient(180deg, var(--navy) 0%, #0D1325 50%, var(--secondary) 100%);
     position: relative;
+    overflow: hidden;
 }
-.faq-list { max-width: 720px; margin: 0 auto; padding: 0 1.5rem; display: flex; flex-direction: column; gap: 0.75rem; }
+.faq-section .section-heading { color: var(--white); }
+.faq-section .section-heading .highlight { color: var(--gold); }
+.faq-section .section-sub { color: rgba(255,255,255,0.5); }
+.faq-section .section-eyebrow { color: #93C5FD; }
+.faq-section .section-eyebrow::before { background: #93C5FD; }
+.faq-list { max-width: 720px; margin: 0 auto; padding: 0 1.5rem; display: flex; flex-direction: column; gap: 0.75rem; position: relative; z-index: 1; }
 .faq-item {
-    background: var(--white);
+    background: rgba(255,255,255,0.04);
+    backdrop-filter: blur(16px) saturate(1.4);
+    -webkit-backdrop-filter: blur(16px) saturate(1.4);
     border-radius: var(--r-md);
-    border: 1px solid var(--border);
+    border: 1px solid rgba(255,255,255,0.08);
     overflow: hidden;
     transition: all 0.3s;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.12), inset 0 1px 0 rgba(255,255,255,0.04);
 }
-.faq-item:hover { border-color: rgba(37,99,235,0.2); }
-.faq-item.open { border-color: rgba(37,99,235,0.25); box-shadow: 0 4px 16px rgba(37,99,235,0.06); }
+.faq-item:hover { border-color: rgba(37,99,235,0.25); background: rgba(255,255,255,0.06); }
+.faq-item.open { border-color: rgba(37,99,235,0.3); box-shadow: 0 4px 24px rgba(0,0,0,0.2); }
 .faq-question {
     width: 100%;
     padding: 1.125rem 1.25rem;
@@ -917,17 +926,17 @@
     cursor: pointer;
     font-size: 0.9375rem;
     font-weight: 600;
-    color: var(--text);
+    color: rgba(255,255,255,0.85);
     font-family: var(--font);
     text-align: left;
     transition: color 0.3s;
 }
-.faq-item.open .faq-question { color: var(--primary); }
-.faq-question svg { transition: all 0.4s cubic-bezier(0.34,1.56,0.64,1); flex-shrink: 0; color: var(--primary); }
-.faq-item.open .faq-question svg { transform: rotate(45deg); color: var(--primary-dark); }
+.faq-item.open .faq-question { color: #60A5FA; }
+.faq-question svg { transition: all 0.4s cubic-bezier(0.34,1.56,0.64,1); flex-shrink: 0; color: #60A5FA; }
+.faq-item.open .faq-question svg { transform: rotate(45deg); color: #60A5FA; }
 .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.4s ease; }
 .faq-item.open .faq-answer { max-height: 300px; padding: 0 1.25rem 1.125rem; }
-.faq-answer p { font-size: 0.875rem; color: var(--text-muted); line-height: 1.7; }
+.faq-answer p { font-size: 0.875rem; color: rgba(255,255,255,0.5); line-height: 1.7; }
 
 /* ═══════════════════════════════════════════
    BACK TO TOP
