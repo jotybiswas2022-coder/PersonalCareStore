@@ -1444,30 +1444,21 @@
         <p>Hear from thousands of satisfied users who found their perfect home through BasaFinder.</p>
     </div>
     <div class="test-grid">
-        <div class="test-card reveal" style="animation-delay:0.05s">
-            <div class="test-stars">★★★★★</div>
-            <p class="test-text">"BasaFinder made finding a flat in Dhaka incredibly easy. The filters helped me narrow down exactly what I needed, and I found my dream apartment in just 3 days!"</p>
-            <div class="test-author">
-                <div class="test-avatar">FN</div>
-                <div><div class="test-name">Farzana N.</div><div class="test-role">Renter, Dhaka</div></div>
+        @forelse($testimonials as $i => $t)
+            <div class="test-card reveal" style="animation-delay:{{ 0.05 + ($i * 0.05) }}s">
+                <div class="test-stars">{{ $t->stars }}</div>
+                <p class="test-text">"{{ $t->content }}"</p>
+                <div class="test-author">
+                    <div class="test-avatar">{{ $t->initial }}</div>
+                    <div><div class="test-name">{{ $t->author_name }}</div><div class="test-role">{{ $t->author_role }}</div></div>
+                </div>
             </div>
-        </div>
-        <div class="test-card reveal" style="animation-delay:0.1s">
-            <div class="test-stars">★★★★★</div>
-            <p class="test-text">"As a landlord, posting my property was incredibly easy. I got genuine leads within hours. The verification system gives both parties peace of mind."</p>
-            <div class="test-author">
-                <div class="test-avatar">RH</div>
-                <div><div class="test-name">Rafiq H.</div><div class="test-role">Property Owner, Chattogram</div></div>
+        @empty
+            <div style="grid-column:1/-1; text-align:center; padding:3rem 1rem;">
+                <h3 style="font-size:1.125rem; font-weight:600; color:var(--secondary);">No Testimonials Yet</h3>
+                <p style="color:var(--text-muted); font-size:0.875rem;">Check back soon for customer stories.</p>
             </div>
-        </div>
-        <div class="test-card reveal" style="animation-delay:0.15s">
-            <div class="test-stars">★★★★★</div>
-            <p class="test-text">"I was skeptical about finding a bachelor mess online, but BasaFinder changed my mind. Found a great place with awesome roommates. Highly recommended!"</p>
-            <div class="test-author">
-                <div class="test-avatar">SK</div>
-                <div><div class="test-name">Shahid K.</div><div class="test-role">Renter, Khulna</div></div>
-            </div>
-        </div>
+        @endforelse
     </div>
 </section>
 

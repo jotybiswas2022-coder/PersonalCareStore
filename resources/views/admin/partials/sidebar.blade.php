@@ -50,6 +50,14 @@
             <span class="sb-item-text">New Ad</span>
         </a>
 
+        <div class="sb-label">Content</div>
+        <a href="{{ route('admin.testimonials.index') }}" class="sb-item {{ request()->routeIs('admin.testimonials.*') ? 'active' : '' }}">
+            <span class="sb-item-icon" style="background:{{ request()->routeIs('admin.testimonials.*') ? 'rgba(251,191,36,0.2)' : 'transparent' }};color:{{ request()->routeIs('admin.testimonials.*') ? '#fbbf24' : '#9ca3af' }};">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            </span>
+            <span class="sb-item-text">Testimonials</span>
+        </a>
+
         <div class="sb-label">Config</div>
         <a href="{{ route('admin.contact-setting.index') }}" class="sb-item {{ request()->routeIs('admin.contact-setting.*') ? 'active' : '' }}">
             <span class="sb-item-icon" style="background:{{ request()->routeIs('admin.contact-setting.*') ? 'rgba(245,158,11,0.2)' : 'transparent' }};color:{{ request()->routeIs('admin.contact-setting.*') ? '#fbbf24' : '#9ca3af' }};">

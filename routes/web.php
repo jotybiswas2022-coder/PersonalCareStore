@@ -10,6 +10,7 @@ use App\Http\Controllers\Frontend\ContactMessageController;
 use App\Http\Controllers\Frontend\ToLetAdvertisementController as FrontendToLetController;
 use App\Http\Controllers\Admin\ToLetAdvertisementController as AdminToLetController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Admin\TestimonialController as AdminTestimonialController;
 
 /*
 |--------------------------------------------------------------------------
@@ -76,6 +77,14 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::get('/messages/{id}', [AdminMessageController::class, 'show'])->name('messages.show');
     Route::post('/messages/{id}/reply', [AdminMessageController::class, 'reply'])->name('messages.reply');
     Route::delete('/messages/{id}', [AdminMessageController::class, 'destroy'])->name('messages.destroy');
+
+    // Testimonials
+    Route::get('/testimonials', [AdminTestimonialController::class, 'index'])->name('testimonials.index');
+    Route::get('/testimonials/create', [AdminTestimonialController::class, 'create'])->name('testimonials.create');
+    Route::post('/testimonials', [AdminTestimonialController::class, 'store'])->name('testimonials.store');
+    Route::get('/testimonials/{id}/edit', [AdminTestimonialController::class, 'edit'])->name('testimonials.edit');
+    Route::put('/testimonials/{id}', [AdminTestimonialController::class, 'update'])->name('testimonials.update');
+    Route::delete('/testimonials/{id}', [AdminTestimonialController::class, 'destroy'])->name('testimonials.destroy');
 
     // To-Let Advertisements
     Route::get('/to-let', [AdminToLetController::class, 'index'])->name('to-let.index');
