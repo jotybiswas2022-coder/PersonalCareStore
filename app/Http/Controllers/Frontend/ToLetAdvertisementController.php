@@ -10,7 +10,7 @@ class ToLetAdvertisementController extends Controller
 {
     public function search(Request $request)
     {
-        $query = ToLetAdvertisement::approved()->latest();
+        $query = ToLetAdvertisement::approved();
 
         if ($request->filled('division')) {
             $query->where('division', $request->division);
