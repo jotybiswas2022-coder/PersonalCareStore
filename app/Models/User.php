@@ -47,4 +47,9 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function properties(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(ToLetAdvertisement::class, 'user_id');
+    }
 }

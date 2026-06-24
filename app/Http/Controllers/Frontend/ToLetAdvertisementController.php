@@ -102,6 +102,7 @@ class ToLetAdvertisementController extends Controller
 
         $validated['images'] = !empty($imagePaths) ? $imagePaths : null;
         $validated['status'] = 'pending';
+        $validated['user_id'] = auth()->id();
 
         ToLetAdvertisement::create($validated);
 
@@ -155,10 +156,103 @@ class ToLetAdvertisementController extends Controller
 
         $validated['images'] = !empty($imagePaths) ? $imagePaths : null;
         $validated['status'] = 'pending';
+        $validated['user_id'] = auth()->id();
 
         ToLetAdvertisement::create($validated);
 
         return redirect()->route('post-property')
             ->with('success', 'Your property has been posted successfully! It will be reviewed by our team.');
+    }
+
+    public function myProperties()
+    {
+        $properties = ToLetAdvertisement::where('user_id', auth()->id())
+            ->latest()
+            ->paginate(10);
+
+        return view('frontend.my-properties', compact('properties'));
+    }
+
+    public function editProperty($id)
+    {
+        $property = ToLetAdvertisement::where('user_id', auth()->id())->findOrFail($id);
+        return view('frontend.edit-property', compact('property'));
+    }
+
+    public function updateProperty(Request $request, $id)
+    {
+        $property = ToLetAdvertisement::where('user_id', auth()->id())->findOrFail($id);
+
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'property_type' => 'required|string|max:255',
+            'listing_type' => 'nullable|string|max:255',
+            'division' => 'required|string|max:255',
+            'district' => 'required|string|max:255',
+            'area_location' => 'required|string|max:255',
+            'full_address' => 'required|string',
+            'monthly_rent' => 'required|numeric|min:0',
+            'security_deposit' => 'nullable|numeric|min:0',
+            'bedrooms' => 'required|integer|min:0',
+            'bathrooms' => 'required|integer|min:0',
+            'floor_number' => 'nullable|integer|min:0',
+            'total_floors' => 'nullable|integer|min:0',
+            'property_size' => 'nullable|numeric|min:0',
+            'furnishing' => 'nullable|string|max:255',
+            'tenant_preference' => 'required|string|max:255',
+            'available_from' => 'required|date',
+            'description' => 'nullable|string',
+            'contact_name' => 'required|string|max:255',
+            'contact_phone' => 'required|string|max:255',
+            'contact_email' => 'nullable|email|max:255',
+            'preferred_contact_method' => 'nullable|string|max:255',
+            'images' => 'nullable|array',
+            'images.*' => 'image|mimes:jpeg,png,jpg,webp|max:2048',
+        ]);
+
+        $imagePaths = $property->images ?? [];
+
+        if ($request->filled('delete_images')) {
+            $deleteIndices = array_map('intval', explode(',', $request->delete_images));
+            foreach ($deleteIndices as $idx) {
+                if (isset($imagePaths[$idx])) {
+                    \Illuminate\Support\Facades\Storage::disk('public')->delete($imagePaths[$idx]);
+                    unset($imagePaths[$idx]);
+                }
+            }
+            $imagePaths = array_values($imagePaths);
+        }
+
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $image) {
+                if (count($imagePaths) < 5) {
+                    $imagePaths[] = $image->store('to-let', 'public');
+                }
+            }
+        }
+
+        $validated['images'] = $imagePaths;
+        $validated['status'] = 'pending';
+
+        $property->update($validated);
+
+        return redirect()->route('my-properties')
+            ->with('success', 'Property updated successfully! It needs to be re-approved by admin.');
+    }
+
+    public function destroyProperty($id)
+    {
+        $property = ToLetAdvertisement::where('user_id', auth()->id())->findOrFail($id);
+
+        if ($property->images) {
+            foreach ($property->images as $image) {
+                \Illuminate\Support\Facades\Storage::disk('public')->delete($image);
+            }
+        }
+
+        $property->delete();
+
+        return redirect()->route('my-properties')
+            ->with('success', 'Property deleted successfully.');
     }
 }

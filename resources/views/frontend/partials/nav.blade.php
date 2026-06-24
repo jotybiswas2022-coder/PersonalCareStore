@@ -17,6 +17,7 @@
             </a>
             <div class="nav-divider"></div>
             @auth
+                <a href="{{ route('my-properties') }}" class="nav-item">My Properties</a>
                 <a href="{{ route('profile.edit') }}" class="nav-item">Profile</a>
                 @if(Auth::user()->is_admin)
                     <a href="{{ route('admin.dashboard') }}" class="nav-item nav-item--admin">Admin</a>

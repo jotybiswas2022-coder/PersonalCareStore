@@ -55,6 +55,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    // My Properties
+    Route::get('/my-properties', [FrontendToLetController::class, 'myProperties'])->name('my-properties');
+    Route::get('/my-properties/{id}/edit', [FrontendToLetController::class, 'editProperty'])->name('my-properties.edit');
+    Route::put('/my-properties/{id}', [FrontendToLetController::class, 'updateProperty'])->name('my-properties.update');
+    Route::delete('/my-properties/{id}', [FrontendToLetController::class, 'destroyProperty'])->name('my-properties.destroy');
 });
 
 /*

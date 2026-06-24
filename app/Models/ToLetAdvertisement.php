@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Storage;
 class ToLetAdvertisement extends Model
 {
     protected $fillable = [
+        'user_id',
         'title',
         'property_type',
         'listing_type',
@@ -73,5 +74,10 @@ class ToLetAdvertisement extends Model
     {
         $images = $this->images ?? [];
         return array_map(fn($path) => Storage::disk('public')->url($path), $images);
+    }
+
+    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 }
