@@ -442,6 +442,10 @@
 /* ── Sunshine (after found) ── */
 .hero-scene .sunshine { animation: sunGlow 2s ease-in-out 3.5s infinite; opacity: 0; }
 @keyframes sunGlow { 0%,100% { opacity: 0.06; transform: scale(1); } 50% { opacity: 0.15; transform: scale(1.08); } }
+
+/* ── Pointing arm ── */
+.hero-scene .point-arm { animation: pointAppear 0.6s ease-out 3.5s forwards; opacity: 0; transform-origin: 108px 140px; }
+@keyframes pointAppear { 0% { opacity: 0; transform: scale(0.5) rotate(-20deg); } 100% { opacity: 1; transform: scale(1) rotate(0deg); } }
 .hero-image-card .floating-card {
     position: absolute;
     background: rgba(15,23,42,0.5);
@@ -1181,13 +1185,12 @@
                                     <path d="M104 112 Q104 96 120 94 Q136 96 136 112" fill="rgba(96,165,250,0.1)" stroke="rgba(96,165,250,0.2)" stroke-width="1"/>
                                 </g>
 
-                                <!-- Other arm (down when sad, pointing when happy) -->
-                                <g class="person-arm">
-                                    <!-- Arm holding glass - drops after found -->
-                                    <path d="M132 138 Q148 128 160 116" stroke="rgba(96,165,250,0.35)" stroke-width="3" fill="none" stroke-linecap="round" class="glass-hide" style="animation-delay:3.2s"/>
-                                    <!-- Pointing arm (appears after found) -->
-                                    <path d="M108 140 Q95 128 88 118" stroke="rgba(96,165,250,0.25)" stroke-width="2.5" fill="none" stroke-linecap="round" style="opacity:0; animation: fadeIn 0.5s ease-in 3.5s forwards"/>
-                                </g>
+                            <!-- Arm holding magnifying glass -->
+                            <g class="person-arm">
+                                <path d="M132 138 Q148 128 160 116" stroke="rgba(96,165,250,0.35)" stroke-width="3" fill="none" stroke-linecap="round" class="glass-hide" style="animation-delay:3.2s"/>
+                            </g>
+                            <!-- Pointing arm at house (appears after found) -->
+                            <path d="M108 140 Q92 126 85 116" stroke="rgba(96,165,250,0.3)" stroke-width="2.5" fill="none" stroke-linecap="round" class="point-arm"/>
                             </g>
 
                             <!-- Magnifying Glass (searches then disappears) -->
