@@ -52,7 +52,6 @@
     backdrop-filter: blur(40px) saturate(1.5);
     -webkit-backdrop-filter: blur(40px) saturate(1.5);
     transition: background 0.4s ease, box-shadow 0.4s ease;
-    position: relative;
 }
 .site-header::after {
     content: '';

@@ -777,7 +777,9 @@ n/* ── Smooth floating card entrance ── */
     .hero h1 { font-size: 2.75rem; }
     .hero p { margin-left: auto; margin-right: auto; }
     .hero-stats { justify-content: center; }
-    .hero-visual { display: none; }
+    .hero .hero-grid .hero-visual { max-width: 420px; margin: 0 auto; }
+    .hero-image-card { max-width: 420px; }
+    .hero-scene svg { width: 90%; height: 90%; }
     .hero-search-row { flex-direction: column; }
     .hero-search .search-field { min-width: 100%; }
     .hero-search .btn-search { width: 100%; justify-content: center; }
@@ -789,6 +791,9 @@ n/* ── Smooth floating card entrance ── */
     .hero p { font-size: 0.9375rem; }
     .hero-stats { gap: 1.25rem; flex-wrap: wrap; }
     .hero-stat .num { font-size: 1.25rem; }
+    .hero .hero-grid .hero-visual { max-width: 340px; }
+    .hero-image-card { max-width: 340px; }
+    .hero-image-card .floating-card { display: none; }
 }
 
 /* ═══════════════════════════════════════════
