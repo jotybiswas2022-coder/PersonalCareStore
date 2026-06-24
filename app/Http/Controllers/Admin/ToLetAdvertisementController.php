@@ -120,17 +120,29 @@ class ToLetAdvertisementController extends Controller
         ]);
 
         // Handle image uploads
-        if ($request->hasFile('images')) {
-            $existingImages = $advertisement->images ?? [];
-            $imagePaths = $existingImages; // keep existing
+        $imagePaths = $advertisement->images ?? [];
 
+        // Handle image deletions
+        if ($request->filled('delete_images')) {
+            $deleteIndices = array_map('intval', explode(',', $request->delete_images));
+            foreach ($deleteIndices as $idx) {
+                if (isset($imagePaths[$idx])) {
+                    Storage::disk('public')->delete($imagePaths[$idx]);
+                    unset($imagePaths[$idx]);
+                }
+            }
+            $imagePaths = array_values($imagePaths); // re-index
+        }
+
+        if ($request->hasFile('images')) {
             foreach ($request->file('images') as $image) {
                 if (count($imagePaths) < 5) {
                     $imagePaths[] = $image->store('to-let', 'public');
                 }
             }
-            $validated['images'] = $imagePaths;
         }
+
+        $validated['images'] = $imagePaths;
 
         if (!isset($validated['status'])) {
             $validated['status'] = $advertisement->status;

@@ -174,6 +174,27 @@
     border: 1px solid #e5e7eb;
 }
 .existing-image-item img { width: 100%; height: 100%; object-fit: cover; }
+.existing-image-item .del-existing {
+    position: absolute;
+    top: 0.25rem;
+    right: 0.25rem;
+    width: 1.25rem;
+    height: 1.25rem;
+    background: rgba(220,38,38,0.85);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    font-size: 0.65rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    z-index: 2;
+    line-height: 1;
+}
+.existing-image-item .del-existing:hover { background: #b91c1c; transform: scale(1.15); }
+.existing-image-item.removing { opacity: 0.3; pointer-events: none; transition: opacity 0.3s; }
 
 /* ── Image Upload Area ── */
 .image-upload-area {
@@ -467,15 +488,30 @@
             @if($advertisement->images && count($advertisement->images) > 0)
                 <div style="margin-bottom:1.25rem;">
                     <label style="font-size:0.8rem;font-weight:600;color:#374151;display:block;margin-bottom:0.5rem;">Current Photos ({{ count($advertisement->images) }})</label>
-                    <div class="existing-images">
-                        @foreach($advertisement->all_images as $img)
-                            <div class="existing-image-item">
+                    <div class="existing-images" id="existingImages">
+                        @foreach($advertisement->all_images as $i => $img)
+                            <div class="existing-image-item" data-idx="{{ $i }}">
                                 <img src="{{ $img }}" alt="Property photo">
+                                <button type="button" class="del-existing" onclick="removeExistingImage(this)" title="Delete this photo">×</button>
                             </div>
                         @endforeach
                     </div>
                 </div>
             @endif
+
+            <input type="hidden" name="delete_images" id="deleteImages" value="">
+
+            <script>
+            function removeExistingImage(btn) {
+                var item = btn.parentElement;
+                var idx = item.getAttribute('data-idx');
+                item.classList.add('removing');
+                var input = document.getElementById('deleteImages');
+                var deleted = input.value ? input.value.split(',').map(Number) : [];
+                if (!deleted.includes(idx)) { deleted.push(idx); }
+                input.value = deleted.join(',');
+            }
+            </script>
 
             <div class="form-group" style="max-width:700px;">
                 <label>Add More Photos (optional)</label>
