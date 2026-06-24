@@ -799,6 +799,17 @@
 }
 @keyframes floatBorderGlow { 0% { --float-angle: 0; } 100% { --float-angle: 360; } }
 @property --float-angle { syntax: '<number>'; initial-value: 0; inherits: false; }
+n/* ── Smooth floating card entrance ── */
+.floating-card {
+    opacity: 0;
+    transform: translateY(30px) scale(0.85);
+    transition: opacity 0.7s cubic-bezier(0.34,1.56,0.64,1), transform 0.7s cubic-bezier(0.34,1.56,0.64,1);
+}
+.floating-card.floating-card-enter {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
 .hero-image-card .floating-card:hover { transform: scale(1.12) translateY(-4px) !important; background: rgba(15,23,42,0.6); box-shadow: 0 12px 40px rgba(0,0,0,0.35); }
 .hero-image-card .floating-card:nth-child(2) { bottom: 2%; right: -10%; animation-delay: 0s; animation-duration: 7s; }
 .hero-image-card .floating-card:nth-child(3) { top: 5%; left: -8%; animation-delay: 0s; }

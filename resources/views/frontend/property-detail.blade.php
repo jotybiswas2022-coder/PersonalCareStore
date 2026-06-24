@@ -22,28 +22,28 @@ body { background: var(--navy); }
 
 /* ─── Glass Card ─── */
 .glass-card {
-    background: rgba(15,23,42,0.6);
-    backdrop-filter: blur(28px) saturate(1.5);
-    -webkit-backdrop-filter: blur(28px) saturate(1.5);
-    border: 1px solid rgba(96,165,250,0.08);
+    background: linear-gradient(135deg, rgba(15,23,42,0.55), rgba(15,23,42,0.7));
+    backdrop-filter: blur(40px) saturate(1.4);
+    -webkit-backdrop-filter: blur(40px) saturate(1.4);
     border-radius: var(--r-lg);
-    box-shadow: 0 8px 32px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.04);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.06);
     transition: all 0.4s cubic-bezier(0.16,1,0.3,1);
     position: relative;
     overflow: hidden;
 }
 .glass-card::before {
     content: '';
-    position: absolute; inset: -2px; border-radius: var(--r-lg);
-    background: conic-gradient(from var(--glass-angle,0deg), transparent, rgba(37,99,235,0.12), rgba(124,58,237,0.12), transparent);
-    animation: glassBorderGlow 6s linear infinite;
-    -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 2px), #fff calc(100% - 1.5px));
-    mask: radial-gradient(farthest-side, transparent calc(100% - 2px), #fff calc(100% - 1.5px));
+    position: absolute; inset: 0;
+    border-radius: var(--r-lg);
+    padding: 1px;
+    background: linear-gradient(135deg, rgba(96,165,250,0.2), transparent 40%, transparent 60%, rgba(167,139,250,0.12));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude;
     pointer-events: none;
 }
-@property --glass-angle { syntax: '<angle>'; initial-value: 0deg; inherits: false; }
-@keyframes glassBorderGlow { 0% { --glass-angle: 0deg; } 100% { --glass-angle: 360deg; } }
-.glass-card:hover { box-shadow: 0 12px 48px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.06); transform: translateY(-2px); }
+.glass-card:hover { box-shadow: 0 12px 48px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.08); transform: translateY(-2px); }
 
 /* ─── Breadcrumb ─── */
 .pd-breadcrumb {
