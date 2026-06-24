@@ -71,9 +71,11 @@
     .footer-social a { width: 1.75rem; height: 1.75rem; }
     .footer-col h4 { font-size: 0.8125rem; margin-bottom: 0.625rem; }
     .footer-col a { font-size: 0.75rem; margin-bottom: 0.375rem; }
+    .footer-col:last-child { grid-column: 1 / -1; text-align: center; }
+    .footer-col:last-child h4 { font-size: 0.9375rem; }
     .footer-contact-form input,
-    .footer-contact-form textarea { padding: 0.375rem 0.5rem; font-size: 0.75rem; margin-bottom: 0.375rem; }
-    .footer-contact-form button { padding: 0.375rem; font-size: 0.75rem; }
+    .footer-contact-form textarea { padding: 0.5rem 0.75rem; font-size: 0.85rem; margin-bottom: 0.5rem; }
+    .footer-contact-form button { padding: 0.5rem; font-size: 0.85rem; }
     .footer-bottom { padding: 0.75rem 0; }
     .footer-bottom-inner { flex-direction: column; text-align: center; gap: 0.375rem; }
     .footer-bottom-inner p { font-size: 0.7rem; }
