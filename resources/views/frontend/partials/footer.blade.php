@@ -27,11 +27,11 @@
                 </div>
                 <div class="footer-col">
                     <h4>Property Types</h4>
-                    <a href="{{ route('search') }}">Flats & Apartments</a>
-                    <a href="{{ route('search') }}">Houses & Villas</a>
-                    <a href="{{ route('search') }}">Sublets</a>
-                    <a href="{{ route('search') }}">Bachelor Mess</a>
-                    <a href="{{ route('search') }}">Offices & Commercial</a>
+                    <a href="{{ route('search', ['property_type' => 'Flat']) }}">Flats & Apartments</a>
+                    <a href="{{ route('search', ['property_type' => 'House']) }}">Houses & Villas</a>
+                    <a href="{{ route('search', ['property_type' => 'Sublet']) }}">Sublets</a>
+                    <a href="{{ route('search', ['property_type' => 'Bachelor Mess']) }}">Bachelor Mess</a>
+                    <a href="{{ route('search', ['property_type' => 'Office']) }}">Offices & Commercial</a>
                 </div>
                 <div class="footer-col">
                     <h4>Support</h4>
