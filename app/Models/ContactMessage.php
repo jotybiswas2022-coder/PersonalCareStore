@@ -10,6 +10,7 @@ class ContactMessage extends Model
         'name',
         'email',
         'message',
+        'view_token',
         'admin_reply',
         'replied_at',
     ];
