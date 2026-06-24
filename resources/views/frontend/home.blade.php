@@ -1323,6 +1323,11 @@
 .faq-answer p { font-size: 0.875rem; color: var(--text-muted); line-height: 1.7; }
 
 /* ═══════════════════════════════════════════
+n/* ── Smooth scene restart transition ── */
+.hero-scene .scene-loop {
+    transition: opacity 0.35s ease-in-out;
+}
+
    BACK TO TOP
    ═══════════════════════════════════════════ */
 #backToTop {
@@ -2221,16 +2226,26 @@ document.querySelectorAll('.fav-btn').forEach(function(btn) {
     card.addEventListener('mouseleave', function() { this.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg)'; });
 })();
 
-// ── Hero Scene Looper ──
+// ── Hero Scene Looper (smooth fade) ──
 (function() {
     var svg = document.querySelector('.hero-scene svg');
     if (!svg) return;
     var loopWrap = svg.querySelector('.scene-loop');
     if (!loopWrap) return;
     function restartScene() {
-        var clone = loopWrap.cloneNode(true);
-        svg.replaceChild(clone, loopWrap);
-        loopWrap = clone;
+        // Fade out, replace, fade in
+        loopWrap.style.transition = 'opacity 0.35s ease-in-out';
+        loopWrap.style.opacity = '0';
+        setTimeout(function() {
+            var clone = loopWrap.cloneNode(true);
+            clone.style.opacity = '0';
+            clone.style.transition = 'opacity 0.35s ease-in-out';
+            svg.replaceChild(clone, loopWrap);
+            loopWrap = clone;
+            requestAnimationFrame(function() {
+                loopWrap.style.opacity = '1';
+            });
+        }, 400);
     }
     setInterval(restartScene, 5800);
 })();
