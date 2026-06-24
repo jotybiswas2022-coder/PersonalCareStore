@@ -1,7 +1,4 @@
 <footer class="footer">
-    <div class="footer-wave">
-        <svg viewBox="0 0 1440 60" preserveAspectRatio="none"><path d="M0,30 C360,60 720,0 1080,30 C1260,45 1350,30 1440,30 L1440,60 L0,60 Z" fill="var(--secondary)"/></svg>
-    </div>
     <div class="footer-main">
         <div class="container">
             <div class="footer-grid">
@@ -70,8 +67,6 @@
 
 <style>
 .footer { margin-top: auto; }
-.footer-wave { background: #f8fafc; line-height: 0; }
-.footer-wave svg { display: block; width: 100%; height: 40px; }
 .footer-main { background: #f8fafc; padding: 4rem 0 2rem; }
 .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1.5fr; gap: 2.5rem; }
 @media (max-width: 1024px) { .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; } }

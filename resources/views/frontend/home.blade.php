@@ -1582,7 +1582,7 @@
                             </g>
 
                             <!-- Fence near house -->
-                            <g class="slide-in-left" style="animation-delay:2.4s" opacity="0.04">
+                            <g class="slide-in-left" style="animation-delay:2.4s" opacity="0.06">
                                 <rect x="182" y="175" width="2" height="17" fill="#10B981"/>
                                 <rect x="192" y="175" width="2" height="17" fill="#10B981"/>
                                 <rect x="202" y="175" width="2" height="17" fill="#10B981"/>
@@ -1784,7 +1784,7 @@
                             <!-- Property detail popup card -->
 
                             <!-- Road/path -->
-                            <g class="slide-in-left" style="animation-delay:2.2s" opacity="0.04">
+                            <g class="slide-in-left" style="animation-delay:2.2s" opacity="0.06">
                                 <path d="M0 192 Q75 186 150 192 Q225 186 300 192" stroke="rgba(96,165,250,0.08)" stroke-width="1.5" fill="none"/>
                                 <path d="M0 196 Q75 190 150 196 Q225 190 300 196" stroke="rgba(96,165,250,0.06)" stroke-width="1" fill="none"/>
                                 <line x1="0" y1="194" x2="15" y2="194" stroke="rgba(96,165,250,0.04)" stroke-width="0.8"/>
@@ -1800,7 +1800,7 @@
                             </g>
 
                             <!-- Lamp post (left) -->
-                            <g class="slide-up" style="animation-delay:2.6s" opacity="0.04">
+                            <g class="slide-up" style="animation-delay:2.6s" opacity="0.06">
                                 <rect x="56" y="145" width="2" height="47" fill="rgba(245,158,11,0.2)"/>
                                 <path d="M48 145 Q57 140 66 145" stroke="rgba(245,158,11,0.2)" stroke-width="1.2" fill="none"/>
                                 <circle cx="57" cy="143" r="3" fill="rgba(245,158,11,0.08)"/>
@@ -1808,7 +1808,7 @@
                             </g>
 
                             <!-- Lamp post (right) -->
-                            <g class="slide-up" style="animation-delay:2.8s" opacity="0.04">
+                            <g class="slide-up" style="animation-delay:2.8s" opacity="0.06">
                                 <rect x="246" y="148" width="2" height="44" fill="rgba(245,158,11,0.2)"/>
                                 <path d="M238 148 Q247 143 256 148" stroke="rgba(245,158,11,0.2)" stroke-width="1.2" fill="none"/>
                                 <circle cx="247" cy="146" r="3" fill="rgba(245,158,11,0.08)"/>
@@ -1816,7 +1816,7 @@
                             </g>
 
                             <!-- Small car on road -->
-                            <g class="roll-in" style="animation-delay:3.5s" opacity="0.04">
+                            <g class="roll-in" style="animation-delay:3.5s" opacity="0.06">
                                 <rect x="100" y="185" width="16" height="8" rx="2" fill="rgba(96,165,250,0.15)"/>
                                 <rect x="104" y="182" width="10" height="5" rx="1.5" fill="rgba(96,165,250,0.1)"/>
                                 <circle cx="104" cy="193" r="2" fill="rgba(96,165,250,0.12)"/>
@@ -2325,23 +2325,29 @@ document.querySelectorAll('.fav-btn').forEach(function(btn) {
     drawParticles();
 })();
 
-// ── Scroll Parallax ──
+// ── Scroll Parallax (uses CSS background-position, not style.transform) ──
 (function() {
     var hero = document.getElementById('hero');
     if (!hero) return;
-    var mesh = hero.querySelector('.hero-mesh');
-    var orbs = hero.querySelectorAll('.hero-orbs .orb');
+    var gridOverlay = hero.querySelector('.hero-grid-overlay');
+    var glowRings = hero.querySelectorAll('.hero-glow-rings .ring');
 
     window.addEventListener('scroll', function() {
         var heroRect = hero.getBoundingClientRect();
         if (heroRect.bottom < 0) return;
         var progress = Math.min(1, Math.max(0, -heroRect.top / hero.offsetHeight));
-        if (mesh) {
-            mesh.style.transform = 'translateY(' + (progress * 40) + 'px) scale(' + (1 + progress * 0.03) + ')';
+        if (gridOverlay) {
+            gridOverlay.style.opacity = Math.max(0.1, 0.3 - progress * 0.25);
         }
-        if (orbs.length) {
-            for (var i = 0; i < orbs.length; i++) {
-                orbs[i].style.transform += ' translateY(' + (progress * (30 + i * 10)) + 'px)';
+        if (glowRings.length) {
+            for (var i = 0; i < glowRings.length; i++) {
+                var baseScale = 1 - progress * 0.4;
+                glowRings[i].style.transform = 'scale(' + baseScale + ')';
+                glowRings[i].style.opacity = Math.max(0, 1 - progress * 2);
+            }
+        }
+    });
+})();
             }
         }
     });
