@@ -773,27 +773,31 @@ n/* ── Smooth floating card entrance ── */
 @keyframes float { 0%,100% { transform: translateY(0) rotate(0deg); } 33% { transform: translateY(-14px) rotate(0.5deg); } 66% { transform: translateY(-6px) rotate(-0.3deg); } }
 
 @media (max-width: 1024px) {
-    .hero .hero-grid { grid-template-columns: 1fr; gap: 2rem; padding: 5rem 1.5rem 3rem; text-align: center; }
-    .hero h1 { font-size: 2.75rem; }
-    .hero p { margin-left: auto; margin-right: auto; }
-    .hero-stats { justify-content: center; }
-    .hero .hero-grid .hero-visual { max-width: 420px; margin: 0 auto; }
-    .hero-image-card { max-width: 420px; }
+    .hero .hero-grid { grid-template-columns: 1fr; gap: 1.5rem; padding: 1rem 1.5rem 3rem; text-align: center; }
+    .hero .hero-grid .hero-visual { order: -1; max-width: 380px; margin: 0 auto; }
+    .hero-image-card { max-width: 380px; }
     .hero-scene svg { width: 90%; height: 90%; }
+    .hero h1 { font-size: 2.5rem; }
+    .hero p { margin-left: auto; margin-right: auto; }
+    .hero-badge { margin-top: 0.5rem; }
+    .hero-stats { justify-content: center; }
     .hero-search-row { flex-direction: column; }
     .hero-search .search-field { min-width: 100%; }
     .hero-search .btn-search { width: 100%; justify-content: center; }
 }
 @media (max-width: 768px) {
     .hero { min-height: auto; }
-    .hero .hero-grid { padding: 3rem 1rem 2.5rem; }
-    .hero h1 { font-size: 2rem; }
-    .hero p { font-size: 0.9375rem; }
-    .hero-stats { gap: 1.25rem; flex-wrap: wrap; }
-    .hero-stat .num { font-size: 1.25rem; }
-    .hero .hero-grid .hero-visual { max-width: 340px; }
-    .hero-image-card { max-width: 340px; }
+    .hero .hero-grid { padding: 0.5rem 1rem 2.5rem; gap: 1rem; }
+    .hero .hero-grid .hero-visual { order: -1; max-width: 280px; }
+    .hero-image-card { max-width: 280px; }
     .hero-image-card .floating-card { display: none; }
+    .hero h1 { font-size: 1.75rem; }
+    .hero p { font-size: 0.875rem; }
+    .hero-badge { font-size: 0.75rem; padding: 0.35rem 0.85rem; }
+    .hero-stats { gap: 1rem; flex-wrap: wrap; }
+    .hero-stat .num { font-size: 1.125rem; }
+    .hero-stat .label { font-size: 0.7rem; }
+    .hero-image-card .main-img { border-radius: 16px; }
 }
 
 /* ═══════════════════════════════════════════
