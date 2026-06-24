@@ -18,69 +18,9 @@
 }
 @keyframes progressGlow { 0%,100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
 
-/* ═══════════════════════════════════════════
-   AURORA WAVE OVERLAY
-   ═══════════════════════════════════════════ */
-.hero-aurora {
-    position: absolute; inset: 0; pointer-events: none; z-index: 0;
-    overflow: hidden; opacity: 0.5;
-}
-.hero-aurora .aurora-band {
-    position: absolute; width: 200%; height: 120%;
-    top: -10%; left: -50%;
-    background: linear-gradient(
-        180deg,
-        transparent 0%,
-        rgba(37,99,235,0.02) 15%,
-        rgba(124,58,237,0.04) 25%,
-        rgba(16,185,129,0.01) 35%,
-        transparent 50%
-    );
-    animation: auroraDrift 12s ease-in-out infinite alternate;
-    filter: blur(60px);
-    transform-origin: center center;
-}
-.hero-aurora .aurora-band:nth-child(2) {
-    background: linear-gradient(
-        180deg,
-        transparent 0%,
-        rgba(245,158,11,0.01) 20%,
-        rgba(37,99,235,0.03) 35%,
-        rgba(124,58,237,0.02) 45%,
-        transparent 60%
-    );
-    animation-duration: 16s;
-    animation-delay: -4s;
-    animation-direction: alternate-reverse;
-    filter: blur(80px);
-}
-.hero-aurora .aurora-band:nth-child(3) {
-    background: linear-gradient(
-        90deg,
-        transparent 0%,
-        rgba(96,165,250,0.02) 25%,
-        rgba(16,185,129,0.01) 50%,
-        transparent 75%
-    );
-    animation-duration: 14s;
-    animation-delay: -2s;
-    filter: blur(70px);
-}
-@keyframes auroraDrift {
-    0% { transform: translateX(-20%) translateY(0) rotate(-2deg) scale(1); opacity: 0.3; }
-    25% { transform: translateX(10%) translateY(-5%) rotate(1deg) scale(1.05); opacity: 0.5; }
-    50% { transform: translateX(-5%) translateY(8%) rotate(-1deg) scale(0.95); opacity: 0.35; }
-    75% { transform: translateX(15%) translateY(-3%) rotate(2deg) scale(1.02); opacity: 0.45; }
-    100% { transform: translateX(-10%) translateY(5%) rotate(-1.5deg) scale(1.03); opacity: 0.4; }
-}
+/* AURORA WAVE OVERLAY - removed for performance */
 
-/* ═══════════════════════════════════════════
-   INTERACTIVE PARTICLES CANVAS
-   ═══════════════════════════════════════════ */
-#heroParticlesCanvas {
-    position: absolute; inset: 0; pointer-events: none; z-index: 0;
-    width: 100%; height: 100%;
-}
+/* INTERACTIVE PARTICLES CANVAS - removed */
 
 /* ═══════════════════════════════════════════
    HERO
@@ -93,107 +33,8 @@
     overflow: hidden;
     background: var(--navy);
 }
-.hero-mesh {
-    position: absolute;
-    inset: -50%;
-    background:
-        radial-gradient(ellipse 700px 450px at 15% 25%, rgba(37,99,235,0.22) 0%, transparent 60%),
-        radial-gradient(ellipse 550px 400px at 85% 75%, rgba(124,58,237,0.15) 0%, transparent 60%),
-        radial-gradient(ellipse 600px 500px at 50% 10%, rgba(37,99,235,0.10) 0%, transparent 60%),
-        radial-gradient(ellipse 400px 350px at 70% 30%, rgba(245,158,11,0.08) 0%, transparent 60%),
-        radial-gradient(ellipse 450px 350px at 40% 80%, rgba(16,185,129,0.05) 0%, transparent 60%);
-    animation: meshMove 20s ease-in-out infinite alternate;
-    pointer-events: none;
-    will-change: transform;
-}
-@keyframes meshMove {
-    0%   { transform: translate(0,0) rotate(0deg) scale(1); }
-    25%  { transform: translate(2%,-1%) rotate(0.5deg) scale(1.02); }
-    50%  { transform: translate(-1%,1.5%) rotate(-0.5deg) scale(1.04); }
-    75%  { transform: translate(1%,-1.5%) rotate(0.5deg) scale(1.02); }
-    100% { transform: translate(-0.5%,0.5%) rotate(-0.5deg) scale(1.01); }
-}
-.hero-orbs { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
-.hero-orbs .orb {
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
-    transform: translateZ(0);
-    -webkit-transform: translateZ(0);
-    position: absolute; border-radius: 50%;
-    filter: blur(80px); opacity: 0.35;
-    will-change: transform;
-}
-.hero-orbs .orb:nth-child(1) { width: 380px; height: 380px; background: rgba(37,99,235,0.18); top: 5%; left: 5%; }
-.hero-orbs .orb:nth-child(2) { width: 300px; height: 300px; background: rgba(124,58,237,0.12); bottom: 10%; right: 10%; }
-.hero-orbs .orb:nth-child(3) { width: 240px; height: 240px; background: rgba(245,158,11,0.08); top: 55%; left: 55%; }
-.hero-orbs .orb:nth-child(4) { width: 200px; height: 200px; background: rgba(16,185,129,0.06); bottom: 25%; left: 20%; }
-.hero-particles { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
-.hero-particles span {
-    position: absolute; display: block; border-radius: 50%;
-    animation: floatParticle 22s infinite linear;
-}
-.hero-particles .p-dot { width: 3px; height: 3px; background: rgba(147,197,253,0.2); }
-.hero-particles .p-glow { width: 5px; height: 5px; background: rgba(37,99,235,0.2); box-shadow: 0 0 10px 2px rgba(37,99,235,0.1); }
-.hero-particles .p-gold { width: 4px; height: 4px; background: rgba(245,158,11,0.15); }
-.hero-particles .p-trail {
-    width: 3px; height: 3px; background: rgba(147,197,253,0.12);
-    box-shadow: 0 0 6px 2px rgba(147,197,253,0.08);
-    animation: floatParticleTrail 28s infinite linear;
-}
-@keyframes floatParticleTrail {
-    0%   { transform: translateY(100vh) translateX(0) rotate(0deg); opacity: 0; }
-    10%  { opacity: 0.5; }
-    50%  { transform: translateY(-20vh) translateX(80px) rotate(360deg); opacity: 0.2; }
-    90%  { opacity: 0.5; }
-    100% { transform: translateY(-110vh) translateX(150px) rotate(720deg); opacity: 0; }
-}
-@keyframes floatParticle {
-    0%   { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0; }
-    10%  { opacity: 1; }
-    90%  { opacity: 1; }
-    100% { transform: translateY(-100vh) translateX(50px) rotate(720deg); opacity: 0; }
-}
-.hero-particles span:nth-child(1)  { left: 8%;  top: 15%; animation-duration:28s; animation-delay:-2s; }
-.hero-particles span:nth-child(2)  { left: 20%; top: 55%; animation-duration:22s; animation-delay:-5s; }
-.hero-particles span:nth-child(3)  { left: 40%; top: 25%; animation-duration:26s; animation-delay:-8s; }
-.hero-particles span:nth-child(4)  { left: 55%; top: 65%; animation-duration:24s; animation-delay:-3s; }
-.hero-particles span:nth-child(5)  { left: 70%; top: 10%; animation-duration:30s; animation-delay:-10s; }
-.hero-particles span:nth-child(6)  { left: 82%; top: 45%; animation-duration:19s; animation-delay:-6s; }
-.hero-particles span:nth-child(7)  { left: 30%; top: 75%; animation-duration:28s; animation-delay:-12s; }
-.hero-particles span:nth-child(8)  { left: 92%; top: 20%; animation-duration:23s; animation-delay:-7s; }
-.hero-particles span:nth-child(9)  { left: 15%; top: 85%; animation-duration:25s; animation-delay:-4s; }
-.hero-particles span:nth-child(10) { left: 65%; top: 80%; animation-duration:21s; animation-delay:-9s; }
-.hero-particles span:nth-child(11) { left: 48%; top: 5%;  animation-duration:29s; animation-delay:-1s; }
-.hero-particles span:nth-child(12) { left: 5%;  top: 45%; animation-duration:18s; animation-delay:-11s; }
-.hero-particles span:nth-child(13) { left: 75%; top: 30%; animation-duration:24s; animation-delay:-3s; }
-.hero-particles span:nth-child(14) { left: 50%; top: 50%; animation-duration:20s; animation-delay:-7s; }
-.hero-particles span:nth-child(15) { left: 10%; top: 70%; animation-duration:28s; animation-delay:-5s; }
-.hero-glow-rings { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
-.hero-glow-rings .ring {
-    position: absolute; border-radius: 50%;
-    border: 1px solid rgba(37,99,235,0.06);
-    animation: ringExpand 10s ease-out infinite;
-}
-.hero-glow-rings .ring:nth-child(1) { width: 250px; height: 250px; top: 15%; left: 28%; animation-delay: 0s; }
-.hero-glow-rings .ring:nth-child(2) { width: 350px; height: 350px; bottom: 15%; right: 20%; animation-delay: 3.5s; }
-.hero-glow-rings .ring:nth-child(3) { width: 180px; height: 180px; top: 65%; left: 8%; animation-delay: 7s; }
-@keyframes ringExpand { 0% { transform: scale(0.4); opacity: 1; } 100% { transform: scale(3); opacity: 0; } }
-.hero-grid-overlay {
-    position: absolute; inset: 0;
-    background-image:
-        linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
-    background-size: 60px 60px;
-    pointer-events: none;
-    animation: gridPulse 8s ease-in-out infinite;
-}
-@keyframes gridPulse { 0%,100% { opacity: 0.3; } 50% { opacity: 0.8; } }
-.hero-glare {
-    position: absolute; inset: 0; pointer-events: none; z-index: 1;
-    opacity: 0; transition: opacity 0.5s ease;
-    background: radial-gradient(700px circle at var(--mouse-x,50%) var(--mouse-y,50%), rgba(37,99,235,0.06) 0%, transparent 60%);
-}
-.hero-glare.active { opacity: 1; }
+/* hero-mesh removed */
+/* hero decorative elements removed (orbs, particles, glow-rings, grid-overlay, glare) */
 
 .hero .hero-grid {
     max-width: 1280px;
@@ -265,19 +106,7 @@
     animation: gradientShift 6s ease-in-out infinite;
 }
 @keyframes gradientShift { 0%,100% { background-position: 0% 50%; } 25% { background-position: 100% 0%; } 50% { background-position: 100% 100%; } 75% { background-position: 0% 100%; } }
-.hero h1 .typewriter-text {
-    display: inline-block; position: relative;
-    color: #FCD34D;
-    text-shadow: 0 0 30px rgba(252,211,77,0.2);
-}
-.hero h1 .typewriter-text::after {
-    content: '';
-    position: absolute; right: -6px; top: 50%; transform: translateY(-50%);
-    width: 2.5px; height: 70%;
-    background: #FCD34D;
-    animation: blink 0.8s step-end infinite;
-}
-@keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: 0; } }
+/* typewriter CSS removed */
 .hero p {
     font-size: 1.0625rem;
     color: rgba(255,255,255,0.5);
@@ -447,333 +276,6 @@
 .hero-scene { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
 .hero-scene svg { width: 85%; height: 85%; }
 
-/* ═══════════════════════════════════════════
-   SCENE ANIMATIONS (single-pass, JS-looped)
-   ═══════════════════════════════════════════ */
-
-/* ── Character walk in + body bob ── */
-.hero-scene .scene-loop .person-group { animation: walkIn 1s ease-out forwards, bodyBob 0.4s ease-in-out 1s 3; will-change: transform; backface-visibility: hidden; }
-@keyframes walkIn { 0% { transform: translateX(-120px); opacity: 0; } 60% { transform: translateX(5px); } 100% { transform: translateX(0); opacity: 1; } }
-@keyframes bodyBob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
-
-/* ── Head look around ── */
-.hero-scene .scene-loop .person-head { animation: headLook 3s ease-in-out 0.3s infinite; transform-origin: 120px 110px; }
-@keyframes headLook {
-    0%,100% { transform: rotate(0deg); }
-    10% { transform: rotate(12deg); }
-    25% { transform: rotate(-10deg); }
-    40% { transform: rotate(8deg); }
-    55% { transform: rotate(-6deg); }
-    70% { transform: rotate(4deg); }
-}
-
-/* ── Arm wave ── */
-.hero-scene .scene-loop .person-arm { animation: armWave 2s ease-in-out 0.2s infinite; transform-origin: 132px 136px; }
-@keyframes armWave {
-    0%,100% { transform: rotate(0deg); }
-    20% { transform: rotate(20deg); }
-    40% { transform: rotate(-10deg); }
-    60% { transform: rotate(15deg); }
-    80% { transform: rotate(-5deg); }
-}
-
-/* ── Face transitions ── */
-.hero-scene .scene-loop .face-sad { animation: fadeOut 1.8s ease-in-out forwards; }
-@keyframes fadeOut { 0%,60% { opacity: 1; } 80% { opacity: 0.5; } 100% { opacity: 0; } }
-.hero-scene .scene-loop .face-happy { animation: fadeIn 0.5s ease-in-out 1.6s forwards; opacity: 0; }
-@keyframes fadeIn { 0% { opacity: 0; transform: scale(0.5); } 60% { transform: scale(1.1); } 100% { opacity: 1; transform: scale(1); } }
-
-/* ── Magnifying glass sweep ── */
-.hero-scene .scene-loop .search-glass { animation: glassSweep 2s ease-in-out 0.6s 2; transform-origin: 160px 114px; opacity: 0; animation-fill-mode: forwards; }
-@keyframes glassSweep {
-    0% { opacity: 0; transform: rotate(0deg); }
-    10% { opacity: 1; }
-    20% { transform: rotate(18deg); }
-    40% { transform: rotate(-18deg); }
-    60% { transform: rotate(14deg); }
-    80% { transform: rotate(-10deg); }
-    100% { opacity: 1; transform: rotate(0deg); }
-}
-.hero-scene .scene-loop .glass-hide { animation: glassFadeOut 0.4s ease-in 1.7s forwards; }
-@keyframes glassFadeOut { 0% { opacity: 1; transform: scale(1) rotate(0deg); } 50% { transform: scale(0.5) rotate(30deg); } 100% { opacity: 0; transform: scale(0) rotate(60deg); } }
-
-/* ── House pop + glow ── */
-.hero-scene .scene-loop .house-found { animation: housePop 0.6s cubic-bezier(0.34,1.56,0.64,1) 1.4s forwards, houseGlow 1.2s ease-in-out 2s infinite; opacity: 0; transform-origin: 215px 169px; }
-@keyframes housePop { 0% { opacity: 0; transform: scale(0) rotate(-25deg); } 40% { transform: scale(1.35) rotate(8deg); } 70% { transform: scale(0.9) rotate(-3deg); } 100% { opacity: 1; transform: scale(1) rotate(0deg); } }
-@keyframes houseGlow { 0%,100% { filter: drop-shadow(0 0 4px rgba(16,185,129,0.3)) brightness(1); } 50% { filter: drop-shadow(0 0 16px rgba(16,185,129,0.6)) brightness(1.08); } }
-
-/* ── Happy jump ── */
-.hero-scene .scene-loop .happy-jump { animation: jumpHappy 0.7s ease-in-out 1.7s infinite; }
-@keyframes jumpHappy {
-    0%,100% { transform: translateY(0); }
-    40% { transform: translateY(-20px); }
-    60% { transform: translateY(-4px); }
-}
-
-/* ── Sparkle pop ── */
-.hero-scene .scene-loop .sparkle { animation: sparklePop 1.4s ease-out 1.9s infinite; opacity: 0; }
-@keyframes sparklePop {
-    0% { opacity: 0; transform: scale(0) rotate(0deg); }
-    15% { opacity: 1; transform: scale(1.8) rotate(180deg); }
-    40% { opacity: 0.5; transform: scale(0.7) rotate(360deg); }
-    70% { opacity: 0.2; transform: scale(1.2) rotate(540deg); }
-    100% { opacity: 0; transform: scale(0) rotate(720deg); }
-}
-
-/* ── Checkmark pop + heartbeat ── */
-.hero-scene .scene-loop .checkmark { animation: checkPop 0.5s cubic-bezier(0.34,1.56,0.64,1) 2s forwards, heartBeat 0.8s ease-in-out 2.8s infinite; opacity: 0; transform-origin: 215px 140px; }
-@keyframes checkPop { 0% { opacity: 0; transform: scale(0) rotate(-40deg); } 40% { transform: scale(1.5) rotate(8deg); } 70% { transform: scale(0.9) rotate(-4deg); } 100% { opacity: 1; transform: scale(1) rotate(0deg); } }
-@keyframes heartBeat {
-    0%,100% { transform: scale(1); }
-    15% { transform: scale(1.2); }
-    30% { transform: scale(1); }
-    45% { transform: scale(1.1); }
-    60% { transform: scale(1); }
-}
-
-/* ── FOUND badge tada ── */
-.hero-scene .scene-loop .found-text { animation: badgeBounce 0.5s cubic-bezier(0.34,1.56,0.64,1) 2.3s forwards, tada 1s ease-in-out 3.2s infinite; opacity: 0; }
-@keyframes badgeBounce { 0% { opacity: 0; transform: scale(0) translateY(20px); } 40% { transform: scale(1.35); } 70% { transform: scale(0.9); } 100% { opacity: 1; transform: scale(1) translateY(0); } }
-@keyframes tada {
-    0%,100% { transform: scale(1) rotate(0deg); }
-    10%,20% { transform: scale(0.9) rotate(-4deg); }
-    30%,50%,70%,90% { transform: scale(1.15) rotate(4deg); }
-    40%,60%,80% { transform: scale(1.15) rotate(-4deg); }
-}
-
-/* ── Travel dots ── */
-.hero-scene .scene-loop .travel-dot { animation: dotTravel 1.2s ease-in-out 1.5s infinite; }
-@keyframes dotTravel {
-    0% { opacity: 0; transform: translateX(0) scale(0); }
-    15% { opacity: 0.7; transform: translateX(12px) scale(1.2); }
-    40% { opacity: 0.5; transform: translateX(30px) scale(0.9); }
-    70% { opacity: 0.3; transform: translateX(48px) scale(0.6); }
-    100% { opacity: 0; transform: translateX(60px) scale(0); }
-}
-
-/* ── Pointing arm ── */
-.hero-scene .scene-loop .point-arm { animation: pointAppear 0.4s ease-out 1.6s forwards; opacity: 0; transform-origin: 132px 136px; }
-@keyframes pointAppear { 0% { opacity: 0; transform: scale(0.3) rotate(-30deg); } 50% { transform: scale(1.2) rotate(5deg); } 100% { opacity: 1; transform: scale(1) rotate(0deg); } }
-
-/* ── Rain ── */
-.hero-scene .scene-loop .raindrop { animation: rainFall 0.8s linear infinite; }
-@keyframes rainFall { 0% { opacity: 0; transform: translateY(-25px); } 30% { opacity: 0.5; } 50% { opacity: 0.3; transform: translateY(15px); } 100% { opacity: 0; transform: translateY(40px); } }
-
-/* ── Sunshine ── */
-.hero-scene .scene-loop .sunshine { animation: sunGlow 1.2s ease-in-out 1.8s infinite; opacity: 0; }
-@keyframes sunGlow { 0%,100% { opacity: 0; transform: scale(1); } 50% { opacity: 0.25; transform: scale(1.12); } }
-
-/* ── Float soft ── */
-.hero-scene .scene-loop .float-element { animation: floatSoft 2.5s ease-in-out infinite; }
-@keyframes floatSoft { 0%,100% { transform: translateY(0); } 25% { transform: translateY(-6px); } 50% { transform: translateY(-2px); } 75% { transform: translateY(-4px); } }
-
-/* ── Pulse glow ── */
-.hero-scene .scene-loop .pulse-glow { animation: pulseGlow 1.5s ease-in-out infinite; }
-@keyframes pulseGlow { 0%,100% { opacity: 0.3; transform: scale(1); } 50% { opacity: 0.8; transform: scale(1.08); } }
-
-/* ── Slide up ── */
-.hero-scene .scene-loop .slide-up { animation: slideUp 0.6s ease-out 1.3s forwards; opacity: 0; }
-@keyframes slideUp { 0% { opacity: 0; transform: translateY(25px); } 60% { opacity: 1; transform: translateY(-3px); } 100% { opacity: 1; transform: translateY(0); } }
-
-/* ── Card flip ── */
-.hero-scene .scene-loop .card-flip { animation: cardFlip 0.6s ease-out 1.5s forwards; opacity: 0; }
-@keyframes cardFlip { 0% { opacity: 0; transform: scale(0); } 60% { opacity: 1; transform: scale(1.15); } 80% { transform: scale(0.92); } 100% { opacity: 1; transform: scale(1); } }
-
-/* ── Bounce in down ── */
-.hero-scene .scene-loop .bounce-in-down { animation: bounceInDown 0.8s ease-out 0.5s forwards; opacity: 0; transform-origin: top center; }
-@keyframes bounceInDown {
-    0% { opacity: 0; transform: scaleY(0); }
-    40% { opacity: 1; transform: scaleY(1.08); }
-    60% { transform: scaleY(0.94); }
-    80% { transform: scaleY(1.02); }
-    100% { opacity: 1; transform: scaleY(1); }
-}
-
-/* ── Slide in left ── */
-.hero-scene .scene-loop .slide-in-left { animation: slideInLeft 0.7s ease-out 1s forwards; opacity: 0; }
-@keyframes slideInLeft { 0% { opacity: 0; transform: translateX(-50px); } 60% { transform: translateX(6px); } 100% { opacity: 1; transform: translateX(0); } }
-
-/* ── Slide in right ── */
-.hero-scene .scene-loop .slide-in-right { animation: slideInRight 0.7s ease-out 1.1s forwards; opacity: 0; }
-@keyframes slideInRight { 0% { opacity: 0; transform: translateX(50px); } 60% { transform: translateX(-6px); } 100% { opacity: 1; transform: translateX(0); } }
-
-/* ── Zoom in ── */
-.hero-scene .scene-loop .zoom-in { animation: zoomIn 0.5s ease-out 2.5s forwards; opacity: 0; }
-@keyframes zoomIn { 0% { opacity: 0; transform: scale(0); } 50% { transform: scale(1.15); } 100% { opacity: 1; transform: scale(1); } }
-
-/* ── Bird fly ── */
-.hero-scene .scene-loop .bird-fly { animation: birdFly 4s ease-in-out 0.8s infinite; }
-@keyframes birdFly {
-    0% { transform: translateX(-30px) translateY(0); opacity: 0; }
-    10% { opacity: 0.4; }
-    50% { transform: translateX(160px) translateY(-8px); opacity: 0.6; }
-    90% { transform: translateX(330px) translateY(-3px); opacity: 0.2; }
-    100% { transform: translateX(350px) translateY(0); opacity: 0; }
-}
-
-/* ── Bird wing flap ── */
-.hero-scene .scene-loop .bird-wing { animation: birdWing 0.3s ease-in-out infinite; transform-origin: 4px 0; }
-@keyframes birdWing { 0%,100% { transform: rotate(0deg) scaleX(1); } 50% { transform: rotate(20deg) scaleX(0.8); } }
-
-/* ── Run in (second character) ── */
-.hero-scene .scene-loop .run-in { animation: runIn 1.2s ease-out 2.5s forwards; opacity: 0; }
-@keyframes runIn { 0% { opacity: 0; transform: translateX(-80px); } 40% { transform: translateX(8px); } 70% { transform: translateX(-3px); } 100% { opacity: 1; transform: translateX(0); } }
-
-/* ── Wobble ── */
-.hero-scene .scene-loop .wobble { animation: wobble 1s ease-in-out 3s infinite; }
-@keyframes wobble {
-    0%,100% { transform: translateX(0) rotate(0deg); }
-    15% { transform: translateX(-4px) rotate(-4deg); }
-    30% { transform: translateX(4px) rotate(4deg); }
-    45% { transform: translateX(-3px) rotate(-3deg); }
-    60% { transform: translateX(3px) rotate(2deg); }
-    75% { transform: translateX(-2px) rotate(-1deg); }
-}
-
-/* ── Shake ── */
-.hero-scene .scene-loop .shake { animation: shake 0.6s ease-in-out 1.8s infinite; }
-@keyframes shake {
-    0%,100% { transform: translateX(0); }
-    10%,50%,90% { transform: translateX(-3px); }
-    30%,70% { transform: translateX(3px); }
-}
-
-/* ── Flash ── */
-.hero-scene .scene-loop .flash { animation: flash 0.8s ease-in-out 2.8s infinite; }
-@keyframes flash { 0%,50%,100% { opacity: 1; } 25%,75% { opacity: 0.2; } }
-
-/* ── Ripple ── */
-.hero-scene .scene-loop .ripple { animation: ripple 2s ease-out 1.5s infinite; }
-@keyframes ripple {
-    0% { opacity: 0.3; transform: scale(0); }
-    50% { opacity: 0.15; transform: scale(2); }
-    100% { opacity: 0; transform: scale(3); }
-}
-
-/* ── Confetti fall ── */
-.hero-scene .scene-loop .confetti-fall { animation: confettiFall 2.5s linear 3s infinite; }
-@keyframes confettiFall {
-    0% { opacity: 0; transform: translateY(-30px) rotate(0deg) scale(0); }
-    20% { opacity: 0.7; transform: translateY(10px) rotate(72deg) scale(1); }
-    50% { opacity: 0.5; transform: translateY(40px) rotate(180deg) scale(0.8); }
-    80% { opacity: 0.2; transform: translateY(70px) rotate(288deg) scale(0.4); }
-    100% { opacity: 0; transform: translateY(100px) rotate(360deg) scale(0); }
-}
-
-/* ── Shooting star ── */
-.hero-scene .scene-loop .shooting-star { animation: shootingStar 1.5s ease-out 1s infinite; }
-@keyframes shootingStar {
-    0% { opacity: 0; transform: translateX(0) translateY(0); }
-    5% { opacity: 0.6; }
-    15% { opacity: 0; transform: translateX(80px) translateY(80px); }
-    100% { opacity: 0; }
-}
-
-/* ── Flower bloom ── */
-.hero-scene .scene-loop .flower-bloom { animation: flowerBloom 0.7s ease-out 2.2s forwards; opacity: 0; }
-@keyframes flowerBloom { 0% { opacity: 0; transform: scale(0) rotate(-10deg); } 60% { opacity: 1; transform: scale(1.2) rotate(3deg); } 100% { opacity: 1; transform: scale(1) rotate(0deg); } }
-
-/* ── Pulsing ring ── */
-.hero-scene .scene-loop .pulse-ring { animation: pulseRing 2s ease-out 2s infinite; transform-origin: 226px 155px; }
-@keyframes pulseRing {
-    0% { opacity: 0.5; transform: scale(1); stroke-width: 1.5; }
-    50% { opacity: 0.2; transform: scale(3); stroke-width: 0.8; }
-    100% { opacity: 0; transform: scale(5); stroke-width: 0; }
-}
-
-/* ── Gentle swing ── */
-.hero-scene .scene-loop .gentle-swing { animation: gentleSwing 3s ease-in-out 1s infinite; }
-@keyframes gentleSwing {
-    0%,100% { transform: rotate(0deg); }
-    25% { transform: rotate(2deg); }
-    75% { transform: rotate(-2deg); }
-}
-
-/* ── Color pulse ── */
-.hero-scene .scene-loop .color-pulse { animation: colorPulse 2s ease-in-out 2.5s infinite; }
-@keyframes colorPulse { 0%,100% { fill: rgba(16,185,129,0.2); } 50% { fill: rgba(245,158,11,0.2); } }
-
-/* ── Spin pulse ── */
-.hero-scene .scene-loop .spin-pulse { animation: spinPulse 3s linear 2s infinite; transform-origin: center; }
-@keyframes spinPulse { 0% { transform: rotate(0deg) scale(1); } 50% { transform: rotate(180deg) scale(1.2); } 100% { transform: rotate(360deg) scale(1); } }
-
-/* ── Bounce ── */
-.hero-scene .scene-loop .bounce-simple { animation: bounceSimple 1s ease-in-out 2.5s infinite; }
-@keyframes bounceSimple { 0%,100% { transform: translateY(0); } 30% { transform: translateY(-8px); } 50% { transform: translateY(0); } 70% { transform: translateY(-4px); } }
-
-/* ── Roll in ── */
-.hero-scene .scene-loop .roll-in { animation: rollIn 0.7s ease-out 2s forwards; opacity: 0; }
-@keyframes rollIn { 0% { opacity: 0; transform: translateX(-40px) rotate(-120deg); } 60% { transform: translateX(5px) rotate(10deg); } 100% { opacity: 1; transform: translateX(0) rotate(0deg); } }
-
-/* ── Light speed in ── */
-.hero-scene .scene-loop .light-speed-in { animation: lightSpeedIn 0.8s ease-out 2.5s forwards; opacity: 0; }
-@keyframes lightSpeedIn {
-    0% { opacity: 0; transform: translateX(60px) skewX(-20deg); }
-    60% { opacity: 1; transform: translateX(-5px) skewX(5deg); }
-    80% { transform: translateX(2px) skewX(-2deg); }
-    100% { opacity: 1; transform: translateX(0) skewX(0deg); }
-}
-
-/* ── Flip in X ── */
-.hero-scene .scene-loop .flip-in-x { animation: flipInX 0.7s ease-out 2.8s forwards; opacity: 0; }
-@keyframes flipInX {
-    0% { opacity: 0; transform: perspective(200px) rotateX(80deg); }
-    50% { opacity: 1; transform: perspective(200px) rotateX(-15deg); }
-    70% { transform: perspective(200px) rotateX(5deg); }
-    100% { opacity: 1; transform: perspective(200px) rotateX(0deg); }
-}
-
-/* ── Flip in Y ── */
-.hero-scene .scene-loop .flip-in-y { animation: flipInY 0.7s ease-out 2.6s forwards; opacity: 0; }
-@keyframes flipInY {
-    0% { opacity: 0; transform: perspective(200px) rotateY(80deg); }
-    50% { opacity: 1; transform: perspective(200px) rotateY(-15deg); }
-    70% { transform: perspective(200px) rotateY(5deg); }
-    100% { opacity: 1; transform: perspective(200px) rotateY(0deg); }
-}
-
-/* ── Typing dot (sequential) ── */
-.hero-scene .scene-loop .typing-dot { animation: typingDot 0.4s ease-out forwards; opacity: 0; }
-@keyframes typingDot { 0% { opacity: 0; transform: scale(0); } 60% { transform: scale(1.3); } 100% { opacity: 1; transform: scale(1); } }
-
-/* ── Progress fill ── */
-.hero-scene .scene-loop .progress-fill { animation: progressFill 1.2s ease-out 0.7s forwards; }
-@keyframes progressFill { 0% { width: 0; opacity: 0; } 30% { opacity: 0.4; } 100% { width: 160px; opacity: 0.12; } }
-
-/* ── Heart float ── */
-.hero-scene .scene-loop .heart-float { animation: heartFloat 2s ease-out 3s infinite; opacity: 0; }
-@keyframes heartFloat {
-    0% { opacity: 0; transform: translateY(0) scale(0) rotate(0deg); }
-    20% { opacity: 0.5; transform: translateY(-10px) scale(1) rotate(10deg); }
-    50% { opacity: 0.3; transform: translateY(-25px) scale(0.8) rotate(-5deg); }
-    80% { opacity: 0.1; transform: translateY(-40px) scale(0.4) rotate(10deg); }
-    100% { opacity: 0; transform: translateY(-55px) scale(0) rotate(0deg); }
-}
-
-/* ── Door swing ── */
-.hero-scene .scene-loop .door-swing { animation: doorSwing 0.6s ease-out 2.2s forwards; transform-origin: left center; }
-@keyframes doorSwing { 0% { transform: scaleX(1); } 30% { transform: scaleX(0.1); } 70% { transform: scaleX(1.05); } 100% { transform: scaleX(1); } }
-
-/* ── Key fly ── */
-.hero-scene .scene-loop .key-fly { animation: keyFly 1s ease-in-out 2.6s forwards; opacity: 0; }
-@keyframes keyFly {
-    0% { opacity: 0; transform: translateX(-60px) translateY(0) rotate(-30deg); }
-    30% { opacity: 0.4; transform: translateX(-30px) translateY(-15px) rotate(-15deg); }
-    60% { opacity: 0.6; transform: translateX(-10px) translateY(-5px) rotate(5deg); }
-    100% { opacity: 1; transform: translateX(0) translateY(0) rotate(0deg); }
-}
-
-/* ── Rainbow glow ── */
-.hero-scene .scene-loop .rainbow-glow { animation: rainbowGlow 2s ease-out 2.8s forwards; opacity: 0; }
-@keyframes rainbowGlow { 0% { opacity: 0; } 40% { opacity: 0.04; } 100% { opacity: 0.02; } }
-
-/* ═══════════════════════════════════════════
-   FREE-RUNNING BACKGROUND PARTICLES
-   ═══════════════════════════════════════════ */
-.hero-scene .dot-pulse { animation: dotPulse 2s ease-in-out infinite; }
-@keyframes dotPulse { 0%,100% { opacity: 0.08; transform: scale(0.6); } 50% { opacity: 0.6; transform: scale(1.4); } }
-.hero-scene .search-ray { animation: rayPulse 3s ease-in-out infinite; transform-origin: 150px 105px; }
-@keyframes rayPulse { 0%,100% { opacity: 0.06; transform: scale(0.95); } 50% { opacity: 0.2; transform: scale(1.06); } }
 .hero-image-card .floating-card {
     position: absolute;
     background: rgba(15,23,42,0.5);
@@ -1157,25 +659,18 @@ n/* ── Smooth floating card entrance ── */
     position: absolute; inset: 0; border-radius: var(--r-lg); padding: 1.5px;
     background: linear-gradient(135deg, rgba(255,255,255,0.06), rgba(37,99,235,0.15), rgba(124,58,237,0.15), rgba(245,158,11,0.1), rgba(255,255,255,0.06));
     background-size: 400% 400%;
-    animation: cityBorderShift 6s ease-in-out infinite;
+    animation: stepBorderShift 6s ease-in-out infinite;
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude;
     pointer-events: none;
 }
-@keyframes cityBorderShift { 0%,100% { background-position: 0% 50%; } 25% { background-position: 100% 0%; } 50% { background-position: 100% 100%; } 75% { background-position: 0% 100%; } }
 .city-card::after {
     content: '';
     position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
     background: radial-gradient(circle at 50% 0%, rgba(96,165,250,0.04) 0%, transparent 50%);
-    animation: cityShine 8s ease-in-out infinite;
+    animation: stepShine 8s ease-in-out infinite;
     pointer-events: none;
-}
-@keyframes cityShine {
-    0%,100% { transform: translate(0,0) rotate(0deg); opacity: 0.2; }
-    25%  { transform: translate(10%,-10%) rotate(5deg); opacity: 0.5; }
-    50%  { transform: translate(-5%,5%) rotate(-3deg); opacity: 0.3; }
-    75%  { transform: translate(8%,-8%) rotate(4deg); opacity: 0.6; }
 }
 .city-card:hover {
     transform: translateY(-8px) scale(1.03);
@@ -1245,24 +740,17 @@ n/* ── Smooth floating card entrance ── */
     position: absolute; inset: 0; border-radius: var(--r-lg); padding: 1.5px;
     background: linear-gradient(135deg, rgba(255,255,255,0.06), rgba(37,99,235,0.15), rgba(124,58,237,0.15), rgba(245,158,11,0.1), rgba(255,255,255,0.06));
     background-size: 400% 400%;
-    animation: testBorderShift 6s ease-in-out infinite;
+    animation: stepBorderShift 6s ease-in-out infinite;
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude;
     pointer-events: none;
 }
-@keyframes testBorderShift { 0%,100% { background-position: 0% 50%; } 25% { background-position: 100% 0%; } 50% { background-position: 100% 100%; } 75% { background-position: 0% 100%; } }
 .test-card .test-glow {
     position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
     background: radial-gradient(circle at 50% 0%, rgba(96,165,250,0.04) 0%, transparent 50%);
-    animation: testShine 8s ease-in-out infinite;
+    animation: stepShine 8s ease-in-out infinite;
     pointer-events: none;
-}
-@keyframes testShine {
-    0%,100% { transform: translate(0,0) rotate(0deg); opacity: 0.2; }
-    25%  { transform: translate(10%,-10%) rotate(5deg); opacity: 0.5; }
-    50%  { transform: translate(-5%,5%) rotate(-3deg); opacity: 0.3; }
-    75%  { transform: translate(8%,-8%) rotate(4deg); opacity: 0.6; }
 }
 .test-card:hover {
     box-shadow: 0 20px 56px rgba(0,0,0,0.3), 0 0 40px rgba(37,99,235,0.06), inset 0 1px 0 rgba(255,255,255,0.1);
@@ -1334,11 +822,6 @@ n/* ── Smooth floating card entrance ── */
 .faq-answer p { font-size: 0.875rem; color: var(--text-muted); line-height: 1.7; }
 
 /* ═══════════════════════════════════════════
-n/* ── Smooth scene restart transition ── */
-.hero-scene .scene-loop {
-    transition: opacity 0.35s ease-in-out;
-}
-
    BACK TO TOP
    ═══════════════════════════════════════════ */
 #backToTop {
@@ -1367,26 +850,7 @@ n/* ── Smooth scene restart transition ── */
 <!-- ════════ HERO ════════ -->
 <section class="hero" id="hero">
     <div class="hero-mesh"></div>
-    <div class="hero-grid-overlay"></div>
-    <div class="hero-glow-rings">
-        <div class="ring"></div><div class="ring"></div><div class="ring"></div>
-    </div>
-    <div class="hero-glare" id="heroGlare"></div>
-    <div class="hero-aurora">
-        <div class="aurora-band"></div>
-        <div class="aurora-band"></div>
-        <div class="aurora-band"></div>
-    </div>
-    <div class="hero-orbs">
-        <div class="orb"></div><div class="orb"></div><div class="orb"></div><div class="orb"></div>
-    </div>
-    <canvas id="heroParticlesCanvas"></canvas>
-    <div class="hero-particles">
-        <span class="p-dot"></span><span class="p-glow"></span><span class="p-dot"></span><span class="p-gold"></span>
-        <span class="p-dot"></span><span class="p-glow"></span><span class="p-trail"></span><span class="p-dot"></span>
-        <span class="p-gold"></span><span class="p-dot"></span><span class="p-glow"></span><span class="p-dot"></span>
-        <span class="p-dot"></span><span class="p-trail"></span><span class="p-gold"></span>
-    </div>
+    <!-- hero decorative elements removed (aurora, orbs, particles, rings, grid-overlay, glare, canvas) -->
 
     <div class="hero-grid">
         <div class="hero-content">
@@ -1394,7 +858,7 @@ n/* ── Smooth scene restart transition ── */
                 <span class="dot"></span>
                 Trusted by 10,000+ Renters &amp; Landlords
             </div>
-            <h1>Find Your <span class="highlight">Perfect Rental</span><br><span class="typewriter-text" id="heroWord">Home</span></h1>
+            <h1>Find Your <span class="highlight">Perfect Rental</span><br>Home</h1>
             <p>Discover thousands of verified rental properties across Bangladesh. From city flats to suburban houses, find your ideal space with confidence.</p>
 
             <div class="hero-search">
@@ -1454,431 +918,22 @@ n/* ── Smooth scene restart transition ── */
         </div>
 
         <div class="hero-visual">
-            <div class="hero-image-card" id="tiltCard">
+            <div class="hero-image-card">
                 <div class="main-img">
                     <div class="hero-scene">
-                        <svg viewBox="0 0 300 210" overflow="visible" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <g class="scene-loop">
-                            <defs>
-                                <radialGradient id="heroGlowGrad"><stop offset="0%" stop-color="#60A5FA"/><stop offset="100%" stop-color="transparent"/></radialGradient>
-                                <linearGradient id="houseGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="rgba(16,185,129,0.2)"/><stop offset="100%" stop-color="rgba(16,185,129,0.08)"/></linearGradient>
-                                <radialGradient id="starGlow"><stop offset="0%" stop-color="#60A5FA"/><stop offset="100%" stop-color="transparent"/></radialGradient>
-                                <linearGradient id="searchBarGrad" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="rgba(15,23,42,0.7)"/><stop offset="100%" stop-color="rgba(15,23,42,0.5)"/></linearGradient>
-                                <radialGradient id="sunGlowGrad"><stop offset="0%" stop-color="rgba(245,158,11,0.15)"/><stop offset="100%" stop-color="transparent"/></radialGradient>
-                            </defs>
-
-                            <!-- Dark sky bg -->
+                        <svg viewBox="0 0 300 210" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:85%;height:85%">
                             <rect x="0" y="0" width="300" height="210" fill="rgba(15,23,42,0.08)" rx="12"/>
-
-                            <!-- Stars twinkling -->
-                            <circle cx="20" cy="25" r="1" fill="#60A5FA" class="dot-pulse" style="animation-delay:0.1s"/>
-                            <circle cx="55" cy="40" r="1.2" fill="#93C5FD" class="dot-pulse" style="animation-delay:0.4s"/>
-                            <circle cx="90" cy="15" r="0.8" fill="#60A5FA" class="dot-pulse" style="animation-delay:0.7s"/>
-                            <circle cx="130" cy="30" r="1" fill="#93C5FD" class="dot-pulse" style="animation-delay:0.2s"/>
-                            <circle cx="170" cy="18" r="1.2" fill="#60A5FA" class="dot-pulse" style="animation-delay:0.5s"/>
-                            <circle cx="210" cy="42" r="0.8" fill="#93C5FD" class="dot-pulse" style="animation-delay:0.8s"/>
-                            <circle cx="250" cy="22" r="1" fill="#60A5FA" class="dot-pulse" style="animation-delay:0.3s"/>
-                            <circle cx="280" cy="50" r="1.1" fill="#93C5FD" class="dot-pulse" style="animation-delay:0.6s"/>
-
-                            <!-- Shooting star -->
-                            <g class="shooting-star">
-                                <line x1="0" y1="0" x2="15" y2="15" stroke="rgba(255,255,255,0.2)" stroke-width="1" stroke-linecap="round"/>
-                                <circle cx="0" cy="0" r="0.8" fill="rgba(255,255,255,0.3)"/>
-                            </g>
-
-                            <!-- City skyline silhouette -->
-                            <g class="city-skyline" opacity="0.06">
-                                <rect x="10" y="140" width="20" height="52" fill="#60A5FA" rx="2"/>
-                                <rect x="35" y="125" width="15" height="67" fill="#60A5FA" rx="2"/>
-                                <rect x="55" y="148" width="12" height="44" fill="#60A5FA" rx="2"/>
-                                <rect x="72" y="130" width="18" height="62" fill="#60A5FA" rx="2"/>
-                                <rect x="95" y="145" width="10" height="47" fill="#60A5FA" rx="2"/>
-                                <rect x="230" y="135" width="16" height="57" fill="#60A5FA" rx="2"/>
-                                <rect x="250" y="150" width="12" height="42" fill="#60A5FA" rx="2"/>
-                                <rect x="267" y="128" width="20" height="64" fill="#60A5FA" rx="2"/>
-                            </g>
-
-                            <!-- Search ray (pulsing) -->
-                            <circle cx="150" cy="105" r="95" class="search-ray" fill="url(#heroGlowGrad)"/>
-
-                            <!-- Sunshine overlay (appears after found) -->
-                            <circle cx="150" cy="80" r="110" class="sunshine" fill="url(#heroGlowGrad)"/>
-                            <circle cx="150" cy="50" r="40" fill="url(#sunGlowGrad)" class="zoom-in" style="animation-delay:2.5s"/>
-
-                            <!-- Flying bird -->
-                            <g class="bird-fly">
-                                <path d="M0 0 Q6 -5 12 0" stroke="rgba(147,197,253,0.15)" stroke-width="1.2" fill="none" stroke-linecap="round" class="bird-wing"/>
-                                <path d="M12 0 Q18 -5 24 0" stroke="rgba(147,197,253,0.15)" stroke-width="1.2" fill="none" stroke-linecap="round" class="bird-wing" style="animation-delay:-0.1s"/>
-                            </g>
-
-                            <!-- Clouds (appear after found) -->
-                            <g class="slide-up" style="animation-delay:2.8s">
-                                <ellipse cx="60" cy="55" rx="28" ry="7" fill="rgba(255,255,255,0.03)"/>
-                                <ellipse cx="76" cy="52" rx="18" ry="5" fill="rgba(255,255,255,0.02)"/>
-                                <ellipse cx="48" cy="53" rx="12" ry="4" fill="rgba(255,255,255,0.02)"/>
-                                <ellipse cx="238" cy="65" rx="25" ry="6" fill="rgba(255,255,255,0.03)"/>
-                                <ellipse cx="254" cy="62" rx="15" ry="4" fill="rgba(255,255,255,0.02)"/>
-                                <ellipse cx="140" cy="48" rx="20" ry="5" fill="rgba(255,255,255,0.02)" class="float-element" style="animation-delay:1s"/>
-                            </g>
-
-                            <!-- Search bar UI at top -->
-                            <g class="bounce-in-down" style="animation-delay:0.5s">
-                                <rect x="38" y="8" width="224" height="22" rx="11" fill="url(#searchBarGrad)" stroke="rgba(96,165,250,0.08)" stroke-width="1"/>
-                                <circle cx="53" cy="19" r="3.5" stroke="rgba(147,197,253,0.2)" stroke-width="1.5" fill="none"/>
-                                <line x1="56" y1="22" x2="61" y2="27" stroke="rgba(147,197,253,0.2)" stroke-width="1.5" stroke-linecap="round"/>
-                                <!-- Typing dots -->
-                                <circle cx="72" cy="19" r="1.5" fill="rgba(147,197,253,0.15)" class="typing-dot" style="animation-delay:0.7s"/>
-                                <circle cx="80" cy="19" r="1.5" fill="rgba(147,197,253,0.15)" class="typing-dot" style="animation-delay:0.9s"/>
-                                <circle cx="88" cy="19" r="1.5" fill="rgba(147,197,253,0.15)" class="typing-dot" style="animation-delay:1.1s"/>
-                                <circle cx="96" cy="19" r="1.5" fill="rgba(147,197,253,0.15)" class="typing-dot" style="animation-delay:1.3s"/>
-                                <line x1="108" y1="14" x2="108" y2="22" stroke="rgba(147,197,253,0.12)" stroke-width="1" class="flash" style="animation-delay:1.5s"/>
-                                <rect x="68" y="14" width="130" height="10" rx="5" fill="rgba(147,197,253,0.03)"/>
-                            </g>
-
-                            <!-- Progress bar under search -->
-                            <rect x="38" y="32" width="224" height="2" rx="1" fill="rgba(147,197,253,0.03)"/>
-                            <rect x="38" y="32" width="0" height="2" rx="1" fill="rgba(16,185,129,0.08)" class="progress-fill"/>
-
-                            <!-- Search results card -->
-                            <g class="card-flip" style="animation-delay:1.2s">
-                                <rect x="158" y="32" width="126" height="42" rx="7" fill="rgba(15,23,42,0.25)" stroke="rgba(96,165,250,0.06)" stroke-width="1"/>
-                                <rect x="164" y="36" width="34" height="26" rx="4" fill="rgba(147,197,253,0.05)"/>
-                                <rect x="168" y="42" width="14" height="14" rx="3" fill="rgba(16,185,129,0.18)"/>
-                                <!-- Price highlight pulse -->
-                                <rect x="168" y="42" width="14" height="14" rx="3" fill="rgba(16,185,129,0.25)" class="color-pulse"/>
-                                <rect x="202" y="38" width="72" height="5" rx="2.5" fill="rgba(147,197,253,0.08)"/>
-                                <rect x="202" y="46" width="58" height="4" rx="2" fill="rgba(147,197,253,0.05)"/>
-                                <rect x="202" y="54" width="42" height="4" rx="2" fill="rgba(16,185,129,0.1)"/>
-                                <rect x="204" y="62" width="32" height="7" rx="3.5" fill="rgba(16,185,129,0.13)"/>
-                                <!-- Verified badge on result -->
-                                <rect x="252" y="36" width="18" height="7" rx="3.5" fill="rgba(16,185,129,0.1)"/>
-                                <text x="261" y="41" text-anchor="middle" font-size="4" font-weight="700" fill="rgba(16,185,129,0.4)">✓</text>
-                            </g>
-
-                            <!-- Second search result (staggered) -->
-                            <g class="card-flip" style="animation-delay:1.5s">
-                                <rect x="160" y="76" width="100" height="28" rx="6" fill="rgba(15,23,42,0.18)" stroke="rgba(96,165,250,0.04)" stroke-width="1"/>
-                                <rect x="165" y="80" width="22" height="16" rx="3" fill="rgba(96,165,250,0.04)"/>
-                                <rect x="191" y="81" width="55" height="4" rx="2" fill="rgba(147,197,253,0.06)"/>
-                                <rect x="191" y="88" width="42" height="3" rx="1.5" fill="rgba(147,197,253,0.04)"/>
-                                <rect x="191" y="94" width="28" height="5" rx="2.5" fill="rgba(16,185,129,0.08)"/>
-                            </g>
-
-                            <!-- Location pin on map -->
-                            <g class="pulse-glow" style="animation-delay:2s">
-                                <path d="M226 148 C226 148 220 158 226 165 C232 158 226 148 226 148Z" fill="rgba(16,185,129,0.2)" stroke="rgba(16,185,129,0.35)" stroke-width="1"/>
-                                <circle cx="226" cy="155" r="3" fill="rgba(16,185,129,0.3)"/>
-                            </g>
-                            <!-- Pulse ring around pin -->
-                            <circle cx="226" cy="155" r="3" fill="none" stroke="rgba(16,185,129,0.15)" stroke-width="1" class="pulse-ring" style="animation-delay:2.2s"/>
-
-                            <!-- Ground with grass -->
+                            <rect x="192" y="150" width="46" height="38" rx="4" fill="rgba(16,185,129,0.08)" stroke="rgba(16,185,129,0.5)" stroke-width="2"/>
+                            <path d="M185 154 L215 129 L247 154" stroke="rgba(16,185,129,0.5)" stroke-width="2.5" fill="rgba(16,185,129,0.08)" stroke-linejoin="round"/>
+                            <circle cx="120" cy="110" r="15" fill="rgba(96,165,250,0.12)" stroke="rgba(96,165,250,0.35)" stroke-width="1.5"/>
+                            <circle cx="115" cy="108" r="2.2" fill="rgba(96,165,250,0.55)"/>
+                            <circle cx="125" cy="108" r="2.2" fill="rgba(96,165,250,0.55)"/>
+                            <path d="M112 115 Q120 124 128 115" stroke="rgba(96,165,250,0.55)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                            <rect x="108" y="126" width="24" height="40" rx="8" fill="rgba(96,165,250,0.18)" stroke="rgba(96,165,250,0.35)" stroke-width="1.5"/>
                             <ellipse cx="150" cy="192" rx="140" ry="8" fill="rgba(96,165,250,0.05)"/>
-                            <!-- Grass blades -->
-                            <g class="slide-in-left" style="animation-delay:2s">
-                                <path d="M30 190 L32 182 L34 190" stroke="rgba(16,185,129,0.04)" stroke-width="1" fill="none" stroke-linecap="round"/>
-                                <path d="M80 188 L82 180 L84 188" stroke="rgba(16,185,129,0.04)" stroke-width="1" fill="none" stroke-linecap="round"/>
-                                <path d="M160 189 L162 181 L164 189" stroke="rgba(16,185,129,0.04)" stroke-width="1" fill="none" stroke-linecap="round"/>
-                                <path d="M250 190 L252 183 L254 190" stroke="rgba(16,185,129,0.04)" stroke-width="1" fill="none" stroke-linecap="round"/>
-                                <path d="M120 188 L122 180 L124 188" stroke="rgba(16,185,129,0.04)" stroke-width="1" fill="none" stroke-linecap="round"/>
-                                <path d="M200 189 L202 181 L204 189" stroke="rgba(16,185,129,0.04)" stroke-width="1" fill="none" stroke-linecap="round"/>
-                            </g>
-
-                            <!-- Flowers -->
-                            <g class="flower-bloom" style="animation-delay:2.2s">
-                                <line x1="42" y1="188" x2="42" y2="178" stroke="rgba(16,185,129,0.06)" stroke-width="1"/>
-                                <circle cx="42" cy="177" r="3" fill="rgba(245,158,11,0.06)"/>
-                                <circle cx="42" cy="177" r="1.5" fill="rgba(245,158,11,0.1)"/>
-                            </g>
-                            <g class="flower-bloom" style="animation-delay:2.3s">
-                                <line x1="258" y1="188" x2="258" y2="176" stroke="rgba(16,185,129,0.06)" stroke-width="1"/>
-                                <circle cx="258" cy="175" r="3.5" fill="rgba(147,197,253,0.06)"/>
-                                <circle cx="258" cy="175" r="1.5" fill="rgba(147,197,253,0.1)"/>
-                            </g>
-                            <g class="flower-bloom" style="animation-delay:2.4s">
-                                <line x1="145" y1="190" x2="145" y2="180" stroke="rgba(16,185,129,0.06)" stroke-width="1"/>
-                                <circle cx="145" cy="179" r="2.5" fill="rgba(239,68,68,0.05)"/>
-                                <circle cx="145" cy="179" r="1.2" fill="rgba(239,68,68,0.08)"/>
-                            </g>
-
-                            <!-- Fence near house -->
-                            <g class="slide-in-left" style="animation-delay:2.4s" opacity="0.06">
-                                <rect x="182" y="175" width="2" height="17" fill="#10B981"/>
-                                <rect x="192" y="175" width="2" height="17" fill="#10B981"/>
-                                <rect x="202" y="175" width="2" height="17" fill="#10B981"/>
-                                <rect x="212" y="175" width="2" height="17" fill="#10B981"/>
-                                <rect x="222" y="175" width="2" height="17" fill="#10B981"/>
-                                <rect x="180" y="177" width="46" height="1.5" fill="#10B981"/>
-                                <rect x="180" y="185" width="46" height="1.5" fill="#10B981"/>
-                            </g>
-
-                            <!-- Tree (left) -->
-                            <g class="gentle-swing" style="animation-delay:0s">
-                                <rect x="23" y="155" width="6" height="35" rx="2" fill="rgba(16,185,129,0.06)" stroke="rgba(16,185,129,0.1)" stroke-width="1"/>
-                                <ellipse cx="26" cy="140" rx="14" ry="18" fill="rgba(16,185,129,0.03)" stroke="rgba(16,185,129,0.06)" stroke-width="1"/>
-                                <ellipse cx="26" cy="130" rx="10" ry="12" fill="rgba(16,185,129,0.04)" stroke="rgba(16,185,129,0.08)" stroke-width="1"/>
-                                <ellipse cx="26" cy="122" rx="7" ry="8" fill="rgba(16,185,129,0.05)"/>
-                            </g>
-
-                            <!-- Tree (right) -->
-                            <g class="gentle-swing" style="animation-delay:0.3s">
-                                <rect x="268" y="158" width="6" height="32" rx="2" fill="rgba(16,185,129,0.06)" stroke="rgba(16,185,129,0.1)" stroke-width="1"/>
-                                <ellipse cx="271" cy="145" rx="12" ry="15" fill="rgba(16,185,129,0.03)" stroke="rgba(16,185,129,0.06)" stroke-width="1"/>
-                                <ellipse cx="271" cy="136" rx="8" ry="10" fill="rgba(16,185,129,0.04)" stroke="rgba(16,185,129,0.08)" stroke-width="1"/>
-                                <ellipse cx="271" cy="129" rx="6" ry="7" fill="rgba(16,185,129,0.05)"/>
-                            </g>
-
-                            <!-- Rain drops -->
-                            <g class="raindrop"><line x1="60" y1="40" x2="58" y2="50" stroke="rgba(147,197,253,0.08)" stroke-width="1.5" stroke-linecap="round" style="animation-delay:0.2s"/></g>
-                            <g class="raindrop"><line x1="90" y1="30" x2="88" y2="40" stroke="rgba(147,197,253,0.06)" stroke-width="1.5" stroke-linecap="round" style="animation-delay:0.6s"/></g>
-                            <g class="raindrop"><line x1="260" y1="50" x2="258" y2="60" stroke="rgba(147,197,253,0.07)" stroke-width="1.5" stroke-linecap="round" style="animation-delay:0.4s"/></g>
-                            <g class="raindrop"><line x1="50" y1="80" x2="48" y2="90" stroke="rgba(147,197,253,0.05)" stroke-width="1.5" stroke-linecap="round" style="animation-delay:0.9s"/></g>
-                            <g class="raindrop"><line x1="270" y1="140" x2="268" y2="150" stroke="rgba(147,197,253,0.06)" stroke-width="1.5" stroke-linecap="round" style="animation-delay:0.3s"/></g>
-                            <g class="raindrop"><line x1="140" y1="60" x2="138" y2="70" stroke="rgba(147,197,253,0.05)" stroke-width="1.5" stroke-linecap="round" style="animation-delay:0.7s"/></g>
-                            <g class="raindrop"><line x1="220" y1="90" x2="218" y2="100" stroke="rgba(147,197,253,0.04)" stroke-width="1.5" stroke-linecap="round" style="animation-delay:0.1s"/></g>
-                            <g class="raindrop"><line x1="180" y1="55" x2="178" y2="65" stroke="rgba(147,197,253,0.04)" stroke-width="1.5" stroke-linecap="round" style="animation-delay:0.5s"/></g>
-                            <g class="raindrop"><line x1="110" y1="70" x2="108" y2="80" stroke="rgba(147,197,253,0.03)" stroke-width="1.5" stroke-linecap="round" style="animation-delay:0.15s"/></g>
-
-                            <!-- Puddles on ground -->
-                            <ellipse cx="100" cy="191" rx="8" ry="3" fill="rgba(96,165,250,0.02)"/>
-                            <ellipse cx="200" cy="193" rx="6" ry="2" fill="rgba(96,165,250,0.02)"/>
-                            <ellipse cx="150" cy="194" rx="4" ry="1.5" fill="rgba(96,165,250,0.02)"/>
-
-                            <!-- Person Group -->
-                            <g class="person-group person-body">
-                                <g class="happy-jump" style="animation-delay:3.2s">
-                                    <!-- Shoes -->
-                                    <ellipse cx="111" cy="190" rx="6" ry="3" fill="rgba(96,165,250,0.18)"/>
-                                    <ellipse cx="129" cy="190" rx="6" ry="3" fill="rgba(96,165,250,0.18)"/>
-                                    <!-- Legs walking -->
-                                    <line x1="114" y1="166" x2="111" y2="188" stroke="rgba(96,165,250,0.35)" stroke-width="2.8" stroke-linecap="round">
-                                        <animate attributeName="x2" values="111;117;111" dur="0.6s" repeatCount="indefinite"/>
-                                    </line>
-                                    <line x1="126" y1="166" x2="129" y2="188" stroke="rgba(96,165,250,0.35)" stroke-width="2.8" stroke-linecap="round">
-                                        <animate attributeName="x2" values="129;123;129" dur="0.6s" repeatCount="indefinite"/>
-                                    </line>
-                                    <!-- Body / Torso -->
-                                    <rect x="108" y="126" width="24" height="40" rx="8" fill="rgba(96,165,250,0.18)" stroke="rgba(96,165,250,0.35)" stroke-width="1.5"/>
-                                    <!-- Collar detail -->
-                                    <path d="M116 126 L120 132 L124 126" fill="rgba(96,165,250,0.06)" stroke="rgba(96,165,250,0.12)" stroke-width="0.8"/>
-                                    <!-- Head -->
-                                    <g class="person-head">
-                                        <circle cx="120" cy="110" r="15" fill="rgba(96,165,250,0.12)" stroke="rgba(96,165,250,0.35)" stroke-width="1.5"/>
-
-                                        <!-- SAD FACE (searching) -->
-                                        <g class="face-sad">
-                                            <circle cx="115" cy="109" r="1.8" fill="rgba(96,165,250,0.45)"/>
-                                            <circle cx="125" cy="109" r="1.8" fill="rgba(96,165,250,0.45)"/>
-                                            <line x1="112" y1="104" x2="117" y2="106" stroke="rgba(96,165,250,0.35)" stroke-width="1.2" stroke-linecap="round"/>
-                                            <line x1="124" y1="106" x2="129" y2="104" stroke="rgba(96,165,250,0.35)" stroke-width="1.2" stroke-linecap="round"/>
-                                            <path d="M113 117 Q120 113 127 117" stroke="rgba(96,165,250,0.4)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-                                            <ellipse cx="113" cy="113" rx="1" ry="1.8" fill="rgba(147,197,253,0.2)">
-                                                <animate attributeName="opacity" values="0.3;0;0.3" dur="2s" repeatCount="indefinite"/>
-                                            </ellipse>
-                                        </g>
-
-                                        <!-- HAPPY FACE (found) -->
-                                        <g class="face-happy">
-                                            <circle cx="115" cy="108" r="2.2" fill="rgba(96,165,250,0.55)"/>
-                                            <circle cx="125" cy="108" r="2.2" fill="rgba(96,165,250,0.55)"/>
-                                            <circle cx="114" cy="107" r="0.8" fill="rgba(255,255,255,0.3)"/>
-                                            <circle cx="124" cy="107" r="0.8" fill="rgba(255,255,255,0.3)"/>
-                                            <line x1="112" y1="103" x2="117" y2="101" stroke="rgba(96,165,250,0.5)" stroke-width="1.2" stroke-linecap="round"/>
-                                            <line x1="123" y1="101" x2="128" y2="103" stroke="rgba(96,165,250,0.5)" stroke-width="1.2" stroke-linecap="round"/>
-                                            <path d="M112 115 Q120 124 128 115" stroke="rgba(96,165,250,0.55)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-                                            <ellipse cx="111" cy="114" rx="3.5" ry="1.8" fill="rgba(245,158,11,0.08)"/>
-                                            <ellipse cx="129" cy="114" rx="3.5" ry="1.8" fill="rgba(245,158,11,0.08)"/>
-                                        </g>
-
-                                        <!-- Hair -->
-                                        <path d="M103 110 Q103 93 120 91 Q137 93 137 110" fill="rgba(96,165,250,0.1)" stroke="rgba(96,165,250,0.2)" stroke-width="1"/>
-                                        <path d="M108 95 Q110 88 114 93" fill="rgba(96,165,250,0.06)" stroke="rgba(96,165,250,0.12)" stroke-width="0.6"/>
-                                        <path d="M126 93 Q128 87 132 94" fill="rgba(96,165,250,0.06)" stroke="rgba(96,165,250,0.12)" stroke-width="0.6"/>
-                                    </g>
-
-                                    <!-- Left arm (hangs at side) -->
-                                    <path d="M108 136 Q94 148 90 160" stroke="rgba(96,165,250,0.3)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-                                    <circle cx="90" cy="160" r="2.5" fill="rgba(96,165,250,0.12)"/>
-                                    <!-- Right arm holding magnifying glass -->
-                                    <g class="person-arm">
-                                        <path d="M132 136 Q148 126 160 114" stroke="rgba(96,165,250,0.35)" stroke-width="3" fill="none" stroke-linecap="round" class="glass-hide" style="animation-delay:3.2s"/>
-                                    </g>
-                                    <circle cx="160" cy="114" r="2.8" fill="rgba(96,165,250,0.15)" class="glass-hide" style="animation-delay:3.2s"/>
-                                    <!-- Right arm pointing at house -->
-                                    <path d="M132 136 Q145 124 152 112" stroke="rgba(96,165,250,0.3)" stroke-width="2.5" fill="none" stroke-linecap="round" class="point-arm"/>
-                                </g>
-                            </g>
-
-                            <!-- Hearts floating from happy person -->
-                            <g class="heart-float" style="animation-delay:3.2s">
-                                <path d="M116 108 Q116 104 119 104 Q122 104 122 108 Q122 112 116 116 Q110 112 110 108 Q110 104 113 104 Q116 104 116 108Z" fill="rgba(245,158,11,0.15)" transform="scale(0.5)"/>
-                            </g>
-                            <g class="heart-float" style="animation-delay:3.7s">
-                                <path d="M116 108 Q116 104 119 104 Q122 104 122 108 Q122 112 116 116 Q110 112 110 108 Q110 104 113 104 Q116 104 116 108Z" fill="rgba(245,158,11,0.12)" transform="scale(0.4)"/>
-                            </g>
-                            <g class="heart-float" style="animation-delay:4.2s">
-                                <path d="M116 108 Q116 104 119 104 Q122 104 122 108 Q122 112 116 116 Q110 112 110 108 Q110 104 113 104 Q116 104 116 108Z" fill="rgba(239,68,68,0.1)" transform="scale(0.35)"/>
-                            </g>
-
-                            <!-- Magnifying Glass -->
-                            <g class="search-glass glass-hide" style="animation-delay:3.2s">
-                                <circle cx="160" cy="114" r="14" stroke="rgba(96,165,250,0.5)" stroke-width="2.5" fill="rgba(96,165,250,0.04)"/>
-                                <path d="M150 106 Q155 102 161 105" stroke="rgba(147,197,253,0.35)" stroke-width="1.8" fill="none" stroke-linecap="round"/>
-                                <line x1="170" y1="124" x2="183" y2="137" stroke="rgba(96,165,250,0.4)" stroke-width="2.8" stroke-linecap="round"/>
-                                <ellipse cx="155" cy="110" rx="4" ry="2" fill="rgba(147,197,253,0.1)" transform="rotate(-20 155 110)"/>
-                            </g>
-
-                            <!-- Search result connection line -->
-                            <path d="M136 118 Q165 108 190 138" stroke="rgba(96,165,250,0.08)" stroke-width="1.5" stroke-dasharray="5 4" fill="none" style="opacity:0; animation: fadeIn 0.5s ease-in 2.8s forwards"/>
-
-                            <!-- Traveling dots from person to house -->
-                            <circle cx="140" cy="118" r="2" fill="rgba(96,165,250,0.2)" class="travel-dot" style="animation-delay:3s"/>
-                            <circle cx="155" cy="113" r="2" fill="rgba(96,165,250,0.16)" class="travel-dot" style="animation-delay:3.3s"/>
-                            <circle cx="170" cy="116" r="2" fill="rgba(96,165,250,0.12)" class="travel-dot" style="animation-delay:3.6s"/>
-
-                            <!-- Found! House (detailed) -->
-                            <g class="house-found">
-                                <rect x="192" y="150" width="46" height="38" rx="4" fill="url(#houseGrad)" stroke="rgba(16,185,129,0.5)" stroke-width="2"/>
-                                <path d="M185 154 L215 129 L247 154" stroke="rgba(16,185,129,0.5)" stroke-width="2.5" fill="rgba(16,185,129,0.08)" stroke-linejoin="round"/>
-                                <!-- Roof tiles -->
-                                <line x1="196" y1="148" x2="234" y2="148" stroke="rgba(16,185,129,0.05)" stroke-width="0.5"/>
-                                <line x1="200" y1="143" x2="230" y2="143" stroke="rgba(16,185,129,0.05)" stroke-width="0.5"/>
-                                <line x1="204" y1="138" x2="226" y2="138" stroke="rgba(16,185,129,0.05)" stroke-width="0.5"/>
-                                <!-- Chimney -->
-                                <rect x="226" y="133" width="8" height="14" rx="2" fill="rgba(16,185,129,0.1)" stroke="rgba(16,185,129,0.3)" stroke-width="1.2"/>
-                                <!-- Smoke -->
-                                <circle cx="230" cy="128" r="3" fill="rgba(147,197,253,0.08)" class="dot-pulse" style="animation-delay:0.1s"/>
-                                <circle cx="233" cy="121" r="2.5" fill="rgba(147,197,253,0.06)" class="dot-pulse" style="animation-delay:0.4s"/>
-                                <circle cx="229" cy="115" r="2" fill="rgba(147,197,253,0.04)" class="dot-pulse" style="animation-delay:0.7s"/>
-                                <!-- Door -->
-                                <rect x="209" y="166" width="14" height="14" rx="2" fill="rgba(16,185,129,0.15)" stroke="rgba(16,185,129,0.3)" stroke-width="1.2"/>
-                                <circle cx="220" cy="174" r="1.2" fill="rgba(16,185,129,0.5)"/>
-                                <path d="M209 168 Q216 164 223 168" stroke="rgba(16,185,129,0.2)" stroke-width="0.8" fill="none"/>
-                                <!-- Left window -->
-                                <rect x="196" y="156" width="10" height="10" rx="1.5" fill="rgba(147,197,253,0.12)" stroke="rgba(16,185,129,0.3)" stroke-width="1"/>
-                                <line x1="201" y1="156" x2="201" y2="166" stroke="rgba(16,185,129,0.15)" stroke-width="0.6"/>
-                                <line x1="196" y1="161" x2="206" y2="161" stroke="rgba(16,185,129,0.15)" stroke-width="0.6"/>
-                                <rect x="197" y="157" width="4" height="4" rx="0.5" fill="rgba(245,158,11,0.08)"/>
-                                <rect x="202" y="157" width="3" height="4" rx="0.5" fill="rgba(245,158,11,0.05)"/>
-                                <!-- Right window -->
-                                <rect x="224" y="156" width="10" height="10" rx="1.5" fill="rgba(147,197,253,0.12)" stroke="rgba(16,185,129,0.3)" stroke-width="1"/>
-                                <line x1="229" y1="156" x2="229" y2="166" stroke="rgba(16,185,129,0.15)" stroke-width="0.6"/>
-                                <line x1="224" y1="161" x2="234" y2="161" stroke="rgba(16,185,129,0.15)" stroke-width="0.6"/>
-                                <rect x="225" y="157" width="4" height="4" rx="0.5" fill="rgba(245,158,11,0.08)"/>
-                                <rect x="230" y="157" width="3" height="4" rx="0.5" fill="rgba(245,158,11,0.05)"/>
-                            </g>
-
-                            <!-- Checkmark -->
-                            <g class="checkmark">
-                                <circle cx="215" cy="140" r="16" fill="rgba(16,185,129,0.08)" stroke="rgba(16,185,129,0.3)" stroke-width="1.8"/>
-                                <circle cx="215" cy="140" r="10" fill="rgba(16,185,129,0.04)"/>
-                                <path d="M207 140 L212 146 L223 134" stroke="rgba(16,185,129,0.65)" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-                            </g>
-
-                            <!-- FOUND! Badge -->
-                            <g class="found-text">
-                                <rect x="184" y="114" width="62" height="22" rx="11" fill="rgba(16,185,129,0.08)" stroke="rgba(16,185,129,0.25)" stroke-width="1.2"/>
-                                <rect x="186" y="116" width="58" height="18" rx="9" fill="rgba(16,185,129,0.04)"/>
-                                <text x="215" y="129" text-anchor="middle" font-size="10" font-weight="800" fill="rgba(16,185,129,0.7)" font-family="sans-serif" letter-spacing="0.5">FOUND!</text>
-                            </g>
-
-                            <!-- Sparkles -->
-                            <text class="sparkle" x="175" y="95" font-size="14" fill="rgba(245,158,11,0.5)" style="animation-delay:3.4s">✦</text>
-                            <text class="sparkle" x="248" y="120" font-size="10" fill="rgba(245,158,11,0.4)" style="animation-delay:3.7s">✦</text>
-                            <text class="sparkle" x="255" y="175" font-size="11" fill="rgba(96,165,250,0.4)" style="animation-delay:4s">✦</text>
-                            <text class="sparkle" x="265" y="92" font-size="8" fill="rgba(147,197,253,0.35)" style="animation-delay:4.3s">✦</text>
-                            <text class="sparkle" x="185" y="80" font-size="9" fill="rgba(245,158,11,0.3)" style="animation-delay:3.5s">✦</text>
-                            <text class="sparkle" x="160" y="178" font-size="8" fill="rgba(96,165,250,0.3)" style="animation-delay:4.1s">✦</text>
-                            <text class="sparkle" x="240" y="80" font-size="7" fill="rgba(255,255,255,0.25)" style="animation-delay:3.9s">✦</text>
-
-                            <!-- Confetti pieces -->
-                            <rect x="170" y="80" width="3" height="5" rx="1" fill="rgba(245,158,11,0.2)" transform="rotate(30 171 82)" class="float-element" style="animation-delay:3.5s"/>
-                            <rect x="240" y="100" width="3" height="5" rx="1" fill="rgba(16,185,129,0.2)" transform="rotate(-20 241 102)" class="float-element" style="animation-delay:3.8s"/>
-                            <rect x="190" y="160" width="3" height="5" rx="1" fill="rgba(96,165,250,0.2)" transform="rotate(45 191 162)" class="float-element" style="animation-delay:4.1s"/>
-                            <rect x="260" y="145" width="3" height="5" rx="1" fill="rgba(245,158,11,0.18)" transform="rotate(60 261 147)" class="float-element" style="animation-delay:3.6s"/>
-                            <rect x="155" y="170" width="3" height="5" rx="1" fill="rgba(147,197,253,0.2)" transform="rotate(-40 156 172)" class="float-element" style="animation-delay:4.4s"/>
-                            <rect x="200" y="75" width="3" height="5" rx="1" fill="rgba(16,185,129,0.18)" transform="rotate(15 201 77)" class="float-element" style="animation-delay:3.2s"/>
-                            <rect x="230" y="170" width="3" height="5" rx="1" fill="rgba(245,158,11,0.15)" transform="rotate(-60 231 172)" class="float-element" style="animation-delay:4.7s"/>
-                            <rect x="250" y="130" width="3" height="5" rx="1" fill="rgba(239,68,68,0.15)" transform="rotate(70 251 132)" class="float-element" style="animation-delay:3.3s"/>
-
-                            <!-- Property detail popup card -->
-
-                            <!-- Road/path -->
-                            <g class="slide-in-left" style="animation-delay:2.2s" opacity="0.06">
-                                <path d="M0 192 Q75 186 150 192 Q225 186 300 192" stroke="rgba(96,165,250,0.08)" stroke-width="1.5" fill="none"/>
-                                <path d="M0 196 Q75 190 150 196 Q225 190 300 196" stroke="rgba(96,165,250,0.06)" stroke-width="1" fill="none"/>
-                                <line x1="0" y1="194" x2="15" y2="194" stroke="rgba(96,165,250,0.04)" stroke-width="0.8"/>
-                                <line x1="30" y1="194" x2="45" y2="194" stroke="rgba(96,165,250,0.04)" stroke-width="0.8"/>
-                                <line x1="60" y1="194" x2="75" y2="194" stroke="rgba(96,165,250,0.04)" stroke-width="0.8"/>
-                                <line x1="90" y1="192" x2="105" y2="192" stroke="rgba(96,165,250,0.04)" stroke-width="0.8"/>
-                                <line x1="120" y1="192" x2="135" y2="192" stroke="rgba(96,165,250,0.04)" stroke-width="0.8"/>
-                                <line x1="150" y1="192" x2="165" y2="192" stroke="rgba(96,165,250,0.04)" stroke-width="0.8"/>
-                                <line x1="180" y1="192" x2="195" y2="192" stroke="rgba(96,165,250,0.04)" stroke-width="0.8"/>
-                                <line x1="210" y1="192" x2="225" y2="192" stroke="rgba(96,165,250,0.04)" stroke-width="0.8"/>
-                                <line x1="240" y1="192" x2="255" y2="192" stroke="rgba(96,165,250,0.04)" stroke-width="0.8"/>
-                                <line x1="270" y1="192" x2="285" y2="192" stroke="rgba(96,165,250,0.04)" stroke-width="0.8"/>
-                            </g>
-
-                            <!-- Lamp post (left) -->
-                            <g class="slide-up" style="animation-delay:2.6s" opacity="0.06">
-                                <rect x="56" y="145" width="2" height="47" fill="rgba(245,158,11,0.2)"/>
-                                <path d="M48 145 Q57 140 66 145" stroke="rgba(245,158,11,0.2)" stroke-width="1.2" fill="none"/>
-                                <circle cx="57" cy="143" r="3" fill="rgba(245,158,11,0.08)"/>
-                                <ellipse cx="57" cy="148" rx="8" ry="4" fill="rgba(245,158,11,0.03)"/>
-                            </g>
-
-                            <!-- Lamp post (right) -->
-                            <g class="slide-up" style="animation-delay:2.8s" opacity="0.06">
-                                <rect x="246" y="148" width="2" height="44" fill="rgba(245,158,11,0.2)"/>
-                                <path d="M238 148 Q247 143 256 148" stroke="rgba(245,158,11,0.2)" stroke-width="1.2" fill="none"/>
-                                <circle cx="247" cy="146" r="3" fill="rgba(245,158,11,0.08)"/>
-                                <ellipse cx="247" cy="151" rx="8" ry="4" fill="rgba(245,158,11,0.03)"/>
-                            </g>
-
-                            <!-- Small car on road -->
-                            <g class="roll-in" style="animation-delay:3.5s" opacity="0.06">
-                                <rect x="100" y="185" width="16" height="8" rx="2" fill="rgba(96,165,250,0.15)"/>
-                                <rect x="104" y="182" width="10" height="5" rx="1.5" fill="rgba(96,165,250,0.1)"/>
-                                <circle cx="104" cy="193" r="2" fill="rgba(96,165,250,0.12)"/>
-                                <circle cx="113" cy="193" r="2" fill="rgba(96,165,250,0.12)"/>
-                                <circle cx="116" cy="188" r="1" fill="rgba(245,158,11,0.08)"/>
-                            </g>
-
-                            <!-- Second bird (smaller, different path) -->
-                            <g class="bird-fly" style="animation-delay:1.5s;">
-                                <path d="M0 0 Q5 -4 10 0" stroke="rgba(147,197,253,0.1)" stroke-width="0.8" fill="none" stroke-linecap="round" class="bird-wing"/>
-                                <path d="M10 0 Q15 -4 20 0" stroke="rgba(147,197,253,0.1)" stroke-width="0.8" fill="none" stroke-linecap="round" class="bird-wing" style="animation-delay:-0.1s"/>
-                            </g>
-
-                            <!-- Third bird (far away, tiny) -->
-                            <g class="bird-fly" style="animation-delay:2.5s; animation-duration:6s;">
-                                <path d="M0 0 Q4 -3 8 0" stroke="rgba(147,197,253,0.06)" stroke-width="0.6" fill="none" stroke-linecap="round" class="bird-wing"/>
-                                <path d="M8 0 Q12 -3 16 0" stroke="rgba(147,197,253,0.06)" stroke-width="0.6" fill="none" stroke-linecap="round" class="bird-wing" style="animation-delay:-0.1s"/>
-                            </g>
-
-                            <!-- Floating leaves -->
-                            <ellipse cx="38" cy="100" rx="2" ry="1" fill="rgba(16,185,129,0.05)" class="float-element" style="animation-delay:0.5s; animation-duration:4s" transform="rotate(30 38 100)"/>
-                            <ellipse cx="262" cy="90" rx="2" ry="1" fill="rgba(245,158,11,0.04)" class="float-element" style="animation-delay:1.2s; animation-duration:5s" transform="rotate(-20 262 90)"/>
-                            <ellipse cx="148" cy="70" rx="1.5" ry="0.8" fill="rgba(147,197,253,0.03)" class="float-element" style="animation-delay:2s; animation-duration:3.5s" transform="rotate(45 148 70)"/>
-
-                            <g class="card-flip" style="animation-delay:2s">
-                                <rect x="18" y="143" width="62" height="44" rx="7" fill="rgba(15,23,42,0.3)" stroke="rgba(96,165,250,0.06)" stroke-width="1"/>
-                                <rect x="22" y="147" width="54" height="15" rx="4" fill="rgba(147,197,253,0.04)"/>
-                                <text x="49" y="158" text-anchor="middle" font-size="5.5" font-weight="700" fill="rgba(16,185,129,0.5)" font-family="sans-serif">Dream House</text>
-                                <rect x="22" y="165" width="54" height="4" rx="2" fill="rgba(147,197,253,0.05)"/>
-                                <rect x="22" y="173" width="32" height="4" rx="2" fill="rgba(147,197,253,0.03)"/>
-                                <text x="49" y="182" text-anchor="middle" font-size="5.5" font-weight="700" fill="rgba(245,158,11,0.5)" font-family="sans-serif">BDT 15,000/mo</text>
-                            </g>
-
-                            <!-- Floating dots (ambient) -->
-                            <circle cx="70" cy="55" r="2.5" fill="rgba(96,165,250,0.06)" class="dot-pulse" style="animation-delay:0.3s"/>
-                            <circle cx="240" cy="65" r="2" fill="rgba(147,197,253,0.05)" class="dot-pulse" style="animation-delay:0.7s"/>
-                            <circle cx="55" cy="145" r="2" fill="rgba(147,197,253,0.04)" class="dot-pulse" style="animation-delay:1.1s"/>
-                            <circle cx="270" cy="85" r="2.5" fill="rgba(96,165,250,0.05)" class="dot-pulse" style="animation-delay:1.5s"/>
-                            <circle cx="85" cy="105" r="1.5" fill="rgba(96,165,250,0.04)" class="dot-pulse" style="animation-delay:1.9s"/>
-                            <circle cx="140" cy="45" r="1.5" fill="rgba(147,197,253,0.03)" class="dot-pulse" style="animation-delay:0.5s"/>
-                            <circle cx="230" cy="180" r="1.5" fill="rgba(96,165,250,0.03)" class="dot-pulse" style="animation-delay:2.1s"/>
-                            </g>
+                            <text x="215" y="129" text-anchor="middle" font-size="10" font-weight="800" fill="rgba(16,185,129,0.7)">FOUND!</text>
+                            <circle cx="215" cy="140" r="16" fill="rgba(16,185,129,0.08)" stroke="rgba(16,185,129,0.3)" stroke-width="1.8"/>
+                            <path d="M207 140 L212 146 L223 134" stroke="rgba(16,185,129,0.65)" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                     </div>
                 </div>
@@ -2100,58 +1155,7 @@ n/* ── Smooth scene restart transition ── */
 var scrollProgressEl = document.getElementById('scrollProgress');
 var backToTopBtn = document.getElementById('backToTop');
 
-// ── Hero Mouse Parallax ──
-(function() {
-    var hero = document.getElementById('hero');
-    if (!hero) return;
-    var glare = document.getElementById('heroGlare');
-    var mesh = hero.querySelector('.hero-mesh');
-    var targetX = 0, targetY = 0, currentX = 0, currentY = 0, time = 0;
-
-    var orbConfigs = [
-        { ax: 8, ay: 6, speed: 0.4, delay: 0 },
-        { ax: 6, ay: 10, speed: 0.3, delay: 1.5 },
-        { ax: 5, ay: 4, speed: 0.5, delay: 0.8 },
-        { ax: 7, ay: 5, speed: 0.35, delay: 2.2 }
-    ];
-    var orbs = hero.querySelectorAll('.hero-orbs .orb');
-
-    hero.addEventListener('mousemove', function(e) {
-        var rect = this.getBoundingClientRect();
-        targetX = ((e.clientX - rect.left) / rect.width - 0.5) * 2;
-        targetY = ((e.clientY - rect.top) / rect.height - 0.5) * 2;
-        if (glare) {
-            glare.style.setProperty('--mouse-x', ((e.clientX - rect.left) / rect.width * 100) + '%');
-            glare.style.setProperty('--mouse-y', ((e.clientY - rect.top) / rect.height * 100) + '%');
-            glare.classList.add('active');
-        }
-    });
-    hero.addEventListener('mouseleave', function() { targetX = 0; targetY = 0; if (glare) glare.classList.remove('active'); });
-
-    function animateHero() {
-        time += 0.016;
-        currentX += (targetX - currentX) * 0.03;
-        currentY += (targetY - currentY) * 0.03;
-        if (mesh) mesh.style.transform = 'translate(' + (currentX * 0.5) + 'px, ' + (currentY * 0.5) + 'px) scale(' + (1 + Math.abs(currentX) * 0.005) + ')';
-        if (orbs.length) {
-            for (var i = 0; i < orbs.length; i++) {
-                var cfg = orbConfigs[i] || { ax: 5, ay: 5, speed: 0.3, delay: 0 };
-                var floatX = Math.sin(time * cfg.speed + cfg.delay) * cfg.ax;
-                var floatY = Math.cos(time * cfg.speed * 0.7 + cfg.delay + 1) * cfg.ay;
-                var paraX = currentX * (8 - i * 1.5);
-                var paraY = currentY * (6 - i * 1);
-                var scale = 1 + Math.sin(time * 0.3 + i) * 0.05;
-                orbs[i].style.transform = 'translate(' + (floatX + paraX) + 'px, ' + (floatY + paraY) + 'px) scale(' + scale + ')';
-            }
-        }
-        if (glare && !glare.classList.contains('active')) {
-            glare.style.setProperty('--mouse-x', (50 + Math.sin(time * 0.15) * 30) + '%');
-            glare.style.setProperty('--mouse-y', (50 + Math.cos(time * 0.1) * 25) + '%');
-        }
-        requestAnimationFrame(animateHero);
-    }
-    animateHero();
-})();
+// ── Hero Mouse Parallax - removed for performance
 
 // ── Scroll ──
 window.addEventListener('scroll', function() {
@@ -2208,148 +1212,13 @@ document.querySelectorAll('.fav-btn').forEach(function(btn) {
     });
 });
 
-// ── Typewriter ──
-(function() {
-    var words = ['Home', 'Apartment', 'Flat', 'House', 'Room', 'Villa'];
-    var wordIndex = 0;
-    var el = document.getElementById('heroWord');
-    if (!el) return;
-    function typeWord(word, cb) {
-        var i = 0; el.textContent = '';
-        var t = setInterval(function() { el.textContent += word[i]; i++; if (i >= word.length) { clearInterval(t); setTimeout(cb, 2000); } }, 80);
-    }
-    function deleteWord(cb) {
-        var w = el.textContent, i = w.length;
-        var d = setInterval(function() { el.textContent = w.substring(0, i - 1); i--; if (i <= 0) { clearInterval(d); cb(); } }, 40);
-    }
-    function cycle() { wordIndex = (wordIndex + 1) % words.length; deleteWord(function() { typeWord(words[wordIndex], cycle); }); }
-    setTimeout(cycle, 3000);
-})();
+// ── Typewriter - removed for performance
 
-// ── 3D Tilt ──
-(function() {
-    var card = document.getElementById('tiltCard');
-    if (!card || window.innerWidth < 1024) return;
-    card.addEventListener('mousemove', function(e) {
-        var r = this.getBoundingClientRect();
-        this.style.transform = 'perspective(1000px) rotateX(' + (((e.clientY - r.top) / r.height - 0.5) * -16) + 'deg) rotateY(' + (((e.clientX - r.left) / r.width - 0.5) * 16) + 'deg)';
-    });
-    card.addEventListener('mouseleave', function() { this.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg)'; });
-})();
+// ── 3D Tilt - removed for performance
 
-// ── Hero Scene Looper (smooth fade) ──
-(function() {
-    var svg = document.querySelector('.hero-scene svg');
-    if (!svg) return;
-    var loopWrap = svg.querySelector('.scene-loop');
-    if (!loopWrap) return;
-    function restartScene() {
-        // Fade out, replace, fade in
-        loopWrap.style.transition = 'opacity 0.35s ease-in-out';
-        loopWrap.style.opacity = '0';
-        setTimeout(function() {
-            var clone = loopWrap.cloneNode(true);
-            clone.style.opacity = '0';
-            clone.style.transition = 'opacity 0.35s ease-in-out';
-            svg.replaceChild(clone, loopWrap);
-            loopWrap = clone;
-            requestAnimationFrame(function() {
-                loopWrap.style.opacity = '1';
-            });
-        }, 400);
-    }
-    setInterval(restartScene, 5800);
-})();
+// ── Hero Scene Looper - removed for performance
 
-// ── Interactive Mouse Particles ──
-(function() {
-    var canvas = document.getElementById('heroParticlesCanvas');
-    if (!canvas) return;
-    var ctx = canvas.getContext('2d');
-    var particles = [];
-    var mouseX = -1000, mouseY = -1000;
-    var hero = document.getElementById('hero');
-    var w, h;
-
-    function resize() {
-        w = hero.offsetWidth;
-        h = hero.offsetHeight;
-        canvas.width = w;
-        canvas.height = h;
-    }
-    resize();
-    window.addEventListener('resize', resize);
-
-    hero.addEventListener('mousemove', function(e) {
-        var r = hero.getBoundingClientRect();
-        mouseX = e.clientX - r.left;
-        mouseY = e.clientY - r.top;
-    });
-    hero.addEventListener('mouseleave', function() {
-        mouseX = -1000;
-        mouseY = -1000;
-    });
-
-    for (var i = 0; i < 60; i++) {
-        particles.push({
-            x: Math.random() * w,
-            y: Math.random() * h,
-            vx: (Math.random() - 0.5) * 0.3,
-            vy: (Math.random() - 0.5) * 0.3 - 0.1,
-            r: Math.random() * 2 + 1,
-            alpha: Math.random() * 0.3 + 0.1,
-            pulse: Math.random() * 2,
-            pulseSpeed: Math.random() * 0.02 + 0.01
-        });
-    }
-
-    function drawParticles() {
-        ctx.clearRect(0, 0, w, h);
-        for (var i = 0; i < particles.length; i++) {
-            var p = particles[i];
-            p.x += p.vx;
-            p.y += p.vy;
-            p.pulse += p.pulseSpeed;
-
-            var dx = p.x - mouseX;
-            var dy = p.y - mouseY;
-            var dist = Math.sqrt(dx * dx + dy * dy);
-            if (dist < 100) {
-                var force = (100 - dist) / 100 * 2;
-                p.x += dx / dist * force;
-                p.y += dy / dist * force;
-            }
-
-            if (p.x < 0) p.x = w;
-            if (p.x > w) p.x = 0;
-            if (p.y < 0) p.y = h;
-            if (p.y > h) p.y = 0;
-
-            var pulseAlpha = p.alpha + Math.sin(p.pulse) * 0.08;
-            ctx.beginPath();
-            ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-            ctx.fillStyle = 'rgba(147,197,253,' + pulseAlpha.toFixed(3) + ')';
-            ctx.fill();
-
-            for (var j = i + 1; j < particles.length; j++) {
-                var p2 = particles[j];
-                var dx2 = p.x - p2.x;
-                var dy2 = p.y - p2.y;
-                var dist2 = Math.sqrt(dx2 * dx2 + dy2 * dy2);
-                if (dist2 < 60) {
-                    ctx.beginPath();
-                    ctx.moveTo(p.x, p.y);
-                    ctx.lineTo(p2.x, p2.y);
-                    ctx.strokeStyle = 'rgba(147,197,253,' + (0.05 * (1 - dist2 / 60)).toFixed(3) + ')';
-                    ctx.lineWidth = 0.5;
-                    ctx.stroke();
-                }
-            }
-        }
-        requestAnimationFrame(drawParticles);
-    }
-    drawParticles();
-})();
+// ── Interactive Mouse Particles - removed for performance
 
 // ── Enhanced floating cards entrance ──
 (function() {
