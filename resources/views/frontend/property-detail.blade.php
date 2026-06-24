@@ -47,15 +47,30 @@
 .pd-gallery .gallery-main {
     position: relative;
     background: linear-gradient(135deg, #E2E8F0, #CBD5E1);
-    border-radius: 16px;
+    border-radius: 20px;
     overflow: hidden;
-    height: 420px;
+    height: 460px;
+    box-shadow: 0 4px 24px rgba(15,23,42,0.08);
 }
 .pd-gallery .gallery-main img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.35s ease;
+}
+.pd-gallery .gallery-counter {
+    position: absolute;
+    bottom: 16px;
+    right: 16px;
+    background: rgba(15,23,42,0.7);
+    backdrop-filter: blur(8px);
+    color: #fff;
+    padding: 0.375rem 0.875rem;
+    border-radius: 8px;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    z-index: 2;
+    letter-spacing: 0.03em;
 }
 .gallery-badges {
     position: absolute;
@@ -80,47 +95,40 @@
     background: rgba(15,23,42,0.75);
     color: #fff;
 }
-.gallery-cta {
-    position: absolute;
-    bottom: 16px;
-    right: 16px;
-    background: rgba(15,23,42,0.75);
-    backdrop-filter: blur(8px);
-    color: #fff;
-    border: none;
-    padding: 0.5rem 1rem;
-    border-radius: 8px;
-    font-size: 0.8125rem;
-    font-weight: 500;
-    cursor: pointer;
-    font-family: var(--font);
-    transition: all 0.2s;
-    z-index: 2;
-}
-.gallery-cta:hover { background: rgba(15,23,42,0.9); }
 .pd-gallery .gallery-thumbs {
     display: flex;
-    gap: 0.5rem;
-    margin-top: 0.625rem;
+    gap: 0.625rem;
+    margin-top: 0.75rem;
+    padding: 0.75rem;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 14px;
     overflow-x: auto;
-    padding-bottom: 0.25rem;
 }
 .pd-gallery .gallery-thumbs .thumb {
     flex-shrink: 0;
-    width: 80px;
-    height: 60px;
-    border-radius: 8px;
+    width: 96px;
+    height: 72px;
+    border-radius: 10px;
     overflow: hidden;
     cursor: pointer;
     border: 2px solid transparent;
-    transition: border-color 0.2s, opacity 0.2s;
+    transition: border-color 0.2s, transform 0.2s;
     background: linear-gradient(135deg, #E2E8F0, #CBD5E1);
+    box-shadow: 0 1px 4px rgba(15,23,42,0.06);
 }
-.pd-gallery .gallery-thumbs .thumb:hover { border-color: var(--primary); opacity: 0.85; }
-.pd-gallery .gallery-thumbs .thumb.active { border-color: var(--primary); opacity: 1; }
-.pd-gallery .gallery-thumbs .thumb img { width: 100%; height: 100%; object-fit: cover; }
+.pd-gallery .gallery-thumbs .thumb:hover {
+    border-color: var(--primary);
+    transform: translateY(-2px);
+}
+.pd-gallery .gallery-thumbs .thumb.active {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px var(--primary-light);
+}
+.pd-gallery .gallery-thumbs .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
 @media (max-width: 768px) {
     .pd-gallery .gallery-main { height: 280px; }
+    .pd-gallery .gallery-thumbs .thumb { width: 72px; height: 56px; }
 }
 
 /* ─── Content ─── */
@@ -454,11 +462,14 @@
                 <span class="gallery-badge verified">Verified</span>
                 <span class="gallery-badge type">{{ $propertyTypeLabel }}</span>
             </div>
+            @if($totalImages > 1)
+                <div class="gallery-counter" id="galleryCounter">1 / {{ $totalImages }}</div>
+            @endif
         </div>
         @if($totalImages > 1)
             <div class="gallery-thumbs" id="galleryThumbs">
                 @foreach($allImages as $i => $img)
-                    <div class="thumb {{ $i === 0 ? 'active' : '' }}" data-src="{{ $img }}" onclick="switchGalleryImage(this)">
+                    <div class="thumb {{ $i === 0 ? 'active' : '' }}" data-src="{{ $img }}" data-index="{{ $i + 1 }}" onclick="switchGalleryImage(this)">
                         <img src="{{ $img }}" alt="">
                     </div>
                 @endforeach
@@ -474,6 +485,8 @@
         var thumbs = document.querySelectorAll('#galleryThumbs .thumb');
         thumbs.forEach(function(t) { t.classList.remove('active'); });
         el.classList.add('active');
+        var counter = document.getElementById('galleryCounter');
+        if (counter) { counter.textContent = el.getAttribute('data-index') + ' / ' + thumbs.length; }
     }
     </script>
 
