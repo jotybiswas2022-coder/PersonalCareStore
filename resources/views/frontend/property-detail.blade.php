@@ -44,17 +44,22 @@
 .pd-gallery {
     display: grid;
     grid-template-columns: 2fr 1fr;
-    grid-template-rows: 320px 320px;
     gap: 0.625rem;
     border-radius: 16px;
     overflow: hidden;
     margin-bottom: 2rem;
+    max-height: 640px;
+}
+.pd-gallery.single {
+    grid-template-columns: 1fr;
+    max-height: 480px;
 }
 .pd-gallery .gallery-main {
     grid-row: 1 / -1;
     background: linear-gradient(135deg, #E2E8F0, #CBD5E1);
     position: relative;
     overflow: hidden;
+    min-height: 320px;
 }
 .pd-gallery .gallery-main img {
     width: 100%;
@@ -63,19 +68,26 @@
     transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .pd-gallery .gallery-main:hover img { transform: scale(1.05); }
-.pd-gallery .gallery-item {
+.pd-gallery .gallery-side {
+    display: flex;
+    flex-direction: column;
+    gap: 0.625rem;
+}
+.pd-gallery .gallery-side .gallery-item {
+    flex: 1;
     background: linear-gradient(135deg, #E2E8F0, #CBD5E1);
     position: relative;
     overflow: hidden;
+    min-height: 150px;
 }
-.pd-gallery .gallery-item img {
+.pd-gallery .gallery-side .gallery-item img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     transition: transform 0.4s;
 }
-.pd-gallery .gallery-item:hover img { transform: scale(1.08); }
-.pd-gallery .gallery-item .gallery-overlay {
+.pd-gallery .gallery-side .gallery-item:hover img { transform: scale(1.08); }
+.pd-gallery .gallery-side .gallery-item .gallery-overlay {
     position: absolute;
     inset: 0;
     background: rgba(15,23,42,0.3);
@@ -85,7 +97,13 @@
     opacity: 0;
     transition: opacity 0.3s;
 }
-.pd-gallery .gallery-item:hover .gallery-overlay { opacity: 1; }
+.pd-gallery .gallery-side .gallery-item:hover .gallery-overlay { opacity: 1; }
+@media (max-width: 768px) {
+    .pd-gallery { grid-template-columns: 1fr; max-height: none; }
+    .pd-gallery .gallery-side { flex-direction: row; }
+    .pd-gallery .gallery-main { grid-row: auto; min-height: 250px; }
+    .pd-gallery .gallery-side .gallery-item { min-height: 100px; }
+}
 .gallery-badges {
     position: absolute;
     top: 16px;
@@ -443,11 +461,12 @@
     @php
         $allImages = $property->all_images;
         $firstImage = $property->first_image;
-        $remainingImages = array_slice($allImages, 1, 2);
+        $sideImages = array_slice($allImages, 1, 2);
         $propertyTypeLabel = ucfirst(str_replace('_', ' ', $property->property_type));
+        $totalImages = count($allImages);
     @endphp
 
-    <div class="pd-gallery pd-animate pd-animate-d1">
+    <div class="pd-gallery {{ $totalImages <= 1 ? 'single' : '' }} pd-animate pd-animate-d1">
         <div class="gallery-main">
             @if($firstImage)
                 <img src="{{ $firstImage }}" alt="{{ $property->title }}">
@@ -463,28 +482,28 @@
                 <span class="gallery-badge verified">Verified</span>
                 <span class="gallery-badge type">{{ $propertyTypeLabel }}</span>
             </div>
-            @if(count($allImages) > 1)
-                <button class="gallery-cta">View All {{ count($allImages) }} Photos</button>
+            @if($totalImages > 1)
+                <button class="gallery-cta">View All {{ $totalImages }} Photos</button>
             @endif
         </div>
-        @foreach($remainingImages as $img)
-            <div class="gallery-item">
-                <img src="{{ $img }}" alt="Property photo">
-                <div class="gallery-overlay">
-                    <svg width="24" height="24" fill="none" stroke="#fff" viewBox="0 0 24 24" stroke-width="2">
-                        <circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/>
-                    </svg>
-                </div>
+        @if($totalImages > 1)
+            <div class="gallery-side">
+                @foreach($sideImages as $img)
+                    <div class="gallery-item">
+                        <img src="{{ $img }}" alt="Property photo">
+                        <div class="gallery-overlay">
+                            <svg width="24" height="24" fill="none" stroke="#fff" viewBox="0 0 24 24" stroke-width="2">
+                                <circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/>
+                            </svg>
+                        </div>
+                    </div>
+                @endforeach
+                @if($totalImages > 3)
+                    <div class="gallery-item" style="position:relative;overflow:hidden;flex:1;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#E2E8F0,#CBD5E1);">
+                        <span style="font-size:1.5rem;font-weight:800;color:var(--text-muted);">+{{ $totalImages - 3 }} more</span>
+                    </div>
+                @endif
             </div>
-        @endforeach
-        @if(count($remainingImages) < 2)
-            @for($i = count($remainingImages); $i < 2; $i++)
-                <div class="gallery-item">
-                    <svg width="40" height="40" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="0.5" opacity="0.3">
-                        <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/>
-                    </svg>
-                </div>
-            @endfor
         @endif
     </div>
 
