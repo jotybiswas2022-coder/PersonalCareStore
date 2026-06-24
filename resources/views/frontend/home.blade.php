@@ -781,7 +781,9 @@
 
 /* ───────────── FEATURED PROPERTIES ───────────── */
 .featured-section { padding: 5rem 0; background: var(--bg); position: relative; }
-.prop-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.5rem; max-width: 1280px; margin: 0 auto; padding: 0 1.5rem; }
+.prop-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem; max-width: 1280px; margin: 0 auto; padding: 0 1.5rem; }
+@media (max-width: 1200px) { .prop-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 640px) { .prop-grid { grid-template-columns: 1fr; padding: 0 1rem; } }
 .prop-card {
     background: var(--white);
     border-radius: var(--radius);
@@ -882,7 +884,11 @@
 .prop-card .prop-body .prop-actions a:first-child:hover { background: var(--primary-dark); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(37,99,235,0.3); }
 .prop-card .prop-body .prop-actions a:last-child { background: var(--bg); color: var(--text); border: 1px solid var(--border); }
 .prop-card .prop-body .prop-actions a:last-child:hover { background: var(--primary-light); color: var(--primary); border-color: var(--primary); }
-@media (max-width: 640px) { .prop-grid { grid-template-columns: 1fr; padding: 0 1rem; } .prop-card .prop-img { height: 200px; } }
+@media (max-width: 640px) { .prop-card .prop-img { height: 200px; } }
+.browse-more { text-align: center; margin-top: 2.5rem; }
+.btn-browse { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.8125rem 2rem; background: linear-gradient(135deg, #2563EB, #7C3AED); color: #fff; border-radius: 12px; font-weight: 600; font-size: 0.9375rem; text-decoration: none; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); box-shadow: 0 4px 14px rgba(37,99,235,0.3); }
+.btn-browse:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(37,99,235,0.45); }
+.btn-browse:active { transform: translateY(0); }
 
 /* ───────────── HOW IT WORKS ───────────── */
 .how-section { padding: 5rem 0; background: var(--white); position: relative; }
@@ -1340,6 +1346,9 @@
                 <p style="color:var(--text-muted); font-size:0.9375rem;">Check back soon for featured rental properties.</p>
             </div>
         @endforelse
+    </div>
+    <div class="browse-more">
+        <a href="{{ route('search') }}" class="btn-browse">Browse More Properties <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7l7 7-7 7"/></svg></a>
     </div>
 </section>
 

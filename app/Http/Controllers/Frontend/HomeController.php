@@ -15,7 +15,7 @@ class HomeController extends Controller
     {
         $featuredProperties = ToLetAdvertisement::approved()
             ->latest()
-            ->take(6)
+            ->take(4)
             ->get();
 
         return view('frontend.home', compact('featuredProperties'));
