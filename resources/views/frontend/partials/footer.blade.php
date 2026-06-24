@@ -50,6 +50,7 @@
                         <textarea name="message" placeholder="Write your message..." required rows="3"></textarea>
                         <button type="submit">Send Message</button>
                     </form>
+                    <a href="{{ route('contact.my-messages') }}" style="display:inline-block; margin-top:0.5rem; color:rgba(255,255,255,0.4); font-size:0.75rem; text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='rgba(255,255,255,0.4)'">View My Messages</a>
                 </div>
             </div>
         </div>
