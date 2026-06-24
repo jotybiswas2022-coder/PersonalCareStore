@@ -23,7 +23,6 @@
                     <a href="{{ route('home') }}">Home</a>
                     <a href="{{ route('search') }}">Browse Properties</a>
                     <a href="{{ route('post-property') }}">Post Property</a>
-                    <a href="{{ route('home') }}#categories">Categories</a>
                     <a href="{{ route('home') }}#properties">Featured Properties</a>
                 </div>
                 <div class="footer-col">

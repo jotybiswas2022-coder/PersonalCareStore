@@ -12,7 +12,6 @@
         <div id="navLinks" class="nav-links">
             <a href="{{ route('home') }}" class="nav-link">Home</a>
             <a href="{{ route('search') }}" class="nav-link">Browse</a>
-            <a href="{{ route('home') }}#categories" class="nav-link">Categories</a>
             <a href="{{ route('home') }}#properties" class="nav-link">Properties</a>
             <a href="{{ route('post-property') }}" class="nav-link nav-link-highlight">
                 <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
