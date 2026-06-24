@@ -444,8 +444,8 @@
 @keyframes sunGlow { 0%,100% { opacity: 0.06; transform: scale(1); } 50% { opacity: 0.15; transform: scale(1.08); } }
 
 /* ── Pointing arm ── */
-.hero-scene .point-arm { animation: pointAppear 0.6s ease-out 3.5s forwards; opacity: 0; transform-origin: 108px 140px; }
-@keyframes pointAppear { 0% { opacity: 0; transform: scale(0.5) rotate(-20deg); } 100% { opacity: 1; transform: scale(1) rotate(0deg); } }
+.hero-scene .point-arm { animation: pointAppear 0.5s ease-out 3.1s forwards; opacity: 0; transform-origin: 132px 138px; }
+@keyframes pointAppear { 0% { opacity: 0; transform: scale(0.5) rotate(-15deg); } 100% { opacity: 1; transform: scale(1) rotate(0deg); } }
 .hero-image-card .floating-card {
     position: absolute;
     background: rgba(15,23,42,0.5);
@@ -1185,12 +1185,14 @@
                                     <path d="M104 112 Q104 96 120 94 Q136 96 136 112" fill="rgba(96,165,250,0.1)" stroke="rgba(96,165,250,0.2)" stroke-width="1"/>
                                 </g>
 
-                            <!-- Arm holding magnifying glass -->
+                            <!-- Left arm (always visible, hangs at side) -->
+                            <path d="M108 138 Q94 150 90 164" stroke="rgba(96,165,250,0.3)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                            <!-- Right arm holding magnifying glass -->
                             <g class="person-arm">
                                 <path d="M132 138 Q148 128 160 116" stroke="rgba(96,165,250,0.35)" stroke-width="3" fill="none" stroke-linecap="round" class="glass-hide" style="animation-delay:3.2s"/>
                             </g>
-                            <!-- Pointing arm at house (appears after found) -->
-                            <path d="M108 140 Q92 126 85 116" stroke="rgba(96,165,250,0.3)" stroke-width="2.5" fill="none" stroke-linecap="round" class="point-arm"/>
+                            <!-- Right arm pointing at house (appears after found, replaces glass arm) -->
+                            <path d="M132 138 Q145 126 152 114" stroke="rgba(96,165,250,0.3)" stroke-width="2.5" fill="none" stroke-linecap="round" class="point-arm"/>
                             </g>
 
                             <!-- Magnifying Glass (searches then disappears) -->
