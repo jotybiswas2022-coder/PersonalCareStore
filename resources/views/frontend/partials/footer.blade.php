@@ -70,7 +70,23 @@
 .footer-main { background: #f8fafc; padding: 4rem 0 2rem; }
 .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1.5fr; gap: 2.5rem; }
 @media (max-width: 1024px) { .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; } }
-@media (max-width: 640px) { .footer-grid { grid-template-columns: 1fr; gap: 1.5rem; } }
+@media (max-width: 640px) {
+    .footer-main { padding: 2rem 0 1.5rem; }
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+    .footer-brand { grid-column: span 2; }
+    .footer-desc { max-width: 100%; font-size: 0.8125rem; margin-bottom: 0.75rem; }
+    .footer-social a { width: 1.75rem; height: 1.75rem; }
+    .footer-col h4 { font-size: 0.8125rem; margin-bottom: 0.625rem; }
+    .footer-col a { font-size: 0.75rem; margin-bottom: 0.375rem; }
+    .footer-contact-form input,
+    .footer-contact-form textarea { padding: 0.375rem 0.5rem; font-size: 0.75rem; margin-bottom: 0.375rem; }
+    .footer-contact-form button { padding: 0.375rem; font-size: 0.75rem; }
+    .footer-bottom { padding: 0.75rem 0; }
+    .footer-bottom-inner { flex-direction: column; text-align: center; gap: 0.375rem; }
+    .footer-bottom-inner p { font-size: 0.7rem; }
+    .footer-bottom-links { gap: 0.75rem; }
+    .footer-bottom-links a { font-size: 0.7rem; }
+}
 .footer-logo { display: flex; align-items: center; gap: 0.625rem; margin-bottom: 1rem; }
 .footer-logo .logo-icon { width: 2rem; height: 2rem; background: linear-gradient(135deg, var(--primary), #1D4ED8); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #fff; font-weight: 800; font-size: 1rem; }
 .footer-logo span:last-child { color: var(--secondary); font-size: 1.25rem; font-weight: 700; letter-spacing: -0.02em; }
