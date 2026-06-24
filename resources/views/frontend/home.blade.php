@@ -796,8 +796,8 @@
 @keyframes floatBorderGlow { 0% { --float-angle: 0; } 100% { --float-angle: 360; } }
 @property --float-angle { syntax: '<number>'; initial-value: 0; inherits: false; }
 .hero-image-card .floating-card:hover { transform: scale(1.12) translateY(-4px) !important; background: rgba(15,23,42,0.6); box-shadow: 0 12px 40px rgba(0,0,0,0.35); }
-.hero-image-card .floating-card:nth-child(1) { bottom: 8%; right: -10%; animation-delay: 0s; animation-duration: 7s; }
-.hero-image-card .floating-card:nth-child(2) { top: 5%; left: -8%; animation-delay: 0s; }
+.hero-image-card .floating-card:nth-child(2) { bottom: 8%; right: -10%; animation-delay: 0s; animation-duration: 7s; }
+.hero-image-card .floating-card:nth-child(3) { top: 5%; left: -8%; animation-delay: 0s; }
 .hero-image-card .floating-card:nth-child(4) { bottom: 35%; left: -6%; animation-delay: 1s; animation-duration: 8s; }
 .floating-card .fc-icon { width: 2.5rem; height: 2.5rem; border-radius: 12px; display: flex; align-items: center; justify-content: center; }
 .floating-card .fc-icon.blue { background: rgba(37,99,235,0.15); color: #60A5FA; }
