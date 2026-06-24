@@ -1198,6 +1198,12 @@
         <div class="ring"></div>
     </div>
     <div class="hero-glare" id="heroGlare"></div>
+    <div class="hero-orbs">
+        <div class="orb"></div>
+        <div class="orb"></div>
+        <div class="orb"></div>
+        <div class="orb"></div>
+    </div>
     <div class="hero-particles">
         <span class="p-dot"></span><span class="p-glow"></span><span class="p-dot"></span><span class="p-accent"></span>
         <span class="p-dot"></span><span class="p-glow"></span><span class="p-trail"></span><span class="p-dot"></span>
