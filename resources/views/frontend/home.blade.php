@@ -378,69 +378,47 @@
 .hero-image-card .main-img .placeholder-icon { display: none; }
 .hero-scene { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
 .hero-scene svg { width: 85%; height: 85%; }
-/* ── Scene loop wrapper ── */
-.hero-scene .scene-loop { animation: sceneReset 9s step-end infinite; }
-@keyframes sceneReset { 0%,85% { visibility: visible; } 86%,100% { visibility: hidden; } }
+/* ── Original single-pass animations (restarted via JS loop) ── */
+.hero-scene .scene-loop .person-group { animation: walkIn 2s ease-out forwards; }
+@keyframes walkIn { 0% { transform: translateX(-80px); opacity: 0; } 100% { transform: translateX(0); opacity: 1; } }
+.hero-scene .scene-loop .person-body { animation: bodyBob 0.6s ease-in-out 0s 5; }
+@keyframes bodyBob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
+.hero-scene .scene-loop .person-head { animation: headLook 6s ease-in-out 1s infinite; transform-origin: 120px 112px; }
+@keyframes headLook { 0%,100% { transform: rotate(0deg); } 15% { transform: rotate(8deg); } 35% { transform: rotate(-6deg); } 55% { transform: rotate(5deg); } }
+.hero-scene .scene-loop .person-arm { animation: armWave 4s ease-in-out 0.5s infinite; transform-origin: 132px 138px; }
+@keyframes armWave { 0%,100% { transform: rotate(0deg); } 25% { transform: rotate(14deg); } 50% { transform: rotate(-6deg); } 75% { transform: rotate(8deg); } }
+.hero-scene .scene-loop .face-sad { animation: fadeOut 3.5s ease-in-out forwards; }
+@keyframes fadeOut { 0%,70% { opacity: 1; } 100% { opacity: 0; } }
+.hero-scene .scene-loop .face-happy { animation: fadeIn 1s ease-in-out 3s forwards; opacity: 0; }
+@keyframes fadeIn { 0% { opacity: 0; } 100% { opacity: 1; } }
+.hero-scene .scene-loop .search-glass { animation: glassSweep 4s ease-in-out 1.5s 2; transform-origin: 160px 114px; opacity: 0; animation-fill-mode: forwards; }
+@keyframes glassSweep { 0% { opacity: 0; transform: rotate(0deg); } 10% { opacity: 1; } 25% { transform: rotate(12deg); } 50% { transform: rotate(-12deg); } 75% { transform: rotate(8deg); } 100% { opacity: 1; transform: rotate(0deg); } }
+.hero-scene .scene-loop .glass-hide { animation: glassFadeOut 0.8s ease-in 3.2s forwards; }
+@keyframes glassFadeOut { 0% { opacity: 1; } 100% { opacity: 0; transform: scale(0.5); } }
+.hero-scene .scene-loop .house-found { animation: housePop 1s cubic-bezier(0.34,1.56,0.64,1) 2.8s forwards; opacity: 0; transform-origin: 214px 168px; }
+@keyframes housePop { 0% { opacity: 0; transform: scale(0) rotate(-15deg); } 50% { transform: scale(1.2) rotate(4deg); } 100% { opacity: 1; transform: scale(1) rotate(0deg); } }
+.hero-scene .scene-loop .happy-jump { animation: jumpHappy 0.6s ease-in-out 3.2s infinite; }
+@keyframes jumpHappy { 0%,100% { transform: translateY(0); } 25% { transform: translateY(-10px); } 50% { transform: translateY(0); } }
+.hero-scene .scene-loop .sparkle { animation: sparklePop 2s ease-out 3.4s infinite; opacity: 0; }
+@keyframes sparklePop { 0% { opacity: 0; transform: scale(0) rotate(0deg); } 20% { opacity: 1; transform: scale(1.4) rotate(180deg); } 50% { opacity: 0.5; transform: scale(0.7) rotate(360deg); } 100% { opacity: 0; transform: scale(0) rotate(360deg); } }
+.hero-scene .scene-loop .checkmark { animation: checkPop 1s cubic-bezier(0.34,1.56,0.64,1) 3.8s forwards; opacity: 0; transform-origin: 214px 140px; }
+@keyframes checkPop { 0% { opacity: 0; transform: scale(0) rotate(-25deg); } 50% { transform: scale(1.35) rotate(5deg); } 100% { opacity: 1; transform: scale(1) rotate(0deg); } }
+.hero-scene .scene-loop .found-text { animation: badgeBounce 0.8s cubic-bezier(0.34,1.56,0.64,1) 4.2s forwards; opacity: 0; }
+@keyframes badgeBounce { 0% { opacity: 0; transform: scale(0) translateY(15px); } 50% { transform: scale(1.2); } 100% { opacity: 1; transform: scale(1) translateY(0); } }
+.hero-scene .scene-loop .travel-dot { animation: dotTravel 2s ease-in-out 3s infinite; }
+@keyframes dotTravel { 0% { opacity: 0; transform: translateX(0); } 30% { opacity: 0.5; } 70% { opacity: 0.5; } 100% { opacity: 0; transform: translateX(50px); } }
+.hero-scene .scene-loop .point-arm { animation: pointAppear 0.5s ease-out 3.1s forwards; opacity: 0; transform-origin: 132px 138px; }
+@keyframes pointAppear { 0% { opacity: 0; transform: scale(0.5) rotate(-15deg); } 100% { opacity: 1; transform: scale(1) rotate(0deg); } }
+.hero-scene .scene-loop .raindrop { animation: rainFall 1.5s linear infinite; }
+@keyframes rainFall { 0% { opacity: 0; transform: translateY(-20px); } 50% { opacity: 0.4; transform: translateY(20px); } 100% { opacity: 0; transform: translateY(40px); } }
+.hero-scene .scene-loop .sunshine { animation: sunGlow 2s ease-in-out 3.5s infinite; opacity: 0; }
+@keyframes sunGlow { 0%,100% { opacity: 0.06; transform: scale(1); } 50% { opacity: 0.15; transform: scale(1.08); } }
 
-/* ── Walk-in Person ── */
-.hero-scene .person-group { animation: walkIn 9s ease-out infinite; }
-@keyframes walkIn { 0% { transform: translateX(-80px); opacity: 0; } 6% { transform: translateX(0); opacity: 1; } 88% { transform: translateX(0); opacity: 1; } 100% { transform: translateX(-80px); opacity: 0; } }
-.hero-scene .person-body { animation: bodyBob 9s ease-in-out infinite; }
-@keyframes bodyBob { 0%,5% { transform: translateY(0); } 8%,35% { transform: translateY(0); } 11%,32% { transform: translateY(-3px); } 38%,88% { transform: translateY(0); } 100% { transform: translateY(0); } }
-.hero-scene .person-head { animation: headLook 9s ease-in-out infinite; transform-origin: 120px 112px; }
-@keyframes headLook { 0%,10% { transform: rotate(0deg); } 15% { transform: rotate(8deg); } 25% { transform: rotate(-6deg); } 35% { transform: rotate(5deg); } 40%,88% { transform: rotate(0deg); } 100% { transform: rotate(0deg); } }
-.hero-scene .person-arm { animation: armWave 9s ease-in-out infinite; transform-origin: 132px 138px; }
-@keyframes armWave { 0%,6% { transform: rotate(0deg); } 15% { transform: rotate(14deg); } 25% { transform: rotate(-6deg); } 33% { transform: rotate(8deg); } 38%,88% { transform: rotate(0deg); } 100% { transform: rotate(0deg); } }
-
-/* ── Sad Face (initial) ── */
-.hero-scene .face-sad { animation: fadeOut 9s ease-in-out infinite; }
-@keyframes fadeOut { 0%,33% { opacity: 1; } 38%,100% { opacity: 0; } }
-
-/* ── Happy Face (after finding) ── */
-.hero-scene .face-happy { animation: fadeIn 9s ease-in-out infinite; }
-@keyframes fadeIn { 0%,33% { opacity: 0; } 38%,88% { opacity: 1; } 100% { opacity: 0; } }
-
-/* ── Magnifying Glass ── */
-.hero-scene .search-glass { animation: glassSweep 9s ease-in-out infinite; transform-origin: 160px 114px; }
-@keyframes glassSweep { 0%,16% { opacity: 0; transform: rotate(0deg); } 18% { opacity: 1; } 22% { transform: rotate(12deg); } 28% { transform: rotate(-12deg); } 34% { transform: rotate(8deg); } 38%,88% { opacity: 1; transform: rotate(0deg); } 100% { opacity: 0; transform: rotate(0deg); } }
-.hero-scene .glass-hide { animation: glassFadeOut 9s ease-in infinite; }
-@keyframes glassFadeOut { 0%,35% { opacity: 1; } 38%,88% { opacity: 0; transform: scale(0.5); } 100% { opacity: 0; transform: scale(0.5); } }
-
-/* ── House pops up (delayed - after searching) ── */
-.hero-scene .house-found { animation: housePop 9s cubic-bezier(0.34,1.56,0.64,1) infinite; transform-origin: 214px 168px; }
-@keyframes housePop { 0%,30% { opacity: 0; transform: scale(0) rotate(-15deg); } 33% { opacity: 1; transform: scale(1.2) rotate(4deg); } 36% { transform: scale(1) rotate(0deg); } 38%,88% { opacity: 1; transform: scale(1) rotate(0deg); } 100% { opacity: 0; transform: scale(0) rotate(-15deg); } }
-
-/* ── Happy Jump (whole person) ── */
-.hero-scene .happy-jump { animation: jumpHappy 9s ease-in-out infinite; }
-@keyframes jumpHappy { 0%,35% { transform: translateY(0); } 38% { transform: translateY(-10px); } 41% { transform: translateY(0); } 44% { transform: translateY(-10px); } 47% { transform: translateY(0); } 50% { transform: translateY(-10px); } 53% { transform: translateY(0); } 56%,88% { transform: translateY(0); } 100% { transform: translateY(0); } }
-
-/* ── Sparkles ── */
-.hero-scene .sparkle { animation: sparklePop 9s ease-out infinite; }
-@keyframes sparklePop { 0%,37% { opacity: 0; transform: scale(0) rotate(0deg); } 40% { opacity: 1; transform: scale(1.4) rotate(180deg); } 50% { opacity: 0.5; transform: scale(0.7) rotate(360deg); } 60%,88% { opacity: 0; transform: scale(0) rotate(360deg); } 100% { opacity: 0; transform: scale(0) rotate(0deg); } }
-
-/* ── Checkmark ── */
-.hero-scene .checkmark { animation: checkPop 9s cubic-bezier(0.34,1.56,0.64,1) infinite; transform-origin: 214px 140px; }
-@keyframes checkPop { 0%,40% { opacity: 0; transform: scale(0) rotate(-25deg); } 43% { opacity: 1; transform: scale(1.35) rotate(5deg); } 46% { transform: scale(1) rotate(0deg); } 47%,88% { opacity: 1; transform: scale(1) rotate(0deg); } 100% { opacity: 0; transform: scale(0) rotate(-25deg); } }
-
-/* ── Found badge bounce ── */
-.hero-scene .found-text { animation: badgeBounce 9s cubic-bezier(0.34,1.56,0.64,1) infinite; }
-@keyframes badgeBounce { 0%,44% { opacity: 0; transform: scale(0) translateY(15px); } 47% { opacity: 1; transform: scale(1.2); } 50% { transform: scale(1) translateY(0); } 51%,88% { opacity: 1; transform: scale(1) translateY(0); } 100% { opacity: 0; transform: scale(0) translateY(15px); } }
-
-/* ── Connecting dots travel ── */
-.hero-scene .travel-dot { animation: dotTravel 9s ease-in-out infinite; }
-@keyframes dotTravel { 0%,32% { opacity: 0; transform: translateX(0); } 35% { opacity: 0.5; } 42% { opacity: 0.5; } 48%,88% { opacity: 0; transform: translateX(50px); } 100% { opacity: 0; transform: translateX(0); } }
-
-/* ── Pointing arm ── */
-.hero-scene .point-arm { animation: pointAppear 9s ease-out infinite; transform-origin: 132px 138px; }
-@keyframes pointAppear { 0%,33% { opacity: 0; transform: scale(0.5) rotate(-15deg); } 36%,88% { opacity: 1; transform: scale(1) rotate(0deg); } 100% { opacity: 0; transform: scale(0.5) rotate(-15deg); } }
-
-/* ── Rain drops (searching phase) ── */
-.hero-scene .raindrop { animation: rainFall 9s linear infinite; }
-@keyframes rainFall { 0%,3% { opacity: 0; transform: translateY(-20px); } 8%,30% { opacity: 0.4; transform: translateY(20px); } 35%,100% { opacity: 0; transform: translateY(40px); } }
-
-/* ── Sunshine (after found) ── */
-.hero-scene .sunshine { animation: sunGlow 9s ease-in-out infinite; }
-@keyframes sunGlow { 0%,35% { opacity: 0; transform: scale(1); } 40%,88% { opacity: 0.12; transform: scale(1.08); } 100% { opacity: 0; transform: scale(1); } }
+/* Free-running background particles */
+.hero-scene .dot-pulse { animation: dotPulse 2s ease-in-out infinite; }
+@keyframes dotPulse { 0%,100% { opacity: 0.12; transform: scale(0.8); } 50% { opacity: 0.5; transform: scale(1.3); } }
+.hero-scene .search-ray { animation: rayPulse 3s ease-in-out infinite; transform-origin: 150px 105px; }
+@keyframes rayPulse { 0%,100% { opacity: 0.06; transform: scale(0.95); } 50% { opacity: 0.18; transform: scale(1.05); } }
 
 /* ── Dots / Search ray (free running) ── */
 .hero-scene .dot-pulse { animation: dotPulse 2s ease-in-out infinite; }
@@ -1601,6 +1579,19 @@ document.querySelectorAll('.fav-btn').forEach(function(btn) {
         this.style.transform = 'perspective(1000px) rotateX(' + (((e.clientY - r.top) / r.height - 0.5) * -16) + 'deg) rotateY(' + (((e.clientX - r.left) / r.width - 0.5) * 16) + 'deg)';
     });
     card.addEventListener('mouseleave', function() { this.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg)'; });
+})();
+
+// ── Hero Scene Looper ──
+(function() {
+    var loopWrap = document.querySelector('.hero-scene .scene-loop');
+    if (!loopWrap) return;
+    var parent = loopWrap.parentNode;
+    function restartScene() {
+        var clone = loopWrap.cloneNode(true);
+        parent.replaceChild(clone, loopWrap);
+        loopWrap = clone;
+    }
+    setInterval(restartScene, 8500);
 })();
 </script>
 @endpush
