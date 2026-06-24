@@ -43,9 +43,13 @@
                 </div>
                 <div class="footer-col">
                     <h4>Contact Us</h4>
-                    <a href="tel:+8801234567890"><svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24" style="margin-right:6px;vertical-align:middle"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>+880 1234-567890</a>
-                    <a href="mailto:info@basafinder.com"><svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24" style="margin-right:6px;vertical-align:middle"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2zm16 4l-8 5-8-5v2l8 5 8-5V8z"/></svg>info@basafinder.com</a>
-                    <a href="#"><svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24" style="margin-right:6px;vertical-align:middle"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>Dhaka, Bangladesh</a>
+                    <form method="POST" action="{{ route('contact.submit') }}" class="footer-contact-form">
+                        @csrf
+                        <input type="text" name="name" placeholder="Your Name" required>
+                        <input type="email" name="email" placeholder="Your Email" required>
+                        <textarea name="message" placeholder="Write your message..." required rows="3"></textarea>
+                        <button type="submit">Send Message</button>
+                    </form>
                 </div>
             </div>
         </div>
@@ -81,9 +85,39 @@
 .footer-col h4 { color: #fff; font-size: 0.9375rem; font-weight: 600; margin-bottom: 1.125rem; }
 .footer-col a { display: block; color: rgba(255,255,255,0.5); text-decoration: none; font-size: 0.875rem; margin-bottom: 0.625rem; transition: all 0.2s; }
 .footer-col a:hover { color: var(--accent); padding-left: 4px; }
-.footer-app-badges { display: flex; flex-direction: column; gap: 0.625rem; }
-.app-badge { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(255,255,255,0.08); color: #fff; padding: 0.625rem 1rem; border-radius: 8px; font-size: 0.8125rem; font-weight: 500; text-decoration: none; transition: all 0.2s; }
-.app-badge:hover { background: rgba(255,255,255,0.15); transform: translateY(-1px); }
+.footer-contact-form input,
+.footer-contact-form textarea {
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    margin-bottom: 0.5rem;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 6px;
+    color: #fff;
+    font-size: 0.8125rem;
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.2s;
+    box-sizing: border-box;
+}
+.footer-contact-form input::placeholder,
+.footer-contact-form textarea::placeholder { color: rgba(255,255,255,0.35); }
+.footer-contact-form input:focus,
+.footer-contact-form textarea:focus { border-color: var(--primary); }
+.footer-contact-form button {
+    width: 100%;
+    padding: 0.5rem;
+    background: var(--primary);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+    font-family: inherit;
+}
+.footer-contact-form button:hover { background: var(--primary-dark); }
 .footer-bottom { background: #0B1121; padding: 1.25rem 0; border-top: 1px solid rgba(255,255,255,0.05); }
 .footer-bottom-inner { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
 .footer-bottom-inner p { color: rgba(255,255,255,0.3); font-size: 0.8125rem; }
