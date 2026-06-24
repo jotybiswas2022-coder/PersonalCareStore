@@ -304,8 +304,8 @@ function confirmDelete(id, title) {
         if (result.isConfirmed) {
             var form = document.createElement('form');
             form.method = 'POST';
-            form.action = '{{ route('my-properties.destroy', '') }}/' + id;
-            form.innerHTML = '@csrf @method('DELETE')';
+            form.action = '{{ url('my-properties') }}/' + id;
+            form.innerHTML = '<input type="hidden" name="_token" value="{{ csrf_token() }}"><input type="hidden" name="_method" value="DELETE">';
             document.body.appendChild(form);
             form.submit();
         }
