@@ -158,7 +158,7 @@
                             <span><svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="2" y1="20" x2="22" y2="20"/></svg> Family</span>
                         </div>
                         <div class="p-actions">
-                            <a href="{{ route('property-detail') }}" class="btn btn-primary btn-sm">View Details</a>
+                            <a href="{{ route('property-detail', 1) }}" class="btn btn-primary btn-sm">View Details</a>
                             <a href="#" class="btn btn-outline btn-sm">Contact Owner</a>
                         </div>
                     </div>
@@ -180,7 +180,7 @@
                             <span><svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="2" y1="20" x2="22" y2="20"/></svg> Family</span>
                         </div>
                         <div class="p-actions">
-                            <a href="{{ route('property-detail') }}" class="btn btn-primary btn-sm">View Details</a>
+                            <a href="{{ route('property-detail', 2) }}" class="btn btn-primary btn-sm">View Details</a>
                             <a href="#" class="btn btn-outline btn-sm">Contact Owner</a>
                         </div>
                     </div>
@@ -202,7 +202,7 @@
                             <span><svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="2" y1="20" x2="22" y2="20"/></svg> Bachelor</span>
                         </div>
                         <div class="p-actions">
-                            <a href="{{ route('property-detail') }}" class="btn btn-primary btn-sm">View Details</a>
+                            <a href="{{ route('property-detail', 3) }}" class="btn btn-primary btn-sm">View Details</a>
                             <a href="#" class="btn btn-outline btn-sm">Contact Owner</a>
                         </div>
                     </div>
