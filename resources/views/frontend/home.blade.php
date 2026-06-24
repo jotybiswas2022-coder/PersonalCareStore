@@ -580,18 +580,49 @@
 .steps-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; max-width: 1280px; margin: 0 auto; padding: 0 1.5rem; }
 .step-card {
     text-align: center;
-    padding: 2.5rem 2rem;
+    padding: 2.75rem 2rem;
     position: relative;
-    background: rgba(255,255,255,0.03);
-    backdrop-filter: blur(16px);
+    background: rgba(255,255,255,0.04);
+    backdrop-filter: blur(24px) saturate(1.6);
+    -webkit-backdrop-filter: blur(24px) saturate(1.6);
     border-radius: var(--r-lg);
-    border: 1px solid rgba(255,255,255,0.06);
-    box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+    border: 1px solid rgba(255,255,255,0.08);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.06);
     transition: all 0.4s cubic-bezier(0.16,1,0.3,1);
+    overflow: hidden;
 }
-.step-card:hover { transform: translateY(-6px); box-shadow: 0 16px 48px rgba(0,0,0,0.25); border-color: rgba(37,99,235,0.2); }
-.step-card:not(:last-child)::after {
+.step-card::before {
     content: '';
+    position: absolute; inset: 0; border-radius: var(--r-lg); padding: 1.5px;
+    background: linear-gradient(135deg, rgba(255,255,255,0.06), rgba(37,99,235,0.15), rgba(124,58,237,0.15), rgba(245,158,11,0.1), rgba(255,255,255,0.06));
+    background-size: 400% 400%;
+    animation: stepBorderShift 6s ease-in-out infinite;
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+}
+@keyframes stepBorderShift { 0%,100% { background-position: 0% 50%; } 25% { background-position: 100% 0%; } 50% { background-position: 100% 100%; } 75% { background-position: 0% 100%; } }
+.step-card::after {
+    content: '';
+    position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+    background: radial-gradient(circle at 50% 0%, rgba(96,165,250,0.04) 0%, transparent 50%);
+    animation: stepShine 8s ease-in-out infinite;
+    pointer-events: none;
+}
+@keyframes stepShine {
+    0%,100% { transform: translate(0,0) rotate(0deg); opacity: 0.2; }
+    25%  { transform: translate(10%,-10%) rotate(5deg); opacity: 0.5; }
+    50%  { transform: translate(-5%,5%) rotate(-3deg); opacity: 0.3; }
+    75%  { transform: translate(8%,-8%) rotate(4deg); opacity: 0.6; }
+}
+.step-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 56px rgba(0,0,0,0.3), 0 0 40px rgba(37,99,235,0.06), inset 0 1px 0 rgba(255,255,255,0.1);
+    border-color: rgba(37,99,235,0.25);
+    background: rgba(255,255,255,0.06);
+}
+.step-connector {
     position: absolute; top: 3rem; right: -1rem;
     width: 2rem; height: 1px;
     background: linear-gradient(90deg, rgba(37,99,235,0.4), transparent);
@@ -1016,12 +1047,14 @@
         <p class="section-sub">Finding your perfect rental home is just three simple steps away.</p>
     </div>
     <div class="steps-grid">
-        <div class="step-card reveal">
+        <div class="step-card reveal" style="position:relative;">
+            <div class="step-connector"></div>
             <div class="step-num">1</div>
             <h3>Search Properties</h3>
             <p>Browse thousands of verified rental properties across Bangladesh using our smart search and filters.</p>
         </div>
-        <div class="step-card reveal">
+        <div class="step-card reveal" style="position:relative;">
+            <div class="step-connector"></div>
             <div class="step-num">2</div>
             <h3>Compare &amp; Connect</h3>
             <p>Compare properties side-by-side and connect directly with verified owners or agents.</p>

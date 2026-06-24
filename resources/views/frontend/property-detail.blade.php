@@ -204,13 +204,18 @@
 
 /* ─── Meta Grid ─── */
 .pd-meta-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-    gap: 0.75rem;
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 0.5rem;
     padding: 1.25rem;
     background: var(--bg);
     border-radius: 12px;
     margin-bottom: 1.5rem;
+    justify-content: space-around;
+}
+.pd-meta-item {
+    flex: 1;
+    min-width: 0;
 }
 .pd-meta-item {
     text-align: center;

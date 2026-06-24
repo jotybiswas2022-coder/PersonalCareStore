@@ -143,17 +143,22 @@
                     <h2>Available Properties</h2>
                     <p>Showing {{ $properties->firstItem() ?? 0 }}–{{ $properties->lastItem() ?? 0 }} of {{ $properties->total() }} results</p>
                 </div>
-                <form method="GET" action="{{ route('search') }}">
-                    @foreach(request()->except('sort', 'page') as $key => $value)
-                        @if(is_array($value))
-                            @foreach($value as $v)
-                                <input type="hidden" name="{{ $key }}[]" value="{{ $v }}">
-                            @endforeach
-                        @else
-                            <input type="hidden" name="{{ $key }}" value="{{ $value }}">
-                        @endif
-                    @endforeach
-                    <select name="sort" class="sort-select" onchange="this.form.submit()">
+                <div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap;">
+                    <form method="GET" action="{{ route('search') }}" id="searchForm" style="display:contents;">
+                        @foreach(request()->except('search', 'sort', 'page') as $key => $value)
+                            @if(is_array($value))
+                                @foreach($value as $v)
+                                    <input type="hidden" name="{{ $key }}[]" value="{{ $v }}">
+                                @endforeach
+                            @else
+                                <input type="hidden" name="{{ $key }}" value="{{ $value }}">
+                            @endif
+                        @endforeach
+                        <div style="position:relative;">
+                            <input type="text" name="search" placeholder="Search properties..." value="{{ request('search') }}" id="liveSearch" style="padding:0.5rem 0.75rem 0.5rem 2.25rem;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:0.8125rem;font-family:var(--font);outline:none;width:220px;transition:border-color 0.2s;box-sizing:border-box;" onfocus="this.style.borderColor='var(--primary)'" onblur="this.style.borderColor='var(--border)'">
+                            <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" style="position:absolute;left:0.625rem;top:50%;transform:translateY(-50%);color:var(--text-light);pointer-events:none;"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+                        </div>
+                        <select name="sort" class="sort-select" onchange="this.form.submit()">
                         <option value="latest" {{ request('sort') === 'latest' ? 'selected' : '' }}>Sort: Latest</option>
                         <option value="price_low" {{ request('sort') === 'price_low' ? 'selected' : '' }}>Sort: Price (Low)</option>
                         <option value="price_high" {{ request('sort') === 'price_high' ? 'selected' : '' }}>Sort: Price (High)</option>
