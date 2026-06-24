@@ -373,7 +373,7 @@
 .pd-summary-row:last-child { border-bottom: none; }
 .pd-summary-row .sv-value { font-weight: 600; color: var(--text); }
 
-/* ─── Map ─── */
+/* ─── Location Card ─── */
 .pd-map-card {
     background: var(--white);
     border: 1px solid var(--border);
@@ -385,17 +385,8 @@
     font-weight: 700;
     color: var(--secondary);
     margin-bottom: 1rem;
-}
-.map-placeholder {
-    height: 180px;
-    background: var(--bg);
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--text-muted);
-    font-size: 0.8125rem;
-    gap: 0.375rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid var(--bg);
 }
 
 /* ─── Contact Method Badge ─── */
@@ -638,42 +629,12 @@
                     <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
                     Location
                 </h3>
-                <div style="display:flex;flex-direction:column;gap:0.625rem;">
-                    <div style="display:flex;align-items:center;gap:0.75rem;background:var(--bg);border-radius:12px;padding:1rem 1.25rem;">
-                        <div style="width:2.5rem;height:2.5rem;background:var(--primary-light);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-                            <svg width="18" height="18" fill="none" stroke="var(--primary)" viewBox="0 0 24 24" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                        </div>
-                        <div>
-                            <div style="font-size:0.75rem;color:var(--text-muted);margin-bottom:0.125rem;">Division</div>
-                            <div style="font-size:0.9375rem;font-weight:600;color:var(--text);">{{ $property->division }}</div>
-                        </div>
-                    </div>
-                    <div style="display:flex;align-items:center;gap:0.75rem;background:var(--bg);border-radius:12px;padding:1rem 1.25rem;">
-                        <div style="width:2.5rem;height:2.5rem;background:var(--primary-light);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-                            <svg width="18" height="18" fill="none" stroke="var(--primary)" viewBox="0 0 24 24" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/><line x1="10" y1="2" x2="10" y2="22"/></svg>
-                        </div>
-                        <div>
-                            <div style="font-size:0.75rem;color:var(--text-muted);margin-bottom:0.125rem;">District</div>
-                            <div style="font-size:0.9375rem;font-weight:600;color:var(--text);">{{ $property->district }}</div>
-                        </div>
-                    </div>
-                    <div style="display:flex;align-items:center;gap:0.75rem;background:var(--bg);border-radius:12px;padding:1rem 1.25rem;">
-                        <div style="width:2.5rem;height:2.5rem;background:var(--primary-light);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-                            <svg width="18" height="18" fill="none" stroke="var(--primary)" viewBox="0 0 24 24" stroke-width="2"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><circle cx="12" cy="11" r="2"/></svg>
-                        </div>
-                        <div>
-                            <div style="font-size:0.75rem;color:var(--text-muted);margin-bottom:0.125rem;">Area</div>
-                            <div style="font-size:0.9375rem;font-weight:600;color:var(--text);">{{ $property->area_location }}</div>
-                        </div>
-                    </div>
-                    <div style="display:flex;align-items:center;gap:0.75rem;background:var(--bg);border-radius:12px;padding:1rem 1.25rem;">
-                        <div style="width:2.5rem;height:2.5rem;background:var(--primary-light);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-                            <svg width="18" height="18" fill="none" stroke="var(--primary)" viewBox="0 0 24 24" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-                        </div>
-                        <div style="flex:1;min-width:0;">
-                            <div style="font-size:0.75rem;color:var(--text-muted);margin-bottom:0.125rem;">Full Address</div>
-                            <div style="font-size:0.9375rem;font-weight:600;color:var(--text);word-break:break-word;">{{ $property->full_address }}</div>
-                        </div>
+                <div style="background:var(--bg);border-radius:12px;padding:1rem;">
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.5rem;font-size:0.875rem;">
+                        <div><span style="color:var(--text-muted);">Division:</span> <strong>{{ $property->division }}</strong></div>
+                        <div><span style="color:var(--text-muted);">District:</span> <strong>{{ $property->district }}</strong></div>
+                        <div><span style="color:var(--text-muted);">Area:</span> <strong>{{ $property->area_location }}</strong></div>
+                        <div><span style="color:var(--text-muted);">Full Address:</span> <strong>{{ $property->full_address }}</strong></div>
                     </div>
                 </div>
             </div>
@@ -758,12 +719,29 @@
                 @endif
             </div>
 
-            {{-- Map --}}
+            {{-- Location --}}
             <div class="pd-map-card">
-                <h4>Location</h4>
-                <div class="map-placeholder">
-                    <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/></svg>
-                    {{ $property->area_location }}, {{ $property->district }}
+                <h4>
+                    <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" style="vertical-align:middle;margin-right:6px;"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    Location
+                </h4>
+                <div style="display:flex;flex-direction:column;gap:0.5rem;">
+                    <div style="display:flex;justify-content:space-between;padding:0.5rem 0;border-bottom:1px solid var(--border);font-size:0.85rem;">
+                        <span style="color:var(--text-muted);">Division</span>
+                        <span style="font-weight:600;color:var(--text);">{{ $property->division }}</span>
+                    </div>
+                    <div style="display:flex;justify-content:space-between;padding:0.5rem 0;border-bottom:1px solid var(--border);font-size:0.85rem;">
+                        <span style="color:var(--text-muted);">District</span>
+                        <span style="font-weight:600;color:var(--text);">{{ $property->district }}</span>
+                    </div>
+                    <div style="display:flex;justify-content:space-between;padding:0.5rem 0;border-bottom:1px solid var(--border);font-size:0.85rem;">
+                        <span style="color:var(--text-muted);">Area</span>
+                        <span style="font-weight:600;color:var(--text);">{{ $property->area_location }}</span>
+                    </div>
+                    <div style="display:flex;flex-direction:column;padding:0.5rem 0;font-size:0.85rem;gap:0.25rem;">
+                        <span style="color:var(--text-muted);">Full Address</span>
+                        <span style="font-weight:600;color:var(--text);">{{ $property->full_address }}</span>
+                    </div>
                 </div>
             </div>
 
