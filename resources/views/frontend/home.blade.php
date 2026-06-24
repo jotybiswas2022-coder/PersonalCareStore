@@ -1288,57 +1288,6 @@
     </div>
 </section>
 
-<!-- ════════ CATEGORIES ════════ -->
-<section id="categories" class="categories-section">
-    <div class="section-header reveal">
-        <span class="badge">Browse by Category</span>
-        <h2>Explore Property Types</h2>
-        <p>Find exactly what you need from our wide range of rental property categories.</p>
-    </div>
-    <div class="cat-grid">
-        <a href="{{ route('search') }}" class="cat-card reveal" style="animation-delay:0.05s">
-            <div class="cat-icon"><svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
-            <span class="cat-name">Flats</span>
-            <span class="cat-count">2,450 Properties</span>
-        </a>
-        <a href="{{ route('search') }}" class="cat-card reveal" style="animation-delay:0.1s">
-            <div class="cat-icon"><svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path d="M3 21h18M3 10h18M5 6l7-3 7 3M4 10v11m16-11v11M8 14v3m4-3v3m4-3v3"/></svg></div>
-            <span class="cat-name">Houses</span>
-            <span class="cat-count">1,820 Properties</span>
-        </a>
-        <a href="{{ route('search') }}" class="cat-card reveal" style="animation-delay:0.15s">
-            <div class="cat-icon"><svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8m-4-4v4"/></svg></div>
-            <span class="cat-name">Sublets</span>
-            <span class="cat-count">980 Properties</span>
-        </a>
-        <a href="{{ route('search') }}" class="cat-card reveal" style="animation-delay:0.2s">
-            <div class="cat-icon"><svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87m-4-12a4 4 0 010 7.75"/></svg></div>
-            <span class="cat-name">Bachelor Mess</span>
-            <span class="cat-count">650 Properties</span>
-        </a>
-        <a href="{{ route('search') }}" class="cat-card reveal" style="animation-delay:0.25s">
-            <div class="cat-icon"><svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg></div>
-            <span class="cat-name">Offices</span>
-            <span class="cat-count">420 Properties</span>
-        </a>
-        <a href="{{ route('search') }}" class="cat-card reveal" style="animation-delay:0.3s">
-            <div class="cat-icon"><svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg></div>
-            <span class="cat-name">Shops</span>
-            <span class="cat-count">310 Properties</span>
-        </a>
-        <a href="{{ route('search') }}" class="cat-card reveal" style="animation-delay:0.35s">
-            <div class="cat-icon"><svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><path d="M9 22V12h6v10"/></svg></div>
-            <span class="cat-name">Hostels</span>
-            <span class="cat-count">530 Properties</span>
-        </a>
-        <a href="{{ route('search') }}" class="cat-card reveal" style="animation-delay:0.4s">
-            <div class="cat-icon"><svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
-            <span class="cat-name">All Rentals</span>
-            <span class="cat-count">8,160+ Total</span>
-        </a>
-    </div>
-</section>
-
 <!-- ════════ FEATURED PROPERTIES ════════ -->
 <section id="properties" class="featured-section">
     <div class="section-header reveal">
