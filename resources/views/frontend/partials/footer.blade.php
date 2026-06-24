@@ -71,7 +71,7 @@
     .footer-social a { width: 1.75rem; height: 1.75rem; }
     .footer-col h4 { font-size: 0.8125rem; margin-bottom: 0.625rem; }
     .footer-col a { font-size: 0.75rem; margin-bottom: 0.375rem; }
-    .footer-col:last-child { grid-column: 1 / -1; text-align: center; }
+    .footer-col:last-child { grid-column: 1 / -1; }
     .footer-col:last-child h4 { font-size: 0.9375rem; }
     .footer-contact-form input,
     .footer-contact-form textarea { padding: 0.5rem 0.75rem; font-size: 0.85rem; margin-bottom: 0.5rem; }
