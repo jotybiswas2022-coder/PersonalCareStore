@@ -115,6 +115,10 @@
 }
 .hero-orbs { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
 .hero-orbs .orb {
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
     position: absolute; border-radius: 50%;
     filter: blur(80px); opacity: 0.35;
     will-change: transform;
@@ -448,7 +452,7 @@
    ═══════════════════════════════════════════ */
 
 /* ── Character walk in + body bob ── */
-.hero-scene .scene-loop .person-group { animation: walkIn 1s ease-out forwards, bodyBob 0.4s ease-in-out 1s 3; }
+.hero-scene .scene-loop .person-group { animation: walkIn 1s ease-out forwards, bodyBob 0.4s ease-in-out 1s 3; will-change: transform; backface-visibility: hidden; }
 @keyframes walkIn { 0% { transform: translateX(-120px); opacity: 0; } 60% { transform: translateX(5px); } 100% { transform: translateX(0); opacity: 1; } }
 @keyframes bodyBob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
 
@@ -796,7 +800,7 @@
 @keyframes floatBorderGlow { 0% { --float-angle: 0; } 100% { --float-angle: 360; } }
 @property --float-angle { syntax: '<number>'; initial-value: 0; inherits: false; }
 .hero-image-card .floating-card:hover { transform: scale(1.12) translateY(-4px) !important; background: rgba(15,23,42,0.6); box-shadow: 0 12px 40px rgba(0,0,0,0.35); }
-.hero-image-card .floating-card:nth-child(2) { bottom: 8%; right: -10%; animation-delay: 0s; animation-duration: 7s; }
+.hero-image-card .floating-card:nth-child(2) { bottom: 2%; right: -10%; animation-delay: 0s; animation-duration: 7s; }
 .hero-image-card .floating-card:nth-child(3) { top: 5%; left: -8%; animation-delay: 0s; }
 .hero-image-card .floating-card:nth-child(4) { bottom: 35%; left: -6%; animation-delay: 1s; animation-duration: 8s; }
 .floating-card .fc-icon { width: 2.5rem; height: 2.5rem; border-radius: 12px; display: flex; align-items: center; justify-content: center; }
