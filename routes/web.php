@@ -40,8 +40,9 @@ Route::post('/to-let/post', [FrontendToLetController::class, 'store'])->name('to
 |--------------------------------------------------------------------------
 */
 Route::view('/search', 'frontend.search')->name('search');
-Route::view('/property/{id?}', 'frontend.property-detail')->name('property-detail');
-Route::view('/post-property', 'frontend.post-property')->name('post-property');
+Route::get('/property/{id}', [FrontendToLetController::class, 'show'])->name('property-detail');
+Route::get('/post-property', [FrontendToLetController::class, 'postProperty'])->name('post-property');
+Route::post('/post-property', [FrontendToLetController::class, 'storePostProperty'])->name('post-property.store');
 
 /*
 |--------------------------------------------------------------------------

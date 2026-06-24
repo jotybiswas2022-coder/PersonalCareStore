@@ -966,8 +966,8 @@
                         @endif
                     </div>
                     <div class="prop-actions">
-                        <a href="{{ route('property-detail') }}">View Details</a>
-                        <a href="#">Contact Owner</a>
+                        <a href="{{ route('property-detail', $property->id) }}">View Details</a>
+                        <a href="tel:{{ $property->contact_phone }}">Contact Owner</a>
                     </div>
                 </div>
             </div>

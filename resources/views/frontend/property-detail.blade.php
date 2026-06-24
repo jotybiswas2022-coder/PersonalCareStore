@@ -1,169 +1,747 @@
 @extends('frontend.layouts.app')
 
-@section('title', 'Property Details')
+@section('title', $property->title . ' - BasaFinder')
 
 @push('styles')
 <style>
-.prop-detail { max-width: 1280px; margin: 0 auto; padding: 2rem 1.5rem; }
-.prop-gallery { display: grid; grid-template-columns: 2fr 1fr; grid-template-rows: 300px 300px; gap: 0.75rem; border-radius: var(--radius); overflow: hidden; margin-bottom: 2rem; }
-.prop-gallery .gallery-main { grid-row: 1 / -1; background: linear-gradient(135deg, #E2E8F0, #CBD5E1); position: relative; display: flex; align-items: center; justify-content: center; }
-.prop-gallery .gallery-item { background: linear-gradient(135deg, #E2E8F0, #CBD5E1); position: relative; display: flex; align-items: center; justify-content: center; }
-.prop-gallery .gallery-item svg { opacity: 0.3; }
-.gallery-badges { position: absolute; top: 16px; left: 16px; display: flex; gap: 0.5rem; z-index: 1; }
-.gallery-badge { padding: 0.375rem 0.75rem; border-radius: 6px; font-size: 0.75rem; font-weight: 600; }
-.gallery-cta { position: absolute; bottom: 16px; right: 16px; background: rgba(15,23,42,0.75); backdrop-filter: blur(8px); color: #fff; border: none; padding: 0.5rem 1rem; border-radius: 8px; font-size: 0.8125rem; font-weight: 500; cursor: pointer; font-family: var(--font); transition: all 0.2s; }
+/* ─── Animations ─── */
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes slideLeft {
+    from { opacity: 0; transform: translateX(30px); }
+    to   { opacity: 1; transform: translateX(0); }
+}
+.pd-animate { animation: fadeUp 0.6s ease-out both; }
+.pd-animate-d1 { animation-delay: 0.1s; }
+.pd-animate-d2 { animation-delay: 0.2s; }
+.pd-animate-d3 { animation-delay: 0.3s; }
+
+/* ─── Breadcrumb ─── */
+.pd-breadcrumb {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 1rem 1.5rem 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8125rem;
+    color: var(--text-muted);
+}
+.pd-breadcrumb a { color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+.pd-breadcrumb a:hover { color: var(--primary); }
+.pd-breadcrumb .sep { color: var(--border); }
+
+/* ─── Layout ─── */
+.pd-wrap {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 1.5rem 1.5rem 3rem;
+}
+
+/* ─── Gallery ─── */
+.pd-gallery {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: 320px 320px;
+    gap: 0.625rem;
+    border-radius: 16px;
+    overflow: hidden;
+    margin-bottom: 2rem;
+}
+.pd-gallery .gallery-main {
+    grid-row: 1 / -1;
+    background: linear-gradient(135deg, #E2E8F0, #CBD5E1);
+    position: relative;
+    overflow: hidden;
+}
+.pd-gallery .gallery-main img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.pd-gallery .gallery-main:hover img { transform: scale(1.05); }
+.pd-gallery .gallery-item {
+    background: linear-gradient(135deg, #E2E8F0, #CBD5E1);
+    position: relative;
+    overflow: hidden;
+}
+.pd-gallery .gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s;
+}
+.pd-gallery .gallery-item:hover img { transform: scale(1.08); }
+.pd-gallery .gallery-item .gallery-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(15,23,42,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+.pd-gallery .gallery-item:hover .gallery-overlay { opacity: 1; }
+.gallery-badges {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    display: flex;
+    gap: 0.5rem;
+    z-index: 2;
+    flex-wrap: wrap;
+}
+.gallery-badge {
+    padding: 0.375rem 0.75rem;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    backdrop-filter: blur(4px);
+}
+.gallery-badge.featured { background: rgba(245,158,11,0.9); color: #fff; }
+.gallery-badge.verified { background: rgba(16,185,129,0.9); color: #fff; }
+.gallery-badge.new { background: rgba(37,99,235,0.9); color: #fff; }
+.gallery-badge.type {
+    background: rgba(15,23,42,0.75);
+    color: #fff;
+}
+.gallery-cta {
+    position: absolute;
+    bottom: 16px;
+    right: 16px;
+    background: rgba(15,23,42,0.75);
+    backdrop-filter: blur(8px);
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: var(--font);
+    transition: all 0.2s;
+    z-index: 2;
+}
 .gallery-cta:hover { background: rgba(15,23,42,0.9); }
-@media (max-width: 768px) { .prop-gallery { grid-template-columns: 1fr; grid-template-rows: 250px 120px 120px; } .prop-gallery .gallery-main { grid-row: auto; } }
-.prop-content { display: grid; grid-template-columns: 1fr 360px; gap: 2rem; align-items: start; }
-@media (max-width: 1024px) { .prop-content { grid-template-columns: 1fr; } }
-.prop-info { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 2rem; }
-.prop-info .prop-title { font-size: 1.75rem; font-weight: 800; color: var(--secondary); margin-bottom: 0.5rem; }
-.prop-info .prop-address { display: flex; align-items: center; gap: 0.375rem; color: var(--text-muted); font-size: 0.9375rem; margin-bottom: 1.25rem; }
-.prop-info .prop-price-row { display: flex; align-items: baseline; gap: 0.75rem; margin-bottom: 1.5rem; }
-.prop-info .prop-price-row .price { font-size: 2rem; font-weight: 800; color: var(--primary); }
-.prop-info .prop-price-row .price small { font-size: 0.9375rem; font-weight: 400; color: var(--text-muted); }
-.prop-info .prop-price-row .status { padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.75rem; font-weight: 600; }
-.status-available { background: #D1FAE5; color: #065F46; }
-.status-rented { background: #FEE2E2; color: #991B1B; }
-.prop-meta-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; padding: 1.25rem; background: var(--bg); border-radius: var(--radius-sm); margin-bottom: 1.5rem; }
-.prop-meta-item { text-align: center; }
-.prop-meta-item .pm-icon { color: var(--primary); margin-bottom: 0.375rem; }
-.prop-meta-item .pm-value { font-size: 1rem; font-weight: 700; color: var(--secondary); }
-.prop-meta-item .pm-label { font-size: 0.75rem; color: var(--text-muted); }
-@media (max-width: 640px) { .prop-meta-grid { grid-template-columns: repeat(2, 1fr); } }
-.prop-section { margin-bottom: 2rem; }
-.prop-section h3 { font-size: 1.125rem; font-weight: 700; color: var(--secondary); margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--bg); }
-.prop-section p, .prop-section li { font-size: 0.9375rem; color: var(--text); line-height: 1.7; }
-.amenities-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 0.75rem; }
-.amenity-item { display: flex; align-items: center; gap: 0.625rem; padding: 0.625rem 0.875rem; background: var(--bg); border-radius: var(--radius-sm); font-size: 0.875rem; color: var(--text); }
-.amenity-item svg { color: var(--success); flex-shrink: 0; }
-.prop-sidebar { display: flex; flex-direction: column; gap: 1.5rem; }
-.owner-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; text-align: center; }
-.owner-card .owner-avatar { width: 4rem; height: 4rem; border-radius: 50%; background: var(--primary-light); color: var(--primary); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1.375rem; margin: 0 auto 0.75rem; }
-.owner-card h4 { font-size: 1.0625rem; font-weight: 700; color: var(--secondary); }
-.owner-card .owner-status { display: inline-flex; align-items: center; gap: 0.25rem; font-size: 0.75rem; color: var(--success); font-weight: 500; margin-bottom: 1rem; }
-.owner-card .owner-status .dot { width: 0.375rem; height: 0.375rem; background: var(--success); border-radius: 50%; }
-.owner-card .owner-contact { display: flex; flex-direction: column; gap: 0.625rem; }
-.owner-card .owner-contact a { display: flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 0.75rem; border-radius: var(--radius-sm); font-size: 0.875rem; font-weight: 600; text-decoration: none; transition: all 0.2s; }
-.owner-card .owner-contact .btn-call { background: var(--primary); color: #fff; }
-.owner-card .owner-contact .btn-call:hover { background: var(--primary-dark); }
-.owner-card .owner-contact .btn-whatsapp { background: #25D366; color: #fff; }
-.owner-card .owner-contact .btn-whatsapp:hover { background: #1DA851; }
-.owner-card .owner-contact .btn-message { background: var(--bg); color: var(--text); border: 1px solid var(--border); }
-.owner-card .owner-contact .btn-message:hover { background: var(--primary-light); color: var(--primary); border-color: var(--primary-light); }
-.map-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; }
-.map-card h4 { font-size: 1rem; font-weight: 700; color: var(--secondary); margin-bottom: 1rem; }
-.map-placeholder { height: 200px; background: var(--bg); border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; color: var(--text-muted); font-size: 0.875rem; }
+@media (max-width: 768px) {
+    .pd-gallery { grid-template-columns: 1fr; grid-template-rows: 250px 100px 100px; }
+    .pd-gallery .gallery-main { grid-row: auto; }
+}
+
+/* ─── Content ─── */
+.pd-content {
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: 2rem;
+    align-items: start;
+}
+@media (max-width: 1024px) { .pd-content { grid-template-columns: 1fr; } }
+
+/* ─── Info Panel ─── */
+.pd-info {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 2rem;
+}
+.pd-info .pd-title {
+    font-size: 1.625rem;
+    font-weight: 800;
+    color: var(--secondary);
+    margin-bottom: 0.375rem;
+    line-height: 1.2;
+}
+.pd-info .pd-title .pd-type-badge {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--primary);
+    background: var(--primary-light);
+    padding: 0.15rem 0.5rem;
+    border-radius: 4px;
+    vertical-align: middle;
+    margin-left: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+.pd-info .pd-address {
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+    color: var(--text-muted);
+    font-size: 0.875rem;
+    margin-bottom: 1.25rem;
+}
+.pd-info .pd-price-row {
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+}
+.pd-info .pd-price-row .price {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--primary);
+}
+.pd-info .pd-price-row .price small {
+    font-size: 0.875rem;
+    font-weight: 400;
+    color: var(--text-muted);
+}
+.pd-info .pd-price-row .status {
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+.status-approved { background: #D1FAE5; color: #065F46; }
+.status-pending { background: #FEF3C7; color: #92400E; }
+.status-rejected { background: #FEE2E2; color: #991B1B; }
+
+/* ─── Meta Grid ─── */
+.pd-meta-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 0.75rem;
+    padding: 1.25rem;
+    background: var(--bg);
+    border-radius: 12px;
+    margin-bottom: 1.5rem;
+}
+.pd-meta-item {
+    text-align: center;
+    padding: 0.5rem;
+}
+.pd-meta-item .pm-icon {
+    color: var(--primary);
+    margin-bottom: 0.25rem;
+}
+.pd-meta-item .pm-value {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--secondary);
+}
+.pd-meta-item .pm-label {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    margin-top: 0.125rem;
+}
+
+/* ─── Sections ─── */
+.pd-section { margin-bottom: 2rem; }
+.pd-section:last-child { margin-bottom: 0; }
+.pd-section h3 {
+    font-size: 1.0625rem;
+    font-weight: 700;
+    color: var(--secondary);
+    margin-bottom: 0.875rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--bg);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+.pd-section h3 svg { color: var(--primary); }
+.pd-section p, .pd-section li {
+    font-size: 0.9375rem;
+    color: var(--text);
+    line-height: 1.75;
+}
+.pd-desc {
+    font-size: 0.9375rem;
+    color: var(--text);
+    line-height: 1.75;
+    white-space: pre-line;
+}
+
+/* ─── Detail List ─── */
+.pd-details-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+}
+.pd-detail-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 0.75rem;
+    background: var(--bg);
+    border-radius: 8px;
+    font-size: 0.85rem;
+}
+.pd-detail-item .dd-label { color: var(--text-muted); }
+.pd-detail-item .dd-value { font-weight: 600; color: var(--text); }
+
+/* ─── Sidebar ─── */
+.pd-sidebar { display: flex; flex-direction: column; gap: 1.25rem; }
+
+/* ─── Owner Card ─── */
+.pd-owner-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.5rem;
+    text-align: center;
+}
+.pd-owner-card .owner-avatar {
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary-light), rgba(167,139,250,0.2));
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.375rem;
+    margin: 0 auto 0.75rem;
+}
+.pd-owner-card h4 { font-size: 1.0625rem; font-weight: 700; color: var(--secondary); margin-bottom: 0.125rem; }
+.pd-owner-card .owner-label {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-bottom: 0.75rem;
+}
+.pd-owner-card .owner-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-size: 0.75rem;
+    color: var(--success);
+    font-weight: 500;
+    margin-bottom: 1rem;
+}
+.pd-owner-card .owner-status .dot {
+    width: 0.375rem;
+    height: 0.375rem;
+    background: var(--success);
+    border-radius: 50%;
+    animation: pulse-dot2 2s ease-in-out infinite;
+}
+@keyframes pulse-dot2 { 0%,100% { opacity: 1; } 50% { opacity: 0.5; } }
+.pd-owner-card .owner-contact { display: flex; flex-direction: column; gap: 0.625rem; }
+.pd-owner-card .owner-contact a,
+.pd-owner-card .owner-contact button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem;
+    border-radius: 10px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.25s;
+    border: none;
+    cursor: pointer;
+    font-family: var(--font);
+}
+.pd-owner-card .owner-contact .btn-call { background: var(--primary); color: #fff; }
+.pd-owner-card .owner-contact .btn-call:hover { background: var(--primary-dark); transform: translateY(-1px); box-shadow: 0 4px 14px rgba(37,99,235,0.3); }
+.pd-owner-card .owner-contact .btn-whatsapp { background: #25D366; color: #fff; }
+.pd-owner-card .owner-contact .btn-whatsapp:hover { background: #1DA851; transform: translateY(-1px); box-shadow: 0 4px 14px rgba(37,165,82,0.3); }
+.pd-owner-card .owner-contact .btn-email { background: var(--bg); color: var(--text); border: 1px solid var(--border); }
+.pd-owner-card .owner-contact .btn-email:hover { background: var(--primary-light); color: var(--primary); border-color: var(--primary); }
+
+/* ─── Summary Card ─── */
+.pd-summary-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.5rem;
+}
+.pd-summary-card h4 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--secondary);
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid var(--bg);
+}
+.pd-summary-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    border-bottom: 1px solid var(--border);
+}
+.pd-summary-row:last-child { border-bottom: none; }
+.pd-summary-row .sv-value { font-weight: 600; color: var(--text); }
+
+/* ─── Map ─── */
+.pd-map-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.5rem;
+}
+.pd-map-card h4 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--secondary);
+    margin-bottom: 1rem;
+}
+.map-placeholder {
+    height: 180px;
+    background: var(--bg);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+    font-size: 0.8125rem;
+    gap: 0.375rem;
+}
+
+/* ─── Contact Method Badge ─── */
+.contact-method-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-size: 0.7rem;
+    color: var(--primary);
+    background: var(--primary-light);
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    font-weight: 500;
+}
+
+/* ─── CTA Button ─── */
+.pd-cta-btn {
+    width: 100%;
+    justify-content: center;
+    padding: 0.875rem;
+    font-size: 0.9375rem;
+}
+
+/* ─── Loading State ─── */
+.pd-loading {
+    text-align: center;
+    padding: 4rem 2rem;
+}
+.pd-loading .spinner {
+    width: 2.5rem;
+    height: 2.5rem;
+    border: 3px solid var(--border);
+    border-top-color: var(--primary);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin: 0 auto 1rem;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
 </style>
 @endpush
 
 @section('content')
-<div class="prop-detail">
-    <div class="prop-gallery">
+{{-- Breadcrumb --}}
+<div class="pd-breadcrumb pd-animate">
+    <a href="{{ route('home') }}">Home</a>
+    <span class="sep">›</span>
+    <a href="{{ route('search') }}">Properties</a>
+    <span class="sep">›</span>
+    <span>{{ $property->title }}</span>
+</div>
+
+<div class="pd-wrap">
+    {{-- Gallery --}}
+    @php
+        $allImages = $property->all_images;
+        $firstImage = $property->first_image;
+        $remainingImages = array_slice($allImages, 1, 2);
+        $propertyTypeLabel = ucfirst(str_replace('_', ' ', $property->property_type));
+    @endphp
+
+    <div class="pd-gallery pd-animate pd-animate-d1">
         <div class="gallery-main">
-            <svg width="80" height="80" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="0.5"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            @if($firstImage)
+                <img src="{{ $firstImage }}" alt="{{ $property->title }}">
+            @else
+                <div style="display:flex;align-items:center;justify-content:center;height:100%;">
+                    <svg width="80" height="80" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="0.5" opacity="0.3">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>
+                    </svg>
+                </div>
+            @endif
             <div class="gallery-badges">
-                <span class="gallery-badge" style="background:var(--accent);color:var(--secondary)">Featured</span>
-                <span class="gallery-badge" style="background:var(--success);color:#fff">Verified Owner</span>
-                <span class="gallery-badge" style="background:var(--primary);color:#fff">New Listing</span>
+                <span class="gallery-badge featured">Featured</span>
+                <span class="gallery-badge verified">Verified</span>
+                <span class="gallery-badge type">{{ $propertyTypeLabel }}</span>
             </div>
-            <button class="gallery-cta">View All Photos</button>
+            @if(count($allImages) > 1)
+                <button class="gallery-cta">View All {{ count($allImages) }} Photos</button>
+            @endif
         </div>
-        <div class="gallery-item"><svg width="40" height="40" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="0.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
-        <div class="gallery-item"><svg width="40" height="40" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="0.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
+        @foreach($remainingImages as $img)
+            <div class="gallery-item">
+                <img src="{{ $img }}" alt="Property photo">
+                <div class="gallery-overlay">
+                    <svg width="24" height="24" fill="none" stroke="#fff" viewBox="0 0 24 24" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/>
+                    </svg>
+                </div>
+            </div>
+        @endforeach
+        @if(count($remainingImages) < 2)
+            @for($i = count($remainingImages); $i < 2; $i++)
+                <div class="gallery-item">
+                    <svg width="40" height="40" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="0.5" opacity="0.3">
+                        <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/>
+                    </svg>
+                </div>
+            @endfor
+        @endif
     </div>
 
-    <div class="prop-content">
-        <div class="prop-info">
-            <h1 class="prop-title">Modern 2BHK Apartment in Gulshan</h1>
-            <div class="prop-address"><svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> House 12, Road 7, Gulshan-1, Dhaka 1212</div>
-            <div class="prop-price-row">
-                <span class="price">BDT 15,000 <small>/month</small></span>
-                <span class="status status-available">Available</span>
+    <div class="pd-content">
+        {{-- Main Info --}}
+        <div class="pd-info pd-animate pd-animate-d2">
+            <h1 class="pd-title">
+                {{ $property->title }}
+                <span class="pd-type-badge">{{ $propertyTypeLabel }}</span>
+            </h1>
+
+            <div class="pd-address">
+                <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/>
+                </svg>
+                {{ $property->full_address }}, {{ $property->area_location }}, {{ $property->district }}, {{ $property->division }}
             </div>
 
-            <div class="prop-meta-grid">
-                <div class="prop-meta-item">
+            <div class="pd-price-row">
+                <span class="price">BDT {{ number_format($property->monthly_rent, 0) }} <small>/month</small></span>
+                <span class="status status-{{ $property->status }}">{{ ucfirst($property->status) }}</span>
+            </div>
+
+            {{-- Meta Grid --}}
+            <div class="pd-meta-grid">
+                <div class="pd-meta-item">
                     <div class="pm-icon"><svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
-                    <div class="pm-value">2</div>
+                    <div class="pm-value">{{ $property->bedrooms }}</div>
                     <div class="pm-label">Bedrooms</div>
                 </div>
-                <div class="prop-meta-item">
+                <div class="pd-meta-item">
                     <div class="pm-icon"><svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path d="M4 21h16"/><path d="M6 21v-7"/><path d="M18 21v-7"/><rect x="2" y="3" width="20" height="11" rx="2"/></svg></div>
-                    <div class="pm-value">2</div>
+                    <div class="pm-value">{{ $property->bathrooms }}</div>
                     <div class="pm-label">Bathrooms</div>
                 </div>
-                <div class="prop-meta-item">
+                @if($property->property_size)
+                <div class="pd-meta-item">
                     <div class="pm-icon"><svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="2" y1="20" x2="22" y2="20"/></svg></div>
-                    <div class="pm-value">1,200</div>
+                    <div class="pm-value">{{ number_format($property->property_size) }}</div>
                     <div class="pm-label">Sq. Ft.</div>
                 </div>
-                <div class="prop-meta-item">
-                    <div class="pm-icon"><svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="2" y1="20" x2="22" y2="20"/></svg></div>
-                    <div class="pm-value">3rd</div>
+                @endif
+                @if($property->floor_number)
+                <div class="pd-meta-item">
+                    <div class="pm-icon"><svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="9" y1="22" x2="15" y2="22"/><path d="M8 7l4-3 4 3"/></svg></div>
+                    <div class="pm-value">{{ $property->floor_number }}{{ $property->total_floors ? '/'.$property->total_floors : '' }}</div>
                     <div class="pm-label">Floor</div>
                 </div>
+                @endif
+                @if($property->furnishing)
+                <div class="pd-meta-item">
+                    <div class="pm-icon"><svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg></div>
+                    <div class="pm-value">{{ ucfirst(str_replace('_', ' ', $property->furnishing)) }}</div>
+                    <div class="pm-label">Furnishing</div>
+                </div>
+                @endif
+                @if($property->listing_type)
+                <div class="pd-meta-item">
+                    <div class="pm-icon"><svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg></div>
+                    <div class="pm-value">{{ ucfirst(str_replace('_', ' ', $property->listing_type)) }}</div>
+                    <div class="pm-label">Listing Type</div>
+                </div>
+                @endif
             </div>
 
-            <div class="prop-section">
-                <h3>Description</h3>
-                <p>Beautiful modern apartment located in the heart of Gulshan. This premium 2-bedroom apartment offers stunning city views, premium finishes, and easy access to all major amenities. The apartment features a spacious living room, modern kitchen with built-in cabinets, two bedrooms with attached bathrooms, and a balcony with panoramic views. Ideal for small families or professionals looking for a premium living experience in Dhaka's most sought-after neighborhood.</p>
+            {{-- Description --}}
+            @if($property->description)
+            <div class="pd-section">
+                <h3>
+                    <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                    Description
+                </h3>
+                <div class="pd-desc">{{ $property->description }}</div>
             </div>
+            @endif
 
-            <div class="prop-section">
-                <h3>Amenities & Features</h3>
-                <div class="amenities-grid">
-                    <div class="amenity-item"><svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> Air Conditioning</div>
-                    <div class="amenity-item"><svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> Fully Furnished</div>
-                    <div class="amenity-item"><svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> WiFi Ready</div>
-                    <div class="amenity-item"><svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> Parking</div>
-                    <div class="amenity-item"><svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> CCTV Security</div>
-                    <div class="amenity-item"><svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> Lift/Elevator</div>
-                    <div class="amenity-item"><svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> Generator</div>
-                    <div class="amenity-item"><svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> Water Supply</div>
+            {{-- Property Details --}}
+            <div class="pd-section">
+                <h3>
+                    <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                    Property Details
+                </h3>
+                <div class="pd-details-grid">
+                    <div class="pd-detail-item">
+                        <span class="dd-label">Property Type</span>
+                        <span class="dd-value">{{ $propertyTypeLabel }}</span>
+                    </div>
+                    @if($property->listing_type)
+                    <div class="pd-detail-item">
+                        <span class="dd-label">Listing Type</span>
+                        <span class="dd-value">{{ ucfirst(str_replace('_', ' ', $property->listing_type)) }}</span>
+                    </div>
+                    @endif
+                    <div class="pd-detail-item">
+                        <span class="dd-label">Bedrooms</span>
+                        <span class="dd-value">{{ $property->bedrooms }}</span>
+                    </div>
+                    <div class="pd-detail-item">
+                        <span class="dd-label">Bathrooms</span>
+                        <span class="dd-value">{{ $property->bathrooms }}</span>
+                    </div>
+                    @if($property->floor_number)
+                    <div class="pd-detail-item">
+                        <span class="dd-label">Floor</span>
+                        <span class="dd-value">{{ $property->floor_number }}{{ $property->total_floors ? ' of '.$property->total_floors : '' }}</span>
+                    </div>
+                    @endif
+                    @if($property->property_size)
+                    <div class="pd-detail-item">
+                        <span class="dd-label">Property Size</span>
+                        <span class="dd-value">{{ number_format($property->property_size) }} sqft</span>
+                    </div>
+                    @endif
+                    @if($property->furnishing)
+                    <div class="pd-detail-item">
+                        <span class="dd-label">Furnishing</span>
+                        <span class="dd-value">{{ ucfirst(str_replace('_', ' ', $property->furnishing)) }}</span>
+                    </div>
+                    @endif
+                    <div class="pd-detail-item">
+                        <span class="dd-label">Tenant Preference</span>
+                        <span class="dd-value">{{ ucfirst($property->tenant_preference) }}</span>
+                    </div>
+                    @if($property->available_from)
+                    <div class="pd-detail-item">
+                        <span class="dd-label">Available From</span>
+                        <span class="dd-value">{{ $property->available_from->format('M d, Y') }}</span>
+                    </div>
+                    @endif
+                    @if($property->security_deposit)
+                    <div class="pd-detail-item">
+                        <span class="dd-label">Security Deposit</span>
+                        <span class="dd-value">BDT {{ number_format($property->security_deposit) }}</span>
+                    </div>
+                    @endif
                 </div>
             </div>
 
-            <div class="prop-section">
-                <h3>Location</h3>
-                <div class="map-placeholder">
-                    <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5" style="margin-right:0.5rem;"><path d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/></svg>
-                    Map loaded here
+            {{-- Location --}}
+            <div class="pd-section">
+                <h3>
+                    <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    Location
+                </h3>
+                <div style="background:var(--bg);border-radius:12px;padding:1rem;">
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.5rem;font-size:0.875rem;">
+                        <div><span style="color:var(--text-muted);">Division:</span> <strong>{{ $property->division }}</strong></div>
+                        <div><span style="color:var(--text-muted);">District:</span> <strong>{{ $property->district }}</strong></div>
+                        <div><span style="color:var(--text-muted);">Area:</span> <strong>{{ $property->area_location }}</strong></div>
+                        <div><span style="color:var(--text-muted);">Full Address:</span> <strong>{{ $property->full_address }}</strong></div>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <div class="prop-sidebar">
-            <div class="owner-card">
-                <div class="owner-avatar">AR</div>
-                <h4>Abdur Rahman</h4>
-                <div class="owner-status"><span class="dot"></span> Verified Owner</div>
+        {{-- Sidebar --}}
+        <div class="pd-sidebar pd-animate pd-animate-d3">
+            {{-- Owner Card --}}
+            <div class="pd-owner-card">
+                <div class="owner-avatar">
+                    {{ substr($property->contact_name, 0, 1) }}{{ strpos($property->contact_name, ' ') !== false ? substr($property->contact_name, strpos($property->contact_name, ' ') + 1, 1) : '' }}
+                </div>
+                <h4>{{ $property->contact_name }}</h4>
+                <div class="owner-label">Property Owner</div>
+                <div class="owner-status">
+                    <span class="dot"></span> Verified Owner
+                </div>
                 <div class="owner-contact">
-                    <a href="tel:+8801700000000" class="btn-call"><svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg> Call Now</a>
-                    <a href="https://wa.me/8801700000000" class="btn-whatsapp"><svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg> WhatsApp</a>
-                    <a href="#" class="btn-message"><svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg> Send Message</a>
+                    <a href="tel:{{ $property->contact_phone }}" class="btn-call">
+                        <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+                        Call {{ $property->contact_phone }}
+                    </a>
+                    <a href="https://wa.me/88{{ preg_replace('/[^0-9]/', '', $property->contact_phone) }}" class="btn-whatsapp" target="_blank">
+                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                        WhatsApp
+                    </a>
+                    @if($property->contact_email)
+                    <a href="mailto:{{ $property->contact_email }}" class="btn-email">
+                        <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                        Send Email
+                    </a>
+                    @endif
                 </div>
+                @if($property->preferred_contact_method)
+                    <div style="margin-top:0.75rem;">
+                        <span class="contact-method-badge">
+                            <svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+                            Prefers {{ ucfirst($property->preferred_contact_method) }}
+                        </span>
+                    </div>
+                @endif
             </div>
 
-            <div class="map-card">
-                <h4>Location Map</h4>
+            {{-- Rental Summary --}}
+            <div class="pd-summary-card">
+                <h4>Rental Summary</h4>
+                <div class="pd-summary-row">
+                    <span>Monthly Rent</span>
+                    <span class="sv-value">BDT {{ number_format($property->monthly_rent) }}</span>
+                </div>
+                @if($property->security_deposit)
+                <div class="pd-summary-row">
+                    <span>Security Deposit</span>
+                    <span class="sv-value">BDT {{ number_format($property->security_deposit) }}</span>
+                </div>
+                @endif
+                <div class="pd-summary-row">
+                    <span>Bedrooms</span>
+                    <span class="sv-value">{{ $property->bedrooms }}</span>
+                </div>
+                <div class="pd-summary-row">
+                    <span>Bathrooms</span>
+                    <span class="sv-value">{{ $property->bathrooms }}</span>
+                </div>
+                @if($property->property_size)
+                <div class="pd-summary-row">
+                    <span>Property Size</span>
+                    <span class="sv-value">{{ number_format($property->property_size) }} sqft</span>
+                </div>
+                @endif
+                @if($property->available_from)
+                <div class="pd-summary-row">
+                    <span>Available From</span>
+                    <span class="sv-value">{{ $property->available_from->format('M d, Y') }}</span>
+                </div>
+                @endif
+                @if($property->floor_number)
+                <div class="pd-summary-row">
+                    <span>Floor</span>
+                    <span class="sv-value">{{ $property->floor_number }}{{ $property->total_floors ? '/'.$property->total_floors : '' }}</span>
+                </div>
+                @endif
+            </div>
+
+            {{-- Map --}}
+            <div class="pd-map-card">
+                <h4>Location</h4>
                 <div class="map-placeholder">
-                    <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5" style="margin-right:0.375rem;"><path d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/></svg>
-                    Interactive Map
+                    <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/></svg>
+                    {{ $property->area_location }}, {{ $property->district }}
                 </div>
             </div>
 
-            <div class="owner-card">
-                <h4 style="margin-bottom:0.75rem;">Rental Summary</h4>
-                <div style="text-align:left;">
-                    <div style="display:flex;justify-content:space-between;padding:0.375rem 0;font-size:0.875rem;color:var(--text-muted);border-bottom:1px solid var(--border);"><span>Rent</span><span style="font-weight:600;color:var(--text);">BDT 15,000</span></div>
-                    <div style="display:flex;justify-content:space-between;padding:0.375rem 0;font-size:0.875rem;color:var(--text-muted);border-bottom:1px solid var(--border);"><span>Security Deposit</span><span style="font-weight:600;color:var(--text);">BDT 30,000</span></div>
-                    <div style="display:flex;justify-content:space-between;padding:0.375rem 0;font-size:0.875rem;color:var(--text-muted);border-bottom:1px solid var(--border);"><span>Service Charge</span><span style="font-weight:600;color:var(--text);">BDT 1,500</span></div>
-                    <div style="display:flex;justify-content:space-between;padding:0.375rem 0;font-size:0.875rem;color:var(--text-muted);"><span>Available From</span><span style="font-weight:600;color:var(--text);">Immediate</span></div>
-                </div>
-            </div>
-
-            <a href="#" class="btn btn-primary btn-lg" style="width:100%;justify-content:center;">Schedule a Visit</a>
+            {{-- CTA --}}
+            <a href="tel:{{ $property->contact_phone }}" class="btn btn-primary pd-cta-btn">
+                <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+                Call to Inquire
+            </a>
         </div>
     </div>
 </div>
