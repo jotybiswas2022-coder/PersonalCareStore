@@ -59,7 +59,15 @@ class ToLetAdvertisementController extends Controller
 
     public function show($id)
     {
-        $property = ToLetAdvertisement::approved()->findOrFail($id);
+        $property = ToLetAdvertisement::findOrFail($id);
+
+        // Allow owners to preview their own properties, otherwise only approved
+        if ($property->status !== 'approved') {
+            if (!auth()->check() || auth()->id() !== $property->user_id) {
+                abort(404);
+            }
+        }
+
         return view('frontend.property-detail', compact('property'));
     }
 
