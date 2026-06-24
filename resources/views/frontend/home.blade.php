@@ -378,6 +378,10 @@
 .hero-image-card .main-img .placeholder-icon { display: none; }
 .hero-scene { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
 .hero-scene svg { width: 85%; height: 85%; }
+/* ── Scene loop wrapper ── */
+.hero-scene .scene-loop { animation: sceneReset 9s step-end infinite; }
+@keyframes sceneReset { 0%,85% { visibility: visible; } 86%,100% { visibility: hidden; } }
+
 /* ── Walk-in Person ── */
 .hero-scene .person-group { animation: walkIn 9s ease-out infinite; }
 @keyframes walkIn { 0% { transform: translateX(-80px); opacity: 0; } 6% { transform: translateX(0); opacity: 1; } 88% { transform: translateX(0); opacity: 1; } 100% { transform: translateX(-80px); opacity: 0; } }
@@ -438,11 +442,11 @@
 .hero-scene .sunshine { animation: sunGlow 9s ease-in-out infinite; }
 @keyframes sunGlow { 0%,35% { opacity: 0; transform: scale(1); } 40%,88% { opacity: 0.12; transform: scale(1.08); } 100% { opacity: 0; transform: scale(1); } }
 
-/* ── Dots / Search ray (synced to 9s master) ── */
-.hero-scene .dot-pulse { animation: dotPulse 9s ease-in-out infinite; }
-@keyframes dotPulse { 0%,3% { opacity: 0; transform: scale(0.8); } 6% { opacity: 0.12; } 25% { opacity: 0.5; transform: scale(1.3); } 50% { opacity: 0.12; transform: scale(0.8); } 75% { opacity: 0.5; transform: scale(1.3); } 85%,100% { opacity: 0; transform: scale(0.8); } }
-.hero-scene .search-ray { animation: rayPulse 9s ease-in-out infinite; transform-origin: 150px 105px; }
-@keyframes rayPulse { 0%,5% { opacity: 0; transform: scale(0.95); } 10% { opacity: 0.06; } 25% { opacity: 0.18; transform: scale(1.05); } 50% { opacity: 0.06; transform: scale(0.95); } 75% { opacity: 0.18; transform: scale(1.05); } 85%,100% { opacity: 0; transform: scale(0.95); } }
+/* ── Dots / Search ray (free running) ── */
+.hero-scene .dot-pulse { animation: dotPulse 2s ease-in-out infinite; }
+@keyframes dotPulse { 0%,100% { opacity: 0.12; transform: scale(0.8); } 50% { opacity: 0.5; transform: scale(1.3); } }
+.hero-scene .search-ray { animation: rayPulse 3s ease-in-out infinite; transform-origin: 150px 105px; }
+@keyframes rayPulse { 0%,100% { opacity: 0.06; transform: scale(0.95); } 50% { opacity: 0.18; transform: scale(1.05); } }
 .hero-image-card .floating-card {
     position: absolute;
     background: rgba(15,23,42,0.5);
@@ -1104,6 +1108,7 @@
                 <div class="main-img">
                     <div class="hero-scene">
                         <svg viewBox="0 0 300 210" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g class="scene-loop">
                             <defs>
                                 <radialGradient id="heroGlowGrad"><stop offset="0%" stop-color="#60A5FA"/><stop offset="100%" stop-color="transparent"/></radialGradient>
                                 <linearGradient id="houseGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="rgba(16,185,129,0.2)"/><stop offset="100%" stop-color="rgba(16,185,129,0.08)"/></linearGradient>
@@ -1239,6 +1244,7 @@
                             <circle cx="55" cy="145" r="2" fill="rgba(147,197,253,0.04)" class="dot-pulse" style="animation-delay:1.1s"/>
                             <circle cx="270" cy="85" r="2.5" fill="rgba(96,165,250,0.05)" class="dot-pulse" style="animation-delay:1.5s"/>
                             <circle cx="85" cy="105" r="1.5" fill="rgba(96,165,250,0.04)" class="dot-pulse" style="animation-delay:1.9s"/>
+                            </g>
                         </svg>
                     </div>
                 </div>
