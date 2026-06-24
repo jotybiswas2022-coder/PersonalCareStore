@@ -31,13 +31,6 @@
                     <a href="{{ route('search', ['property_type' => 'Office']) }}">Offices & Commercial</a>
                 </div>
                 <div class="footer-col">
-                    <h4>Support</h4>
-                    <a href="#">Help Center</a>
-                    <a href="#">Safety Tips</a>
-                    <a href="#">Terms of Service</a>
-                    <a href="#">Privacy Policy</a>
-                </div>
-                <div class="footer-col">
                     <h4>Contact Us</h4>
                     <form method="POST" action="{{ route('contact.submit') }}" class="footer-contact-form">
                         @csrf
@@ -68,7 +61,7 @@
 <style>
 .footer { margin-top: auto; }
 .footer-main { background: #f8fafc; padding: 4rem 0 2rem; }
-.footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1.5fr; gap: 2.5rem; }
+.footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr; gap: 2.5rem; }
 @media (max-width: 1024px) { .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; } }
 @media (max-width: 640px) {
     .footer-main { padding: 2rem 0 1.5rem; }
