@@ -791,8 +791,8 @@
    TESTIMONIALS
    ═══════════════════════════════════════════ */
 .testimonials-section {
-    padding: 6rem 0 8rem;
-    background: var(--secondary);
+    padding: 6rem 0 0;
+    background: linear-gradient(180deg, var(--navy) 0%, #0D1325 30%, var(--secondary) 70%, #0B1121 100%);
     position: relative;
     overflow: hidden;
 }
@@ -802,12 +802,6 @@
     background:
         radial-gradient(ellipse 700px 450px at 20% 20%, rgba(37,99,235,0.08) 0%, transparent 60%),
         radial-gradient(ellipse 500px 400px at 80% 80%, rgba(245,158,11,0.05) 0%, transparent 60%);
-    pointer-events: none;
-}
-.testimonials-section::after {
-    content: '';
-    position: absolute; bottom: 0; left: 0; right: 0; height: 120px;
-    background: linear-gradient(180deg, transparent, var(--secondary));
     pointer-events: none;
 }
 .testimonials-section .section-heading { color: var(--white); }
