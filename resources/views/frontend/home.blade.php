@@ -531,7 +531,7 @@
 .prop-card .prop-img .price-tag small { font-size: 0.6875rem; font-weight: 400; opacity: 0.6; }
 .prop-card .prop-body { padding: 1.25rem; position: relative; z-index: 1; }
 .prop-card .prop-body .prop-title {
-    font-family: var(--font-serif);
+    font-family: var(--font);
     font-size: 1.125rem; font-weight: 700;
     color: var(--text);
     margin-bottom: 0.375rem;
