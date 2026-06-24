@@ -19,6 +19,70 @@
 @keyframes progressGlow { 0%,100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
 
 /* ═══════════════════════════════════════════
+   AURORA WAVE OVERLAY
+   ═══════════════════════════════════════════ */
+.hero-aurora {
+    position: absolute; inset: 0; pointer-events: none; z-index: 0;
+    overflow: hidden; opacity: 0.5;
+}
+.hero-aurora .aurora-band {
+    position: absolute; width: 200%; height: 120%;
+    top: -10%; left: -50%;
+    background: linear-gradient(
+        180deg,
+        transparent 0%,
+        rgba(37,99,235,0.02) 15%,
+        rgba(124,58,237,0.04) 25%,
+        rgba(16,185,129,0.01) 35%,
+        transparent 50%
+    );
+    animation: auroraDrift 12s ease-in-out infinite alternate;
+    filter: blur(60px);
+    transform-origin: center center;
+}
+.hero-aurora .aurora-band:nth-child(2) {
+    background: linear-gradient(
+        180deg,
+        transparent 0%,
+        rgba(245,158,11,0.01) 20%,
+        rgba(37,99,235,0.03) 35%,
+        rgba(124,58,237,0.02) 45%,
+        transparent 60%
+    );
+    animation-duration: 16s;
+    animation-delay: -4s;
+    animation-direction: alternate-reverse;
+    filter: blur(80px);
+}
+.hero-aurora .aurora-band:nth-child(3) {
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(96,165,250,0.02) 25%,
+        rgba(16,185,129,0.01) 50%,
+        transparent 75%
+    );
+    animation-duration: 14s;
+    animation-delay: -2s;
+    filter: blur(70px);
+}
+@keyframes auroraDrift {
+    0% { transform: translateX(-20%) translateY(0) rotate(-2deg) scale(1); opacity: 0.3; }
+    25% { transform: translateX(10%) translateY(-5%) rotate(1deg) scale(1.05); opacity: 0.5; }
+    50% { transform: translateX(-5%) translateY(8%) rotate(-1deg) scale(0.95); opacity: 0.35; }
+    75% { transform: translateX(15%) translateY(-3%) rotate(2deg) scale(1.02); opacity: 0.45; }
+    100% { transform: translateX(-10%) translateY(5%) rotate(-1.5deg) scale(1.03); opacity: 0.4; }
+}
+
+/* ═══════════════════════════════════════════
+   INTERACTIVE PARTICLES CANVAS
+   ═══════════════════════════════════════════ */
+#heroParticlesCanvas {
+    position: absolute; inset: 0; pointer-events: none; z-index: 0;
+    width: 100%; height: 100%;
+}
+
+/* ═══════════════════════════════════════════
    HERO
    ═══════════════════════════════════════════ */
 .hero {
@@ -664,6 +728,41 @@
     100% { opacity: 1; transform: perspective(200px) rotateY(0deg); }
 }
 
+/* ── Typing dot (sequential) ── */
+.hero-scene .scene-loop .typing-dot { animation: typingDot 0.4s ease-out forwards; opacity: 0; }
+@keyframes typingDot { 0% { opacity: 0; transform: scale(0); } 60% { transform: scale(1.3); } 100% { opacity: 1; transform: scale(1); } }
+
+/* ── Progress fill ── */
+.hero-scene .scene-loop .progress-fill { animation: progressFill 1.2s ease-out 0.7s forwards; }
+@keyframes progressFill { 0% { width: 0; opacity: 0; } 30% { opacity: 0.4; } 100% { width: 160px; opacity: 0.12; } }
+
+/* ── Heart float ── */
+.hero-scene .scene-loop .heart-float { animation: heartFloat 2s ease-out 3s infinite; opacity: 0; }
+@keyframes heartFloat {
+    0% { opacity: 0; transform: translateY(0) scale(0) rotate(0deg); }
+    20% { opacity: 0.5; transform: translateY(-10px) scale(1) rotate(10deg); }
+    50% { opacity: 0.3; transform: translateY(-25px) scale(0.8) rotate(-5deg); }
+    80% { opacity: 0.1; transform: translateY(-40px) scale(0.4) rotate(10deg); }
+    100% { opacity: 0; transform: translateY(-55px) scale(0) rotate(0deg); }
+}
+
+/* ── Door swing ── */
+.hero-scene .scene-loop .door-swing { animation: doorSwing 0.6s ease-out 2.2s forwards; transform-origin: left center; }
+@keyframes doorSwing { 0% { transform: scaleX(1); } 30% { transform: scaleX(0.1); } 70% { transform: scaleX(1.05); } 100% { transform: scaleX(1); } }
+
+/* ── Key fly ── */
+.hero-scene .scene-loop .key-fly { animation: keyFly 1s ease-in-out 2.6s forwards; opacity: 0; }
+@keyframes keyFly {
+    0% { opacity: 0; transform: translateX(-60px) translateY(0) rotate(-30deg); }
+    30% { opacity: 0.4; transform: translateX(-30px) translateY(-15px) rotate(-15deg); }
+    60% { opacity: 0.6; transform: translateX(-10px) translateY(-5px) rotate(5deg); }
+    100% { opacity: 1; transform: translateX(0) translateY(0) rotate(0deg); }
+}
+
+/* ── Rainbow glow ── */
+.hero-scene .scene-loop .rainbow-glow { animation: rainbowGlow 2s ease-out 2.8s forwards; opacity: 0; }
+@keyframes rainbowGlow { 0% { opacity: 0; } 40% { opacity: 0.04; } 100% { opacity: 0.02; } }
+
 /* ═══════════════════════════════════════════
    FREE-RUNNING BACKGROUND PARTICLES
    ═══════════════════════════════════════════ */
@@ -697,8 +796,9 @@
 @keyframes floatBorderGlow { 0% { --float-angle: 0; } 100% { --float-angle: 360; } }
 @property --float-angle { syntax: '<number>'; initial-value: 0; inherits: false; }
 .hero-image-card .floating-card:hover { transform: scale(1.12) translateY(-4px) !important; background: rgba(15,23,42,0.6); box-shadow: 0 12px 40px rgba(0,0,0,0.35); }
-.hero-image-card .floating-card:nth-child(2) { bottom: 8%; left: -8%; animation-delay: 2s; animation-duration: 7s; }
-.hero-image-card .floating-card:nth-child(3) { top: 5%; right: -10%; animation-delay: 0s; }
+.hero-image-card .floating-card:nth-child(2) { bottom: 8%; right: -10%; animation-delay: 2s; animation-duration: 7s; }
+.hero-image-card .floating-card:nth-child(3) { top: 5%; left: -8%; animation-delay: 0s; }
+.hero-image-card .floating-card:nth-child(4) { bottom: 35%; left: -6%; animation-delay: 1s; animation-duration: 8s; }
 .floating-card .fc-icon { width: 2.5rem; height: 2.5rem; border-radius: 12px; display: flex; align-items: center; justify-content: center; }
 .floating-card .fc-icon.blue { background: rgba(37,99,235,0.15); color: #60A5FA; }
 .floating-card .fc-icon.gold { background: rgba(245,158,11,0.12); color: #FCD34D; }
@@ -1252,9 +1352,15 @@
         <div class="ring"></div><div class="ring"></div><div class="ring"></div>
     </div>
     <div class="hero-glare" id="heroGlare"></div>
+    <div class="hero-aurora">
+        <div class="aurora-band"></div>
+        <div class="aurora-band"></div>
+        <div class="aurora-band"></div>
+    </div>
     <div class="hero-orbs">
         <div class="orb"></div><div class="orb"></div><div class="orb"></div><div class="orb"></div>
     </div>
+    <canvas id="heroParticlesCanvas"></canvas>
     <div class="hero-particles">
         <span class="p-dot"></span><span class="p-glow"></span><span class="p-dot"></span><span class="p-gold"></span>
         <span class="p-dot"></span><span class="p-glow"></span><span class="p-trail"></span><span class="p-dot"></span>
@@ -1400,11 +1506,18 @@
                                 <rect x="38" y="8" width="224" height="22" rx="11" fill="url(#searchBarGrad)" stroke="rgba(96,165,250,0.08)" stroke-width="1"/>
                                 <circle cx="53" cy="19" r="3.5" stroke="rgba(147,197,253,0.2)" stroke-width="1.5" fill="none"/>
                                 <line x1="56" y1="22" x2="61" y2="27" stroke="rgba(147,197,253,0.2)" stroke-width="1.5" stroke-linecap="round"/>
+                                <!-- Typing dots -->
+                                <circle cx="72" cy="19" r="1.5" fill="rgba(147,197,253,0.15)" class="typing-dot" style="animation-delay:0.7s"/>
+                                <circle cx="80" cy="19" r="1.5" fill="rgba(147,197,253,0.15)" class="typing-dot" style="animation-delay:0.9s"/>
+                                <circle cx="88" cy="19" r="1.5" fill="rgba(147,197,253,0.15)" class="typing-dot" style="animation-delay:1.1s"/>
+                                <circle cx="96" cy="19" r="1.5" fill="rgba(147,197,253,0.15)" class="typing-dot" style="animation-delay:1.3s"/>
+                                <line x1="108" y1="14" x2="108" y2="22" stroke="rgba(147,197,253,0.12)" stroke-width="1" class="flash" style="animation-delay:1.5s"/>
                                 <rect x="68" y="14" width="130" height="10" rx="5" fill="rgba(147,197,253,0.03)"/>
-                                <line x1="68" y1="19" x2="180" y2="19" stroke="rgba(147,197,253,0.05)" stroke-width="1" stroke-dasharray="3 3"/>
-                                <!-- Cursor blinking -->
-                                <line x1="178" y1="14" x2="178" y2="22" stroke="rgba(147,197,253,0.15)" stroke-width="1" class="flash" style="animation-delay:0.8s"/>
                             </g>
+
+                            <!-- Progress bar under search -->
+                            <rect x="38" y="32" width="224" height="2" rx="1" fill="rgba(147,197,253,0.03)"/>
+                            <rect x="38" y="32" width="0" height="2" rx="1" fill="rgba(16,185,129,0.08)" class="progress-fill"/>
 
                             <!-- Search results card -->
                             <g class="card-flip" style="animation-delay:1.2s">
@@ -1576,6 +1689,17 @@
                                 </g>
                             </g>
 
+                            <!-- Hearts floating from happy person -->
+                            <g class="heart-float" style="animation-delay:3.2s">
+                                <path d="M116 108 Q116 104 119 104 Q122 104 122 108 Q122 112 116 116 Q110 112 110 108 Q110 104 113 104 Q116 104 116 108Z" fill="rgba(245,158,11,0.15)" transform="scale(0.5)"/>
+                            </g>
+                            <g class="heart-float" style="animation-delay:3.7s">
+                                <path d="M116 108 Q116 104 119 104 Q122 104 122 108 Q122 112 116 116 Q110 112 110 108 Q110 104 113 104 Q116 104 116 108Z" fill="rgba(245,158,11,0.12)" transform="scale(0.4)"/>
+                            </g>
+                            <g class="heart-float" style="animation-delay:4.2s">
+                                <path d="M116 108 Q116 104 119 104 Q122 104 122 108 Q122 112 116 116 Q110 112 110 108 Q110 104 113 104 Q116 104 116 108Z" fill="rgba(239,68,68,0.1)" transform="scale(0.35)"/>
+                            </g>
+
                             <!-- Magnifying Glass -->
                             <g class="search-glass glass-hide" style="animation-delay:3.2s">
                                 <circle cx="160" cy="114" r="14" stroke="rgba(96,165,250,0.5)" stroke-width="2.5" fill="rgba(96,165,250,0.04)"/>
@@ -1658,6 +1782,65 @@
                             <rect x="250" y="130" width="3" height="5" rx="1" fill="rgba(239,68,68,0.15)" transform="rotate(70 251 132)" class="float-element" style="animation-delay:3.3s"/>
 
                             <!-- Property detail popup card -->
+
+                            <!-- Road/path -->
+                            <g class="slide-in-left" style="animation-delay:2.2s" opacity="0.04">
+                                <path d="M0 192 Q75 186 150 192 Q225 186 300 192" stroke="rgba(96,165,250,0.08)" stroke-width="1.5" fill="none"/>
+                                <path d="M0 196 Q75 190 150 196 Q225 190 300 196" stroke="rgba(96,165,250,0.06)" stroke-width="1" fill="none"/>
+                                <line x1="0" y1="194" x2="15" y2="194" stroke="rgba(96,165,250,0.04)" stroke-width="0.8"/>
+                                <line x1="30" y1="194" x2="45" y2="194" stroke="rgba(96,165,250,0.04)" stroke-width="0.8"/>
+                                <line x1="60" y1="194" x2="75" y2="194" stroke="rgba(96,165,250,0.04)" stroke-width="0.8"/>
+                                <line x1="90" y1="192" x2="105" y2="192" stroke="rgba(96,165,250,0.04)" stroke-width="0.8"/>
+                                <line x1="120" y1="192" x2="135" y2="192" stroke="rgba(96,165,250,0.04)" stroke-width="0.8"/>
+                                <line x1="150" y1="192" x2="165" y2="192" stroke="rgba(96,165,250,0.04)" stroke-width="0.8"/>
+                                <line x1="180" y1="192" x2="195" y2="192" stroke="rgba(96,165,250,0.04)" stroke-width="0.8"/>
+                                <line x1="210" y1="192" x2="225" y2="192" stroke="rgba(96,165,250,0.04)" stroke-width="0.8"/>
+                                <line x1="240" y1="192" x2="255" y2="192" stroke="rgba(96,165,250,0.04)" stroke-width="0.8"/>
+                                <line x1="270" y1="192" x2="285" y2="192" stroke="rgba(96,165,250,0.04)" stroke-width="0.8"/>
+                            </g>
+
+                            <!-- Lamp post (left) -->
+                            <g class="slide-up" style="animation-delay:2.6s" opacity="0.04">
+                                <rect x="56" y="145" width="2" height="47" fill="rgba(245,158,11,0.2)"/>
+                                <path d="M48 145 Q57 140 66 145" stroke="rgba(245,158,11,0.2)" stroke-width="1.2" fill="none"/>
+                                <circle cx="57" cy="143" r="3" fill="rgba(245,158,11,0.08)"/>
+                                <ellipse cx="57" cy="148" rx="8" ry="4" fill="rgba(245,158,11,0.03)"/>
+                            </g>
+
+                            <!-- Lamp post (right) -->
+                            <g class="slide-up" style="animation-delay:2.8s" opacity="0.04">
+                                <rect x="246" y="148" width="2" height="44" fill="rgba(245,158,11,0.2)"/>
+                                <path d="M238 148 Q247 143 256 148" stroke="rgba(245,158,11,0.2)" stroke-width="1.2" fill="none"/>
+                                <circle cx="247" cy="146" r="3" fill="rgba(245,158,11,0.08)"/>
+                                <ellipse cx="247" cy="151" rx="8" ry="4" fill="rgba(245,158,11,0.03)"/>
+                            </g>
+
+                            <!-- Small car on road -->
+                            <g class="roll-in" style="animation-delay:3.5s" opacity="0.04">
+                                <rect x="100" y="185" width="16" height="8" rx="2" fill="rgba(96,165,250,0.15)"/>
+                                <rect x="104" y="182" width="10" height="5" rx="1.5" fill="rgba(96,165,250,0.1)"/>
+                                <circle cx="104" cy="193" r="2" fill="rgba(96,165,250,0.12)"/>
+                                <circle cx="113" cy="193" r="2" fill="rgba(96,165,250,0.12)"/>
+                                <circle cx="116" cy="188" r="1" fill="rgba(245,158,11,0.08)"/>
+                            </g>
+
+                            <!-- Second bird (smaller, different path) -->
+                            <g class="bird-fly" style="animation-delay:1.5s;">
+                                <path d="M0 0 Q5 -4 10 0" stroke="rgba(147,197,253,0.1)" stroke-width="0.8" fill="none" stroke-linecap="round" class="bird-wing"/>
+                                <path d="M10 0 Q15 -4 20 0" stroke="rgba(147,197,253,0.1)" stroke-width="0.8" fill="none" stroke-linecap="round" class="bird-wing" style="animation-delay:-0.1s"/>
+                            </g>
+
+                            <!-- Third bird (far away, tiny) -->
+                            <g class="bird-fly" style="animation-delay:2.5s; animation-duration:6s;">
+                                <path d="M0 0 Q4 -3 8 0" stroke="rgba(147,197,253,0.06)" stroke-width="0.6" fill="none" stroke-linecap="round" class="bird-wing"/>
+                                <path d="M8 0 Q12 -3 16 0" stroke="rgba(147,197,253,0.06)" stroke-width="0.6" fill="none" stroke-linecap="round" class="bird-wing" style="animation-delay:-0.1s"/>
+                            </g>
+
+                            <!-- Floating leaves -->
+                            <ellipse cx="38" cy="100" rx="2" ry="1" fill="rgba(16,185,129,0.05)" class="float-element" style="animation-delay:0.5s; animation-duration:4s" transform="rotate(30 38 100)"/>
+                            <ellipse cx="262" cy="90" rx="2" ry="1" fill="rgba(245,158,11,0.04)" class="float-element" style="animation-delay:1.2s; animation-duration:5s" transform="rotate(-20 262 90)"/>
+                            <ellipse cx="148" cy="70" rx="1.5" ry="0.8" fill="rgba(147,197,253,0.03)" class="float-element" style="animation-delay:2s; animation-duration:3.5s" transform="rotate(45 148 70)"/>
+
                             <g class="card-flip" style="animation-delay:2s">
                                 <rect x="18" y="143" width="62" height="44" rx="7" fill="rgba(15,23,42,0.3)" stroke="rgba(96,165,250,0.06)" stroke-width="1"/>
                                 <rect x="22" y="147" width="54" height="15" rx="4" fill="rgba(147,197,253,0.04)"/>
@@ -1680,12 +1863,16 @@
                     </div>
                 </div>
                 <div class="floating-card">
-                    <div class="fc-icon blue"><svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div>
-                    <div class="fc-text"><div class="fc-num">Verified</div><div class="fc-label">Properties Only</div></div>
-                </div>
-                <div class="floating-card">
                     <div class="fc-icon gold"><svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div>
                     <div class="fc-text"><div class="fc-num">Quick</div><div class="fc-label">Response Time</div></div>
+                </div>
+                <div class="floating-card">
+            <div class="floating-card">
+                    <div class="fc-icon gold"><svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div>
+                    <div class="fc-text"><div class="fc-num">100%</div><div class="fc-label">Secure Payments</div></div>
+                </div>
+                    <div class="fc-icon blue"><svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div>
+                    <div class="fc-text"><div class="fc-num">Verified</div><div class="fc-label">Properties Only</div></div>
                 </div>
             </div>
         </div>
@@ -2045,7 +2232,132 @@ document.querySelectorAll('.fav-btn').forEach(function(btn) {
         svg.replaceChild(clone, loopWrap);
         loopWrap = clone;
     }
-    setInterval(restartScene, 4800);
+    setInterval(restartScene, 5800);
+})();
+
+// ── Interactive Mouse Particles ──
+(function() {
+    var canvas = document.getElementById('heroParticlesCanvas');
+    if (!canvas) return;
+    var ctx = canvas.getContext('2d');
+    var particles = [];
+    var mouseX = -1000, mouseY = -1000;
+    var hero = document.getElementById('hero');
+    var w, h;
+
+    function resize() {
+        w = hero.offsetWidth;
+        h = hero.offsetHeight;
+        canvas.width = w;
+        canvas.height = h;
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    hero.addEventListener('mousemove', function(e) {
+        var r = hero.getBoundingClientRect();
+        mouseX = e.clientX - r.left;
+        mouseY = e.clientY - r.top;
+    });
+    hero.addEventListener('mouseleave', function() {
+        mouseX = -1000;
+        mouseY = -1000;
+    });
+
+    for (var i = 0; i < 60; i++) {
+        particles.push({
+            x: Math.random() * w,
+            y: Math.random() * h,
+            vx: (Math.random() - 0.5) * 0.3,
+            vy: (Math.random() - 0.5) * 0.3 - 0.1,
+            r: Math.random() * 2 + 1,
+            alpha: Math.random() * 0.3 + 0.1,
+            pulse: Math.random() * 2,
+            pulseSpeed: Math.random() * 0.02 + 0.01
+        });
+    }
+
+    function drawParticles() {
+        ctx.clearRect(0, 0, w, h);
+        for (var i = 0; i < particles.length; i++) {
+            var p = particles[i];
+            p.x += p.vx;
+            p.y += p.vy;
+            p.pulse += p.pulseSpeed;
+
+            var dx = p.x - mouseX;
+            var dy = p.y - mouseY;
+            var dist = Math.sqrt(dx * dx + dy * dy);
+            if (dist < 100) {
+                var force = (100 - dist) / 100 * 2;
+                p.x += dx / dist * force;
+                p.y += dy / dist * force;
+            }
+
+            if (p.x < 0) p.x = w;
+            if (p.x > w) p.x = 0;
+            if (p.y < 0) p.y = h;
+            if (p.y > h) p.y = 0;
+
+            var pulseAlpha = p.alpha + Math.sin(p.pulse) * 0.08;
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+            ctx.fillStyle = 'rgba(147,197,253,' + pulseAlpha.toFixed(3) + ')';
+            ctx.fill();
+
+            for (var j = i + 1; j < particles.length; j++) {
+                var p2 = particles[j];
+                var dx2 = p.x - p2.x;
+                var dy2 = p.y - p2.y;
+                var dist2 = Math.sqrt(dx2 * dx2 + dy2 * dy2);
+                if (dist2 < 60) {
+                    ctx.beginPath();
+                    ctx.moveTo(p.x, p.y);
+                    ctx.lineTo(p2.x, p2.y);
+                    ctx.strokeStyle = 'rgba(147,197,253,' + (0.05 * (1 - dist2 / 60)).toFixed(3) + ')';
+                    ctx.lineWidth = 0.5;
+                    ctx.stroke();
+                }
+            }
+        }
+        requestAnimationFrame(drawParticles);
+    }
+    drawParticles();
+})();
+
+// ── Scroll Parallax ──
+(function() {
+    var hero = document.getElementById('hero');
+    if (!hero) return;
+    var mesh = hero.querySelector('.hero-mesh');
+    var orbs = hero.querySelectorAll('.hero-orbs .orb');
+
+    window.addEventListener('scroll', function() {
+        var heroRect = hero.getBoundingClientRect();
+        if (heroRect.bottom < 0) return;
+        var progress = Math.min(1, Math.max(0, -heroRect.top / hero.offsetHeight));
+        if (mesh) {
+            mesh.style.transform = 'translateY(' + (progress * 40) + 'px) scale(' + (1 + progress * 0.03) + ')';
+        }
+        if (orbs.length) {
+            for (var i = 0; i < orbs.length; i++) {
+                orbs[i].style.transform += ' translateY(' + (progress * (30 + i * 10)) + 'px)';
+            }
+        }
+    });
+})();
+
+// ── Enhanced floating cards entrance ──
+(function() {
+    document.querySelectorAll('.floating-card').forEach(function(card, i) {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(30px) scale(0.85)';
+        setTimeout(function() {
+            card.style.transition = 'all 0.7s cubic-bezier(0.34,1.56,0.64,1)';
+            card.style.opacity = '1';
+            card.style.transform = '';
+        }, 600 + i * 400);
+    });
 })();
 </script>
 @endpush

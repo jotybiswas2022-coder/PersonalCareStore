@@ -49,7 +49,7 @@
                         <textarea name="message" placeholder="Write your message..." required rows="3"></textarea>
                         <button type="submit">Send Message</button>
                     </form>
-                    <a href="{{ route('contact.find') }}" style="display:block; margin-top:0.75rem; color:rgba(255,255,255,0.4); font-size:0.8125rem; text-decoration:none; text-align:center; transition:color 0.2s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='rgba(255,255,255,0.4)'">My Messages</a>
+                    <a href="{{ route('contact.find') }}" style="display:block; margin-top:0.75rem; color:#64748b; font-size:0.8125rem; text-decoration:none; text-align:center; transition:color 0.2s;" onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='#64748b'">My Messages</a>
                 </div>
             </div>
         </div>
@@ -70,31 +70,31 @@
 
 <style>
 .footer { margin-top: auto; }
-.footer-wave { background: var(--secondary); line-height: 0; }
+.footer-wave { background: #f8fafc; line-height: 0; }
 .footer-wave svg { display: block; width: 100%; height: 40px; }
-.footer-main { background: var(--secondary); padding: 4rem 0 2rem; }
+.footer-main { background: #f8fafc; padding: 4rem 0 2rem; }
 .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1.5fr; gap: 2.5rem; }
 @media (max-width: 1024px) { .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; } }
 @media (max-width: 640px) { .footer-grid { grid-template-columns: 1fr; gap: 1.5rem; } }
 .footer-logo { display: flex; align-items: center; gap: 0.625rem; margin-bottom: 1rem; }
 .footer-logo .logo-icon { width: 2rem; height: 2rem; background: linear-gradient(135deg, var(--primary), #1D4ED8); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #fff; font-weight: 800; font-size: 1rem; }
-.footer-logo span:last-child { color: #fff; font-size: 1.25rem; font-weight: 700; letter-spacing: -0.02em; }
-.footer-desc { color: rgba(255,255,255,0.5); font-size: 0.875rem; line-height: 1.7; margin-bottom: 1.5rem; max-width: 24rem; }
+.footer-logo span:last-child { color: var(--secondary); font-size: 1.25rem; font-weight: 700; letter-spacing: -0.02em; }
+.footer-desc { color: #64748b; font-size: 0.875rem; line-height: 1.7; margin-bottom: 1.5rem; max-width: 24rem; }
 .footer-social { display: flex; gap: 0.625rem; }
-.footer-social a { width: 2.125rem; height: 2.125rem; background: rgba(255,255,255,0.08); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.5); text-decoration: none; transition: all 0.2s; }
+.footer-social a { width: 2.125rem; height: 2.125rem; background: #e2e8f0; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #64748b; text-decoration: none; transition: all 0.2s; }
 .footer-social a:hover { background: var(--primary); color: #fff; transform: translateY(-2px); }
-.footer-col h4 { color: #fff; font-size: 0.9375rem; font-weight: 600; margin-bottom: 1.125rem; }
-.footer-col a { display: block; color: rgba(255,255,255,0.5); text-decoration: none; font-size: 0.875rem; margin-bottom: 0.625rem; transition: all 0.2s; }
+.footer-col h4 { color: var(--secondary); font-size: 0.9375rem; font-weight: 600; margin-bottom: 1.125rem; }
+.footer-col a { display: block; color: #64748b; text-decoration: none; font-size: 0.875rem; margin-bottom: 0.625rem; transition: all 0.2s; }
 .footer-col a:hover { color: var(--accent); padding-left: 4px; }
 .footer-contact-form input,
 .footer-contact-form textarea {
     width: 100%;
     padding: 0.5rem 0.75rem;
     margin-bottom: 0.5rem;
-    background: rgba(255,255,255,0.08);
-    border: 1px solid rgba(255,255,255,0.1);
+    background: #fff;
+    border: 1px solid #e2e8f0;
     border-radius: 6px;
-    color: #fff;
+    color: var(--secondary);
     font-size: 0.8125rem;
     font-family: inherit;
     outline: none;
@@ -102,7 +102,7 @@
     box-sizing: border-box;
 }
 .footer-contact-form input::placeholder,
-.footer-contact-form textarea::placeholder { color: rgba(255,255,255,0.35); }
+.footer-contact-form textarea::placeholder { color: #94a3b8; }
 .footer-contact-form input:focus,
 .footer-contact-form textarea:focus { border-color: var(--primary); }
 .footer-contact-form button {
@@ -119,10 +119,10 @@
     font-family: inherit;
 }
 .footer-contact-form button:hover { background: var(--primary-dark); }
-.footer-bottom { background: #0B1121; padding: 1.25rem 0; border-top: 1px solid rgba(255,255,255,0.05); }
+.footer-bottom { background: #e2e8f0; padding: 1.25rem 0; border-top: 1px solid rgba(0,0,0,0.05); }
 .footer-bottom-inner { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
-.footer-bottom-inner p { color: rgba(255,255,255,0.3); font-size: 0.8125rem; }
+.footer-bottom-inner p { color: #64748b; font-size: 0.8125rem; }
 .footer-bottom-links { display: flex; gap: 1.25rem; }
-.footer-bottom-links a { color: rgba(255,255,255,0.3); text-decoration: none; font-size: 0.8125rem; transition: color 0.2s; }
+.footer-bottom-links a { color: #64748b; text-decoration: none; font-size: 0.8125rem; transition: color 0.2s; }
 .footer-bottom-links a:hover { color: var(--accent); }
 </style>
