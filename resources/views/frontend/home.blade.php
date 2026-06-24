@@ -1866,11 +1866,6 @@
                     <div class="fc-icon gold"><svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div>
                     <div class="fc-text"><div class="fc-num">Quick</div><div class="fc-label">Response Time</div></div>
                 </div>
-                <div class="floating-card">
-            <div class="floating-card">
-                    <div class="fc-icon gold"><svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div>
-                    <div class="fc-text"><div class="fc-num">100%</div><div class="fc-label">Secure Payments</div></div>
-                </div>
                     <div class="fc-icon blue"><svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div>
                     <div class="fc-text"><div class="fc-num">Verified</div><div class="fc-label">Properties Only</div></div>
                 </div>
@@ -2323,34 +2318,6 @@ document.querySelectorAll('.fav-btn').forEach(function(btn) {
         requestAnimationFrame(drawParticles);
     }
     drawParticles();
-})();
-
-// ── Scroll Parallax (uses CSS background-position, not style.transform) ──
-(function() {
-    var hero = document.getElementById('hero');
-    if (!hero) return;
-    var gridOverlay = hero.querySelector('.hero-grid-overlay');
-    var glowRings = hero.querySelectorAll('.hero-glow-rings .ring');
-
-    window.addEventListener('scroll', function() {
-        var heroRect = hero.getBoundingClientRect();
-        if (heroRect.bottom < 0) return;
-        var progress = Math.min(1, Math.max(0, -heroRect.top / hero.offsetHeight));
-        if (gridOverlay) {
-            gridOverlay.style.opacity = Math.max(0.1, 0.3 - progress * 0.25);
-        }
-        if (glowRings.length) {
-            for (var i = 0; i < glowRings.length; i++) {
-                var baseScale = 1 - progress * 0.4;
-                glowRings[i].style.transform = 'scale(' + baseScale + ')';
-                glowRings[i].style.opacity = Math.max(0, 1 - progress * 2);
-            }
-        }
-    });
-})();
-            }
-        }
-    });
 })();
 
 // ── Enhanced floating cards entrance ──
