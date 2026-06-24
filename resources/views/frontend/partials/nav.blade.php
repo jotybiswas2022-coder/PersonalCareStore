@@ -49,7 +49,7 @@
     position: sticky;
     top: 0;
     z-index: 1000;
-    background: rgba(5,10,22,0.55);
+    background: rgba(5,10,22,0.88);
     backdrop-filter: blur(40px) saturate(1.5);
     -webkit-backdrop-filter: blur(40px) saturate(1.5);
     transition: background 0.4s ease, box-shadow 0.4s ease;
@@ -60,14 +60,14 @@
     position: absolute;
     bottom: 0; left: 0; right: 0;
     height: 1px;
-    background: linear-gradient(90deg, transparent 0%, rgba(96,165,250,0.12) 25%, rgba(167,139,250,0.12) 50%, rgba(96,165,250,0.12) 75%, transparent 100%);
+    background: linear-gradient(90deg, transparent 0%, rgba(96,165,250,0.15) 25%, rgba(167,139,250,0.15) 50%, rgba(96,165,250,0.15) 75%, transparent 100%);
     background-size: 200% 100%;
     animation: navBorderFlow 6s ease-in-out infinite;
     pointer-events: none;
 }
 .site-header.scrolled {
-    background: rgba(5,10,22,0.75);
-    box-shadow: 0 4px 32px rgba(0,0,0,0.2);
+    background: rgba(5,10,22,0.95);
+    box-shadow: 0 4px 32px rgba(0,0,0,0.3);
 }
 
 .header-inner {
@@ -225,10 +225,11 @@
         top: 70px;
         left: 0;
         right: 0;
-        background: rgba(5,10,22,0.92);
+        background: rgba(5,10,22,0.97);
         backdrop-filter: blur(40px) saturate(1.5);
         -webkit-backdrop-filter: blur(40px) saturate(1.5);
-        border-bottom: 1px solid rgba(96,165,250,0.06);
+        border-bottom: 1px solid rgba(96,165,250,0.08);
+        box-shadow: 0 20px 60px rgba(0,0,0,0.5);
         flex-direction: column;
         align-items: stretch;
         padding: 0.75rem 1rem;
