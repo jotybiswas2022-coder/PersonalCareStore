@@ -9,16 +9,10 @@ use Illuminate\Support\Str;
 
 class ContactMessageController extends Controller
 {
-    public function find(Request $request)
+    public function find()
     {
-        $email = $request->query('email');
-        $messages = collect();
-        if ($email) {
-            $messages = ContactMessage::where('email', $email)
-                ->latest()
-                ->get(['id', 'view_token', 'created_at', 'admin_reply']);
-        }
-        return view('frontend.contact.find', compact('messages', 'email'));
+        $messages = ContactMessage::latest()->get(['id', 'view_token', 'created_at', 'admin_reply', 'name', 'email']);
+        return view('frontend.contact.find', compact('messages'));
     }
 
     public function show($token)
