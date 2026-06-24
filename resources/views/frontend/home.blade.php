@@ -381,7 +381,7 @@
 /* ── Walk-in Person ── */
 .hero-scene .person-group { animation: walkIn 2s ease-out forwards; }
 @keyframes walkIn { 0% { transform: translateX(-80px); opacity: 0; } 100% { transform: translateX(0); opacity: 1; } }
-.hero-scene .person-body { animation: bodyBob 0.6s ease-in-out infinite; }
+.hero-scene .person-body { animation: bodyBob 0.6s ease-in-out 0s 5; }
 @keyframes bodyBob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
 .hero-scene .person-head { animation: headLook 6s ease-in-out 1s infinite; transform-origin: 120px 112px; }
 @keyframes headLook { 0%,100% { transform: rotate(0deg); } 15% { transform: rotate(8deg); } 35% { transform: rotate(-6deg); } 55% { transform: rotate(5deg); } }
@@ -1129,70 +1129,59 @@
                             <g class="raindrop"><line x1="270" y1="140" x2="268" y2="150" stroke="rgba(147,197,253,0.06)" stroke-width="1.5" stroke-linecap="round" style="animation-delay:0.3s"/></g>
 
                             <!-- Person Group -->
-                            <g class="person-group">
-                                <g class="person-body">
-                                    <!-- Legs walking (sad phase) / jumping (happy phase) -->
-                                    <g class="happy-jump" style="animation-delay:3.2s">
-                                        <line x1="114" y1="166" x2="110" y2="188" stroke="rgba(96,165,250,0.35)" stroke-width="2.8" stroke-linecap="round">
-                                            <animate attributeName="x2" values="110;118;110" dur="0.6s" repeatCount="indefinite"/>
-                                        </line>
-                                        <line x1="126" y1="166" x2="130" y2="188" stroke="rgba(96,165,250,0.35)" stroke-width="2.8" stroke-linecap="round">
-                                            <animate attributeName="x2" values="130;122;130" dur="0.6s" repeatCount="indefinite"/>
-                                        </line>
-                                    </g>
+                            <g class="person-group person-body">
+                                <g class="happy-jump" style="animation-delay:3.2s">
                                     <!-- Body -->
                                     <rect x="108" y="128" width="24" height="38" rx="7" fill="rgba(96,165,250,0.18)" stroke="rgba(96,165,250,0.35)" stroke-width="1.5"/>
-                                </g>
-                                <!-- Head -->
-                                <g class="person-head">
-                                    <circle cx="120" cy="112" r="16" fill="rgba(96,165,250,0.12)" stroke="rgba(96,165,250,0.35)" stroke-width="1.5"/>
+                                    <!-- Legs walking -->
+                                    <line x1="114" y1="166" x2="110" y2="188" stroke="rgba(96,165,250,0.35)" stroke-width="2.8" stroke-linecap="round">
+                                        <animate attributeName="x2" values="110;118;110" dur="0.6s" repeatCount="indefinite"/>
+                                    </line>
+                                    <line x1="126" y1="166" x2="130" y2="188" stroke="rgba(96,165,250,0.35)" stroke-width="2.8" stroke-linecap="round">
+                                        <animate attributeName="x2" values="130;122;130" dur="0.6s" repeatCount="indefinite"/>
+                                    </line>
+                                    <!-- Head -->
+                                    <g class="person-head">
+                                        <circle cx="120" cy="112" r="16" fill="rgba(96,165,250,0.12)" stroke="rgba(96,165,250,0.35)" stroke-width="1.5"/>
 
-                                    <!-- ── SAD FACE (initial) ── -->
-                                    <g class="face-sad">
-                                        <!-- Eyes looking down (sad) -->
-                                        <circle cx="116" cy="111" r="1.5" fill="rgba(96,165,250,0.4)"/>
-                                        <circle cx="125" cy="111" r="1.5" fill="rgba(96,165,250,0.4)"/>
-                                        <!-- Sad eyebrows (angled up in middle) -->
-                                        <line x1="113" y1="106" x2="118" y2="108" stroke="rgba(96,165,250,0.35)" stroke-width="1.2" stroke-linecap="round"/>
-                                        <line x1="124" y1="108" x2="129" y2="106" stroke="rgba(96,165,250,0.35)" stroke-width="1.2" stroke-linecap="round"/>
-                                        <!-- Frown -->
-                                        <path d="M114 119 Q120 115 127 119" stroke="rgba(96,165,250,0.4)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-                                        <!-- Tear drop -->
-                                        <ellipse cx="114" cy="114" rx="1" ry="1.5" fill="rgba(147,197,253,0.2)">
-                                            <animate attributeName="opacity" values="0.3;0;0.3" dur="2s" repeatCount="indefinite"/>
-                                        </ellipse>
+                                        <!-- ── SAD FACE (initial) ── -->
+                                        <g class="face-sad">
+                                            <circle cx="116" cy="111" r="1.5" fill="rgba(96,165,250,0.4)"/>
+                                            <circle cx="125" cy="111" r="1.5" fill="rgba(96,165,250,0.4)"/>
+                                            <line x1="113" y1="106" x2="118" y2="108" stroke="rgba(96,165,250,0.35)" stroke-width="1.2" stroke-linecap="round"/>
+                                            <line x1="124" y1="108" x2="129" y2="106" stroke="rgba(96,165,250,0.35)" stroke-width="1.2" stroke-linecap="round"/>
+                                            <path d="M114 119 Q120 115 127 119" stroke="rgba(96,165,250,0.4)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                                            <ellipse cx="114" cy="114" rx="1" ry="1.5" fill="rgba(147,197,253,0.2)">
+                                                <animate attributeName="opacity" values="0.3;0;0.3" dur="2s" repeatCount="indefinite"/>
+                                            </ellipse>
+                                        </g>
+
+                                        <!-- ── HAPPY FACE (after finding house) ── -->
+                                        <g class="face-happy">
+                                            <circle cx="116" cy="110" r="2" fill="rgba(96,165,250,0.55)"/>
+                                            <circle cx="126" cy="110" r="2" fill="rgba(96,165,250,0.55)"/>
+                                            <circle cx="115" cy="109" r="0.8" fill="rgba(255,255,255,0.3)"/>
+                                            <circle cx="125" cy="109" r="0.8" fill="rgba(255,255,255,0.3)"/>
+                                            <line x1="113" y1="105" x2="118" y2="103" stroke="rgba(96,165,250,0.5)" stroke-width="1.2" stroke-linecap="round"/>
+                                            <line x1="124" y1="103" x2="129" y2="105" stroke="rgba(96,165,250,0.5)" stroke-width="1.2" stroke-linecap="round"/>
+                                            <path d="M113 117 Q120 125 127 117" stroke="rgba(96,165,250,0.55)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                                            <ellipse cx="112" cy="116" rx="3" ry="1.5" fill="rgba(245,158,11,0.08)"/>
+                                            <ellipse cx="130" cy="116" rx="3" ry="1.5" fill="rgba(245,158,11,0.08)"/>
+                                        </g>
+
+                                        <!-- Hair -->
+                                        <path d="M104 112 Q104 96 120 94 Q136 96 136 112" fill="rgba(96,165,250,0.1)" stroke="rgba(96,165,250,0.2)" stroke-width="1"/>
                                     </g>
 
-                                    <!-- ── HAPPY FACE (after finding house) ── -->
-                                    <g class="face-happy">
-                                        <!-- Eyes wide & excited -->
-                                        <circle cx="116" cy="110" r="2" fill="rgba(96,165,250,0.55)"/>
-                                        <circle cx="126" cy="110" r="2" fill="rgba(96,165,250,0.55)"/>
-                                        <!-- Eye shine -->
-                                        <circle cx="115" cy="109" r="0.8" fill="rgba(255,255,255,0.3)"/>
-                                        <circle cx="125" cy="109" r="0.8" fill="rgba(255,255,255,0.3)"/>
-                                        <!-- Excited eyebrows (raised) -->
-                                        <line x1="113" y1="105" x2="118" y2="103" stroke="rgba(96,165,250,0.5)" stroke-width="1.2" stroke-linecap="round"/>
-                                        <line x1="124" y1="103" x2="129" y2="105" stroke="rgba(96,165,250,0.5)" stroke-width="1.2" stroke-linecap="round"/>
-                                        <!-- Big happy smile -->
-                                        <path d="M113 117 Q120 125 127 117" stroke="rgba(96,165,250,0.55)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-                                        <!-- Blush -->
-                                        <ellipse cx="112" cy="116" rx="3" ry="1.5" fill="rgba(245,158,11,0.08)"/>
-                                        <ellipse cx="130" cy="116" rx="3" ry="1.5" fill="rgba(245,158,11,0.08)"/>
+                                    <!-- Left arm (hangs at side) -->
+                                    <path d="M108 138 Q94 150 90 164" stroke="rgba(96,165,250,0.3)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                                    <!-- Right arm holding magnifying glass -->
+                                    <g class="person-arm">
+                                        <path d="M132 138 Q148 128 160 116" stroke="rgba(96,165,250,0.35)" stroke-width="3" fill="none" stroke-linecap="round" class="glass-hide" style="animation-delay:3.2s"/>
                                     </g>
-
-                                    <!-- Hair -->
-                                    <path d="M104 112 Q104 96 120 94 Q136 96 136 112" fill="rgba(96,165,250,0.1)" stroke="rgba(96,165,250,0.2)" stroke-width="1"/>
+                                    <!-- Right arm pointing at house (appears after found) -->
+                                    <path d="M132 138 Q145 126 152 114" stroke="rgba(96,165,250,0.3)" stroke-width="2.5" fill="none" stroke-linecap="round" class="point-arm"/>
                                 </g>
-
-                            <!-- Left arm (always visible, hangs at side) -->
-                            <path d="M108 138 Q94 150 90 164" stroke="rgba(96,165,250,0.3)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-                            <!-- Right arm holding magnifying glass -->
-                            <g class="person-arm">
-                                <path d="M132 138 Q148 128 160 116" stroke="rgba(96,165,250,0.35)" stroke-width="3" fill="none" stroke-linecap="round" class="glass-hide" style="animation-delay:3.2s"/>
-                            </g>
-                            <!-- Right arm pointing at house (appears after found, replaces glass arm) -->
-                            <path d="M132 138 Q145 126 152 114" stroke="rgba(96,165,250,0.3)" stroke-width="2.5" fill="none" stroke-linecap="round" class="point-arm"/>
                             </g>
 
                             <!-- Magnifying Glass (searches then disappears) -->
