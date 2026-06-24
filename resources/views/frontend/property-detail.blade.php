@@ -42,67 +42,20 @@
 
 /* ─── Gallery ─── */
 .pd-gallery {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 0.625rem;
-    border-radius: 16px;
-    overflow: hidden;
     margin-bottom: 2rem;
-    max-height: 640px;
-}
-.pd-gallery.single {
-    grid-template-columns: 1fr;
-    max-height: 480px;
 }
 .pd-gallery .gallery-main {
-    grid-row: 1 / -1;
-    background: linear-gradient(135deg, #E2E8F0, #CBD5E1);
     position: relative;
+    background: linear-gradient(135deg, #E2E8F0, #CBD5E1);
+    border-radius: 16px;
     overflow: hidden;
-    min-height: 320px;
+    height: 420px;
 }
 .pd-gallery .gallery-main img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.pd-gallery .gallery-main:hover img { transform: scale(1.05); }
-.pd-gallery .gallery-side {
-    display: flex;
-    flex-direction: column;
-    gap: 0.625rem;
-}
-.pd-gallery .gallery-side .gallery-item {
-    flex: 1;
-    background: linear-gradient(135deg, #E2E8F0, #CBD5E1);
-    position: relative;
-    overflow: hidden;
-    min-height: 150px;
-}
-.pd-gallery .gallery-side .gallery-item img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.4s;
-}
-.pd-gallery .gallery-side .gallery-item:hover img { transform: scale(1.08); }
-.pd-gallery .gallery-side .gallery-item .gallery-overlay {
-    position: absolute;
-    inset: 0;
-    background: rgba(15,23,42,0.3);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    transition: opacity 0.3s;
-}
-.pd-gallery .gallery-side .gallery-item:hover .gallery-overlay { opacity: 1; }
-@media (max-width: 768px) {
-    .pd-gallery { grid-template-columns: 1fr; max-height: none; }
-    .pd-gallery .gallery-side { flex-direction: row; }
-    .pd-gallery .gallery-main { grid-row: auto; min-height: 250px; }
-    .pd-gallery .gallery-side .gallery-item { min-height: 100px; }
+    transition: opacity 0.3s ease;
 }
 .gallery-badges {
     position: absolute;
@@ -145,9 +98,29 @@
     z-index: 2;
 }
 .gallery-cta:hover { background: rgba(15,23,42,0.9); }
+.pd-gallery .gallery-thumbs {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.625rem;
+    overflow-x: auto;
+    padding-bottom: 0.25rem;
+}
+.pd-gallery .gallery-thumbs .thumb {
+    flex-shrink: 0;
+    width: 80px;
+    height: 60px;
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: border-color 0.2s, opacity 0.2s;
+    background: linear-gradient(135deg, #E2E8F0, #CBD5E1);
+}
+.pd-gallery .gallery-thumbs .thumb:hover { border-color: var(--primary); opacity: 0.85; }
+.pd-gallery .gallery-thumbs .thumb.active { border-color: var(--primary); opacity: 1; }
+.pd-gallery .gallery-thumbs .thumb img { width: 100%; height: 100%; object-fit: cover; }
 @media (max-width: 768px) {
-    .pd-gallery { grid-template-columns: 1fr; grid-template-rows: 250px 100px 100px; }
-    .pd-gallery .gallery-main { grid-row: auto; }
+    .pd-gallery .gallery-main { height: 280px; }
 }
 
 /* ─── Content ─── */
@@ -461,15 +434,14 @@
     @php
         $allImages = $property->all_images;
         $firstImage = $property->first_image;
-        $sideImages = array_slice($allImages, 1, 2);
         $propertyTypeLabel = ucfirst(str_replace('_', ' ', $property->property_type));
         $totalImages = count($allImages);
     @endphp
 
-    <div class="pd-gallery {{ $totalImages <= 1 ? 'single' : '' }} pd-animate pd-animate-d1">
-        <div class="gallery-main">
+    <div class="pd-gallery pd-animate pd-animate-d1">
+        <div class="gallery-main" id="galleryMain">
             @if($firstImage)
-                <img src="{{ $firstImage }}" alt="{{ $property->title }}">
+                <img id="mainGalleryImg" src="{{ $firstImage }}" alt="{{ $property->title }}">
             @else
                 <div style="display:flex;align-items:center;justify-content:center;height:100%;">
                     <svg width="80" height="80" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="0.5" opacity="0.3">
@@ -482,30 +454,28 @@
                 <span class="gallery-badge verified">Verified</span>
                 <span class="gallery-badge type">{{ $propertyTypeLabel }}</span>
             </div>
-            @if($totalImages > 1)
-                <button class="gallery-cta">View All {{ $totalImages }} Photos</button>
-            @endif
         </div>
         @if($totalImages > 1)
-            <div class="gallery-side">
-                @foreach($sideImages as $img)
-                    <div class="gallery-item">
-                        <img src="{{ $img }}" alt="Property photo">
-                        <div class="gallery-overlay">
-                            <svg width="24" height="24" fill="none" stroke="#fff" viewBox="0 0 24 24" stroke-width="2">
-                                <circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/>
-                            </svg>
-                        </div>
+            <div class="gallery-thumbs" id="galleryThumbs">
+                @foreach($allImages as $i => $img)
+                    <div class="thumb {{ $i === 0 ? 'active' : '' }}" data-src="{{ $img }}" onclick="switchGalleryImage(this)">
+                        <img src="{{ $img }}" alt="">
                     </div>
                 @endforeach
-                @if($totalImages > 3)
-                    <div class="gallery-item" style="position:relative;overflow:hidden;flex:1;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#E2E8F0,#CBD5E1);">
-                        <span style="font-size:1.5rem;font-weight:800;color:var(--text-muted);">+{{ $totalImages - 3 }} more</span>
-                    </div>
-                @endif
             </div>
         @endif
     </div>
+
+    <script>
+    function switchGalleryImage(el) {
+        var src = el.getAttribute('data-src');
+        var main = document.getElementById('mainGalleryImg');
+        if (main) { main.src = src; }
+        var thumbs = document.querySelectorAll('#galleryThumbs .thumb');
+        thumbs.forEach(function(t) { t.classList.remove('active'); });
+        el.classList.add('active');
+    }
+    </script>
 
     <div class="pd-content">
         {{-- Main Info --}}
