@@ -18,6 +18,11 @@ class HomeController extends Controller
             ->take(4)
             ->get();
 
-        return view('frontend.home', compact('featuredProperties'));
+        $divisionCounts = ToLetAdvertisement::approved()
+            ->selectRaw('division, COUNT(*) as total')
+            ->groupBy('division')
+            ->pluck('total', 'division');
+
+        return view('frontend.home', compact('featuredProperties', 'divisionCounts'));
     }
 }

@@ -1417,30 +1417,16 @@
         <p>Browse rental properties in major cities all across Bangladesh.</p>
     </div>
     <div class="cities-grid">
-        <a href="{{ route('search') }}" class="city-card reveal" style="animation-delay:0.05s">
-            <div class="city-overlay"></div>
-            <div class="city-info"><h3>Dhaka</h3><p>2,450+ Properties</p></div>
-        </a>
-        <a href="{{ route('search') }}" class="city-card reveal" style="animation-delay:0.1s">
-            <div class="city-overlay"></div>
-            <div class="city-info"><h3>Chattogram</h3><p>1,200+ Properties</p></div>
-        </a>
-        <a href="{{ route('search') }}" class="city-card reveal" style="animation-delay:0.15s">
-            <div class="city-overlay"></div>
-            <div class="city-info"><h3>Khulna</h3><p>850+ Properties</p></div>
-        </a>
-        <a href="{{ route('search') }}" class="city-card reveal" style="animation-delay:0.2s">
-            <div class="city-overlay"></div>
-            <div class="city-info"><h3>Rajshahi</h3><p>620+ Properties</p></div>
-        </a>
-        <a href="{{ route('search') }}" class="city-card reveal" style="animation-delay:0.25s">
-            <div class="city-overlay"></div>
-            <div class="city-info"><h3>Sylhet</h3><p>540+ Properties</p></div>
-        </a>
-        <a href="{{ route('search') }}" class="city-card reveal" style="animation-delay:0.3s">
-            <div class="city-overlay"></div>
-            <div class="city-info"><h3>Barishal</h3><p>380+ Properties</p></div>
-        </a>
+        @php
+            $cities = ['Dhaka','Chattogram','Khulna','Rajshahi','Sylhet','Barishal','Rangpur','Mymensingh'];
+        @endphp
+        @foreach($cities as $i => $city)
+            @php $count = $divisionCounts[$city] ?? 0; @endphp
+            <a href="{{ route('search', ['division' => $city]) }}" class="city-card reveal" style="animation-delay:{{ 0.05 + ($i * 0.05) }}s">
+                <div class="city-overlay"></div>
+                <div class="city-info"><h3>{{ $city }}</h3><p>{{ $count > 0 ? number_format($count) . '+ Properties' : 'Browse Properties' }}</p></div>
+            </a>
+        @endforeach
     </div>
 </section>
 
