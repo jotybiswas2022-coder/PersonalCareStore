@@ -377,24 +377,53 @@
 .hero-image-card:hover .main-img { transform: scale(1.02); }
 .hero-image-card .main-img .placeholder-icon { display: none; }
 .hero-scene { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
-.hero-scene svg { width: 80%; height: 80%; }
-.hero-scene .person { animation: personBreathe 3s ease-in-out infinite; }
-@keyframes personBreathe { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
-.hero-scene .search-glass { animation: searchSweep 4s ease-in-out infinite; transform-origin: 120px 110px; }
-@keyframes searchSweep { 0%,100% { transform: rotate(-8deg); } 50% { transform: rotate(8deg); } }
-.hero-scene .house-found { animation: houseAppear 2s ease-out forwards, houseFloat 4s ease-in-out 2s infinite; opacity: 0; }
-@keyframes houseAppear { 0% { opacity: 0; transform: scale(0.3) translateY(20px); } 100% { opacity: 1; transform: scale(1) translateY(0); } }
-@keyframes houseFloat { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
-.hero-scene .sparkle { animation: sparklePop 2s ease-out 1.5s infinite; opacity: 0; }
-@keyframes sparklePop { 0% { opacity: 0; transform: scale(0) rotate(0deg); } 30% { opacity: 1; transform: scale(1.2) rotate(180deg); } 60% { opacity: 0.6; transform: scale(0.8) rotate(360deg); } 100% { opacity: 0; transform: scale(0) rotate(360deg); } }
-.hero-scene .checkmark { animation: checkPop 2s ease-out 2s forwards; opacity: 0; }
-@keyframes checkPop { 0% { opacity: 0; transform: scale(0); } 50% { transform: scale(1.3); } 100% { opacity: 1; transform: scale(1); } }
-.hero-scene .dot-pulse { animation: dotPulse 2s ease-in-out infinite; }
-@keyframes dotPulse { 0%,100% { opacity: 0.2; transform: scale(0.8); } 50% { opacity: 1; transform: scale(1.2); } }
-.hero-scene .search-ray { animation: rayPulse 2s ease-in-out infinite; transform-origin: 120px 110px; }
-@keyframes rayPulse { 0%,100% { opacity: 0.1; transform: scale(0.95); } 50% { opacity: 0.3; transform: scale(1.05); } }
-.hero-scene .found-text { animation: textFadeIn 2s ease-out 2.5s forwards; opacity: 0; }
-@keyframes textFadeIn { 0% { opacity: 0; transform: translateY(10px); } 100% { opacity: 1; transform: translateY(0); } }
+.hero-scene svg { width: 85%; height: 85%; }
+/* ── Walk-in Person ── */
+.hero-scene .person-group { animation: walkIn 2s ease-out forwards; }
+@keyframes walkIn { 0% { transform: translateX(-60px); opacity: 0; } 100% { transform: translateX(0); opacity: 1; } }
+.hero-scene .person-body { animation: bodyBob 0.6s ease-in-out infinite; }
+@keyframes bodyBob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
+.hero-scene .person-head { animation: headLook 4s ease-in-out 2s infinite; transform-origin: 120px 112px; }
+@keyframes headLook { 0%,100% { transform: rotate(0deg); } 25% { transform: rotate(6deg); } 75% { transform: rotate(-4deg); } }
+.hero-scene .person-arm { animation: armWave 3s ease-in-out 0.5s infinite; transform-origin: 132px 138px; }
+@keyframes armWave { 0%,100% { transform: rotate(0deg); } 30% { transform: rotate(12deg); } 60% { transform: rotate(-5deg); } }
+
+/* ── Magnifying Glass ── */
+.hero-scene .search-glass { animation: glassSweep 4s ease-in-out 1s infinite; transform-origin: 155px 115px; }
+@keyframes glassSweep { 0%,100% { transform: rotate(-6deg); } 25% { transform: rotate(10deg); } 50% { transform: rotate(-10deg); } 75% { transform: rotate(8deg); } }
+
+/* ── House pops up ── */
+.hero-scene .house-found { animation: housePop 1.2s cubic-bezier(0.34,1.56,0.64,1) 0.8s forwards, houseWiggle 3s ease-in-out 2s infinite; opacity: 0; transform-origin: 205px 164px; }
+@keyframes housePop { 0% { opacity: 0; transform: scale(0) rotate(-10deg); } 60% { transform: scale(1.15) rotate(3deg); } 100% { opacity: 1; transform: scale(1) rotate(0deg); } }
+@keyframes houseWiggle { 0%,100% { transform: rotate(0deg); } 25% { transform: rotate(2deg) translateY(-3px); } 75% { transform: rotate(-1deg) translateY(2px); } }
+
+/* ── Happy Jump ── */
+.hero-scene .happy-jump { animation: jumpHappy 1.5s ease-in-out 1.5s infinite; }
+@keyframes jumpHappy { 0%,100% { transform: translateY(0); } 20% { transform: translateY(-8px); } 40% { transform: translateY(0); } }
+
+/* ── Sparkles ── */
+.hero-scene .sparkle { animation: sparklePop 1.5s ease-out 1.2s infinite; opacity: 0; }
+@keyframes sparklePop { 0% { opacity: 0; transform: scale(0) rotate(0deg); } 30% { opacity: 1; transform: scale(1.3) rotate(180deg); } 60% { opacity: 0.6; transform: scale(0.8) rotate(360deg); } 100% { opacity: 0; transform: scale(0) rotate(360deg); } }
+
+/* ── Checkmark ── */
+.hero-scene .checkmark { animation: checkPop 1.2s cubic-bezier(0.34,1.56,0.64,1) 1.8s forwards; opacity: 0; transform-origin: 205px 140px; }
+@keyframes checkPop { 0% { opacity: 0; transform: scale(0) rotate(-20deg); } 60% { transform: scale(1.3) rotate(5deg); } 100% { opacity: 1; transform: scale(1) rotate(0deg); } }
+
+/* ── Found badge bounce ── */
+.hero-scene .found-text { animation: badgeBounce 1s cubic-bezier(0.34,1.56,0.64,1) 2.2s forwards; opacity: 0; }
+@keyframes badgeBounce { 0% { opacity: 0; transform: scale(0) translateY(10px); } 60% { transform: scale(1.15); } 100% { opacity: 1; transform: scale(1) translateY(0); } }
+
+/* ── Dots ── */
+.hero-scene .dot-pulse { animation: dotPulse 1.8s ease-in-out infinite; }
+@keyframes dotPulse { 0%,100% { opacity: 0.15; transform: scale(0.8); } 50% { opacity: 0.6; transform: scale(1.3); } }
+
+/* ── Search ray pulse ── */
+.hero-scene .search-ray { animation: rayPulse 2.5s ease-in-out infinite; transform-origin: 140px 105px; }
+@keyframes rayPulse { 0%,100% { opacity: 0.08; transform: scale(0.95); } 50% { opacity: 0.2; transform: scale(1.05); } }
+
+/* ── Connecting dots travel ── */
+.hero-scene .travel-dot { animation: dotTravel 2.5s ease-in-out infinite; }
+@keyframes dotTravel { 0% { opacity: 0; transform: translateX(0); } 30% { opacity: 0.6; } 70% { opacity: 0.6; } 100% { opacity: 0; transform: translateX(45px); } }
 .hero-image-card .floating-card {
     position: absolute;
     background: rgba(15,23,42,0.5);
@@ -1055,87 +1084,123 @@
             <div class="hero-image-card" id="tiltCard">
                 <div class="main-img">
                     <div class="hero-scene">
-                        <svg viewBox="0 0 280 210" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <!-- Background glow -->
-                            <circle cx="140" cy="105" r="90" class="search-ray" fill="url(#heroGlowGrad)" opacity="0.15"/>
+                        <svg viewBox="0 0 300 210" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <defs>
                                 <radialGradient id="heroGlowGrad"><stop offset="0%" stop-color="#60A5FA"/><stop offset="100%" stop-color="transparent"/></radialGradient>
+                                <linearGradient id="houseGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="rgba(16,185,129,0.2)"/><stop offset="100%" stop-color="rgba(16,185,129,0.08)"/></linearGradient>
                             </defs>
 
+                            <!-- Background glow -->
+                            <circle cx="150" cy="105" r="95" class="search-ray" fill="url(#heroGlowGrad)"/>
+
                             <!-- Ground -->
-                            <ellipse cx="140" cy="190" rx="100" ry="8" fill="rgba(96,165,250,0.06)"/>
+                            <ellipse cx="150" cy="192" rx="110" ry="6" fill="rgba(96,165,250,0.05)"/>
 
-                            <!-- Person -->
-                            <g class="person">
-                                <!-- Body -->
-                                <rect x="108" y="128" width="24" height="36" rx="6" fill="rgba(96,165,250,0.2)" stroke="rgba(96,165,250,0.4)" stroke-width="1.5"/>
+                            <!-- Person Group -->
+                            <g class="person-group">
+                                <g class="person-body">
+                                    <!-- Legs walking -->
+                                    <g class="happy-jump" style="animation-delay:1.8s">
+                                        <line x1="114" y1="166" x2="110" y2="188" stroke="rgba(96,165,250,0.35)" stroke-width="2.8" stroke-linecap="round">
+                                            <animate attributeName="x2" values="110;118;110" dur="0.6s" repeatCount="indefinite"/>
+                                        </line>
+                                        <line x1="126" y1="166" x2="130" y2="188" stroke="rgba(96,165,250,0.35)" stroke-width="2.8" stroke-linecap="round">
+                                            <animate attributeName="x2" values="130;122;130" dur="0.6s" repeatCount="indefinite"/>
+                                        </line>
+                                    </g>
+                                    <!-- Body -->
+                                    <rect x="108" y="128" width="24" height="38" rx="7" fill="rgba(96,165,250,0.18)" stroke="rgba(96,165,250,0.35)" stroke-width="1.5"/>
+                                </g>
                                 <!-- Head -->
-                                <circle cx="120" cy="112" r="16" fill="rgba(96,165,250,0.15)" stroke="rgba(96,165,250,0.4)" stroke-width="1.5"/>
-                                <!-- Face - eyes -->
-                                <circle cx="115" cy="110" r="1.5" fill="rgba(96,165,250,0.5)"/>
-                                <circle cx="125" cy="110" r="1.5" fill="rgba(96,165,250,0.5)"/>
-                                <!-- Smile -->
-                                <path d="M114 116 Q120 121 126 116" stroke="rgba(96,165,250,0.4)" stroke-width="1.2" fill="none" stroke-linecap="round"/>
-                                <!-- Arm holding glass -->
-                                <path d="M132 138 Q145 130 155 118" stroke="rgba(96,165,250,0.4)" stroke-width="2.5" fill="none" stroke-linecap="round" class="person"/>
-                                <!-- Legs -->
-                                <line x1="114" y1="164" x2="112" y2="186" stroke="rgba(96,165,250,0.3)" stroke-width="2.5" stroke-linecap="round"/>
-                                <line x1="126" y1="164" x2="128" y2="186" stroke="rgba(96,165,250,0.3)" stroke-width="2.5" stroke-linecap="round"/>
+                                <g class="person-head">
+                                    <circle cx="120" cy="112" r="16" fill="rgba(96,165,250,0.12)" stroke="rgba(96,165,250,0.35)" stroke-width="1.5"/>
+                                    <!-- Eyes looking right (at house) -->
+                                    <circle cx="117" cy="110" r="1.5" fill="rgba(96,165,250,0.6)"/>
+                                    <circle cx="126" cy="110" r="1.5" fill="rgba(96,165,250,0.6)"/>
+                                    <!-- Eyebrows excited -->
+                                    <line x1="114" y1="106" x2="119" y2="104" stroke="rgba(96,165,250,0.4)" stroke-width="1.2" stroke-linecap="round"/>
+                                    <line x1="124" y1="104" x2="129" y2="106" stroke="rgba(96,165,250,0.4)" stroke-width="1.2" stroke-linecap="round"/>
+                                    <!-- Big smile -->
+                                    <path d="M113 116 Q120 123 127 116" stroke="rgba(96,165,250,0.5)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                                    <!-- Hair -->
+                                    <path d="M104 112 Q104 96 120 94 Q136 96 136 112" fill="rgba(96,165,250,0.1)" stroke="rgba(96,165,250,0.2)" stroke-width="1"/>
+                                </g>
+                                <!-- Arm holding magnifying glass -->
+                                <g class="person-arm">
+                                    <path d="M132 138 Q148 128 160 116" stroke="rgba(96,165,250,0.35)" stroke-width="3" fill="none" stroke-linecap="round"/>
+                                    <!-- Other arm pointing at house -->
+                                    <path d="M108 140 Q92 130 88 118" stroke="rgba(96,165,250,0.25)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                                </g>
                             </g>
 
-                            <!-- Magnifying Glass -->
+                            <!-- Magnifying Glass with sweep -->
                             <g class="search-glass">
-                                <circle cx="155" cy="115" r="14" stroke="rgba(96,165,250,0.5)" stroke-width="2.5" fill="none"/>
-                                <line x1="165" y1="125" x2="176" y2="136" stroke="rgba(96,165,250,0.4)" stroke-width="2.5" stroke-linecap="round"/>
+                                <circle cx="160" cy="114" r="15" stroke="rgba(96,165,250,0.5)" stroke-width="2.5" fill="rgba(96,165,250,0.04)"/>
                                 <!-- Glass shine -->
-                                <path d="M148 108 Q152 104 157 107" stroke="rgba(147,197,253,0.3)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                                <path d="M152 106 Q156 102 162 105" stroke="rgba(147,197,253,0.35)" stroke-width="2" fill="none" stroke-linecap="round"/>
+                                <line x1="171" y1="125" x2="184" y2="138" stroke="rgba(96,165,250,0.4)" stroke-width="2.8" stroke-linecap="round"/>
+                                <!-- Glass lens reflection -->
+                                <ellipse cx="156" cy="110" rx="4" ry="2" fill="rgba(147,197,253,0.1)" transform="rotate(-20 156 110)"/>
                             </g>
 
-                            <!-- House (found!) -->
+                            <!-- Search result connection (person looking at house) -->
+                            <path d="M136 118 Q165 108 190 138" stroke="rgba(96,165,250,0.1)" stroke-width="1.5" stroke-dasharray="5 4" fill="none"/>
+
+                            <!-- Traveling dots from person to house -->
+                            <circle cx="140" cy="118" r="2" fill="rgba(96,165,250,0.25)" class="travel-dot" style="animation-delay:0s"/>
+                            <circle cx="155" cy="113" r="2" fill="rgba(96,165,250,0.2)" class="travel-dot" style="animation-delay:0.6s"/>
+                            <circle cx="170" cy="116" r="2" fill="rgba(96,165,250,0.15)" class="travel-dot" style="animation-delay:1.2s"/>
+
+                            <!-- Found! House -->
                             <g class="house-found">
-                                <rect x="185" y="148" width="40" height="32" rx="3" fill="rgba(16,185,129,0.15)" stroke="rgba(16,185,129,0.5)" stroke-width="2"/>
-                                <path d="M180 152 L205 132 L230 152" stroke="rgba(16,185,129,0.5)" stroke-width="2" fill="none" stroke-linejoin="round"/>
-                                <rect x="198" y="160" width="14" height="12" rx="1.5" fill="rgba(16,185,129,0.2)" stroke="rgba(16,185,129,0.3)" stroke-width="1"/>
+                                <!-- House body -->
+                                <rect x="192" y="150" width="44" height="36" rx="4" fill="url(#houseGrad)" stroke="rgba(16,185,129,0.5)" stroke-width="2"/>
+                                <!-- Roof -->
+                                <path d="M186 154 L214 132 L242 154" stroke="rgba(16,185,129,0.5)" stroke-width="2.5" fill="rgba(16,185,129,0.08)" stroke-linejoin="round"/>
+                                <!-- Door -->
+                                <rect x="206" y="164" width="16" height="14" rx="2" fill="rgba(16,185,129,0.15)" stroke="rgba(16,185,129,0.3)" stroke-width="1.2"/>
                                 <!-- Door knob -->
-                                <circle cx="209" cy="167" r="1" fill="rgba(16,185,129,0.4)"/>
-                                <!-- Window -->
-                                <rect x="203" y="150" width="8" height="8" rx="1" fill="rgba(147,197,253,0.15)" stroke="rgba(16,185,129,0.3)" stroke-width="0.8"/>
+                                <circle cx="218" cy="172" r="1.2" fill="rgba(16,185,129,0.5)"/>
+                                <!-- Window left -->
+                                <rect x="196" y="156" width="10" height="10" rx="1.5" fill="rgba(147,197,253,0.12)" stroke="rgba(16,185,129,0.3)" stroke-width="1"/>
+                                <line x1="201" y1="156" x2="201" y2="166" stroke="rgba(16,185,129,0.15)" stroke-width="0.8"/>
+                                <line x1="196" y1="161" x2="206" y2="161" stroke="rgba(16,185,129,0.15)" stroke-width="0.8"/>
+                                <!-- Window right -->
+                                <rect x="222" y="156" width="10" height="10" rx="1.5" fill="rgba(147,197,253,0.12)" stroke="rgba(16,185,129,0.3)" stroke-width="1"/>
+                                <line x1="227" y1="156" x2="227" y2="166" stroke="rgba(16,185,129,0.15)" stroke-width="0.8"/>
+                                <line x1="222" y1="161" x2="232" y2="161" stroke="rgba(16,185,129,0.15)" stroke-width="0.8"/>
                                 <!-- Chimney -->
-                                <rect x="213" y="134" width="6" height="10" rx="1" fill="rgba(16,185,129,0.15)" stroke="rgba(16,185,129,0.3)" stroke-width="1"/>
-                                <!-- Smoke -->
-                                <circle cx="216" cy="130" r="2" fill="rgba(147,197,253,0.15)" class="dot-pulse"/>
-                                <circle cx="218" cy="126" r="1.5" fill="rgba(147,197,253,0.1)" class="dot-pulse" style="animation-delay:0.5s"/>
+                                <rect x="222" y="134" width="7" height="12" rx="1.5" fill="rgba(16,185,129,0.1)" stroke="rgba(16,185,129,0.3)" stroke-width="1.2"/>
+                                <!-- Smoke puffs -->
+                                <circle cx="226" cy="129" r="2.5" fill="rgba(147,197,253,0.12)" class="dot-pulse"/>
+                                <circle cx="228" cy="124" r="2" fill="rgba(147,197,253,0.08)" class="dot-pulse" style="animation-delay:0.4s"/>
+                                <circle cx="225" cy="119" r="1.5" fill="rgba(147,197,253,0.06)" class="dot-pulse" style="animation-delay:0.8s"/>
                             </g>
 
                             <!-- Checkmark -->
                             <g class="checkmark">
-                                <circle cx="205" cy="140" r="12" fill="rgba(16,185,129,0.12)" stroke="rgba(16,185,129,0.4)" stroke-width="1.5"/>
-                                <path d="M199 140 L203 144 L211 136" stroke="rgba(16,185,129,0.7)" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                                <circle cx="214" cy="140" r="13" fill="rgba(16,185,129,0.1)" stroke="rgba(16,185,129,0.35)" stroke-width="1.8"/>
+                                <path d="M207 140 L212 145 L221 135" stroke="rgba(16,185,129,0.7)" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                            </g>
+
+                            <!-- FOUND! Badge -->
+                            <g class="found-text">
+                                <rect x="186" y="114" width="56" height="22" rx="11" fill="rgba(16,185,129,0.1)" stroke="rgba(16,185,129,0.3)" stroke-width="1.2"/>
+                                <text x="214" y="129" text-anchor="middle" font-size="10" font-weight="800" fill="rgba(16,185,129,0.75)" font-family="sans-serif" letter-spacing="0.5">FOUND!</text>
                             </g>
 
                             <!-- Sparkles -->
-                            <text class="sparkle" x="170" y="100" font-size="12" fill="rgba(245,158,11,0.5)" style="animation-delay:1.5s">✦</text>
-                            <text class="sparkle" x="230" y="130" font-size="8" fill="rgba(245,158,11,0.4)" style="animation-delay:1.8s">✦</text>
-                            <text class="sparkle" x="240" y="160" font-size="10" fill="rgba(96,165,250,0.4)" style="animation-delay:2.1s">✦</text>
+                            <text class="sparkle" x="175" y="98" font-size="14" fill="rgba(245,158,11,0.5)" style="animation-delay:1.2s">✦</text>
+                            <text class="sparkle" x="240" y="125" font-size="10" fill="rgba(245,158,11,0.4)" style="animation-delay:1.6s">✦</text>
+                            <text class="sparkle" x="250" y="165" font-size="11" fill="rgba(96,165,250,0.4)" style="animation-delay:2s">✦</text>
+                            <text class="sparkle" x="255" y="100" font-size="8" fill="rgba(147,197,253,0.35)" style="animation-delay:2.4s">✦</text>
 
-                            <!-- Found text -->
-                            <g class="found-text">
-                                <rect x="178" y="115" width="54" height="20" rx="10" fill="rgba(16,185,129,0.12)" stroke="rgba(16,185,129,0.3)" stroke-width="1"/>
-                                <text x="205" y="129" text-anchor="middle" font-size="9" font-weight="700" fill="rgba(16,185,129,0.7)" font-family="sans-serif">FOUND!</text>
-                            </g>
-
-                            <!-- Connection line (person to house) -->
-                            <path d="M140 130 Q165 115 190 140" stroke="rgba(96,165,250,0.08)" stroke-width="1.5" stroke-dasharray="4 3" fill="none" class="person"/>
-                            <!-- Dots along path -->
-                            <circle cx="155" cy="122" r="1.5" fill="rgba(96,165,250,0.15)" class="dot-pulse" style="animation-delay:0s"/>
-                            <circle cx="170" cy="120" r="1.5" fill="rgba(96,165,250,0.12)" class="dot-pulse" style="animation-delay:0.8s"/>
-                            <circle cx="182" cy="128" r="1.5" fill="rgba(96,165,250,0.1)" class="dot-pulse" style="animation-delay:1.6s"/>
-
-                            <!-- Decorative dots -->
-                            <circle cx="80" cy="60" r="2" fill="rgba(96,165,250,0.08)" class="dot-pulse" style="animation-delay:0.3s"/>
-                            <circle cx="220" cy="70" r="1.5" fill="rgba(147,197,253,0.06)" class="dot-pulse" style="animation-delay:0.7s"/>
-                            <circle cx="60" cy="150" r="1.5" fill="rgba(147,197,253,0.05)" class="dot-pulse" style="animation-delay:1.1s"/>
-                            <circle cx="250" cy="90" r="2" fill="rgba(96,165,250,0.06)" class="dot-pulse" style="animation-delay:1.4s"/>
+                            <!-- Decorative floating dots -->
+                            <circle cx="70" cy="55" r="2.5" fill="rgba(96,165,250,0.06)" class="dot-pulse" style="animation-delay:0.3s"/>
+                            <circle cx="240" cy="65" r="2" fill="rgba(147,197,253,0.05)" class="dot-pulse" style="animation-delay:0.7s"/>
+                            <circle cx="55" cy="145" r="2" fill="rgba(147,197,253,0.04)" class="dot-pulse" style="animation-delay:1.1s"/>
+                            <circle cx="270" cy="85" r="2.5" fill="rgba(96,165,250,0.05)" class="dot-pulse" style="animation-delay:1.5s"/>
+                            <circle cx="85" cy="105" r="1.5" fill="rgba(96,165,250,0.04)" class="dot-pulse" style="animation-delay:1.9s"/>
                         </svg>
                     </div>
                 </div>
