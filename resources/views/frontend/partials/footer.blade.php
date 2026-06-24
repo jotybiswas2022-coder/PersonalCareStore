@@ -39,7 +39,6 @@
                     <a href="#">Safety Tips</a>
                     <a href="#">Terms of Service</a>
                     <a href="#">Privacy Policy</a>
-                    <a href="{{ route('contact.find') }}">My Messages</a>
                 </div>
                 <div class="footer-col">
                     <h4>Contact Us</h4>
@@ -50,6 +49,7 @@
                         <textarea name="message" placeholder="Write your message..." required rows="3"></textarea>
                         <button type="submit">Send Message</button>
                     </form>
+                    <a href="{{ route('contact.find') }}" style="display:block; margin-top:0.75rem; color:rgba(255,255,255,0.4); font-size:0.8125rem; text-decoration:none; text-align:center; transition:color 0.2s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='rgba(255,255,255,0.4)'">My Messages</a>
                 </div>
             </div>
         </div>
