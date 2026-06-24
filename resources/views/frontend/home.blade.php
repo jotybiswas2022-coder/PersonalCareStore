@@ -1077,62 +1077,6 @@
 .faq-item.open .faq-answer { max-height: 300px; padding: 0 1.25rem 1.125rem; }
 .faq-answer p { font-size: 0.875rem; color: var(--text-muted); line-height: 1.7; }
 
-/* ───────────── APP CTA ───────────── */
-.app-cta-section {
-    padding: 5rem 0;
-    background: linear-gradient(135deg, #2563EB, #7C3AED, #1D4ED8);
-    background-size: 200% 200%;
-    animation: ctaBgShift 8s ease-in-out infinite;
-    position: relative;
-    overflow: hidden;
-}
-@keyframes ctaBgShift { 0%,100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
-.app-cta-section::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background:
-        radial-gradient(circle 500px at 80% 50%, rgba(255,255,255,0.06) 0%, transparent 70%),
-        radial-gradient(circle 300px at 20% 30%, rgba(245,158,11,0.1) 0%, transparent 70%);
-    pointer-events: none;
-}
-.app-cta-section::after {
-    content: '';
-    position: absolute;
-    top: -50%;
-    right: -20%;
-    width: 600px;
-    height: 600px;
-    background: radial-gradient(circle, rgba(255,255,255,0.04) 0%, transparent 60%);
-    border-radius: 50%;
-    animation: ctaGlow 6s ease-in-out infinite alternate;
-}
-@keyframes ctaGlow { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(-30px, 30px) scale(1.2); } }
-.app-cta-inner { max-width: 1280px; margin: 0 auto; padding: 0 1.5rem; text-align: center; position: relative; z-index: 1; }
-.app-cta-inner h2 { font-size: 2.25rem; font-weight: 800; color: #fff; margin-bottom: 0.75rem; letter-spacing: -0.03em; }
-.app-cta-inner p { color: rgba(255,255,255,0.75); max-width: 32rem; margin: 0 auto 2rem; font-size: 1rem; line-height: 1.7; }
-.app-cta-buttons { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
-.app-cta-buttons a {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.75rem;
-    background: rgba(255,255,255,0.12);
-    backdrop-filter: blur(8px);
-    border: 1px solid rgba(255,255,255,0.15);
-    color: #fff;
-    padding: 0.875rem 2rem;
-    border-radius: 12px;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 0.9375rem;
-    transition: all 0.3s;
-    position: relative;
-    overflow: hidden;
-}
-.app-cta-buttons a:hover { background: rgba(255,255,255,0.2); transform: translateY(-3px); box-shadow: 0 8px 30px rgba(0,0,0,0.2); }
-.app-cta-buttons a:active { transform: translateY(0); }
-@media (max-width: 768px) { .app-cta-inner h2 { font-size: 1.625rem; } .app-cta-buttons a { width: 100%; justify-content: center; } }
-
 /* ───────────── BACK TO TOP ───────────── */
 #backToTop {
     position: fixed;
@@ -1160,37 +1104,6 @@
 #backToTop:hover { transform: translateY(-4px) scale(1.05); box-shadow: 0 8px 24px rgba(37,99,235,0.4); }
 #backToTop:active { transform: translateY(0) scale(0.95); }
 
-/* ───────────── NEWSLETTER ───────────── */
-.newsletter-section { padding: 4rem 0; background: var(--bg); border-top: 1px solid var(--border); }
-.newsletter-inner { max-width: 640px; margin: 0 auto; padding: 0 1.5rem; text-align: center; }
-.newsletter-inner h3 { font-size: 1.5rem; font-weight: 700; color: var(--secondary); margin-bottom: 0.5rem; }
-.newsletter-inner p { color: var(--text-muted); font-size: 0.9375rem; margin-bottom: 1.5rem; }
-.newsletter-form { display: flex; gap: 0.75rem; max-width: 480px; margin: 0 auto; }
-.newsletter-form input {
-    flex: 1;
-    padding: 0.8125rem 1.125rem;
-    border: 1.5px solid var(--border);
-    border-radius: var(--radius-sm);
-    font-size: 0.875rem;
-    outline: none;
-    font-family: var(--font);
-    transition: all 0.3s;
-}
-.newsletter-form input:focus { border-color: var(--primary); box-shadow: 0 0 0 4px rgba(37,99,235,0.1); }
-.newsletter-form button {
-    padding: 0.8125rem 1.5rem;
-    background: linear-gradient(135deg, var(--primary), #7C3AED);
-    color: #fff;
-    border: none;
-    border-radius: var(--radius-sm);
-    font-weight: 600;
-    font-size: 0.875rem;
-    cursor: pointer;
-    transition: all 0.3s;
-    white-space: nowrap;
-}
-.newsletter-form button:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(37,99,235,0.3); }
-@media (max-width: 640px) { .newsletter-form { flex-direction: column; } }
 </style>
 @endpush
 
@@ -1484,35 +1397,6 @@
                 <p style="color:var(--text-muted); font-size:0.875rem;">Check back soon for answers.</p>
             </div>
         @endforelse
-    </div>
-</section>
-
-<!-- ════════ NEWSLETTER ════════ -->
-<section class="newsletter-section reveal">
-    <div class="newsletter-inner">
-        <h3>Stay Updated</h3>
-        <p>Get notified about new properties and exclusive deals straight to your inbox.</p>            <form class="newsletter-form" id="newsletterForm">
-            <input type="email" placeholder="Enter your email address" required>
-            <button type="submit">Subscribe</button>
-        </form>
-    </div>
-</section>
-
-<!-- ════════ APP CTA ════════ -->
-<section class="app-cta-section">
-    <div class="app-cta-inner">
-        <h2>Find Properties on the Go</h2>
-        <p>Download the BasaFinder mobile app and search for rental properties anytime, anywhere. Get instant notifications when new properties match your preferences.</p>
-        <div class="app-cta-buttons">
-            <a href="#">
-                <svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24"><path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/></svg>
-                Download for iOS
-            </a>
-            <a href="#">
-                <svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 01-.61-.92V2.734a1 1 0 01.609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.807 1.626a1 1 0 010 1.732l-2.807 1.626L15.206 12l2.492-2.492zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg>
-                Download for Android
-            </a>
-        </div>
     </div>
 </section>
 
