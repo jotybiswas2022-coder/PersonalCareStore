@@ -791,7 +791,7 @@
    TESTIMONIALS
    ═══════════════════════════════════════════ */
 .testimonials-section {
-    padding: 6rem 0 0;
+    padding: 6rem 0 4rem;
     background: linear-gradient(180deg, var(--navy) 0%, #0D1325 30%, var(--secondary) 70%, #0B1121 100%);
     position: relative;
     overflow: hidden;

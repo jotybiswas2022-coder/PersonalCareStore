@@ -70,6 +70,7 @@
 
 <style>
 .footer { margin-top: auto; }
+.footer-wave { background: var(--secondary); line-height: 0; }
 .footer-wave svg { display: block; width: 100%; height: 40px; }
 .footer-main { background: var(--secondary); padding: 4rem 0 2rem; }
 .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1.5fr; gap: 2.5rem; }
