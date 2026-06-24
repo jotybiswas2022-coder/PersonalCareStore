@@ -934,78 +934,50 @@
         <p>Explore our premium selection of verified rental properties across Bangladesh.</p>
     </div>
     <div class="prop-grid">
-        <div class="prop-card reveal" style="animation-delay:0.05s">
-            <div class="prop-img">
-                <div class="img-overlay"></div>
-                <div style="padding:2.5rem; text-align:center; display:flex; flex-direction:column; align-items:center; justify-content:center; height:100%; color:rgba(255,255,255,0.3);">
-                    <svg width="48" height="48" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        @forelse($featuredProperties as $property)
+            <div class="prop-card reveal" style="animation-delay:{{ 0.05 + ($loop->index * 0.05) }}s">
+                <div class="prop-img">
+                    <div class="img-overlay"></div>
+                    @if($property->first_image)
+                        <img src="{{ $property->first_image }}" alt="{{ $property->title }}">
+                    @else
+                        <div style="padding:2.5rem; text-align:center; display:flex; flex-direction:column; align-items:center; justify-content:center; height:100%; color:rgba(255,255,255,0.3);">
+                            <svg width="48" height="48" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                        </div>
+                    @endif
+                    <div class="prop-badges">
+                        <span class="badge badge-featured">Featured</span>
+                        <span class="badge badge-verified">Verified</span>
+                    </div>
+                    <button class="fav-btn" aria-label="Add to favorites"><svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></button>
+                    <div class="price-tag">BDT {{ number_format($property->monthly_rent) }} <small>/mo</small></div>
                 </div>
-                <div class="prop-badges"><span class="badge badge-featured">Featured</span><span class="badge badge-verified">Verified</span></div>
-                <button class="fav-btn" aria-label="Add to favorites"><svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></button>
-                <div class="price-tag">BDT 15,000 <small>/mo</small></div>
-            </div>
-            <div class="prop-body">
-                <h3 class="prop-title">Modern 2BHK Apartment</h3>
-                <div class="prop-location"><svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> Gulshan-1, Dhaka</div>
-                <div class="prop-meta">
-                    <span><svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> 2 Bed</span>
-                    <span><svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M4 21h16"/><path d="M6 21v-7"/><path d="M18 21v-7"/><rect x="2" y="3" width="20" height="11" rx="2"/></svg> 2 Bath</span>
-                    <span><svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="2" y1="20" x2="22" y2="20"/></svg> 1,200 sqft</span>
-                </div>
-                <div class="prop-actions">
-                    <a href="{{ route('property-detail') }}">View Details</a>
-                    <a href="#">Contact Owner</a>
-                </div>
-            </div>
-        </div>
-        <div class="prop-card reveal" style="animation-delay:0.1s">
-            <div class="prop-img">
-                <div class="img-overlay"></div>
-                <div style="padding:2.5rem; text-align:center; display:flex; flex-direction:column; align-items:center; justify-content:center; height:100%; color:rgba(255,255,255,0.3);">
-                    <svg width="48" height="48" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1"><path d="M3 21h18M3 10h18M5 6l7-3 7 3M4 10v11m16-11v11M8 14v3m4-3v3m4-3v3"/></svg>
-                </div>
-                <div class="prop-badges"><span class="badge badge-verified">Verified</span><span class="badge badge-new">New</span></div>
-                <button class="fav-btn" aria-label="Add to favorites"><svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></button>
-                <div class="price-tag">BDT 25,000 <small>/mo</small></div>
-            </div>
-            <div class="prop-body">
-                <h3 class="prop-title">Spacious Family House</h3>
-                <div class="prop-location"><svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> Dhanmondi, Dhaka</div>
-                <div class="prop-meta">
-                    <span><svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> 4 Bed</span>
-                    <span><svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M4 21h16"/><path d="M6 21v-7"/><path d="M18 21v-7"/><rect x="2" y="3" width="20" height="11" rx="2"/></svg> 3 Bath</span>
-                    <span><svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="2" y1="20" x2="22" y2="20"/></svg> 2,500 sqft</span>
-                </div>
-                <div class="prop-actions">
-                    <a href="{{ route('property-detail') }}">View Details</a>
-                    <a href="#">Contact Owner</a>
+                <div class="prop-body">
+                    <h3 class="prop-title">{{ $property->title }}</h3>
+                    <div class="prop-location">
+                        <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        {{ $property->area_location }}, {{ $property->district }}
+                    </div>
+                    <div class="prop-meta">
+                        <span><svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> {{ $property->bedrooms }} {{ Str::plural('Bed', $property->bedrooms) }}</span>
+                        <span><svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M4 21h16"/><path d="M6 21v-7"/><path d="M18 21v-7"/><rect x="2" y="3" width="20" height="11" rx="2"/></svg> {{ $property->bathrooms }} {{ Str::plural('Bath', $property->bathrooms) }}</span>
+                        @if($property->property_size)
+                            <span><svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="2" y1="20" x2="22" y2="20"/></svg> {{ number_format($property->property_size) }} sqft</span>
+                        @endif
+                    </div>
+                    <div class="prop-actions">
+                        <a href="{{ route('property-detail') }}">View Details</a>
+                        <a href="#">Contact Owner</a>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="prop-card reveal" style="animation-delay:0.15s">
-            <div class="prop-img">
-                <div class="img-overlay"></div>
-                <div style="padding:2.5rem; text-align:center; display:flex; flex-direction:column; align-items:center; justify-content:center; height:100%; color:rgba(255,255,255,0.3);">
-                    <svg width="48" height="48" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8m-4-4v4"/></svg>
-                </div>
-                <div class="prop-badges"><span class="badge badge-featured">Featured</span><span class="badge badge-new">New</span></div>
-                <button class="fav-btn" aria-label="Add to favorites"><svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></button>
-                <div class="price-tag">BDT 8,000 <small>/mo</small></div>
+        @empty
+            <div style="grid-column:1/-1; text-align:center; padding:3rem 1rem;">
+                <div style="font-size:2.5rem; margin-bottom:1rem;">🏠</div>
+                <h3 style="font-size:1.25rem; font-weight:700; color:var(--secondary); margin-bottom:0.5rem;">No Properties Yet</h3>
+                <p style="color:var(--text-muted); font-size:0.9375rem;">Check back soon for featured rental properties.</p>
             </div>
-            <div class="prop-body">
-                <h3 class="prop-title">Cozy Sublet Room</h3>
-                <div class="prop-location"><svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> Banani, Dhaka</div>
-                <div class="prop-meta">
-                    <span><svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> 1 Bed</span>
-                    <span><svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M4 21h16"/><path d="M6 21v-7"/><path d="M18 21v-7"/><rect x="2" y="3" width="20" height="11" rx="2"/></svg> 1 Bath</span>
-                    <span><svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="2" y1="20" x2="22" y2="20"/></svg> 450 sqft</span>
-                </div>
-                <div class="prop-actions">
-                    <a href="{{ route('property-detail') }}">View Details</a>
-                    <a href="#">Contact Owner</a>
-                </div>
-            </div>
-        </div>
+        @endforelse
     </div>
 </section>
 
