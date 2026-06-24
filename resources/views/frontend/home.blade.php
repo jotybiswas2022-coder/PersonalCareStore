@@ -872,30 +872,30 @@
             <p>Discover thousands of verified rental properties across Bangladesh. From city flats to suburban houses, find your ideal space with confidence.</p>
 
             <div class="hero-search">
-                <form action="{{ route('search') }}" class="hero-search-row">
+                <form action="{{ route('search') }}" class="hero-search-row" id="heroSearchForm">
                     <div class="search-field">
                         <span class="icon"><svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg></span>
-                        <select name="location">
+                        <select name="division">
                             <option value="">All Locations</option>
-                            <option>Dhaka</option><option>Chattogram</option><option>Khulna</option>
-                            <option>Rajshahi</option><option>Sylhet</option><option>Barishal</option>
-                            <option>Rangpur</option><option>Mymensingh</option>
+                            <option value="Dhaka">Dhaka</option><option value="Chattogram">Chattogram</option><option value="Khulna">Khulna</option>
+                            <option value="Rajshahi">Rajshahi</option><option value="Sylhet">Sylhet</option><option value="Barisal">Barisal</option>
+                            <option value="Rangpur">Rangpur</option><option value="Mymensingh">Mymensingh</option>
                         </select>
                     </div>
                     <div class="search-field">
                         <span class="icon"><svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg></span>
-                        <select name="type">
+                        <select name="property_type">
                             <option value="">All Types</option>
-                            <option>Flat</option><option>House</option><option>Sublet</option>
-                            <option>Bachelor Mess</option><option>Office</option><option>Shop</option><option>Hostel</option>
+                            <option value="Flat">Flat</option><option value="House">House</option><option value="Sublet">Sublet</option>
+                            <option value="Bachelor Mess">Bachelor Mess</option><option value="Office">Office</option><option value="Shop">Shop</option><option value="Hostel">Hostel</option><option value="Room">Room</option>
                         </select>
                     </div>
                     <div class="search-field">
                         <span class="icon"><svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></span>
-                        <select name="rent">
+                        <select name="rent" id="heroRent">
                             <option value="">Any Rent</option>
-                            <option>Under 5,000</option><option>5,000 - 10,000</option>
-                            <option>10,000 - 20,000</option><option>20,000 - 50,000</option><option>50,000+</option>
+                            <option value="0-5000">Under 5,000</option><option value="5000-10000">5,000 - 10,000</option>
+                            <option value="10000-20000">10,000 - 20,000</option><option value="20000-50000">20,000 - 50,000</option><option value="50000-99999999">50,000+</option>
                         </select>
                     </div>
                     <button type="submit" class="btn-search">
@@ -903,6 +903,21 @@
                         Search
                     </button>
                 </form>
+                <script>
+                document.getElementById('heroSearchForm')?.addEventListener('submit', function(e) {
+                    var rent = document.getElementById('heroRent');
+                    if (rent && rent.value) {
+                        var parts = rent.value.split('-');
+                        var min = document.createElement('input');
+                        min.type = 'hidden'; min.name = 'min_rent'; min.value = parts[0];
+                        this.appendChild(min);
+                        var max = document.createElement('input');
+                        max.type = 'hidden'; max.name = 'max_rent'; max.value = parts[1];
+                        this.appendChild(max);
+                        rent.removeAttribute('name');
+                    }
+                });
+                </script>
             </div>
 
             <div class="hero-stats">
