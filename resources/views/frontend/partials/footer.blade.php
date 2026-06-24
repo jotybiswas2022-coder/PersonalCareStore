@@ -42,18 +42,10 @@
                     <a href="#">Contact Us</a>
                 </div>
                 <div class="footer-col">
-                    <h4>Download App</h4>
-                    <p style="color: rgba(255,255,255,0.5); font-size: 0.8125rem; margin-bottom: 1rem; line-height: 1.5;">Find properties on the go with our mobile app.</p>
-                    <div class="footer-app-badges">
-                        <a href="#" class="app-badge">
-                            <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/></svg>
-                            App Store
-                        </a>
-                        <a href="#" class="app-badge">
-                            <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 01-.61-.92V2.734a1 1 0 01.609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.807 1.626a1 1 0 010 1.732l-2.807 1.626L15.206 12l2.492-2.492zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg>
-                            Google Play
-                        </a>
-                    </div>
+                    <h4>Contact Us</h4>
+                    <a href="tel:+8801234567890"><svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24" style="margin-right:6px;vertical-align:middle"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>+880 1234-567890</a>
+                    <a href="mailto:info@basafinder.com"><svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24" style="margin-right:6px;vertical-align:middle"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2zm16 4l-8 5-8-5v2l8 5 8-5V8z"/></svg>info@basafinder.com</a>
+                    <a href="#"><svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24" style="margin-right:6px;vertical-align:middle"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>Dhaka, Bangladesh</a>
                 </div>
             </div>
         </div>
