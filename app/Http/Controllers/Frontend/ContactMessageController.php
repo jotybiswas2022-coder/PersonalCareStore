@@ -13,7 +13,7 @@ class ContactMessageController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255',
-            'message' => 'required|string|min:10',
+            'message' => 'required|string',
         ]);
 
         $contactMessage = ContactMessage::create($validated);
