@@ -284,29 +284,36 @@
 .hero-search .search-field { flex: 1; min-width: 140px; position: relative; }
 .hero-search .search-field .icon { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: rgba(255,255,255,0.3); pointer-events: none; transition: color 0.3s; }
 .hero-search .search-field:focus-within .icon { color: #60A5FA; }
+.hero-search .search-field:focus-within select, .hero-search .search-field:focus-within input { border-color: rgba(59,130,246,0.5); background: rgba(0,0,0,0.35); box-shadow: 0 0 0 4px rgba(59,130,246,0.1), 0 4px 16px rgba(59,130,246,0.08); }
 .hero-search select, .hero-search input {
     width: 100%;
-    padding: 0.8125rem 0.875rem 0.8125rem 2.25rem;
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(255,255,255,0.06);
+    padding: 0.8125rem 2rem 0.8125rem 2.25rem;
+    background: rgba(0,0,0,0.25) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='3 6 6 3 9 6'/%3E%3C/svg%3E") no-repeat right 0.75rem center;
+    border: 1px solid rgba(255,255,255,0.08);
     border-radius: 12px;
-    color: #fff;
+    color: #f1f5f9;
     font-size: 0.875rem;
     font-family: var(--font);
     outline: none;
-    transition: all 0.3s;
+    transition: all 0.3s cubic-bezier(0.16,1,0.3,1);
     -webkit-appearance: none;
     appearance: none;
     cursor: pointer;
     backdrop-filter: blur(4px);
 }
-.hero-search select option { background: #1E293B; color: #fff; }
-.hero-search select:focus, .hero-search input:focus {
-    border-color: rgba(37,99,235,0.4);
-    background: rgba(37,99,235,0.08);
-    box-shadow: 0 0 0 4px rgba(37,99,235,0.06);
+.hero-search select option {
+    background: #0f172a;
+    color: #f1f5f9;
+    padding: 0.5rem 0.75rem;
 }
-.hero-search select:hover, .hero-search input:hover { background: rgba(255,255,255,0.08); }
+.hero-search select option:checked { background: #1e3a5f; }
+.hero-search select::-webkit-scrollbar { width: 6px; }
+.hero-search select::-webkit-scrollbar-track { background: #0f172a; border-radius: 3px; }
+.hero-search select::-webkit-scrollbar-thumb { background: #334155; border-radius: 3px; }
+.hero-search select::-webkit-scrollbar-thumb:hover { background: #475569; }
+.hero-search select option:disabled { color: #475569; }
+.hero-search select:hover, .hero-search input:hover { background-color: rgba(0,0,0,0.35); }
+.hero-search select:active { transform: scale(0.98); }
 .hero-search .btn-search {
     padding: 0.8125rem 2rem;
     background: linear-gradient(135deg, var(--primary), #7C3AED);
