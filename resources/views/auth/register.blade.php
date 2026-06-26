@@ -821,7 +821,22 @@
     75%  { transform: translate(8%,-8%) rotate(4deg); opacity: 0.6; }
 }
 @media (max-width: 640px) {
-    .register-card { padding: 1.5rem; }
+    .register-page { padding: 1rem 0.75rem; }
+    .register-grid { gap: 0; }
+    .register-card {
+        padding: 1.25rem;
+        border-radius: 20px;
+    }
+    .register-card .rc-header { margin-bottom: 1.25rem; }
+    .register-card .rc-header .rc-icon { width: 2.5rem; height: 2.5rem; }
+    .register-card .rc-header h2 { font-size: 1.125rem; }
+    .register-card .rc-header p { font-size: 0.75rem; }
+    .field { margin-bottom: 0.875rem; }
+    .field input { padding: 0.625rem 0.75rem 0.625rem 2.25rem; font-size: 0.8125rem; }
+    .btn-auth { padding: 0.6875rem; font-size: 0.875rem; }
+    .pass-hint { font-size: 0.6875rem; }
+    .auth-divider { margin-top: 1.125rem; padding-top: 1.125rem; }
+    .auth-divider p { font-size: 0.75rem; }
 }
 
 /* ── Card Header ── */
@@ -967,9 +982,6 @@
 @keyframes spin { to { transform: rotate(360deg); } }
 
 /* ── Responsive ── */
-@media (max-width: 640px) {
-    .register-page { padding: 1.5rem 1rem; }
-}
 </style>
 @endpush
 
