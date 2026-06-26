@@ -35,7 +35,7 @@
 }
 @media (max-width: 900px) {
     .confirm-grid { grid-template-columns: 1fr; max-width: 460px; gap: 1.5rem; }
-    .char-panel { display: none; }
+    .char-panel { display: none !important; }
 }
 
 .char-panel {
@@ -65,7 +65,6 @@
     pointer-events: none;
 }
 @keyframes charBorderShift { 0%,100% { background-position: 0% 50%; } 25% { background-position: 100% 0%; } 50% { background-position: 100% 100%; } 75% { background-position: 0% 100%; } }
-@media (max-width: 900px) { .char-panel { min-height: 260px; padding: 1.5rem; } }
 
 .char-container { width: 220px; height: 220px; position: relative; display: flex; align-items: center; justify-content: center; }
 @media (max-width: 900px) { .char-container { width: 180px; height: 180px; } }
