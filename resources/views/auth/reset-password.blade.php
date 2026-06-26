@@ -247,7 +247,23 @@
 @keyframes cardFadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
 .reset-card::after { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle at 50% 0%, rgba(20,184,166,0.03) 0%, transparent 50%); animation: cardShine 8s ease-in-out infinite; pointer-events: none; }
 @keyframes cardShine { 0%,100% { transform: translate(0,0) rotate(0deg); opacity: 0.2; } 25% { transform: translate(10%,-10%) rotate(5deg); opacity: 0.5; } 50% { transform: translate(-5%,5%) rotate(-3deg); opacity: 0.3; } 75% { transform: translate(8%,-8%) rotate(4deg); opacity: 0.6; } }
-@media (max-width: 640px) { .reset-card { padding: 1.5rem; } }
+@media (max-width: 640px) {
+    .reset-page { padding: 1rem 0.75rem; }
+    .reset-grid { gap: 0; }
+    .reset-card {
+        padding: 1.25rem;
+        border-radius: 20px;
+    }
+    .reset-card .rc-header { margin-bottom: 1.25rem; }
+    .reset-card .rc-header .rc-icon { width: 2.5rem; height: 2.5rem; }
+    .reset-card .rc-header h2 { font-size: 1.125rem; }
+    .reset-card .rc-header p { font-size: 0.75rem; }
+    .field { margin-bottom: 0.875rem; }
+    .field input { padding: 0.625rem 0.75rem 0.625rem 2.25rem; font-size: 0.8125rem; }
+    .btn-auth { padding: 0.6875rem; font-size: 0.875rem; }
+    .auth-divider { margin-top: 1.125rem; padding-top: 1.125rem; }
+    .auth-divider p { font-size: 0.75rem; }
+}
 
 .reset-card .rc-header { text-align: center; margin-bottom: 1.75rem; position: relative; }
 .reset-card .rc-header .rc-icon { width: 3rem; height: 3rem; margin: 0 auto 0.75rem; background: linear-gradient(135deg, rgba(20,184,166,0.12), rgba(13,148,136,0.06)); border: 1px solid rgba(45,212,191,0.08); border-radius: 16px; display: flex; align-items: center; justify-content: center; color: #14B8A6; }
@@ -286,7 +302,6 @@
 .btn-auth.loading .btn-text { opacity: 0.6; }
 @keyframes spin { to { transform: rotate(360deg); } }
 
-@media (max-width: 640px) { .reset-page { padding: 1.5rem 1rem; } }
 </style>
 @endpush
 
