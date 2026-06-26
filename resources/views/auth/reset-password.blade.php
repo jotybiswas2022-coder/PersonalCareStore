@@ -35,6 +35,7 @@
 }
 @media (max-width: 900px) {
     .reset-grid { grid-template-columns: 1fr; max-width: 460px; gap: 1.5rem; }
+    .char-panel { display: none; }
 }
 
 .char-panel {
