@@ -335,6 +335,7 @@
 .d-tbl .badge-unread::before { background:#3b82f6; }
 .d-tbl .badge-read { background:#f1f5f9; color:#64748b; }
 .d-tbl .badge-read::before { background:#94a3b8; animation:none; }
+.d-swipe-hint { display:none; }
 .d-tbl .empty { text-align:center; color:#94a3b8; padding:2rem 1.25rem; font-size:0.8125rem; }
 .d-tbl .msg-sub { max-width:220px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
 .d-tbl .td-b { font-weight:600; color:#0f172a; }
@@ -442,8 +443,9 @@
     .d-ov .ov-card { padding:0.75rem 0.875rem; }
     .d-ov .ov-card .ov-l { font-size:0.6rem; }
     .d-ov .ov-card .ov-v { font-size:1rem; }
-    .d-tbl { border-radius:0.625rem; overflow-x:auto; -webkit-overflow-scrolling:touch; }
-    .d-tbl::before { content:'\2190  Swipe \2192'; display:block; text-align:center; font-size:0.6rem; color:#94a3b8; padding:0.375rem; background:#f8fafc; border-bottom:1px solid #f1f5f9; letter-spacing:0.05em; }
+    .d-tbl { border-radius:0.625rem; }
+    .d-tbl-wrap { overflow-x:auto; -webkit-overflow-scrolling:touch; }
+    .d-swipe-hint { display:block; text-align:center; font-size:0.6rem; color:#94a3b8; padding:0.375rem; background:#f8fafc; border-bottom:1px solid #f1f5f9; letter-spacing:0.05em; }
     .d-tbl table { min-width:380px; }
     .d-tbl .dt-h { padding:0.75rem 0.875rem; }
     .d-tbl .dt-h h3 { font-size:0.75rem; }
@@ -494,7 +496,7 @@
     .d-tbl .badge { font-size:0.5rem; padding:0.0625rem 0.375rem; gap:0.25rem; }
     .d-tbl .badge::before { width:0.3125rem; height:0.3125rem; }
     .d-tbl td.td-b { font-size:0.6875rem; }
-    .d-tbl::before { font-size:0.55rem; padding:0.25rem; }
+    .d-swipe-hint { font-size:0.55rem; padding:0.25rem; }
     .d-hero .h-bot { gap:0.3125rem; }
     .d-hero .h-stat { padding:0.4375rem 0.625rem; gap:0.5rem; }
     .d-hero .h-stat .hs-icon { width:1.75rem; height:1.75rem; }
@@ -732,6 +734,8 @@
                 <h3><span class="dt-hg"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>Recent Messages</h3>
                 <span class="dt-c">{{ $recentMessages->count() }}</span>
             </div>
+            <div class="d-swipe-hint">&larr; Swipe &rarr;</div>
+            <div class="d-tbl-wrap">
             <table>
                 <thead><tr><th>Name</th><th>Message</th><th>Status</th></tr></thead>
                 <tbody>
@@ -746,12 +750,15 @@
                     @endforelse
                 </tbody>
             </table>
+            </div>
         </div>
         <div class="d-tbl">
             <div class="dt-h">
                 <h3><span class="dt-hg"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span>Recent Properties</h3>
                 <span class="dt-c">{{ $recentProperties->count() }}</span>
             </div>
+            <div class="d-swipe-hint">&larr; Swipe &rarr;</div>
+            <div class="d-tbl-wrap">
             <table>
                 <thead><tr><th>Title</th><th>Type</th><th>Status</th></tr></thead>
                 <tbody>
@@ -766,6 +773,7 @@
                     @endforelse
                 </tbody>
             </table>
+            </div>
         </div>
     </div>
 </div>

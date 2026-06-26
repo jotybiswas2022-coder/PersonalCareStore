@@ -77,6 +77,7 @@
 .tl-empty svg { margin-bottom: 0.75rem; opacity: 0.3; }
 .tl-empty h3 { font-size: 1rem; font-weight: 600; color: #6b7280; margin-bottom: 0.25rem; }
 .tl-empty p { font-size: 0.8125rem; }
+.tl-swipe-hint { display:none; text-align:center; font-size:0.55rem; color:#94a3b8; padding:0.3125rem; background:#f8fafc; border-bottom:1px solid #f1f5f9; letter-spacing:0.05em; }
 
 @media (hover:none) and (pointer:coarse) {
     .tl-hero .hero-btn:hover { transform:none; background:#6366f1; }
@@ -91,9 +92,10 @@
     .tl-hero p { font-size:0.75rem; }
     .tl-hero .hero-btn { padding:0.5rem 0.875rem; font-size:0.75rem; }
     .tl-hero .hero-btn svg { width:12px; height:12px; }
-    .tl-card { border-radius:0.625rem; overflow-x:auto; -webkit-overflow-scrolling:touch; }
-    .tl-card::before { content:'\2190  Swipe \2192'; display:block; text-align:center; font-size:0.55rem; color:#94a3b8; padding:0.3125rem; background:#f8fafc; border-bottom:1px solid #f1f5f9; letter-spacing:0.05em; }
+    .tl-card { border-radius:0.625rem; }
+    .tl-table-wrap { overflow-x:auto; -webkit-overflow-scrolling:touch; }
     .tl-table { min-width:600px; }
+    .tl-swipe-hint { display:block; }
     .tl-table th { padding:0.625rem 0.875rem; font-size:0.65rem; }
     .tl-table td { padding:0.75rem 0.875rem; font-size:0.78125rem; }
     .tl-content-cell { max-width:180px; }
@@ -107,7 +109,7 @@
     .tl-hero p { font-size:0.6875rem; }
     .tl-hero .hero-btn { justify-content:center; padding:0.5rem 0.75rem; font-size:0.71875rem; }
     .tl-card { border-radius:0.5rem; }
-    .tl-card::before { font-size:0.5rem; padding:0.25rem; }
+        .tl-swipe-hint { font-size:0.5rem; padding:0.25rem; }
     .tl-table { min-width:520px; }
     .tl-table th { padding:0.4375rem 0.625rem; font-size:0.5625rem; }
     .tl-table td { padding:0.5625rem 0.625rem; font-size:0.6875rem; }
@@ -149,6 +151,8 @@
 
 <div class="tl-card tl-animate" style="animation-delay:0.1s">
     @if($testimonials->count())
+        <div class="tl-swipe-hint">&larr; Swipe &rarr;</div>
+        <div class="tl-table-wrap">
         <table class="tl-table">
             <thead>
                 <tr>
@@ -193,6 +197,7 @@
                 @endforeach
             </tbody>
         </table>
+        </div>
     @else
         <div class="tl-empty">
             <svg width="40" height="40" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1"><path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0118.8-4.3M22 12.5a10 10 0 01-18.8 4.2"/></svg>
