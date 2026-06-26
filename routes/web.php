@@ -25,8 +25,16 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 |--------------------------------------------------------------------------
 */
 Route::post('/contact/submit', [ContactMessageController::class, 'store'])->name('contact.submit');
-Route::get('/contact/find', [ContactMessageController::class, 'find'])->name('contact.find');
 Route::get('/contact/message/{token}', [ContactMessageController::class, 'show'])->name('contact.message');
+
+/*
+|--------------------------------------------------------------------------
+| Contact Messages (Auth Required - users view their own messages)
+|--------------------------------------------------------------------------
+*/
+Route::middleware('auth')->group(function () {
+    Route::get('/contact/find', [ContactMessageController::class, 'find'])->name('contact.find');
+});
 
 /*
 |--------------------------------------------------------------------------

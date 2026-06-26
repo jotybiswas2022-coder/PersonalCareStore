@@ -11,7 +11,19 @@ class ContactMessageController extends Controller
 {
     public function find()
     {
-        $messages = ContactMessage::latest()->get(['id', 'view_token', 'created_at', 'admin_reply', 'name', 'email']);
+        $user = auth()->user();
+
+        $messages = ContactMessage::where(function ($q) use ($user) {
+            // Messages linked to this user_id
+            $q->where('user_id', $user->id);
+            // Also match by email for messages submitted before user_id was stored
+            $q->orWhere(function ($sub) use ($user) {
+                $sub->whereNull('user_id')->where('email', $user->email);
+            });
+        })
+        ->latest()
+        ->get(['id', 'view_token', 'created_at', 'admin_reply', 'name', 'email']);
+
         return view('frontend.contact.find', compact('messages'));
     }
 
@@ -30,6 +42,11 @@ class ContactMessageController extends Controller
         ]);
 
         $validated['view_token'] = Str::random(40);
+
+        // Associate with logged-in user if available
+        if (auth()->check()) {
+            $validated['user_id'] = auth()->id();
+        }
 
         $contactMessage = ContactMessage::create($validated);
 
