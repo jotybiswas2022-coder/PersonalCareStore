@@ -92,7 +92,7 @@
     .tl-hero .hero-btn { padding:0.5rem 0.875rem; font-size:0.75rem; }
     .tl-hero .hero-btn svg { width:12px; height:12px; }
     .tl-card { border-radius:0.625rem; overflow-x:auto; -webkit-overflow-scrolling:touch; }
-    .tl-card::after { content:'\2190  Swipe \2192'; display:block; text-align:center; font-size:0.55rem; color:#94a3b8; padding:0.3125rem; background:#f8fafc; border-top:1px solid #f1f5f9; letter-spacing:0.05em; }
+    .tl-card::before { content:'\2190  Swipe \2192'; display:block; text-align:center; font-size:0.55rem; color:#94a3b8; padding:0.3125rem; background:#f8fafc; border-bottom:1px solid #f1f5f9; letter-spacing:0.05em; }
     .tl-table { min-width:600px; }
     .tl-table th { padding:0.625rem 0.875rem; font-size:0.65rem; }
     .tl-table td { padding:0.75rem 0.875rem; font-size:0.78125rem; }
@@ -107,7 +107,7 @@
     .tl-hero p { font-size:0.6875rem; }
     .tl-hero .hero-btn { justify-content:center; padding:0.5rem 0.75rem; font-size:0.71875rem; }
     .tl-card { border-radius:0.5rem; }
-    .tl-card::after { font-size:0.5rem; padding:0.25rem; }
+    .tl-card::before { font-size:0.5rem; padding:0.25rem; }
     .tl-table { min-width:520px; }
     .tl-table th { padding:0.4375rem 0.625rem; font-size:0.5625rem; }
     .tl-table td { padding:0.5625rem 0.625rem; font-size:0.6875rem; }

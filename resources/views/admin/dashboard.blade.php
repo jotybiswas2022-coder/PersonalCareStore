@@ -443,7 +443,7 @@
     .d-ov .ov-card .ov-l { font-size:0.6rem; }
     .d-ov .ov-card .ov-v { font-size:1rem; }
     .d-tbl { border-radius:0.625rem; overflow-x:auto; -webkit-overflow-scrolling:touch; }
-    .d-tbl::after { content:'\2190  Swipe \2192'; display:block; text-align:center; font-size:0.6rem; color:#94a3b8; padding:0.375rem; background:#f8fafc; border-top:1px solid #f1f5f9; letter-spacing:0.05em; }
+    .d-tbl::before { content:'\2190  Swipe \2192'; display:block; text-align:center; font-size:0.6rem; color:#94a3b8; padding:0.375rem; background:#f8fafc; border-bottom:1px solid #f1f5f9; letter-spacing:0.05em; }
     .d-tbl table { min-width:380px; }
     .d-tbl .dt-h { padding:0.75rem 0.875rem; }
     .d-tbl .dt-h h3 { font-size:0.75rem; }
@@ -494,7 +494,7 @@
     .d-tbl .badge { font-size:0.5rem; padding:0.0625rem 0.375rem; gap:0.25rem; }
     .d-tbl .badge::before { width:0.3125rem; height:0.3125rem; }
     .d-tbl td.td-b { font-size:0.6875rem; }
-    .d-tbl::after { font-size:0.55rem; padding:0.25rem; }
+    .d-tbl::before { font-size:0.55rem; padding:0.25rem; }
     .d-hero .h-bot { gap:0.3125rem; }
     .d-hero .h-stat { padding:0.4375rem 0.625rem; gap:0.5rem; }
     .d-hero .h-stat .hs-icon { width:1.75rem; height:1.75rem; }
