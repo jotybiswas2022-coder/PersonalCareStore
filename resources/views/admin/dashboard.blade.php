@@ -341,6 +341,29 @@
 .d-tbl .td-cap { text-transform:capitalize; }
 
 /* ── Responsive ── */
+@media (hover:none) and (pointer:coarse) {
+    .d-card:hover { transform:none; box-shadow:none; border-color:#e5e7eb; }
+    .d-card:hover::before { opacity:0; height:3px; }
+    .d-card:hover .dc-glow { opacity:0; transform:none; }
+    .d-card:hover .dc-bg-shine { opacity:0; animation:none; }
+    .d-card:hover .dc-icon { transform:none; border-radius:0.75rem; }
+    .d-card:active { transform:scale(0.97); transition:0.1s; }
+    .d-q:hover { transform:none; box-shadow:none; }
+    .d-q:hover::before { opacity:0; animation:none; }
+    .d-q:hover .dq-glow { opacity:0; transform:none; }
+    .d-q:hover .dq-icon { transform:none; border-radius:0.625rem; }
+    .d-q:hover .dq-arrow { transform:none; color:#9ca3af; }
+    .d-q:active { transform:scale(0.97); transition:0.1s; }
+    .d-ov .ov-card:hover { transform:none; box-shadow:none; }
+    .d-ov .ov-card:active { transform:scale(0.97); transition:0.1s; }
+    .d-tbl:hover { box-shadow:none; border-color:#e5e7eb; }
+    .d-tbl tbody tr:hover td { background:transparent; }
+    .d-tbl tbody tr:active td { background:#f8faff; }
+    .d-hero .h-stat:hover { transform:none; background:rgba(255,255,255,0.02); border-color:rgba(255,255,255,0.04); }
+    .d-hero .h-stat:active { background:rgba(255,255,255,0.06); }
+    .d-hero .h-date:hover { transform:none; }
+    .d-card .dc-deco { display:none; }
+}
 @media (max-width:1280px) {
     .d-stats { grid-template-columns:repeat(2,1fr); }
     .d-quick { grid-template-columns:repeat(2,1fr); }
@@ -348,45 +371,137 @@
 }
 @media (max-width:1024px) {
     .d-tbls { grid-template-columns:1fr; }
+    .d-tbl .dt-h h3 { font-size:0.8125rem; }
+    .d-tbl th { padding:0.5rem 1rem; font-size:0.6rem; }
+    .d-tbl td { padding:0.625rem 1rem; font-size:0.78125rem; }
 }
 @media (max-width:900px) {
-    .d-hero .h-bot { grid-template-columns:repeat(2,1fr); }
+    .d-hero .h-bot { grid-template-columns:repeat(2,1fr); gap:0.5rem; }
+    .d-hero .h-stat { padding:0.625rem 0.875rem; gap:0.625rem; }
+    .d-hero .h-stat .hs-icon { width:2rem; height:2rem; }
+    .d-hero .h-stat .hs-icon svg { width:14px; height:14px; }
+    .d-hero .h-stat .hs-b .hs-v { font-size:1rem; }
+    .d-hero .h-stat .hs-b .hs-l { font-size:0.6rem; }
 }
 @media (max-width:768px) {
-    .d-hero { margin:-1rem -1rem 1.25rem; padding:1.25rem 1rem 1.5rem; }
+    .d-hero { margin:-1rem -1rem 1.25rem; padding:1.25rem 1rem 1.5rem; border-radius:0 0 1.5rem 1.5rem; }
     .d-hero .h-top { flex-direction:column; align-items:flex-start; }
     .d-hero h1 { font-size:1.2rem; flex-wrap:wrap; }
     .d-hero h1 .hi-greeting { font-size:1rem; }
     .d-hero .h-left { gap:0.75rem; }
     .d-hero .h-av { width:2.5rem; height:2.5rem; font-size:0.875rem; }
-    .d-hero .h-bot { gap:0.625rem; }
+    .d-hero .h-av::after { display:none; }
+    .d-hero .h-meta .hm-dot { font-size:0.7rem; }
+    .d-hero .h-date { font-size:0.7rem; padding:0.375rem 0.75rem; }
+    .d-hero .h-bot { gap:0.5rem; }
+    .d-hero .h-geo { display:none; }
     .d-stats { gap:0.75rem; }
-    .d-card { padding:1rem; }
+    .d-card { padding:1rem; border-radius:0.875rem; }
     .d-card .dc-value { font-size:1.625rem; }
-    .d-card .dc-icon { width:2.25rem; height:2.25rem; }
+    .d-card .dc-icon { width:2.25rem; height:2.25rem; border-radius:0.625rem; }
+    .d-card .dc-icon svg { width:18px; height:18px; }
+    .d-card .dc-badge { font-size:0.55rem; padding:0.125rem 0.375rem; }
+    .d-card .dc-deco { font-size:2.25rem; bottom:0.375rem; right:0.5rem; }
+    .d-card .dc-sub { flex-wrap:wrap; gap:0.375rem; }
     .d-quick { gap:0.625rem; }
+    .d-q { padding:0.75rem 0.875rem; border-radius:0.625rem; }
+    .d-q .dq-icon { width:2.25rem; height:2.25rem; }
+    .d-q .dq-icon svg { width:16px; height:16px; }
+    .d-q .dq-body .dq-l { font-size:0.75rem; }
+    .d-q .dq-body .dq-s { font-size:0.65rem; }
     .d-ov { gap:0.625rem; }
+    .d-ov .ov-card { padding:0.875rem 1rem; border-radius:0.625rem; }
+    .d-ov .ov-card .ov-v { font-size:1.125rem; }
+    .d-section { margin-bottom:1.25rem; }
+    .d-section .ds-h { margin-bottom:0.625rem; }
     .d-section .ds-h h2 { font-size:0.875rem; }
+    .d-section .ds-h .ds-link { font-size:0.7rem; }
 }
 @media (max-width:640px) {
-    .d-hero .h-bot { grid-template-columns:1fr; }
+    body { padding-bottom:env(safe-area-inset-bottom,0); }
+    .d-hero { margin:-1rem -0.75rem 1rem; padding:1rem 0.875rem 1.25rem; border-radius:0 0 1.25rem 1.25rem; }
+    .d-hero .h-top { gap:0.625rem; }
+    .d-hero h1 { font-size:1.05rem; }
+    .d-hero h1 .hi-greeting { font-size:0.875rem; }
+    .d-hero .h-left { gap:0.625rem; }
+    .d-hero .h-av { width:2.25rem; height:2.25rem; font-size:0.75rem; border-radius:0.625rem; }
+    .d-hero .h-av::after { border-radius:0.75rem; }
+    .d-hero .h-bot { grid-template-columns:1fr; gap:0.375rem; }
+    .d-hero .h-stat { padding:0.5rem 0.75rem; }
     .d-stats { grid-template-columns:1fr; gap:0.625rem; }
+    .d-card { padding:0.875rem; border-radius:0.75rem; }
+    .d-card .dc-top { margin-bottom:0.5rem; }
+    .d-card .dc-value { font-size:1.5rem; }
+    .d-card .dc-icon { width:2rem; height:2rem; }
+    .d-card .dc-icon svg { width:16px; height:16px; }
+    .d-card .dc-label { font-size:0.65rem; }
+    .d-card .dc-badge { font-size:0.5rem; }
     .d-quick { grid-template-columns:1fr; gap:0.5rem; }
+    .d-q { padding:0.6875rem 0.75rem; }
     .d-ov { grid-template-columns:1fr; gap:0.5rem; }
+    .d-ov .ov-card { padding:0.75rem 0.875rem; }
+    .d-ov .ov-card .ov-l { font-size:0.6rem; }
+    .d-ov .ov-card .ov-v { font-size:1rem; }
+    .d-tbl { border-radius:0.625rem; overflow-x:auto; -webkit-overflow-scrolling:touch; }
+    .d-tbl::after { content:'\2190  Swipe \2192'; display:block; text-align:center; font-size:0.6rem; color:#94a3b8; padding:0.375rem; background:#f8fafc; border-top:1px solid #f1f5f9; letter-spacing:0.05em; }
+    .d-tbl table { min-width:380px; }
+    .d-tbl .dt-h { padding:0.75rem 0.875rem; }
+    .d-tbl .dt-h h3 { font-size:0.75rem; }
+    .d-tbl .dt-h h3 .dt-hg { width:1.5rem; height:1.5rem; }
+    .d-tbl .dt-h h3 .dt-hg svg { width:12px; height:12px; }
+    .d-tbl .dt-h .dt-c { font-size:0.55rem; }
+    .d-tbl th { padding:0.4375rem 0.875rem; font-size:0.55rem; }
+    .d-tbl td { padding:0.5rem 0.875rem; font-size:0.71875rem; }
+    .d-tbl .msg-sub { max-width:150px; }
+    .d-tbl .badge { font-size:0.5625rem; padding:0.0625rem 0.5rem; }
 }
 @media (max-width:480px) {
-    .d-hero { margin:-0.75rem -0.75rem 1rem; padding:1rem 0.75rem 1.25rem; }
-    .d-hero h1 { font-size:1rem; }
+    .d-hero { margin:-0.75rem -0.5rem 0.875rem; padding:0.875rem 0.75rem 1.125rem; border-radius:0 0 1rem 1rem; }
+    .d-hero h1 { font-size:0.9375rem; }
+    .d-hero h1 .hi-greeting { font-size:0.8125rem; }
     .d-hero .h-left { gap:0.5rem; }
-    .d-hero .h-av { width:2rem; height:2rem; font-size:0.75rem; }
+    .d-hero .h-av { width:2rem; height:2rem; font-size:0.6875rem; }
+    .d-hero .h-meta .hm-dot { font-size:0.625rem; }
+    .d-hero .h-meta .hm-dot::before { width:0.3125rem; height:0.3125rem; }
+    .d-hero .h-date { font-size:0.625rem; padding:0.3125rem 0.625rem; }
     .d-stats { gap:0.5rem; }
-    .d-card { padding:0.875rem; }
+    .d-card { padding:0.75rem; border-radius:0.625rem; }
     .d-card .dc-value { font-size:1.375rem; }
-    .d-card .dc-icon { width:2rem; height:2rem; }
-    .d-tbl { overflow-x:auto; }
-    .d-tbl table { min-width:360px; }
-    .d-tbl th { padding:0.5rem 0.75rem; font-size:0.6rem; }
-    .d-tbl td { padding:0.5rem 0.75rem; font-size:0.75rem; }
+    .d-card .dc-icon { width:1.75rem; height:1.75rem; }
+    .d-card .dc-icon svg { width:14px; height:14px; }
+    .d-card .dc-deco { font-size:1.75rem; }
+    .d-card .dc-sub .dc-tag { font-size:0.55rem; }
+    .d-quick { gap:0.375rem; }
+    .d-q { padding:0.625rem 0.75rem; border-radius:0.5rem; gap:0.5rem; }
+    .d-q .dq-icon { width:2rem; height:2rem; }
+    .d-q .dq-icon svg { width:14px; height:14px; }
+    .d-q .dq-body .dq-l { font-size:0.71875rem; }
+    .d-q .dq-body .dq-s { font-size:0.6rem; }
+    .d-q .dq-arrow { width:12px; height:12px; }
+    .d-ov .ov-card { padding:0.625rem 0.75rem; border-radius:0.5rem; }
+    .d-ov .ov-card .ov-v { font-size:0.9375rem; }
+    .d-ov .ov-card .ov-i { width:1.375rem; height:1.375rem; }
+    .d-ov .ov-card .ov-i svg { width:10px; height:10px; }
+    .d-ov .ov-card .ov-bar { height:0.1875rem; margin-top:0.4375rem; }
+    .d-section { margin-bottom:1rem; }
+    .d-tbl { border-radius:0.5rem; }
+    .d-tbl .dt-h { padding:0.625rem 0.75rem; flex-wrap:wrap; gap:0.375rem; }
+    .d-tbl .dt-h h3 { font-size:0.6875rem; }
+    .d-tbl .dt-h .dt-c { font-size:0.5rem; }
+    .d-tbl th { padding:0.375rem 0.75rem; font-size:0.5rem; }
+    .d-tbl td { padding:0.4375rem 0.75rem; font-size:0.6875rem; }
+    .d-tbl .msg-sub { max-width:120px; }
+    .d-tbl .badge { font-size:0.5rem; padding:0.0625rem 0.375rem; gap:0.25rem; }
+    .d-tbl .badge::before { width:0.3125rem; height:0.3125rem; }
+    .d-tbl td.td-b { font-size:0.6875rem; }
+    .d-tbl::after { font-size:0.55rem; padding:0.25rem; }
+    .d-hero .h-bot { gap:0.3125rem; }
+    .d-hero .h-stat { padding:0.4375rem 0.625rem; gap:0.5rem; }
+    .d-hero .h-stat .hs-icon { width:1.75rem; height:1.75rem; }
+    .d-hero .h-stat .hs-icon svg { width:12px; height:12px; }
+    .d-hero .h-stat .hs-b .hs-v { font-size:0.875rem; }
+    .d-hero .h-stat .hs-b .hs-l { font-size:0.55rem; }
+}
 }
 </style>
 @endpush
