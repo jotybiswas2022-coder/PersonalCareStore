@@ -239,7 +239,22 @@
 @keyframes cardFadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
 .verify-card::after { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle at 50% 0%, rgba(16,185,129,0.03) 0%, transparent 50%); animation: cardShine 8s ease-in-out infinite; pointer-events: none; }
 @keyframes cardShine { 0%,100% { transform: translate(0,0) rotate(0deg); opacity: 0.2; } 25% { transform: translate(10%,-10%) rotate(5deg); opacity: 0.5; } 50% { transform: translate(-5%,5%) rotate(-3deg); opacity: 0.3; } 75% { transform: translate(8%,-8%) rotate(4deg); opacity: 0.6; } }
-@media (max-width: 640px) { .verify-card { padding: 1.5rem; } }
+@media (max-width: 640px) {
+    .verify-page { padding: 1rem 0.75rem; }
+    .verify-grid { gap: 0; }
+    .verify-card {
+        padding: 1.25rem;
+        border-radius: 20px;
+    }
+    .verify-card .vc-header { margin-bottom: 1rem; }
+    .verify-card .vc-header .vc-icon { width: 2.5rem; height: 2.5rem; }
+    .verify-card .vc-header h2 { font-size: 1.125rem; }
+    .verify-card .vc-header p { font-size: 0.75rem; }
+    .btn-auth { padding: 0.6875rem; font-size: 0.875rem; }
+    .btn-outline-auth { padding: 0.6875rem; font-size: 0.875rem; }
+    .btn-group { flex-direction: column; }
+    .btn-auth, .btn-outline-auth { width: 100%; }
+}
 
 .verify-card .vc-header { text-align: center; margin-bottom: 1.5rem; position: relative; }
 .verify-card .vc-header .vc-icon { width: 3.5rem; height: 3.5rem; margin: 0 auto 0.75rem; background: linear-gradient(135deg, rgba(16,185,129,0.12), rgba(5,150,105,0.06)); border: 1px solid rgba(52,211,153,0.08); border-radius: 18px; display: flex; align-items: center; justify-content: center; color: #10B981; }
@@ -265,7 +280,6 @@
 .btn-auth.loading .btn-text { opacity: 0.6; }
 @keyframes spin { to { transform: rotate(360deg); } }
 
-@media (max-width: 640px) { .verify-page { padding: 1.5rem 1rem; } .btn-group { flex-direction: column; } .btn-auth, .btn-outline-auth { width: 100%; } }
 </style>
 @endpush
 
