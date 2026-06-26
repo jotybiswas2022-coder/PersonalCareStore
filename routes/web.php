@@ -11,6 +11,8 @@ use App\Http\Controllers\Admin\ToLetAdvertisementController as AdminToLetControl
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\TestimonialController as AdminTestimonialController;
 use App\Http\Controllers\Admin\FaqController as AdminFaqController;
+use App\Http\Controllers\Admin\PolicyController as AdminPolicyController;
+use App\Http\Controllers\FrontendPolicyController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,6 +47,15 @@ Route::get('/search', [FrontendToLetController::class, 'search'])->name('search'
 Route::get('/property/{id}', [FrontendToLetController::class, 'show'])->name('property-detail');
 Route::get('/post-property', [FrontendToLetController::class, 'postProperty'])->name('post-property');
 Route::post('/post-property', [FrontendToLetController::class, 'storePostProperty'])->name('post-property.store');
+
+/*
+|--------------------------------------------------------------------------
+| Policy Pages (Public)
+|--------------------------------------------------------------------------
+*/
+Route::get('/privacy-policy', [FrontendPolicyController::class, 'privacy'])->name('privacy-policy');
+Route::get('/terms-of-service', [FrontendPolicyController::class, 'terms'])->name('terms-of-service');
+Route::get('/cookie-policy', [FrontendPolicyController::class, 'cookie'])->name('cookie-policy');
 
 /*
 |--------------------------------------------------------------------------
@@ -96,6 +107,14 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::get('/faqs/{id}/edit', [AdminFaqController::class, 'edit'])->name('faqs.edit');
     Route::put('/faqs/{id}', [AdminFaqController::class, 'update'])->name('faqs.update');
     Route::delete('/faqs/{id}', [AdminFaqController::class, 'destroy'])->name('faqs.destroy');
+
+    // Policy Pages
+    Route::get('/policies', [AdminPolicyController::class, 'index'])->name('policies.index');
+    Route::get('/policies/create', [AdminPolicyController::class, 'create'])->name('policies.create');
+    Route::post('/policies', [AdminPolicyController::class, 'store'])->name('policies.store');
+    Route::get('/policies/{id}/edit', [AdminPolicyController::class, 'edit'])->name('policies.edit');
+    Route::put('/policies/{id}', [AdminPolicyController::class, 'update'])->name('policies.update');
+    Route::delete('/policies/{id}', [AdminPolicyController::class, 'destroy'])->name('policies.destroy');
 
     // To-Let Advertisements
     Route::get('/to-let', [AdminToLetController::class, 'index'])->name('to-let.index');

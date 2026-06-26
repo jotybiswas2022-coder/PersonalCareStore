@@ -63,6 +63,12 @@
             </span>
             <span class="sb-item-text">FAQs</span>
         </a>
+        <a href="{{ route('admin.policies.index') }}" class="sb-item {{ request()->routeIs('admin.policies.*') ? 'active' : '' }}">
+            <span class="sb-item-icon" style="background:{{ request()->routeIs('admin.policies.*') ? 'rgba(139,92,246,0.2)' : 'transparent' }};color:{{ request()->routeIs('admin.policies.*') ? '#a78bfa' : '#9ca3af' }};">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+            </span>
+            <span class="sb-item-text">Policies</span>
+        </a>
 
         <div class="sb-label">Config</div>
         <a href="{{ route('admin.settings.index') }}" class="sb-item {{ request()->routeIs('admin.settings.*') ? 'active' : '' }}">

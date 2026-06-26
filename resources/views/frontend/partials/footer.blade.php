@@ -49,9 +49,9 @@
             <div class="footer-bottom-inner">
                 <p>&copy; {{ date('Y') }} BasaFinder. All rights reserved.</p>
                 <div class="footer-bottom-links">
-                    <a href="#">Privacy Policy</a>
-                    <a href="#">Terms of Service</a>
-                    <a href="#">Cookie Policy</a>
+          <a href="{{ route('privacy-policy') }}">Privacy Policy</a>
+          <a href="{{ route('terms-of-service') }}">Terms of Service</a>
+          <a href="{{ route('cookie-policy') }}">Cookie Policy</a>
                 </div>
             </div>
         </div>
