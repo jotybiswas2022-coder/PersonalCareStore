@@ -1,6 +1,7 @@
 @extends('admin.layouts.app')
 
 @push('styles')
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 <style>
 @keyframes fadeUp {
     from { opacity: 0; transform: translateY(16px); }
@@ -41,7 +42,7 @@
 .pol-icon {
     width: 2.5rem; height: 2.5rem; border-radius: 0.5rem;
     display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0; font-size: 1.125rem;
+    flex-shrink: 0; font-size: 1.25rem;
 }
 .pol-body { flex: 1; min-width: 0; }
 .pol-body .t { font-weight: 600; font-size: 0.9375rem; color: #111827; }
@@ -98,14 +99,14 @@
     @forelse($policies as $p)
         @php
             $icons = [
-                'privacy_policy'   => ['icon' => '🔒', 'bg' => '#eef2ff'],
-                'terms_of_service' => ['icon' => '📜', 'bg' => '#fef3c7'],
-                'cookie_policy'    => ['icon' => '🍪', 'bg' => '#d1fae5'],
+                'privacy_policy'   => ['icon' => 'bi-shield-lock',    'bg' => '#eef2ff'],
+                'terms_of_service' => ['icon' => 'bi-file-text',      'bg' => '#fef3c7'],
+                'cookie_policy'    => ['icon' => 'bi-cookie',         'bg' => '#d1fae5'],
             ];
-            $meta = $icons[$p->type] ?? ['icon' => '📄', 'bg' => '#f3f4f6'];
+            $meta = $icons[$p->type] ?? ['icon' => 'bi-file-earmark-text', 'bg' => '#f3f4f6'];
         @endphp
         <div class="pol-row">
-            <div class="pol-icon" style="background:{{ $meta['bg'] }}">{{ $meta['icon'] }}</div>
+            <div class="pol-icon" style="background:{{ $meta['bg'] }}"><i class="{{ $meta['icon'] }}"></i></div>
             <div class="pol-body">
                 <div class="t">{{ $p->title }}</div>
                 <div class="s">{{ str_replace('_', ' ', $p->type) }} &middot; Updated {{ $p->updated_at->diffForHumans() }}</div>
