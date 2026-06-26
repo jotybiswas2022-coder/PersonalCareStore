@@ -847,7 +847,22 @@
     75%  { transform: translate(8%,-8%) rotate(4deg); opacity: 0.6; }
 }
 @media (max-width: 640px) {
-    .login-card { padding: 1.5rem; }
+    .login-page { padding: 1rem 0.75rem; }
+    .login-grid { gap: 0; }
+    .login-card {
+        padding: 1.25rem;
+        border-radius: 20px;
+    }
+    .login-card .lc-header { margin-bottom: 1.25rem; }
+    .login-card .lc-header .lc-icon { width: 2.5rem; height: 2.5rem; }
+    .login-card .lc-header h2 { font-size: 1.125rem; }
+    .login-card .lc-header p { font-size: 0.75rem; }
+    .field { margin-bottom: 0.875rem; }
+    .field input { padding: 0.625rem 0.75rem 0.625rem 2.25rem; font-size: 0.8125rem; }
+    .btn-auth { padding: 0.6875rem; font-size: 0.875rem; }
+    .remember-row { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+    .auth-divider { margin-top: 1.125rem; padding-top: 1.125rem; }
+    .auth-divider p { font-size: 0.75rem; }
 }
 
 /* ── Card Header ── */
