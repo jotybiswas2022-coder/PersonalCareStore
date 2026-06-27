@@ -1310,11 +1310,11 @@ n/* ── Smooth scene restart transition ── */
    ═══════════════════════════════════════════ */
 #backToTop {
     position: fixed; bottom: 2rem; right: 2rem;
-    width: 3rem; height: 3rem;
-    background: var(--primary);
+    width: 3.25rem; height: 3.25rem;
+    background: linear-gradient(135deg, var(--primary), #6366f1);
     color: #fff; border: none; border-radius: 50%;
-    cursor: pointer; font-size: 1.25rem;
-    box-shadow: 0 4px 16px rgba(37,99,235,0.3);
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(37,99,235,0.35);
     z-index: 999;
     display: flex; align-items: center; justify-content: center;
     opacity: 0;
@@ -1323,7 +1323,21 @@ n/* ── Smooth scene restart transition ── */
     pointer-events: none;
 }
 #backToTop.visible { opacity: 1; transform: translateY(0) scale(1); pointer-events: auto; }
-#backToTop:hover { transform: translateY(-4px) scale(1.05); box-shadow: 0 8px 24px rgba(37,99,235,0.4); }
+#backToTop:hover { transform: translateY(-4px) scale(1.1); box-shadow: 0 12px 32px rgba(37,99,235,0.5); }
+#backToTop:active { transform: translateY(-1px) scale(0.95); }
+#backToTop svg { transition: transform 0.3s ease; }
+#backToTop:hover svg { transform: translateY(-2px); }
+#backToTop .ring-pulse {
+    position: absolute; inset: 0; border-radius: 50%;
+    border: 2px solid rgba(37,99,235,0.3);
+    animation: pulse-ring 2s cubic-bezier(0.215,0.61,0.355,1) infinite;
+    pointer-events: none;
+}
+#backToTop .ring-pulse:nth-child(2) { animation-delay: 0.6s; }
+@keyframes pulse-ring {
+    0% { transform: scale(1); opacity: 1; }
+    100% { transform: scale(1.6); opacity: 0; }
+}
 </style>
 @endpush
 
@@ -2051,7 +2065,12 @@ n/* ── Smooth scene restart transition ── */
 </section>
 
 <button id="backToTop" aria-label="Back to top">
-    <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
+    <span class="ring-pulse"></span>
+    <span class="ring-pulse"></span>
+    <svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="12" y1="20" x2="12" y2="4"/>
+        <polyline points="5 11 12 4 19 11"/>
+    </svg>
 </button>
 @endsection
 
