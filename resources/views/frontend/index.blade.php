@@ -1597,7 +1597,7 @@
 
     /* ===== CONTACT INFO CARD ===== */
     .contact-info-card {
-        background: rgba(17, 28, 46, 0.55);
+        background: rgba(17, 28, 46, 0.6);
         backdrop-filter: blur(20px);
         -webkit-backdrop-filter: blur(20px);
         border: 1px solid rgba(59, 130, 246, 0.12);
@@ -1606,7 +1606,6 @@
         position: relative;
         overflow: hidden;
         transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        box-shadow: 0 4px 20px rgba(59, 130, 246, 0.04);
     }
     .contact-info-card:hover {
         border-color: rgba(59, 130, 246, 0.25);
@@ -2262,20 +2261,6 @@
         box-shadow: 0 12px 40px rgba(16, 185, 129, 0.45);
     }
 
-    /* ===== FAQ ITEMS — GLASS EFFECT ===== */
-    .faq-item {
-        background: rgba(17, 28, 46, 0.5) !important;
-        backdrop-filter: blur(12px) !important;
-        -webkit-backdrop-filter: blur(12px) !important;
-        border: 1px solid rgba(59, 130, 246, 0.08) !important;
-        box-shadow: 0 4px 15px rgba(59, 130, 246, 0.03);
-    }
-    html.light-theme .faq-item {
-        background: rgba(255, 255, 255, 0.65) !important;
-        backdrop-filter: blur(12px) !important;
-        -webkit-backdrop-filter: blur(12px) !important;
-    }
-
     /* Shared Utilities */
     .empty-state { text-align: center; padding: 4rem 2rem; }
     .empty-state i { font-size: 3rem; color: var(--text-muted); margin-bottom: 1rem; display: block; }
@@ -2328,7 +2313,16 @@
         .contact-info h3 { font-size: 1.4rem; }
         .contact-form { padding: 1.8rem; }
         
-        .faq-item .faq-question { padding: 1rem 1.2rem !important; font-size: 0.92rem !important; }
+        .faq-item {
+        background: rgba(17, 28, 46, 0.4) !important;
+        backdrop-filter: blur(12px) !important;
+        -webkit-backdrop-filter: blur(12px) !important;
+        border: 1px solid rgba(59, 130, 246, 0.08) !important;
+        border-radius: 16px !important;
+        margin-bottom: 0.75rem !important;
+        overflow: hidden !important;
+    }
+    .faq-item .faq-question { padding: 1rem 1.2rem !important; font-size: 0.92rem !important; }
         .faq-answer p { font-size: 0.85rem !important; }
         
         .footer { padding: 2.5rem 1.5rem; }
