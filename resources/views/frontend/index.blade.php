@@ -826,24 +826,24 @@
         .wave-scene .wave-shimmer { opacity: 0.3; }
         .wave-scene .wave-layer-2 { display: none; }
         .wave-services {
-            display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-            gap: 1rem; padding: 1.5rem 0;
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.5rem; padding: 2rem 0;
         }
         .wave-service { flex: none; text-align: center; padding: 0; background: none; border: none; border-radius: 0; }
         .wave-service:hover .ws-icon { background: var(--accent-gradient); border-color: transparent; color: #fff; transform: scale(1.1) rotate(-4deg); box-shadow: 0 8px 25px rgba(59, 130, 246, 0.25); }
         .wave-service .ws-icon { width: 44px; height: 44px; font-size: 1.2rem; margin-bottom: 0.75rem; }
-        .wave-service h3 { font-size: 0.95rem; }
-        .wave-service p { font-size: 0.8rem; }
+        .wave-service h3 { font-size: 0.95rem; margin-bottom: 0.4rem; }
+        .wave-service p { font-size: 0.8rem; line-height: 1.5; }
     }
     @media (max-width: 480px) {
-        .wave-services { grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+        .wave-services { grid-template-columns: 1fr; gap: 1.5rem; padding: 2rem 0.5rem; }
         .wave-service { padding: 0; background: none; border: none; }
-        .wave-service .ws-icon { width: 38px; height: 38px; font-size: 1rem; }
-        .wave-service h3 { font-size: 0.85rem; }
-        .wave-service p { font-size: 0.75rem; }
+        .wave-service .ws-icon { width: 44px; height: 44px; font-size: 1.1rem; margin-bottom: 0.6rem; }
+        .wave-service h3 { font-size: 0.95rem; margin-bottom: 0.4rem; }
+        .wave-service p { font-size: 0.82rem; line-height: 1.5; }
     }
     @media (max-width: 360px) {
-        .wave-services { grid-template-columns: 1fr; }
+        .wave-services { grid-template-columns: 1fr; gap: 1.25rem; padding: 1.5rem 0.25rem; }
     }
 
     /* ── Case Studies ── */
