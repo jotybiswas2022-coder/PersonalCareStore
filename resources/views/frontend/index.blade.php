@@ -934,6 +934,8 @@
         align-items: center;
         justify-content: center;
         margin-bottom: 0.75rem;
+        border-radius: 50%;
+        background: transparent;
     }
     .skill-circle-svg {
         position: absolute;
@@ -981,10 +983,6 @@
         color: var(--text-primary);
         display: block;
     }
-    .skill-card:hover .skill-circle {
-        box-shadow: 0 0 25px rgba(59, 130, 246, 0.12);
-    }
-
     /* Filter Tabs */
     .filter-tabs {
         display: flex; flex-wrap: wrap; gap: 0.6rem;
