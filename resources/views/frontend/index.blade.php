@@ -839,63 +839,134 @@
         .wave-scene .wave-layer-2 { display: none; }
     }
 
-    /* Case Studies */
-    .casestudy-section { background: linear-gradient(180deg, #080d1a 0%, var(--bg-primary) 100%); position: relative; }
-    html.light-theme .casestudy-section { background: linear-gradient(180deg, #f1f5f9 0%, #f8fafc 100%); }
-    .casestudy-grid { display: flex; flex-direction: column; gap: 2rem; max-width: 900px; margin: 0 auto; }
+    /* ── Case Studies ── */
+    .casestudy-section {
+        background: linear-gradient(180deg, #080d1a 0%, var(--bg-primary) 100%);
+        position: relative; overflow: hidden;
+    }
+    html.light-theme .casestudy-section {
+        background: linear-gradient(180deg, #f1f5f9 0%, #f8fafc 100%);
+    }
+    .casestudy-section::before {
+        content: ''; position: absolute;
+        top: -20%; right: -10%; width: 500px; height: 500px;
+        background: radial-gradient(circle, rgba(99,102,241,0.06) 0%, transparent 70%);
+        pointer-events: none;
+    }
+    html.light-theme .casestudy-section::before {
+        background: radial-gradient(circle, rgba(99,102,241,0.04) 0%, transparent 70%);
+    }
+    .casestudy-grid { display: flex; flex-direction: column; gap: 2rem; max-width: 960px; margin: 0 auto; }
     .casestudy-card {
-        background: var(--bg-card); border: 1px solid var(--border-color);
-        border-radius: var(--radius-lg); overflow: hidden;
-        transition: var(--transition);
+        position: relative;
+        background: rgba(255,255,255,0.03);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(99,102,241,0.1);
+        border-radius: 20px; overflow: hidden;
+        transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    .casestudy-card:hover { border-color: var(--border-hover); box-shadow: var(--shadow-md); transform: translateY(-3px); }
-    .casestudy-image { position: relative; width: 100%; height: 220px; overflow: hidden; }
-    .casestudy-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
-    .casestudy-card:hover .casestudy-image img { transform: scale(1.05); }
+    html.light-theme .casestudy-card {
+        background: rgba(255,255,255,0.7);
+        border-color: rgba(99,102,241,0.12);
+    }
+    .casestudy-card::before {
+        content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+        background: linear-gradient(90deg, transparent, #6366f1, #8b5cf6, transparent);
+        opacity: 0; transition: opacity 0.5s ease;
+    }
+    .casestudy-card:hover::before { opacity: 1; }
+    .casestudy-card:hover {
+        border-color: rgba(99,102,241,0.25);
+        box-shadow: 0 20px 60px rgba(99,102,241,0.08), 0 8px 20px rgba(0,0,0,0.12);
+        transform: translateY(-6px);
+    }
+    html.light-theme .casestudy-card:hover {
+        box-shadow: 0 20px 60px rgba(99,102,241,0.1);
+    }
+    .casestudy-image { position: relative; width: 100%; height: 240px; overflow: hidden; }
+    .casestudy-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1); }
+    .casestudy-card:hover .casestudy-image img { transform: scale(1.06); }
+    .casestudy-image::after {
+        content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+        height: 60%; background: linear-gradient(0deg, rgba(8,13,26,0.8) 0%, transparent 100%);
+        pointer-events: none;
+    }
+    html.light-theme .casestudy-image::after {
+        background: linear-gradient(0deg, rgba(248,250,252,0.8) 0%, transparent 100%);
+    }
     .casestudy-category {
-        position: absolute; top: 1rem; left: 1rem;
-        background: rgba(99,102,241,0.9); color: #fff;
-        padding: 0.3rem 1rem; border-radius: 20px; font-size: 0.75rem; font-weight: 600;
+        position: absolute; top: 1rem; left: 1rem; z-index: 2;
+        background: linear-gradient(135deg, #6366f1, #8b5cf6);
+        color: #fff; padding: 0.35rem 1.1rem;
+        border-radius: 20px; font-size: 0.72rem; font-weight: 700;
+        letter-spacing: 0.3px; box-shadow: 0 4px 15px rgba(99,102,241,0.3);
     }
-    .casestudy-body { padding: 1.5rem; }
-    .casestudy-body h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 0.25rem; }
-    .casestudy-client { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem; }
-    .casestudy-details {
-        display: flex; align-items: flex-start; gap: 0.75rem;
-        margin-bottom: 1.25rem;
+    .casestudy-body { padding: 1.75rem 1.75rem 1.5rem; position: relative; z-index: 1; }
+    .casestudy-body h3 { font-size: 1.3rem; font-weight: 800; margin-bottom: 0.2rem; letter-spacing: -0.3px; }
+    .casestudy-client { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1.25rem; display: flex; align-items: center; gap: 0.4rem; }
+    .casestudy-steps {
+        display: flex; gap: 0; margin-bottom: 1.5rem;
+        background: rgba(99,102,241,0.03); border-radius: 16px;
+        padding: 0.75rem; position: relative;
     }
-    .cs-detail { flex: 1; min-width: 0; }
-    .cs-detail-icon {
-        width: 36px; height: 36px; border-radius: 10px;
-        display: inline-flex; align-items: center; justify-content: center;
-        font-size: 1rem; margin-bottom: 0.4rem;
+    html.light-theme .casestudy-steps { background: rgba(99,102,241,0.04); }
+    .cs-step { flex: 1; min-width: 0; padding: 0.75rem; position: relative; }
+    .cs-step + .cs-step { border-left: 1px solid rgba(99,102,241,0.08); }
+    .cs-step-header { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.5rem; }
+    .cs-step-num {
+        width: 28px; height: 28px; border-radius: 8px;
+        display: flex; align-items: center; justify-content: center;
+        font-size: 0.75rem; font-weight: 800; flex-shrink: 0;
     }
-    .cs-detail-label { display: block; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-muted); margin-bottom: 0.3rem; }
-    .cs-detail p { font-size: 0.85rem; line-height: 1.6; color: var(--text-secondary); margin: 0; }
-    .cs-arrow { flex-shrink: 0; padding-top: 0.4rem; color: var(--accent); font-size: 1.2rem; }
+    .cs-step-num.cs-problem { background: rgba(239,68,68,0.12); color: #ef4444; }
+    .cs-step-num.cs-solution { background: rgba(59,130,246,0.12); color: #3b82f6; }
+    .cs-step-num.cs-result { background: rgba(16,185,129,0.12); color: #10b981; }
+    .cs-step-label { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; }
+    .cs-step-label.lb-problem { color: #ef4444; }
+    .cs-step-label.lb-solution { color: #3b82f6; }
+    .cs-step-label.lb-result { color: #10b981; }
+    .cs-step p { font-size: 0.85rem; line-height: 1.65; color: var(--text-secondary); margin: 0; }
     .casestudy-footer {
         display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem;
         padding-top: 1rem; border-top: 1px solid var(--border-color);
     }
-    .casestudy-tech { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+    .casestudy-tech { display: flex; flex-wrap: wrap; gap: 0.4rem; }
     .tech-badge {
-        font-size: 0.7rem; font-weight: 600; padding: 0.2rem 0.7rem;
-        background: rgba(59,130,246,0.08); color: var(--accent-light);
-        border-radius: 20px; white-space: nowrap;
+        font-size: 0.68rem; font-weight: 600; padding: 0.25rem 0.8rem;
+        background: linear-gradient(135deg, rgba(99,102,241,0.08), rgba(139,92,246,0.08));
+        color: var(--accent-light); border-radius: 20px; white-space: nowrap;
+        border: 1px solid rgba(99,102,241,0.06);
     }
-    .casestudy-link { font-size: 0.85rem; font-weight: 600; color: var(--accent); text-decoration: none; }
-    .casestudy-link:hover { text-decoration: underline; }
+    .casestudy-link {
+        font-size: 0.85rem; font-weight: 600; color: var(--accent); text-decoration: none;
+        display: inline-flex; align-items: center; gap: 0.4rem;
+        padding: 0.4rem 1rem; border-radius: 10px;
+        background: rgba(59,130,246,0.06); transition: all 0.3s ease;
+    }
+    .casestudy-link:hover {
+        background: rgba(59,130,246,0.12); text-decoration: none; transform: translateX(3px);
+    }
     .casestudy-cta {
-        text-align: center; margin-top: 3rem; padding: 2rem;
-        background: var(--bg-card); border: 1px solid var(--border-color);
-        border-radius: var(--radius-lg);
+        text-align: center; margin-top: 3.5rem; padding: 2.5rem 2rem;
+        background: linear-gradient(135deg, rgba(99,102,241,0.04), rgba(139,92,246,0.04));
+        border: 1px solid rgba(99,102,241,0.1);
+        border-radius: 20px; position: relative; overflow: hidden;
     }
-    .casestudy-cta p { font-size: 1rem; color: var(--text-secondary); margin-bottom: 1rem; }
+    html.light-theme .casestudy-cta {
+        background: linear-gradient(135deg, rgba(99,102,241,0.04), rgba(139,92,246,0.04));
+    }
+    .casestudy-cta::before {
+        content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+        background: linear-gradient(90deg, transparent, #6366f1, #8b5cf6, transparent);
+    }
+    .casestudy-cta p { font-size: 1rem; color: var(--text-secondary); margin-bottom: 1.25rem; max-width: 600px; margin-left: auto; margin-right: auto; }
     @media (max-width: 768px) {
         .casestudy-image { height: 180px; }
-        .casestudy-details { flex-direction: column; gap: 1rem; }
-        .cs-arrow { transform: rotate(90deg); text-align: center; padding-top: 0; }
+        .casestudy-steps { flex-direction: column; gap: 0; padding: 0.5rem; }
+        .cs-step + .cs-step { border-left: none; border-top: 1px solid rgba(99,102,241,0.06); }
         .casestudy-footer { flex-direction: column; align-items: flex-start; }
+        .casestudy-body { padding: 1.25rem; }
     }
 
     /* Timeline */
@@ -2375,22 +2446,26 @@
                         <div class="casestudy-body">
                             <h3>{{ $cs->title }}</h3>
                             @if($cs->client)<div class="casestudy-client"><i class="bi bi-building me-1"></i>{{ $cs->client }}</div>@endif
-                            <div class="casestudy-details">
-                                <div class="cs-detail">
-                                    <div class="cs-detail-icon" style="background:rgba(239,68,68,0.1); color:#ef4444;"><i class="bi bi-exclamation-triangle"></i></div>
-                                    <span class="cs-detail-label">{{ __('messages.problem') }}</span>
+                            <div class="casestudy-steps">
+                                <div class="cs-step">
+                                    <div class="cs-step-header">
+                                        <div class="cs-step-num cs-problem">01</div>
+                                        <span class="cs-step-label lb-problem">{{ __('messages.problem') }}</span>
+                                    </div>
                                     <p>{{ $cs->problem }}</p>
                                 </div>
-                                <div class="cs-arrow"><i class="bi bi-arrow-right"></i></div>
-                                <div class="cs-detail">
-                                    <div class="cs-detail-icon" style="background:rgba(59,130,246,0.1); color:#3b82f6;"><i class="bi bi-lightbulb"></i></div>
-                                    <span class="cs-detail-label">{{ __('messages.solution') }}</span>
+                                <div class="cs-step">
+                                    <div class="cs-step-header">
+                                        <div class="cs-step-num cs-solution">02</div>
+                                        <span class="cs-step-label lb-solution">{{ __('messages.solution') }}</span>
+                                    </div>
                                     <p>{{ $cs->solution }}</p>
                                 </div>
-                                <div class="cs-arrow"><i class="bi bi-arrow-right"></i></div>
-                                <div class="cs-detail">
-                                    <div class="cs-detail-icon" style="background:rgba(16,185,129,0.1); color:#10b981;"><i class="bi bi-graph-up-arrow"></i></div>
-                                    <span class="cs-detail-label">{{ __('messages.result') }}</span>
+                                <div class="cs-step">
+                                    <div class="cs-step-header">
+                                        <div class="cs-step-num cs-result">03</div>
+                                        <span class="cs-step-label lb-result">{{ __('messages.result') }}</span>
+                                    </div>
                                     <p>{{ $cs->result }}</p>
                                 </div>
                             </div>
