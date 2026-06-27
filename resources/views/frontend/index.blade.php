@@ -2096,19 +2096,7 @@
     }
 
     /* Back to Top */
-    .back-to-top {
-        position: fixed; top: 30%; right: 1.5rem; transform: scale(0);
-        width: 50px; height: 50px;
-        background: var(--accent-gradient); border-radius: 50%;
-        display: flex; align-items: center; justify-content: center;
-        font-size: 1.2rem; cursor: pointer; z-index: 100;
-        opacity: 0;
-        transition: all 0.4s cubic-bezier(0.16,1,0.3,1); border: none; color: #fff;
-        box-shadow: 0 5px 20px rgba(59, 130, 246, 0.3);
-        pointer-events: none;
-    }
-    .back-to-top.visible { opacity: 1; transform: scale(1); pointer-events: auto; }
-    .back-to-top:hover { transform: scale(1.1); box-shadow: 0 10px 30px rgba(59, 130, 246, 0.45); }
+
 
     /* Floating Admin Button */
     .admin-float-btn {
@@ -2257,7 +2245,6 @@
         .projects-grid { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
         .hero { padding: 5rem 1.5rem 2rem; }
         .whatsapp-float { width: 48px; height: 48px; font-size: 1.3rem; bottom: 1.5rem; left: 1.5rem; }
-        .back-to-top { width: 44px; height: 44px; font-size: 1rem; top: 30%; right: 1rem; }
         .admin-float-btn { width: 42px; height: 42px; font-size: 1rem; bottom: 4.5rem; right: 1.5rem; }
     }
     
@@ -2373,7 +2360,6 @@
         
         .whatsapp-tooltip { display: none; }
         .whatsapp-float { width: 44px; height: 44px; font-size: 1.2rem; bottom: 1rem; left: 1rem; }
-        .back-to-top { width: 38px; height: 38px; font-size: 0.85rem; top: 30%; right: 0.75rem; }
         .admin-float-btn { width: 38px; height: 38px; font-size: 0.9rem; bottom: 4rem; right: 1rem; border-radius: 10px; }
         
         .map-container iframe { height: 220px; }
@@ -3160,10 +3146,7 @@
         <span class="whatsapp-tooltip">{{ __('messages.chat_whatsapp') }}</span>
     </a>
 
-    <!-- Back to Top -->
-    <button class="back-to-top" id="backToTop" aria-label="{{ __('messages.back_to_top') }}">
-        <i class="bi bi-arrow-up"></i>
-    </button>
+
 
     <!-- Floating Admin Button (only for admin users) -->
     @auth
@@ -3345,7 +3328,6 @@
 // ===== COALESCED SCROLL HANDLER (passive + rAF throttled) =====
 (function() {
     var navbar = document.getElementById('navbar');
-    var backToTop = document.getElementById('backToTop');
     var adminFloat = document.querySelector('.admin-float-btn');
     var progressBar = document.getElementById('scrollProgress');
     var revealElements = document.querySelectorAll('.reveal');
@@ -3363,12 +3345,7 @@
             else navbar.classList.remove('scrolled');
         }
         
-        // Back to top & admin float
-        if (backToTop) {
-            if (scrollY > 100) backToTop.classList.add('visible');
-            else backToTop.classList.remove('visible');
-        }
-        if (adminFloat) {
+        // Admin float
             if (scrollY > 300) adminFloat.classList.add('visible');
             else adminFloat.classList.remove('visible');
         }
@@ -3455,10 +3432,6 @@
     });
 })();
 
-// ===== BACK TO TOP CLICK =====
-document.getElementById('backToTop')?.addEventListener('click', function() {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-});
 
 // ===== MAGNETIC BUTTON EFFECT =====
 (function() {
