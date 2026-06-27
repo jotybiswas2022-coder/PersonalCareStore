@@ -2330,19 +2330,19 @@
                     <p>Hi, I'm <span class="about-name-highlight">{{ optional($account)->name ?? 'Portfolio' }}</span>. {{ __('messages.about_desc_1') }}</p>
                     <p>{{ __('messages.about_desc_2') }}</p>
                     <div class="about-stats">
-                        <div class="stat-item">
+                        <div class="stat-item" style="filter: drop-shadow(0 4px 20px rgba(59, 130, 246, 0.08));">
                             <div class="stat-glow"></div>
                             <div class="stat-icon"><i class="bi bi-folder2-open"></i></div>
                             <div class="number" data-count="50">0</div>
                             <div class="label">{{ __('messages.stat_projects') }}</div>
                         </div>
-                        <div class="stat-item">
+                        <div class="stat-item" style="filter: drop-shadow(0 4px 20px rgba(59, 130, 246, 0.08));">
                             <div class="stat-glow"></div>
                             <div class="stat-icon"><i class="bi bi-people-fill"></i></div>
                             <div class="number" data-count="30">0</div>
                             <div class="label">{{ __('messages.stat_clients') }}</div>
                         </div>
-                        <div class="stat-item">
+                        <div class="stat-item" style="filter: drop-shadow(0 4px 20px rgba(59, 130, 246, 0.08));">
                             <div class="stat-glow"></div>
                             <div class="stat-icon"><i class="bi bi-trophy-fill"></i></div>
                             <div class="number" data-count="3">0</div>
@@ -2443,7 +2443,7 @@
             </div>
             <div class="casestudy-grid">
                 @foreach($caseStudies as $cs)
-                    <div class="casestudy-card reveal">
+                    <div class="casestudy-card reveal" style="filter: drop-shadow(0 4px 20px rgba(59, 130, 246, 0.08));">
                         @if($cs->image)
                             <div class="casestudy-image">
                                 <img src="{{ config('app.storage_url') }}{{ $cs->image }}" alt="{{ $cs->title }}">
@@ -2522,7 +2522,7 @@
                             <div class="timeline-dot">
                                 <i class="bi bi-briefcase-fill"></i>
                             </div>
-                            <div class="timeline-card">
+                            <div class="timeline-card" style="filter: drop-shadow(0 4px 20px rgba(59, 130, 246, 0.08));">
                                 <div class="timeline-date">
                                     <i class="bi bi-calendar3 me-1"></i>{{ $exp->duration }}
                                 </div>
@@ -2569,7 +2569,7 @@
                     <div class="skills-grid">
                         @foreach($skills as $index => $skill)
                             <div class="skill-card" data-skill-index="{{ $index }}">
-                                <div class="skill-circle">
+                                <div class="skill-circle" style="filter: drop-shadow(0 4px 20px rgba(59, 130, 246, 0.08));">
                                     <svg class="skill-circle-svg" viewBox="0 0 120 120">
                                         <circle class="skill-circle-bg" cx="60" cy="60" r="52"/>
                                         <circle class="skill-circle-progress" cx="60" cy="60" r="52"
@@ -2595,7 +2595,7 @@
                         @endforeach
                         @foreach($skills as $index => $skill)
                             <div class="skill-card" data-skill-index="{{ $index }}">
-                                <div class="skill-circle">
+                                <div class="skill-circle" style="filter: drop-shadow(0 4px 20px rgba(59, 130, 246, 0.08));">
                                     <svg class="skill-circle-svg" viewBox="0 0 120 120">
                                         <circle class="skill-circle-bg" cx="60" cy="60" r="52"/>
                                         <circle class="skill-circle-progress" cx="60" cy="60" r="52"
@@ -2681,7 +2681,7 @@
                         ];
                         $delay = ($index % 4) + 1;
                     @endphp
-                    <div class="project-card reveal reveal-delay-{{ $delay }}" data-tech="{{ implode(' ', $techSlugs) }}">
+                    <div class="project-card reveal reveal-delay-{{ $delay }}" data-tech="{{ implode(' ', $techSlugs) }}" style="filter: drop-shadow(0 4px 20px rgba(59, 130, 246, 0.08));">
                         <div class="card-image" style="background: {{ $gradients[$index % count($gradients)] }};">
                             @if($project->image)
                                 <img src="{{ config('app.storage_url') }}{{ $project->image }}"
@@ -2736,7 +2736,7 @@
                 <div class="testimonial-carousel reveal">
                     <div class="testimonial-track" id="testimonialTrack">
                         @foreach($testimonials as $testimonial)
-                            <div class="testimonial-card">
+                            <div class="testimonial-card" style="filter: drop-shadow(0 4px 20px rgba(59, 130, 246, 0.08));">
                                 <div class="quote-icon"><i class="bi bi-quote"></i></div>
                                 <div class="testimonial-stars">
                                     @foreach($testimonial->stars as $filled)
@@ -2795,11 +2795,11 @@
             </div>
 
             <div class="contact-grid">
-                <div class="contact-info-card reveal reveal-delay-1">
+                <div class="contact-info-card reveal reveal-delay-1" style="filter: drop-shadow(0 4px 20px rgba(59, 130, 246, 0.08));">
                     <h3><i class="bi bi-chat-dots-fill me-2"></i>{{ __("messages.contact_heading") }}</h3>
                     <p>{{ __("messages.contact_desc") }}</p>
 
-                    <div class="contact-item">
+                    <div class="contact-item" style="filter: drop-shadow(0 4px 20px rgba(59, 130, 246, 0.08));">
                         <div class="icon-box"><i class="bi bi-envelope-fill"></i></div>
                         <div class="text">
                             <div class="label">{{ __("messages.email_label") }}</div>
@@ -2807,7 +2807,7 @@
                         </div>
                     </div>
 
-                    <div class="contact-item">
+                    <div class="contact-item" style="filter: drop-shadow(0 4px 20px rgba(59, 130, 246, 0.08));">
                         <div class="icon-box"><i class="bi bi-phone-fill"></i></div>
                         <div class="text">
                             <div class="label">{{ __("messages.phone_label") }}</div>
@@ -2815,7 +2815,7 @@
                         </div>
                     </div>
 
-                    <div class="contact-item">
+                    <div class="contact-item" style="filter: drop-shadow(0 4px 20px rgba(59, 130, 246, 0.08));">
                         <div class="icon-box"><i class="bi bi-geo-alt-fill"></i></div>
                         <div class="text">
                             <div class="label">{{ __("messages.location_label") }}</div>
@@ -2847,7 +2847,7 @@
                     @endif
                 </div>
 
-                <div class="contact-form reveal reveal-delay-2">
+                <div class="contact-form reveal reveal-delay-2" style="filter: drop-shadow(0 4px 20px rgba(59, 130, 246, 0.08));">
                     <div class="form-header">
                         <h4><i class="bi bi-pencil-square me-2"></i>{{ __("messages.send_message") }}</h4>
                         <p>{{ __("messages.contact_desc") }}</p>
@@ -2911,7 +2911,7 @@
             @if($faqs->isNotEmpty())
                 <div class="faq-list reveal" style="max-width: 800px; margin: 0 auto;">
                     @foreach($faqs as $index => $faq)
-                        <div class="faq-item" style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); margin-bottom: 1rem; overflow: hidden; transition: var(--transition);">
+                        <div class="faq-item" style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); margin-bottom: 1rem; overflow: hidden; transition: var(--transition); filter: drop-shadow(0 4px 20px rgba(59, 130, 246, 0.08));">
                             <button class="faq-question" 
                                     onclick="toggleFaq(this)"
                                     style="width: 100%; padding: 1.2rem 1.5rem; background: none; border: none; color: var(--text-primary); font-size: 0.98rem; font-weight: 600; text-align: left; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 1rem; font-family: var(--font); transition: var(--transition);">
