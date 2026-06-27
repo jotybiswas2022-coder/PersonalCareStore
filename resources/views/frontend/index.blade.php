@@ -864,8 +864,14 @@
     .timeline-card {
         background: var(--bg-card); border: 1px solid var(--border-color);
         border-radius: var(--radius-lg); padding: 1.5rem;
-        transition: var(--transition); position: relative;
+        transition: var(--transition); position: relative; overflow: hidden;
     }
+    .timeline-card::before {
+        content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+        background: radial-gradient(circle at var(--shine-x, 50%) var(--shine-y, 50%), rgba(255,255,255,0.12) 0%, transparent 60%);
+        pointer-events: none; opacity: 0; transition: opacity 0.3s ease; z-index: 1;
+    }
+    .timeline-card:hover::before { opacity: 1; }
     .timeline-card:hover {
         border-color: var(--border-hover); transform: translateY(-5px);
         box-shadow: var(--shadow-md);
@@ -3442,6 +3448,19 @@
     }
 
     setTimeout(function() { if (isVisible) randomThunder(); }, 1000);
+})();
+
+// ===== TIMELINE CARD SHINE EFFECT =====
+(function() {
+    document.querySelectorAll('.timeline-card').forEach(function(card) {
+        card.addEventListener('mousemove', function(e) {
+            var rect = this.getBoundingClientRect();
+            var x = ((e.clientX - rect.left) / rect.width) * 100;
+            var y = ((e.clientY - rect.top) / rect.height) * 100;
+            this.style.setProperty('--shine-x', x + '%');
+            this.style.setProperty('--shine-y', y + '%');
+        });
+    });
 })();
 </script>
 @endsection
