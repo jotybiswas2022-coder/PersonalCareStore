@@ -903,8 +903,6 @@
     html.light-theme .skills-section { background: linear-gradient(180deg, #f1f5f9 0%, #eef2f7 100%); }
     .skills-wrapper {
         overflow: hidden;
-        mask-image: linear-gradient(to right, transparent 0%, #000 5%, #000 95%, transparent 100%);
-        -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 5%, #000 95%, transparent 100%);
     }
     .skills-grid {
         display: flex;
