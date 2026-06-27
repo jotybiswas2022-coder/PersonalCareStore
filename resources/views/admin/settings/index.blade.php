@@ -398,56 +398,6 @@
             @csrf
             @method('PUT')
 
-            {{-- Currency & Pricing --}}
-            <div class="st-section">
-                <div class="st-section-heading">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-                    <span class="sh-text">Currency &amp; Pricing</span>
-                    <span class="sh-sub">— Store currency and tax settings</span>
-                </div>
-                <div class="st-grid">
-                    <div class="st-group">
-                        <label for="currency">Currency</label>
-                        <select name="currency" id="currency">
-                            <option value="BDT" {{ $setting->currency === 'BDT' ? 'selected' : '' }}>BDT (Taka)</option>
-                            <option value="USD" {{ $setting->currency === 'USD' ? 'selected' : '' }}>USD (Dollar)</option>
-                            <option value="INR" {{ $setting->currency === 'INR' ? 'selected' : '' }}>INR (Rupee)</option>
-                        </select>
-                        @error('currency')<span class="error"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>{{ $message }}</span>@enderror
-                    </div>
-
-                    <div class="st-group">
-                        <label for="vat_percentage">VAT Percentage (%)</label>
-                        <input type="number" name="vat_percentage" id="vat_percentage" value="{{ old('vat_percentage', $setting->vat_percentage) }}" step="0.01" min="0" max="100" placeholder="0.00">
-                        @error('vat_percentage')<span class="error"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>{{ $message }}</span>@enderror
-                    </div>
-                </div>
-            </div>
-
-            {{-- Delivery Charges --}}
-            <div class="st-section">
-                <div class="st-section-heading">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
-                    <span class="sh-text">Delivery Charges</span>
-                    <span class="sh-sub">— Shipping costs for different zones</span>
-                </div>
-                <div class="st-grid">
-                    <div class="st-group">
-                        <label for="delivery_charge_inside">Inside Khulna</label>
-                        <input type="number" name="delivery_charge_inside" id="delivery_charge_inside" value="{{ old('delivery_charge_inside', $setting->delivery_charge_inside) }}" step="0.01" min="0" placeholder="0.00">
-                        <span class="hint">Delivery charge for addresses within Khulna city</span>
-                        @error('delivery_charge_inside')<span class="error"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>{{ $message }}</span>@enderror
-                    </div>
-
-                    <div class="st-group">
-                        <label for="delivery_charge_outside">Outside Khulna</label>
-                        <input type="number" name="delivery_charge_outside" id="delivery_charge_outside" value="{{ old('delivery_charge_outside', $setting->delivery_charge_outside) }}" step="0.01" min="0" placeholder="0.00">
-                        <span class="hint">Delivery charge for addresses outside Khulna</span>
-                        @error('delivery_charge_outside')<span class="error"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>{{ $message }}</span>@enderror
-                    </div>
-                </div>
-            </div>
-
             {{-- Contact Information --}}
             <div class="st-section">
                 <div class="st-section-heading">

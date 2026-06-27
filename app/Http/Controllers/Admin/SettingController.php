@@ -12,12 +12,7 @@ class SettingController extends Controller
     {
         $setting = Setting::first();
         if (!$setting) {
-            $setting = Setting::create([
-                'currency' => 'BDT',
-                'delivery_charge_inside' => 0,
-                'delivery_charge_outside' => 0,
-                'vat_percentage' => 0,
-            ]);
+            $setting = Setting::create();
         }
         return view('admin.settings.index', compact('setting'));
     }
@@ -25,10 +20,6 @@ class SettingController extends Controller
     public function update(Request $request)
     {
         $validated = $request->validate([
-            'currency'               => 'required|string|in:BDT,USD,INR',
-            'delivery_charge_inside'  => 'required|numeric|min:0',
-            'delivery_charge_outside' => 'required|numeric|min:0',
-            'vat_percentage'         => 'required|numeric|min:0|max:100',
             'contact_phone'          => 'nullable|string|max:30',
             'contact_email'          => 'nullable|email|max:255',
             'contact_address'        => 'nullable|string|max:500',
