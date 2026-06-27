@@ -31,6 +31,10 @@
     padding: 0.75rem 1rem; transition: all 0.2s;
 }
 .user-row:hover { border-color: #c7d2fe; box-shadow: 0 1px 4px rgba(99,102,241,0.06); }
+.user-serial {
+    width: 2rem; text-align: center; font-size: 0.75rem; font-weight: 700;
+    color: #9ca3af; flex-shrink: 0;
+}
 .user-avatar {
     width: 2.25rem; height: 2.25rem; border-radius: 50%;
     background: linear-gradient(135deg, #6366f1, #818cf8);
@@ -88,6 +92,7 @@
 <div class="user-list tl-animate" style="animation-delay:0.1s">
     @forelse($users as $u)
         <div class="user-row">
+            <span class="user-serial">{{ $users->firstItem() + $loop->index }}</span>
             <div class="user-avatar">{{ strtoupper(substr($u->name, 0, 1)) }}</div>
             <div class="user-body">
                 <div class="name">{{ $u->name }}</div>
