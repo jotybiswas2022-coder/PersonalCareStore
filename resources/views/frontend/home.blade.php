@@ -2152,7 +2152,7 @@ var backToTopBtn = document.getElementById('backToTop');
 window.addEventListener('scroll', function() {
     var scrollTop = window.scrollY;
     scrollProgressEl.style.width = (scrollTop / (document.documentElement.scrollHeight - window.innerHeight) * 100) + '%';
-    backToTopBtn.classList.toggle('visible', scrollTop > 600);
+    backToTopBtn.classList.toggle('visible', scrollTop > 200);
 });
 
 backToTopBtn.addEventListener('click', function() { window.scrollTo({ top: 0, behavior: 'smooth' }); });
