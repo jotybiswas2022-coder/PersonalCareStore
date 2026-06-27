@@ -1,5 +1,5 @@
 <!-- Sidebar (desktop only) -->
-<aside class="sidebar d-none d-md-block" id="sidebarCollapse" style="width:260px; min-width:260px; background:linear-gradient(180deg,#0f172a,#1e293b); flex-shrink:0;">
+<aside class="sidebar d-none d-md-block" id="sidebarCollapse" style="width:260px; min-width:260px; background:linear-gradient(180deg,#0f172a,#1e293b); position:fixed; top:57px; left:0; bottom:0; overflow-y:auto; z-index:1040;">
     <div class="sidebar-header" style="padding:1.2rem 1.5rem; border-bottom:1px solid rgba(255,255,255,0.08); margin-bottom:0.5rem; flex-shrink:0;">
         <a href="/admin" class="brand" style="display:flex; align-items:center; gap:0.75rem; color:#fff; text-decoration:none; font-size:1.2rem; font-weight:800; letter-spacing:-0.3px;">
             <i class="bi bi-grid-1x2-fill" style="font-size:1.6rem; color:#6366f1;"></i>
