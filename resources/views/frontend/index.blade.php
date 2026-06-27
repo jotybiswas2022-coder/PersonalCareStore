@@ -937,46 +937,6 @@
         align-items: center;
         justify-content: center;
         margin-bottom: 0.75rem;
-        transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    }
-    .skill-card:hover .skill-circle {
-        transform: scale(1.08);
-    }
-    .skill-card:hover .skill-circle {
-        box-shadow:
-            0 0 15px var(--accent),
-            0 0 30px rgba(0, 212, 255, 0.3),
-            0 0 50px rgba(124, 58, 237, 0.2),
-            inset 0 0 15px rgba(0, 212, 255, 0.1);
-        animation: electricPulse 1.2s ease-in-out infinite;
-    }
-    @keyframes electricPulse {
-        0%, 100% { box-shadow: 0 0 15px var(--accent), 0 0 30px rgba(0, 212, 255, 0.3), 0 0 50px rgba(124, 58, 237, 0.2), inset 0 0 15px rgba(0, 212, 255, 0.1); }
-        25% { box-shadow: 0 0 25px #00d4ff, 0 0 55px rgba(0, 212, 255, 0.5), 0 0 70px rgba(124, 58, 237, 0.3), inset 0 0 20px #00d4ff; }
-        50% { box-shadow: 0 0 20px var(--accent), 0 0 40px rgba(0, 212, 255, 0.4), 0 0 60px rgba(124, 58, 237, 0.25), inset 0 0 15px rgba(124, 58, 237, 0.15); }
-        75% { box-shadow: 0 0 30px #7c3aed, 0 0 60px rgba(124, 58, 237, 0.5), 0 0 80px rgba(0, 212, 255, 0.2), inset 0 0 20px #7c3aed; }
-    }
-    .skill-card .skill-circle .electric-ring {
-        position: absolute;
-        inset: 0;
-        border-radius: 50%;
-        pointer-events: none;
-        opacity: 0;
-        transition: opacity 0.4s ease;
-    }
-    .skill-card:hover .skill-circle .electric-ring {
-        opacity: 1;
-    }
-    .skill-card .skill-circle .electric-ring svg {
-        width: 100%;
-        height: 100%;
-        display: block;
-        animation: electricSpin 1.5s linear infinite;
-        transform: none;
-    }
-    @keyframes electricSpin {
-        0% { transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
     }
     .skill-circle-svg {
         position: absolute;
@@ -1003,14 +963,7 @@
         z-index: 1;
         transition: color 0.3s ease;
     }
-    .skill-card:hover .skill-icon {
-        animation: iconFlicker 0.8s ease-in-out infinite alternate;
-    }
-    @keyframes iconFlicker {
-        0% { filter: brightness(1) drop-shadow(0 0 0 transparent); }
-        50% { filter: brightness(1.4) drop-shadow(0 0 8px var(--accent)); }
-        100% { filter: brightness(1) drop-shadow(0 0 0 transparent); }
-    }
+
     html.light-theme .skill-card .skill-icon {
         color: var(--accent);
     }
@@ -1031,21 +984,8 @@
         color: var(--text-primary);
         display: block;
     }
-    .skill-card .skill-glow {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 140px;
-        height: 140px;
-        transform: translate(-50%, -50%);
-        background: radial-gradient(circle, rgba(59, 130, 246, 0.08), transparent 60%);
-        pointer-events: none;
-        opacity: 0;
-        transition: opacity 0.4s ease;
-        border-radius: 50%;
-    }
-    .skill-card:hover .skill-glow {
-        opacity: 1;
+    .skill-card:hover .skill-circle {
+        box-shadow: 0 0 25px rgba(59, 130, 246, 0.12);
     }
 
     /* Filter Tabs */
@@ -1827,7 +1767,6 @@
                     <div class="skills-grid">
                         @foreach($skills as $index => $skill)
                             <div class="skill-card">
-                                <div class="skill-glow"></div>
                                 <div class="skill-circle">
                                     <svg class="skill-circle-svg" viewBox="0 0 120 120">
                                         <circle class="skill-circle-bg" cx="60" cy="60" r="52"/>
@@ -1836,19 +1775,6 @@
                                             stroke-dashoffset="326.73"
                                             data-dashoffset="{{ 326.73 - (326.73 * $skill->percentage / 100) }}"/>
                                     </svg>
-                                    <div class="electric-ring">
-                                        <svg viewBox="0 0 120 120">
-                                            <defs>
-                                                <linearGradient id="electricGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                                                    <stop offset="0%" stop-color="var(--accent)"/>
-                                                    <stop offset="50%" stop-color="#00d4ff"/>
-                                                    <stop offset="100%" stop-color="#7c3aed"/>
-                                                </linearGradient>
-                                            </defs>
-                                            <circle cx="60" cy="60" r="54" fill="none" stroke="url(#electricGrad)" stroke-width="2" stroke-dasharray="8 6" opacity="0.7"/>
-                                            <circle cx="60" cy="60" r="56" fill="none" stroke="url(#electricGrad)" stroke-width="1" stroke-dasharray="4 10" opacity="0.4"/>
-                                        </svg>
-                                    </div>
                                     <span class="skill-icon"><i class="bi {{ $skill->icon ?: 'bi-star' }}"></i></span>
                                     <span class="skill-percent">{{ $skill->percentage }}%</span>
                                 </div>
@@ -1857,7 +1783,6 @@
                         @endforeach
                         @foreach($skills as $index => $skill)
                             <div class="skill-card">
-                                <div class="skill-glow"></div>
                                 <div class="skill-circle">
                                     <svg class="skill-circle-svg" viewBox="0 0 120 120">
                                         <circle class="skill-circle-bg" cx="60" cy="60" r="52"/>
@@ -1866,19 +1791,6 @@
                                             stroke-dashoffset="326.73"
                                             data-dashoffset="{{ 326.73 - (326.73 * $skill->percentage / 100) }}"/>
                                     </svg>
-                                    <div class="electric-ring">
-                                        <svg viewBox="0 0 120 120">
-                                            <defs>
-                                                <linearGradient id="electricGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                                                    <stop offset="0%" stop-color="var(--accent)"/>
-                                                    <stop offset="50%" stop-color="#00d4ff"/>
-                                                    <stop offset="100%" stop-color="#7c3aed"/>
-                                                </linearGradient>
-                                            </defs>
-                                            <circle cx="60" cy="60" r="54" fill="none" stroke="url(#electricGrad)" stroke-width="2" stroke-dasharray="8 6" opacity="0.7"/>
-                                            <circle cx="60" cy="60" r="56" fill="none" stroke="url(#electricGrad)" stroke-width="1" stroke-dasharray="4 10" opacity="0.4"/>
-                                        </svg>
-                                    </div>
                                     <span class="skill-icon"><i class="bi {{ $skill->icon ?: 'bi-star' }}"></i></span>
                                     <span class="skill-percent">{{ $skill->percentage }}%</span>
                                 </div>
