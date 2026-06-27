@@ -901,10 +901,23 @@
     /* Skills */
     .skills-section { background: linear-gradient(180deg, #080d1a 0%, var(--bg-secondary) 100%); }
     html.light-theme .skills-section { background: linear-gradient(180deg, #f1f5f9 0%, #eef2f7 100%); }
+    .skills-wrapper {
+        overflow: hidden;
+        mask-image: linear-gradient(to right, transparent 0%, #000 5%, #000 95%, transparent 100%);
+        -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 5%, #000 95%, transparent 100%);
+    }
     .skills-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        display: flex;
         gap: 1.5rem;
+        width: max-content;
+        animation: skillScroll 30s linear infinite;
+    }
+    .skills-grid:hover {
+        animation-play-state: paused;
+    }
+    @keyframes skillScroll {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(-50%); }
     }
     .skill-card {
         text-align: center;
@@ -914,6 +927,7 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+        flex-shrink: 0;
     }
     .skill-card .skill-circle {
         position: relative;
@@ -1459,11 +1473,12 @@
         .hero-buttons .btn-outline-custom { width: 100%; justify-content: center; padding: 0.75rem 1.5rem; font-size: 0.88rem; }
         .hero::before { width: 300px; height: 300px; }
         
-        .skills-grid { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 1.2rem; }
+        .skills-grid { gap: 1.2rem; }
         .skill-card .skill-circle { width: 100px; height: 100px; }
         .skill-card .skill-icon { font-size: 1.5rem; }
         .skill-card .skill-name { font-size: 0.8rem; }
         .skill-card .skill-percent { font-size: 0.65rem; }
+        .skills-grid { animation-duration: 20s; }
         
         .about-grid { gap: 2rem; }
         .about-image .img-wrapper { width: 150px; height: 150px; border-radius: 24px; }
@@ -1538,7 +1553,7 @@
         .hero h1 { font-size: 1.5rem; }
         .about-image .img-wrapper { width: 130px; height: 130px; }
         .about-image .glow-ring { width: 150px; height: 150px; }
-        .skills-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+        .skills-grid { gap: 1rem; animation-duration: 15s; }
         .skill-card .skill-circle { width: 90px; height: 90px; }
         .skill-card .skill-icon { font-size: 1.3rem; }
         .skill-card .skill-name { font-size: 0.72rem; }
@@ -1764,24 +1779,43 @@
             </div>
 
             @if($skills->isNotEmpty())
-                <div class="skills-grid">
-                    @foreach($skills as $index => $skill)
-                        <div class="skill-card reveal" style="transition-delay: {{ $index * 0.05 }}s">
-                            <div class="skill-glow"></div>
-                            <div class="skill-circle">
-                                <svg class="skill-circle-svg" viewBox="0 0 120 120">
-                                    <circle class="skill-circle-bg" cx="60" cy="60" r="52"/>
-                                    <circle class="skill-circle-progress" cx="60" cy="60" r="52"
-                                        stroke-dasharray="326.73"
-                                        stroke-dashoffset="326.73"
-                                        data-dashoffset="{{ 326.73 - (326.73 * $skill->percentage / 100) }}"/>
-                                </svg>
-                                <span class="skill-icon"><i class="bi {{ $skill->icon ?: 'bi-star' }}"></i></span>
-                                <span class="skill-percent">{{ $skill->percentage }}%</span>
+                <div class="skills-wrapper">
+                    <div class="skills-grid">
+                        @foreach($skills as $index => $skill)
+                            <div class="skill-card">
+                                <div class="skill-glow"></div>
+                                <div class="skill-circle">
+                                    <svg class="skill-circle-svg" viewBox="0 0 120 120">
+                                        <circle class="skill-circle-bg" cx="60" cy="60" r="52"/>
+                                        <circle class="skill-circle-progress" cx="60" cy="60" r="52"
+                                            stroke-dasharray="326.73"
+                                            stroke-dashoffset="326.73"
+                                            data-dashoffset="{{ 326.73 - (326.73 * $skill->percentage / 100) }}"/>
+                                    </svg>
+                                    <span class="skill-icon"><i class="bi {{ $skill->icon ?: 'bi-star' }}"></i></span>
+                                    <span class="skill-percent">{{ $skill->percentage }}%</span>
+                                </div>
+                                <span class="skill-name">{{ $skill->name }}</span>
                             </div>
-                            <span class="skill-name">{{ $skill->name }}</span>
-                        </div>
-                    @endforeach
+                        @endforeach
+                        @foreach($skills as $index => $skill)
+                            <div class="skill-card">
+                                <div class="skill-glow"></div>
+                                <div class="skill-circle">
+                                    <svg class="skill-circle-svg" viewBox="0 0 120 120">
+                                        <circle class="skill-circle-bg" cx="60" cy="60" r="52"/>
+                                        <circle class="skill-circle-progress" cx="60" cy="60" r="52"
+                                            stroke-dasharray="326.73"
+                                            stroke-dashoffset="326.73"
+                                            data-dashoffset="{{ 326.73 - (326.73 * $skill->percentage / 100) }}"/>
+                                    </svg>
+                                    <span class="skill-icon"><i class="bi {{ $skill->icon ?: 'bi-star' }}"></i></span>
+                                    <span class="skill-percent">{{ $skill->percentage }}%</span>
+                                </div>
+                                <span class="skill-name">{{ $skill->name }}</span>
+                            </div>
+                        @endforeach
+                    </div>
                 </div>
             @else
                 <div class="empty-state reveal">
