@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\TestimonialController as AdminTestimonialControll
 use App\Http\Controllers\Admin\FaqController as AdminFaqController;
 use App\Http\Controllers\Admin\PolicyController as AdminPolicyController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
+use App\Http\Controllers\Admin\NewsletterController as AdminNewsletterController;
 use App\Http\Controllers\FrontendPolicyController;
 
 /*
@@ -129,6 +130,12 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::delete('/to-let/{id}', [AdminToLetController::class, 'destroy'])->name('to-let.destroy');
     Route::post('/to-let/{id}/approve', [AdminToLetController::class, 'approve'])->name('to-let.approve');
     Route::post('/to-let/{id}/reject', [AdminToLetController::class, 'reject'])->name('to-let.reject');
+
+    // Newsletter
+    Route::get('/newsletter/subscribers', [AdminNewsletterController::class, 'subscribers'])->name('newsletter.subscribers');
+    Route::get('/newsletter/send', [AdminNewsletterController::class, 'sendForm'])->name('newsletter.send');
+    Route::post('/newsletter/send', [AdminNewsletterController::class, 'send'])->name('newsletter.send');
+    Route::delete('/newsletter/subscribers/{id}', [AdminNewsletterController::class, 'destroy'])->name('newsletter.destroy');
 
     // Users
     Route::get('/users', [AdminUserController::class, 'index'])->name('users.index');

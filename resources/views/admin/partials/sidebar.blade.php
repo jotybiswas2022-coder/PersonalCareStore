@@ -78,6 +78,20 @@
             <span class="sb-item-text">User name</span>
         </a>
 
+        <div class="sb-label">Newsletter</div>
+        <a href="{{ route('admin.newsletter.subscribers') }}" class="sb-item {{ request()->routeIs('admin.newsletter.subscribers') || request()->routeIs('admin.newsletter.destroy') ? 'active' : '' }}">
+            <span class="sb-item-icon" style="background:{{ request()->routeIs('admin.newsletter.subscribers') ? 'rgba(16,185,129,0.2)' : 'transparent' }};color:{{ request()->routeIs('admin.newsletter.subscribers') ? '#34d399' : '#9ca3af' }};">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </span>
+            <span class="sb-item-text">Subscribers</span>
+        </a>
+        <a href="{{ route('admin.newsletter.send') }}" class="sb-item {{ request()->routeIs('admin.newsletter.send') ? 'active' : '' }}">
+            <span class="sb-item-icon" style="background:{{ request()->routeIs('admin.newsletter.send') ? 'rgba(251,191,36,0.2)' : 'transparent' }};color:{{ request()->routeIs('admin.newsletter.send') ? '#fbbf24' : '#9ca3af' }};">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+            </span>
+            <span class="sb-item-text">Send Newsletter</span>
+        </a>
+
         <div class="sb-label">Config</div>
         <a href="{{ route('admin.settings.index') }}" class="sb-item {{ request()->routeIs('admin.settings.*') ? 'active' : '' }}">
             <span class="sb-item-icon" style="background:{{ request()->routeIs('admin.settings.*') ? 'rgba(99,102,241,0.2)' : 'transparent' }};color:{{ request()->routeIs('admin.settings.*') ? '#818cf8' : '#9ca3af' }};">
