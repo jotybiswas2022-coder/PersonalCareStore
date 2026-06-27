@@ -848,213 +848,134 @@
 
     /* ── Case Studies ── */
     .casestudy-section {
-        background: linear-gradient(180deg, #060b18 0%, #0a1628 40%, #080d1a 100%);
+        background: linear-gradient(180deg, #080d1a 0%, var(--bg-primary) 100%);
         position: relative; overflow: hidden;
     }
     html.light-theme .casestudy-section {
-        background: linear-gradient(180deg, #eef2f7 0%, #f1f5f9 40%, #f8fafc 100%);
+        background: linear-gradient(180deg, #f1f5f9 0%, #f8fafc 100%);
     }
-    .casestudy-section .cs-orb {
-        position: absolute;
-        border-radius: 50%;
+    .casestudy-section::before {
+        content: ''; position: absolute;
+        top: -20%; right: -10%; width: 500px; height: 500px;
+        background: radial-gradient(circle, rgba(99,102,241,0.06) 0%, transparent 70%);
         pointer-events: none;
-        z-index: 0;
     }
-    .casestudy-section .cs-orb:nth-child(1) {
-        top: -10%; left: -5%;
-        width: 500px; height: 500px;
-        background: radial-gradient(circle, rgba(99,102,241,0.07) 0%, transparent 70%);
-        animation: csOrbFloat 8s ease-in-out infinite;
+    html.light-theme .casestudy-section::before {
+        background: radial-gradient(circle, rgba(99,102,241,0.04) 0%, transparent 70%);
     }
-    .casestudy-section .cs-orb:nth-child(2) {
-        bottom: -15%; right: -8%;
-        width: 400px; height: 400px;
-        background: radial-gradient(circle, rgba(139,92,246,0.05) 0%, transparent 70%);
-        animation: csOrbFloat2 10s ease-in-out infinite;
-    }
-    html.light-theme .casestudy-section .cs-orb:nth-child(1) {
-        background: radial-gradient(circle, rgba(99,102,241,0.05) 0%, transparent 70%);
-    }
-    html.light-theme .casestudy-section .cs-orb:nth-child(2) {
-        background: radial-gradient(circle, rgba(139,92,246,0.04) 0%, transparent 70%);
-    }
-    @keyframes csOrbFloat {
-        0%, 100% { transform: translate(0,0) scale(1); }
-        33% { transform: translate(40px,-30px) scale(1.1); }
-        66% { transform: translate(-20px,20px) scale(0.95); }
-    }
-    @keyframes csOrbFloat2 {
-        0%, 100% { transform: translate(0,0) scale(1); }
-        33% { transform: translate(-30px,20px) scale(1.05); }
-        66% { transform: translate(30px,-30px) scale(0.9); }
-    }
-    .casestudy-section .cs-grid-overlay {
-        position: absolute;
-        top: 0; left: 0; right: 0; bottom: 0;
-        background-image:
-            linear-gradient(rgba(99,102,241,0.03) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(99,102,241,0.03) 1px, transparent 1px);
-        background-size: 60px 60px;
-        pointer-events: none; z-index: 0;
-    }
-    html.light-theme .casestudy-section .cs-grid-overlay {
-        background-image:
-            linear-gradient(rgba(99,102,241,0.04) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(99,102,241,0.04) 1px, transparent 1px);
-    }
-    .casestudy-grid {
-        display: flex; flex-direction: column; gap: 2.5rem;
-        max-width: 960px; margin: 0 auto; position: relative; z-index: 1;
-    }
+    .casestudy-grid { display: flex; flex-direction: column; gap: 2rem; max-width: 960px; margin: 0 auto; }
     .casestudy-card {
         position: relative;
-        background: rgba(255,255,255,0.02);
-        backdrop-filter: blur(16px);
-        -webkit-backdrop-filter: blur(16px);
-        border: 1px solid rgba(99,102,241,0.08);
-        border-radius: 24px; overflow: hidden;
-        transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        transform-style: preserve-3d;
-        perspective: 1000px;
+        background: rgba(255,255,255,0.03);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(99,102,241,0.1);
+        border-radius: 20px; overflow: hidden;
+        transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     }
     html.light-theme .casestudy-card {
-        background: rgba(255,255,255,0.65);
-        border-color: rgba(99,102,241,0.1);
+        background: rgba(255,255,255,0.7);
+        border-color: rgba(99,102,241,0.12);
     }
     .casestudy-card::before {
-        content: '';
-        position: absolute;
-        top: -1px; left: -1px; right: -1px; bottom: -1px;
-        border-radius: 25px;
-        background: conic-gradient(
-            transparent,
-            transparent,
-            transparent,
-            rgba(99,102,241,0.4),
-            rgba(139,92,246,0.4),
-            rgba(99,102,241,0.4),
-            transparent,
-            transparent,
-            transparent
-        );
-        -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-        -webkit-mask-composite: xor;
-        mask-composite: exclude;
-        opacity: 0;
-        transition: opacity 0.6s ease;
-        pointer-events: none;
-        z-index: 0;
-        animation: csBorderSpin 3s linear infinite;
-    }
-    @keyframes csBorderSpin {
-        0% { transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
+        content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+        background: linear-gradient(90deg, transparent, #6366f1, #8b5cf6, transparent);
+        opacity: 0; transition: opacity 0.5s ease;
     }
     .casestudy-card:hover::before { opacity: 1; }
-    .casestudy-card .cs-spotlight {
-        position: absolute;
-        top: 0; left: 0; right: 0; bottom: 0;
-        pointer-events: none;
-        z-index: 1;
-        opacity: 0;
-        transition: opacity 0.4s ease;
-        border-radius: 24px;
-        background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(99,102,241,0.06), transparent 60%);
-    }
-    .casestudy-card:hover .cs-spotlight { opacity: 1; }
     .casestudy-card:hover {
-        border-color: rgba(99,102,241,0.2);
-        box-shadow:
-            0 24px 80px rgba(99,102,241,0.08),
-            0 10px 30px rgba(0,0,0,0.15);
-        transform: translateY(-8px) scale(1.01);
+        border-color: rgba(99,102,241,0.25);
+        box-shadow: 0 20px 60px rgba(99,102,241,0.08), 0 8px 20px rgba(0,0,0,0.12);
+        transform: translateY(-6px);
     }
     html.light-theme .casestudy-card:hover {
-        box-shadow: 0 24px 80px rgba(99,102,241,0.1);
+        box-shadow: 0 20px 60px rgba(99,102,241,0.1);
     }
-    .casestudy-image {
-        position: relative; width: 100%; height: 240px;
-        overflow: hidden; z-index: 2;
-    }
-    .casestudy-image img {
-        width: 100%; height: 100%; object-fit: cover;
-        transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    }
-    .casestudy-card:hover .casestudy-image img { transform: scale(1.12); }
+    .casestudy-image { position: relative; width: 100%; height: 240px; overflow: hidden; }
+    .casestudy-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1); }
+    .casestudy-card:hover .casestudy-image img { transform: scale(1.06); }
     .casestudy-image::after {
         content: ''; position: absolute; bottom: 0; left: 0; right: 0;
-        height: 60%;
-        background: linear-gradient(0deg, rgba(8,13,26,0.85) 0%, transparent 100%);
+        height: 60%; background: linear-gradient(0deg, rgba(8,13,26,0.8) 0%, transparent 100%);
         pointer-events: none;
     }
     html.light-theme .casestudy-image::after {
-        background: linear-gradient(0deg, rgba(248,250,252,0.85) 0%, transparent 100%);
+        background: linear-gradient(0deg, rgba(248,250,252,0.8) 0%, transparent 100%);
     }
-    .casestudy-image .img-shimmer {
-        position: absolute;
-        top: 0; left: -100%; right: 0; bottom: 0;
-        width: 60%;
-        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.04), transparent);
-        transform: skewX(-20deg);
-        pointer-events: none;
-        z-index: 2;
-        transition: left 0.8s ease;
-    }
-    .casestudy-card:hover .img-shimmer { left: 200%; }
     .casestudy-category {
-        position: absolute; top: 1rem; left: 1rem; z-index: 3;
+        position: absolute; top: 1rem; left: 1rem; z-index: 2;
         background: linear-gradient(135deg, #6366f1, #8b5cf6);
-        color: #fff; padding: 0.35rem 1.2rem;
-        border-radius: 20px; font-size: 0.7rem; font-weight: 700;
-        letter-spacing: 0.4px; box-shadow: 0 4px 20px rgba(99,102,241,0.35);
-        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        display: inline-flex; align-items: center; gap: 0.35rem;
+        color: #fff; padding: 0.35rem 1.1rem;
+        border-radius: 20px; font-size: 0.72rem; font-weight: 700;
+        letter-spacing: 0.3px; box-shadow: 0 4px 15px rgba(99,102,241,0.3);
     }
-    .casestudy-card:hover .casestudy-category {
-        transform: scale(1.05) translateY(-2px);
-        box-shadow: 0 6px 25px rgba(99,102,241,0.45);
-    }
-    .casestudy-body {
-        padding: 2rem 2rem 1.75rem;
-        position: relative; z-index: 2;
-    }
-    .casestudy-body h3 {
-        font-size: 1.35rem; font-weight: 800;
-        margin-bottom: 0.25rem; letter-spacing: -0.4px;
-        transition: color 0.3s ease;
-        background: linear-gradient(135deg, var(--text-primary), var(--accent-light));
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-    }
-    .casestudy-card:hover .casestudy-body h3 {
-        background: linear-gradient(135deg, #fff, #a5b4fc);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-    }
-    html.light-theme .casestudy-body h3 {
-        background: linear-gradient(135deg, #0f172a, #6366f1);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-    }
-    html.light-theme .casestudy-card:hover .casestudy-body h3 {
-        background: linear-gradient(135deg, #1e293b, #4f46e5);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-    }
-    .casestudy-client {
-        font-size: 0.82rem; color: var(--text-muted);
-        margin-bottom: 1.25rem;
-        display: flex; align-items: center; gap: 0.4rem;
-    }
+    .casestudy-body { padding: 1.75rem 1.75rem 1.5rem; position: relative; z-index: 1; }
+    .casestudy-body h3 { font-size: 1.3rem; font-weight: 800; margin-bottom: 0.2rem; letter-spacing: -0.3px; }
+    .casestudy-client { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1.25rem; display: flex; align-items: center; gap: 0.4rem; }
     .casestudy-steps {
         display: flex; gap: 0; margin-bottom: 1.5rem;
-        background: rgba(99,102,241,0.02);
-        border: 1px solid rgba(99,102,241,0.05);
-     
+        background: rgba(99,102,241,0.03); border-radius: 16px;
+        padding: 0.75rem; position: relative;
+    }
+    html.light-theme .casestudy-steps { background: rgba(99,102,241,0.04); }
+    .cs-step { flex: 1; min-width: 0; padding: 0.75rem; position: relative; }
+    .cs-step + .cs-step { border-left: 1px solid rgba(99,102,241,0.08); }
+    .cs-step-header { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.5rem; }
+    .cs-step-num {
+        width: 28px; height: 28px; border-radius: 8px;
+        display: flex; align-items: center; justify-content: center;
+        font-size: 0.75rem; font-weight: 800; flex-shrink: 0;
+    }
+    .cs-step-num.cs-problem { background: rgba(239,68,68,0.12); color: #ef4444; }
+    .cs-step-num.cs-solution { background: rgba(59,130,246,0.12); color: #3b82f6; }
+    .cs-step-num.cs-result { background: rgba(16,185,129,0.12); color: #10b981; }
+    .cs-step-label { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; }
+    .cs-step-label.lb-problem { color: #ef4444; }
+    .cs-step-label.lb-solution { color: #3b82f6; }
+    .cs-step-label.lb-result { color: #10b981; }
+    .cs-step p { font-size: 0.85rem; line-height: 1.65; color: var(--text-secondary); margin: 0; }
+    .casestudy-footer {
+        display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem;
+        padding-top: 1rem; border-top: 1px solid var(--border-color);
+    }
+    .casestudy-tech { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .tech-badge {
+        font-size: 0.68rem; font-weight: 600; padding: 0.25rem 0.8rem;
+        background: linear-gradient(135deg, rgba(99,102,241,0.08), rgba(139,92,246,0.08));
+        color: var(--accent-light); border-radius: 20px; white-space: nowrap;
+        border: 1px solid rgba(99,102,241,0.06);
+    }
+    .casestudy-link {
+        font-size: 0.85rem; font-weight: 600; color: var(--accent); text-decoration: none;
+        display: inline-flex; align-items: center; gap: 0.4rem;
+        padding: 0.4rem 1rem; border-radius: 10px;
+        background: rgba(59,130,246,0.06); transition: all 0.3s ease;
+    }
+    .casestudy-link:hover {
+        background: rgba(59,130,246,0.12); text-decoration: none; transform: translateX(3px);
+    }
+    .casestudy-cta {
+        text-align: center; margin-top: 3.5rem; padding: 2.5rem 2rem;
+        background: linear-gradient(135deg, rgba(99,102,241,0.04), rgba(139,92,246,0.04));
+        border: 1px solid rgba(99,102,241,0.1);
+        border-radius: 20px; position: relative; overflow: hidden;
+    }
+    html.light-theme .casestudy-cta {
+        background: linear-gradient(135deg, rgba(99,102,241,0.04), rgba(139,92,246,0.04));
+    }
+    .casestudy-cta::before {
+        content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+        background: linear-gradient(90deg, transparent, #6366f1, #8b5cf6, transparent);
+    }
+    .casestudy-cta p { font-size: 1rem; color: var(--text-secondary); margin-bottom: 1.25rem; max-width: 600px; margin-left: auto; margin-right: auto; }
+    @media (max-width: 768px) {
+        .casestudy-image { height: 180px; }
+        .casestudy-steps { flex-direction: column; gap: 0; padding: 0.5rem; }
+        .cs-step + .cs-step { border-left: none; border-top: 1px solid rgba(99,102,241,0.06); }
+        .casestudy-footer { flex-direction: column; align-items: flex-start; }
+        .casestudy-body { padding: 1.25rem; }
+    }
+
     /* Timeline */
     .timeline-section { background: linear-gradient(180deg, var(--bg-primary) 0%, #080d1a 100%); }
     html.light-theme .timeline-section { background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%); }
@@ -2514,9 +2435,6 @@
     <!-- Case Studies Section -->
     @if($caseStudies->isNotEmpty())
     <section class="casestudy-section section-padding" id="case-studies">
-        <div class="cs-orb"></div>
-        <div class="cs-orb"></div>
-        <div class="cs-grid-overlay"></div>
         <div class="container">
             <div class="section-title reveal">
                 <div class="line"></div>
@@ -2525,13 +2443,10 @@
             </div>
             <div class="casestudy-grid">
                 @foreach($caseStudies as $cs)
-                    <div class="casestudy-card reveal"
-                         onmousemove="this.style.setProperty('--mouse-x', event.offsetX / this.offsetWidth * 100 + '%'); this.style.setProperty('--mouse-y', event.offsetY / this.offsetHeight * 100 + '%')">
-                        <div class="cs-spotlight"></div>
+                    <div class="casestudy-card reveal">
                         @if($cs->image)
                             <div class="casestudy-image">
                                 <img src="{{ config('app.storage_url') }}{{ $cs->image }}" alt="{{ $cs->title }}">
-                                <div class="img-shimmer"></div>
                                 @if($cs->category)<span class="casestudy-category">{{ $cs->category }}</span>@endif
                             </div>
                         @endif
@@ -2589,7 +2504,6 @@
     </section>
     @endif
 
-    <!-- Experience Timeline Section -->
     <!-- Experience Timeline Section -->
     <section class="timeline-section section-padding" id="experience">
         <div class="container">
