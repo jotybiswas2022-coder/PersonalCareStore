@@ -927,9 +927,9 @@
         content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
         opacity: 0.6;
     }
-    .cs-step.cs-problem::before { background: #ef4444; }
-    .cs-step.cs-solution::before { background: #3b82f6; }
-    .cs-step.cs-result::before { background: #10b981; }
+    .cs-step.cs-problem::before { background: var(--accent); }
+    .cs-step.cs-solution::before { background: var(--accent); }
+    .cs-step.cs-result::before { background: var(--accent); }
     .cs-step:hover {
         border-color: rgba(99,102,241,0.2);
         box-shadow: 0 8px 30px rgba(99,102,241,0.06);
@@ -941,14 +941,14 @@
         display: flex; align-items: center; justify-content: center;
         font-size: 0.7rem; font-weight: 800; flex-shrink: 0;
     }
-    .cs-step-num.cs-problem { background: rgba(239,68,68,0.12); color: #ef4444; }
-    .cs-step-num.cs-solution { background: rgba(59,130,246,0.12); color: #3b82f6; }
-    .cs-step-num.cs-result { background: rgba(16,185,129,0.12); color: #10b981; }
+    .cs-step-num.cs-problem { background: rgba(59,130,246,0.12); color: var(--accent); }
+    .cs-step-num.cs-solution { background: rgba(59,130,246,0.12); color: var(--accent); }
+    .cs-step-num.cs-result { background: rgba(59,130,246,0.12); color: var(--accent); }
     .cs-step-label { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
-    .cs-step-label.lb-problem { color: #ef4444; }
-    .cs-step-label.lb-solution { color: #3b82f6; }
-    .cs-step-label.lb-result { color: #10b981; }
-    .cs-step p { font-size: 0.85rem; line-height: 1.65; color: var(--text-secondary); margin: 0; }
+    .cs-step-label.lb-problem { color: var(--accent); }
+    .cs-step-label.lb-solution { color: var(--accent); }
+    .cs-step-label.lb-result { color: var(--accent); }
+    .cs-step p { font-size: 0.85rem; line-height: 1.65; color: var(--accent-light); margin: 0; }
     .casestudy-footer {
         display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem;
         padding-top: 1rem; border-top: 1px solid var(--border-color);
