@@ -2097,16 +2097,16 @@
 
     /* Back to Top */
     .back-to-top {
-        position: fixed; bottom: 2rem; right: 2rem;
+        position: fixed; top: 50%; right: 1.5rem; transform: translateY(-50%);
         width: 50px; height: 50px;
         background: var(--accent-gradient); border-radius: 50%;
         display: flex; align-items: center; justify-content: center;
         font-size: 1.2rem; cursor: pointer; z-index: 100;
-        opacity: 1; transform: none;
-        transition: var(--transition); border: none; color: #fff;
+        opacity: 1;
+        transition: all 0.35s cubic-bezier(0.16,1,0.3,1); border: none; color: #fff;
         box-shadow: 0 5px 20px rgba(59, 130, 246, 0.3);
     }
-    .back-to-top:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(59, 130, 246, 0.45); }
+    .back-to-top:hover { transform: translateY(-50%) scale(1.1); box-shadow: 0 10px 30px rgba(59, 130, 246, 0.45); }
 
     /* Floating Admin Button */
     .admin-float-btn {
@@ -2255,7 +2255,7 @@
         .projects-grid { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
         .hero { padding: 5rem 1.5rem 2rem; }
         .whatsapp-float { width: 48px; height: 48px; font-size: 1.3rem; bottom: 1.5rem; left: 1.5rem; }
-        .back-to-top { width: 48px; height: 48px; font-size: 1.1rem; bottom: 1.5rem; right: 1.5rem; }
+        .back-to-top { width: 48px; height: 48px; font-size: 1.1rem; right: 1rem; }
         .admin-float-btn { width: 42px; height: 42px; font-size: 1rem; bottom: 4.5rem; right: 1.5rem; }
     }
     
@@ -2371,7 +2371,7 @@
         
         .whatsapp-tooltip { display: none; }
         .whatsapp-float { width: 44px; height: 44px; font-size: 1.2rem; bottom: 1rem; left: 1rem; }
-        .back-to-top { width: 40px; height: 40px; font-size: 0.9rem; bottom: 1rem; right: 1rem; border-radius: 12px; }
+        .back-to-top { width: 40px; height: 40px; font-size: 0.9rem; right: 0.75rem; }
         .admin-float-btn { width: 38px; height: 38px; font-size: 0.9rem; bottom: 4rem; right: 1rem; border-radius: 10px; }
         
         .map-container iframe { height: 220px; }
