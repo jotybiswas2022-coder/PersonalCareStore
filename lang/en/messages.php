@@ -116,4 +116,5 @@ return [
     'current'          => 'Current',
     'chat_whatsapp'    => 'Chat on WhatsApp',
     'back_to_top'      => 'Back to top',
+    'made_with'        => 'Made with',
 ];
