@@ -863,7 +863,7 @@
     html.light-theme .casestudy-section::before {
         background: radial-gradient(circle, rgba(99,102,241,0.04) 0%, transparent 70%);
     }
-    .casestudy-grid { display: flex; flex-direction: column; gap: 2rem; max-width: 960px; margin: 0 auto; }
+    .casestudy-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; max-width: 1200px; margin: 0 auto; }
     .casestudy-card {
         position: relative;
         background: rgba(255,255,255,0.03);
@@ -891,7 +891,7 @@
     html.light-theme .casestudy-card:hover {
         box-shadow: 0 20px 60px rgba(99,102,241,0.1);
     }
-    .casestudy-image { position: relative; width: 100%; height: 240px; overflow: hidden; }
+    .casestudy-image { position: relative; width: 100%; height: 180px; overflow: hidden; }
     .casestudy-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1); }
     .casestudy-card:hover .casestudy-image img { transform: scale(1.06); }
     .casestudy-image::after {
@@ -918,25 +918,33 @@
     }
     .cs-step {
         background: rgba(255,255,255,0.03); border: 1px solid rgba(99,102,241,0.08);
-        border-radius: 16px; padding: 1.25rem;
+        border-radius: 14px; padding: 1.25rem 1rem;
+        position: relative; overflow: hidden;
         transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
     html.light-theme .cs-step { background: rgba(255,255,255,0.5); }
+    .cs-step::before {
+        content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+        opacity: 0.6;
+    }
+    .cs-step.cs-problem::before { background: #ef4444; }
+    .cs-step.cs-solution::before { background: #3b82f6; }
+    .cs-step.cs-result::before { background: #10b981; }
     .cs-step:hover {
         border-color: rgba(99,102,241,0.2);
         box-shadow: 0 8px 30px rgba(99,102,241,0.06);
         transform: translateY(-3px);
     }
-    .cs-step-header { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.75rem; }
+    .cs-step-header { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.6rem; }
     .cs-step-num {
-        width: 28px; height: 28px; border-radius: 8px;
+        width: 30px; height: 26px; border-radius: 7px;
         display: flex; align-items: center; justify-content: center;
-        font-size: 0.75rem; font-weight: 800; flex-shrink: 0;
+        font-size: 0.7rem; font-weight: 800; flex-shrink: 0;
     }
     .cs-step-num.cs-problem { background: rgba(239,68,68,0.12); color: #ef4444; }
     .cs-step-num.cs-solution { background: rgba(59,130,246,0.12); color: #3b82f6; }
     .cs-step-num.cs-result { background: rgba(16,185,129,0.12); color: #10b981; }
-    .cs-step-label { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; }
+    .cs-step-label { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
     .cs-step-label.lb-problem { color: #ef4444; }
     .cs-step-label.lb-solution { color: #3b82f6; }
     .cs-step-label.lb-result { color: #10b981; }
@@ -975,8 +983,12 @@
         background: linear-gradient(90deg, transparent, #6366f1, #8b5cf6, transparent);
     }
     .casestudy-cta p { font-size: 1rem; color: var(--text-secondary); margin-bottom: 1.25rem; max-width: 600px; margin-left: auto; margin-right: auto; }
+    @media (max-width: 968px) {
+        .casestudy-grid { grid-template-columns: repeat(2, 1fr); }
+    }
     @media (max-width: 768px) {
-        .casestudy-image { height: 180px; }
+        .casestudy-grid { grid-template-columns: 1fr; gap: 1.25rem; }
+        .casestudy-image { height: 200px; }
         .casestudy-steps { grid-template-columns: 1fr; gap: 0.75rem; }
         .cs-step { padding: 1rem; }
         .casestudy-footer { flex-direction: column; align-items: flex-start; }
@@ -2461,21 +2473,21 @@
                             <h3>{{ $cs->title }}</h3>
                             @if($cs->client)<div class="casestudy-client"><i class="bi bi-building me-1"></i>{{ $cs->client }}</div>@endif
                             <div class="casestudy-steps">
-                                <div class="cs-step">
+                                <div class="cs-step cs-problem">
                                     <div class="cs-step-header">
                                         <div class="cs-step-num cs-problem">01</div>
                                         <span class="cs-step-label lb-problem">{{ __('messages.problem') }}</span>
                                     </div>
                                     <p>{{ $cs->problem }}</p>
                                 </div>
-                                <div class="cs-step">
+                                <div class="cs-step cs-solution">
                                     <div class="cs-step-header">
                                         <div class="cs-step-num cs-solution">02</div>
                                         <span class="cs-step-label lb-solution">{{ __('messages.solution') }}</span>
                                     </div>
                                     <p>{{ $cs->solution }}</p>
                                 </div>
-                                <div class="cs-step">
+                                <div class="cs-step cs-result">
                                     <div class="cs-step-header">
                                         <div class="cs-step-num cs-result">03</div>
                                         <span class="cs-step-label lb-result">{{ __('messages.result') }}</span>
