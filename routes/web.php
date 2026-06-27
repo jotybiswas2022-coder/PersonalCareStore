@@ -12,6 +12,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\TestimonialController as AdminTestimonialController;
 use App\Http\Controllers\Admin\FaqController as AdminFaqController;
 use App\Http\Controllers\Admin\PolicyController as AdminPolicyController;
+use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\FrontendPolicyController;
 
 /*
@@ -125,6 +126,12 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::delete('/to-let/{id}', [AdminToLetController::class, 'destroy'])->name('to-let.destroy');
     Route::post('/to-let/{id}/approve', [AdminToLetController::class, 'approve'])->name('to-let.approve');
     Route::post('/to-let/{id}/reject', [AdminToLetController::class, 'reject'])->name('to-let.reject');
+
+    // Users
+    Route::get('/users', [AdminUserController::class, 'index'])->name('users.index');
+    Route::get('/users/{id}/edit', [AdminUserController::class, 'edit'])->name('users.edit');
+    Route::put('/users/{id}', [AdminUserController::class, 'update'])->name('users.update');
+    Route::delete('/users/{id}', [AdminUserController::class, 'destroy'])->name('users.destroy');
 });
 
 // Include auth routes from Breeze
