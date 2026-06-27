@@ -829,16 +829,11 @@
             display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
             gap: 1rem; padding: 1.5rem 0;
         }
-        .wave-service {
-            flex: none; text-align: center;
-            background: var(--bg-card); border: 1px solid var(--border-color);
-            border-radius: var(--radius-lg); padding: 1.5rem 1rem;
-            transition: var(--transition);
-        }
-        .wave-service:hover { border-color: var(--border-hover); transform: translateY(-3px); box-shadow: var(--shadow-md); }
+        .wave-service { flex: none; text-align: center; padding: 0; background: none; border: none; border-radius: 0; }
+        .wave-service:hover { transform: none; box-shadow: none; }
         .wave-service .ws-icon { width: 44px; height: 44px; font-size: 1.2rem; margin-bottom: 0.75rem; }
-        .wave-service h3 { font-size: 0.95rem; text-shadow: none; }
-        .wave-service p { font-size: 0.8rem; text-shadow: none; }
+        .wave-service h3 { font-size: 0.95rem; }
+        .wave-service p { font-size: 0.8rem; }
     }
     @media (max-width: 480px) {
         .wave-services { grid-template-columns: 1fr 1fr; gap: 0.75rem; }
