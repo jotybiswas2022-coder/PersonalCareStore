@@ -1325,8 +1325,24 @@ n/* ── Smooth scene restart transition ── */
 #backToTop.visible { opacity: 1; transform: translateY(0) scale(1); pointer-events: auto; }
 #backToTop:hover { transform: translateY(-4px) scale(1.1); box-shadow: 0 12px 32px rgba(37,99,235,0.5); }
 #backToTop:active { transform: translateY(-1px) scale(0.95); }
-#backToTop svg { transition: transform 0.3s ease; }
-#backToTop:hover svg { transform: translateY(-2px); }
+#backToTop svg {
+    animation: bounce-arrow 2s ease-in-out infinite;
+}
+#backToTop:hover svg {
+    animation: none;
+    transform: translateY(-3px);
+}
+#backToTop.visible svg {
+    animation: bounce-arrow 2s ease-in-out infinite;
+}
+#backToTop.visible:hover svg {
+    animation: none;
+    transform: translateY(-3px);
+}
+@keyframes bounce-arrow {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+}
 #backToTop .ring-pulse {
     position: absolute; inset: 0; border-radius: 50%;
     border: 2px solid rgba(37,99,235,0.3);
