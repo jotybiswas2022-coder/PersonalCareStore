@@ -32,6 +32,35 @@
                 </div>
                 <div class="footer-col">
                     <h4>Contact Us</h4>
+                    @php $s = optional(settings()); @endphp
+                    @if($s->contact_phone || $s->contact_email || $s->contact_address || $s->contact_hours)
+                        <div class="footer-contact-info">
+                            @if($s->contact_phone)
+                                <div class="fci-item">
+                                    <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                                    <span>{{ $s->contact_phone }}</span>
+                                </div>
+                            @endif
+                            @if($s->contact_email)
+                                <div class="fci-item">
+                                    <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                                    <span>{{ $s->contact_email }}</span>
+                                </div>
+                            @endif
+                            @if($s->contact_address)
+                                <div class="fci-item">
+                                    <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                                    <span>{{ $s->contact_address }}</span>
+                                </div>
+                            @endif
+                            @if($s->contact_hours)
+                                <div class="fci-item">
+                                    <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                                    <span>{{ $s->contact_hours }}</span>
+                                </div>
+                            @endif
+                        </div>
+                    @endif
                     <form method="POST" action="{{ route('contact.submit') }}" class="footer-contact-form">
                         @csrf
                         <input type="text" name="name" placeholder="Your Name" required>
@@ -44,6 +73,23 @@
             </div>
         </div>
     </div>
+    @if($s->newsletter_enabled)
+        <div class="footer-newsletter">
+            <div class="container">
+                <div class="fn-inner">
+                    <div class="fn-text">
+                        <h3>{{ $s->newsletter_heading ?? 'Stay in the Loop' }}</h3>
+                        <p>{{ $s->newsletter_text ?? 'Subscribe to get notified about new listings and offers.' }}</p>
+                    </div>
+                    <form class="fn-form" method="POST" action="#">
+                        @csrf
+                        <input type="email" name="email" placeholder="{{ $s->newsletter_placeholder ?? 'Enter your email address' }}" required>
+                        <button type="submit">{{ $s->newsletter_button_text ?? 'Subscribe' }}</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    @endif
     <div class="footer-bottom">
         <div class="container">
             <div class="footer-bottom-inner">
@@ -125,6 +171,24 @@
     font-family: inherit;
 }
 .footer-contact-form button:hover { background: var(--primary-dark); }
+.footer-contact-info { margin-bottom: 1rem; display: flex; flex-direction: column; gap: 0.5rem; }
+.fci-item { display: flex; align-items: center; gap: 0.5rem; color: #64748b; font-size: 0.8125rem; }
+.fci-item svg { flex-shrink: 0; color: var(--primary); }
+.footer-newsletter { background: #1e293b; padding: 2.5rem 0; }
+.fn-inner { display: flex; align-items: center; justify-content: space-between; gap: 2rem; }
+.fn-text h3 { color: #fff; font-size: 1.125rem; font-weight: 700; margin-bottom: 0.25rem; }
+.fn-text p { color: rgba(255,255,255,0.5); font-size: 0.8125rem; }
+.fn-form { display: flex; gap: 0.5rem; flex-shrink: 0; }
+.fn-form input { padding: 0.625rem 1rem; border-radius: 0.5rem; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.06); color: #fff; font-size: 0.85rem; outline: none; width: 260px; font-family: inherit; }
+.fn-form input::placeholder { color: rgba(255,255,255,0.35); }
+.fn-form input:focus { border-color: var(--primary); }
+.fn-form button { padding: 0.625rem 1.25rem; border-radius: 0.5rem; border: none; background: var(--primary); color: #fff; font-size: 0.85rem; font-weight: 600; cursor: pointer; transition: background 0.2s; font-family: inherit; white-space: nowrap; }
+.fn-form button:hover { background: var(--primary-dark); }
+@media (max-width: 768px) {
+    .fn-inner { flex-direction: column; text-align: center; }
+    .fn-form { width: 100%; }
+    .fn-form input { width: 100%; }
+}
 .footer-bottom { background: #e2e8f0; padding: 1.25rem 0; border-top: 1px solid rgba(0,0,0,0.05); }
 .footer-bottom-inner { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
 .footer-bottom-inner p { color: #64748b; font-size: 0.8125rem; }
