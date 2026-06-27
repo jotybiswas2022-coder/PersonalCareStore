@@ -2099,14 +2099,13 @@
     .back-to-top {
         position: fixed; bottom: 2rem; right: 2rem;
         width: 50px; height: 50px;
-        background: var(--accent-gradient); border-radius: 14px;
+        background: var(--accent-gradient); border-radius: 50%;
         display: flex; align-items: center; justify-content: center;
         font-size: 1.2rem; cursor: pointer; z-index: 100;
-        opacity: 0; transform: translateY(20px);
+        opacity: 1; transform: none;
         transition: var(--transition); border: none; color: #fff;
         box-shadow: 0 5px 20px rgba(59, 130, 246, 0.3);
     }
-    .back-to-top.visible { opacity: 1; transform: translateY(0); }
     .back-to-top:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(59, 130, 246, 0.45); }
 
     /* Floating Admin Button */
@@ -2256,7 +2255,7 @@
         .projects-grid { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
         .hero { padding: 5rem 1.5rem 2rem; }
         .whatsapp-float { width: 48px; height: 48px; font-size: 1.3rem; bottom: 1.5rem; left: 1.5rem; }
-        .back-to-top { width: 44px; height: 44px; font-size: 1rem; bottom: 1.5rem; right: 1.5rem; }
+        .back-to-top { width: 48px; height: 48px; font-size: 1.1rem; bottom: 1.5rem; right: 1.5rem; }
         .admin-float-btn { width: 42px; height: 42px; font-size: 1rem; bottom: 4.5rem; right: 1.5rem; }
     }
     
@@ -3344,7 +3343,6 @@
 // ===== COALESCED SCROLL HANDLER (passive + rAF throttled) =====
 (function() {
     var navbar = document.getElementById('navbar');
-    var backToTop = document.getElementById('backToTop');
     var adminFloat = document.querySelector('.admin-float-btn');
     var progressBar = document.getElementById('scrollProgress');
     var revealElements = document.querySelectorAll('.reveal');
@@ -3362,11 +3360,7 @@
             else navbar.classList.remove('scrolled');
         }
         
-        // Back to top & admin float
-        if (backToTop) {
-            if (scrollY > 400) backToTop.classList.add('visible');
-            else backToTop.classList.remove('visible');
-        }
+        // Admin float
         if (adminFloat) {
             if (scrollY > 300) adminFloat.classList.add('visible');
             else adminFloat.classList.remove('visible');
@@ -3453,6 +3447,11 @@
         });
     });
 })();
+
+// ===== BACK TO TOP CLICK =====
+document.getElementById('backToTop')?.addEventListener('click', function() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+});
 
 // ===== MAGNETIC BUTTON EFFECT =====
 (function() {
