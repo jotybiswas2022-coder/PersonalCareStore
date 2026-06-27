@@ -1992,8 +1992,7 @@
         .typing-wrapper { font-size: 1rem; }
         .hero::before { width: 400px; height: 400px; }
         
-        .about-stats { flex-wrap: wrap; gap: 1rem; }
-        .about-stats .stat-item { min-width: calc(50% - 0.5rem); flex: 1 1 auto; }
+        .about-stats { flex-wrap: nowrap; gap: 0.75rem; }
         .stat-item .stat-icon { width: 36px; height: 36px; font-size: 0.95rem; }
         .about-image .img-wrapper { width: 180px; height: 180px; }
         .about-image .glow-ring { width: 200px; height: 200px; }
