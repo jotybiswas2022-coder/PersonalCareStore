@@ -385,6 +385,7 @@
     <div class="row g-3 mb-4">
         @php
             $stats2 = [
+                ['count' => $caseStudiesCount, 'sub' => "$activeCaseStudies active", 'label' => 'Case Studies', 'icon' => 'bi-journal-code', 'color' => '#6366f1', 'bg' => 'rgba(99,102,241,0.08)'],
                 ['count' => $faqsCount, 'sub' => "$activeFaqs active", 'label' => 'FAQs', 'icon' => 'bi-question-circle', 'color' => '#f97316', 'bg' => 'rgba(249,115,22,0.08)'],
                 ['count' => $contactsCount, 'sub' => 'all inbox', 'label' => 'Messages', 'icon' => 'bi-envelope', 'color' => '#ef4444', 'bg' => 'rgba(239,68,68,0.08)'],
                 ['count' => $usersCount, 'sub' => 'registered', 'label' => 'Users', 'icon' => 'bi-people', 'color' => '#0ea5e9', 'bg' => 'rgba(14,165,233,0.08)'],
@@ -545,6 +546,7 @@
                         <a href="{{ url('/admin/experiences/create') }}" class="dsb-qa"><i class="bi bi-plus-circle" style="color:#f59e0b;"></i> Experience</a>
                         <a href="{{ url('/admin/skills/create') }}" class="dsb-qa"><i class="bi bi-plus-circle" style="color:#8b5cf6;"></i> Skill</a>
                         <a href="{{ url('/admin/testimonials/create') }}" class="dsb-qa"><i class="bi bi-plus-circle" style="color:#ec4899;"></i> Testimonial</a>
+                        <a href="{{ url('/admin/case-studies/create') }}" class="dsb-qa"><i class="bi bi-plus-circle" style="color:#6366f1;"></i> Case Study</a>
                         <a href="{{ url('/admin/faqs/create') }}" class="dsb-qa"><i class="bi bi-plus-circle" style="color:#f97316;"></i> FAQ</a>
                         <a href="{{ url('/admin/account/edit') }}" class="dsb-qa"><i class="bi bi-pencil" style="color:#0ea5e9;"></i> Account</a>
                     </div>

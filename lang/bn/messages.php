@@ -101,6 +101,16 @@ return [
     'no_faqs'         => 'কোনো FAQ যোগ করা হয়নি',
     'no_faqs_desc'    => 'FAQ তথ্য শীঘ্রই আসছে!',
 
+    // Case Studies
+    'casestudy_title'    => 'কেস স্টাডিজ',
+    'casestudy_subtitle' => 'বাস্তব আইটি প্রকল্প। বাস্তব চ্যালেঞ্জ। বাস্তব ফলাফল।',
+    'problem'            => 'সমস্যা',
+    'solution'           => 'সমাধান',
+    'result'             => 'ফলাফল',
+    'view_project'       => 'প্রকল্প দেখুন',
+    'casestudy_cta'      => 'দেখুন কিভাবে Infinite IT ব্যবসায়িক সমস্যাকে প্রতিযোগিতামূলক সুবিধায় রূপান্তরিত করে।',
+    'start_project'      => 'আপনার প্রকল্প শুরু করুন',
+
     // Misc
     'loading'          => 'লোড হচ্ছে...',
     'current'          => 'বর্তমান',

@@ -10,6 +10,7 @@ use App\Http\Controllers\admin\ExperienceController;
 use App\Http\Controllers\admin\SkillController;
 use App\Http\Controllers\admin\ServiceController;
 use App\Http\Controllers\admin\FaqController;
+use App\Http\Controllers\admin\CaseStudyController;
 
 
 Route::prefix('/admin')->middleware('admin')->group(function () {
@@ -77,6 +78,17 @@ Route::prefix('/admin')->middleware('admin')->group(function () {
 
     // Services
     Route::prefix('/services')->name('admin.services.')->controller(ServiceController::class)->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/create', 'create')->name('create');
+        Route::post('/store', 'store')->name('store');
+        Route::get('/edit/{id}', 'edit')->name('edit');
+        Route::put('/update/{id}', 'update')->name('update');
+        Route::delete('/delete/{id}', 'destroy')->name('destroy');
+        Route::get('/toggle-status/{id}', 'toggleStatus')->name('toggleStatus');
+    });
+
+    // Case Studies
+    Route::prefix('/case-studies')->name('admin.casestudies.')->controller(CaseStudyController::class)->group(function () {
         Route::get('/', 'index')->name('index');
         Route::get('/create', 'create')->name('create');
         Route::post('/store', 'store')->name('store');

@@ -96,6 +96,11 @@ use Illuminate\Support\Str;
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link topbar-link {{ request()->is('admin/case-studies*') ? 'active-link' : '' }}" href="{{ url('/admin/case-studies') }}">
+                        <i class="bi bi-journal-code"></i> Case Studies
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link topbar-link {{ request()->is('admin/faqs*') ? 'active-link' : '' }}" href="{{ url('/admin/faqs') }}">
                         <i class="bi bi-question-circle"></i> FAQs
                     </a>

@@ -10,6 +10,7 @@ use App\Models\Experience;
 use App\Models\Skill;
 use App\Models\Service;
 use App\Models\Faq;
+use App\Models\CaseStudy;
 
 class SiteController extends Controller
 {
@@ -21,6 +22,7 @@ class SiteController extends Controller
         $skills = Skill::active()->get();
         $services = Service::active()->get();
         $faqs = Faq::active()->get();
-        return view('frontend.index', compact('account', 'projects', 'testimonials', 'experiences', 'skills', 'services', 'faqs'));
+        $caseStudies = CaseStudy::active()->get();
+        return view('frontend.index', compact('account', 'projects', 'testimonials', 'experiences', 'skills', 'services', 'faqs', 'caseStudies'));
     }
 }

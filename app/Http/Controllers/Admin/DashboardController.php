@@ -12,6 +12,7 @@ use App\Models\Experience;
 use App\Models\Skill;
 use App\Models\Testimonial;
 use App\Models\Faq;
+use App\Models\CaseStudy;
 use App\Models\User;
 
 class DashboardController extends Controller
@@ -29,6 +30,7 @@ class DashboardController extends Controller
         $skillsCount      = Skill::count();
         $testimonialsCount = Testimonial::count();
         $faqsCount        = Faq::count();
+        $caseStudiesCount = CaseStudy::count();
 
         $contacts    = Contact::latest()->take(5)->get();
         $recentProjects = Project::latest()->take(5)->get();
@@ -41,6 +43,7 @@ class DashboardController extends Controller
         $activeSkills      = Skill::where('is_active', true)->count();
         $activeTestimonials = Testimonial::where('is_active', true)->count();
         $activeFaqs        = Faq::where('is_active', true)->count();
+        $activeCaseStudies = CaseStudy::where('is_active', true)->count();
 
         return view('backend.index', compact(
             'account',
@@ -53,6 +56,7 @@ class DashboardController extends Controller
             'skillsCount',
             'testimonialsCount',
             'faqsCount',
+            'caseStudiesCount',
             'contacts',
             'recentProjects',
             'recentServices',
@@ -63,6 +67,7 @@ class DashboardController extends Controller
             'activeSkills',
             'activeTestimonials',
             'activeFaqs',
+            'activeCaseStudies',
         ));
     }
 }

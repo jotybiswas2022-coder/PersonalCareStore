@@ -839,6 +839,65 @@
         .wave-scene .wave-layer-2 { display: none; }
     }
 
+    /* Case Studies */
+    .casestudy-section { background: linear-gradient(180deg, #080d1a 0%, var(--bg-primary) 100%); position: relative; }
+    html.light-theme .casestudy-section { background: linear-gradient(180deg, #f1f5f9 0%, #f8fafc 100%); }
+    .casestudy-grid { display: flex; flex-direction: column; gap: 2rem; max-width: 900px; margin: 0 auto; }
+    .casestudy-card {
+        background: var(--bg-card); border: 1px solid var(--border-color);
+        border-radius: var(--radius-lg); overflow: hidden;
+        transition: var(--transition);
+    }
+    .casestudy-card:hover { border-color: var(--border-hover); box-shadow: var(--shadow-md); transform: translateY(-3px); }
+    .casestudy-image { position: relative; width: 100%; height: 220px; overflow: hidden; }
+    .casestudy-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+    .casestudy-card:hover .casestudy-image img { transform: scale(1.05); }
+    .casestudy-category {
+        position: absolute; top: 1rem; left: 1rem;
+        background: rgba(99,102,241,0.9); color: #fff;
+        padding: 0.3rem 1rem; border-radius: 20px; font-size: 0.75rem; font-weight: 600;
+    }
+    .casestudy-body { padding: 1.5rem; }
+    .casestudy-body h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 0.25rem; }
+    .casestudy-client { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem; }
+    .casestudy-details {
+        display: flex; align-items: flex-start; gap: 0.75rem;
+        margin-bottom: 1.25rem;
+    }
+    .cs-detail { flex: 1; min-width: 0; }
+    .cs-detail-icon {
+        width: 36px; height: 36px; border-radius: 10px;
+        display: inline-flex; align-items: center; justify-content: center;
+        font-size: 1rem; margin-bottom: 0.4rem;
+    }
+    .cs-detail-label { display: block; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-muted); margin-bottom: 0.3rem; }
+    .cs-detail p { font-size: 0.85rem; line-height: 1.6; color: var(--text-secondary); margin: 0; }
+    .cs-arrow { flex-shrink: 0; padding-top: 0.4rem; color: var(--accent); font-size: 1.2rem; }
+    .casestudy-footer {
+        display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem;
+        padding-top: 1rem; border-top: 1px solid var(--border-color);
+    }
+    .casestudy-tech { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+    .tech-badge {
+        font-size: 0.7rem; font-weight: 600; padding: 0.2rem 0.7rem;
+        background: rgba(59,130,246,0.08); color: var(--accent-light);
+        border-radius: 20px; white-space: nowrap;
+    }
+    .casestudy-link { font-size: 0.85rem; font-weight: 600; color: var(--accent); text-decoration: none; }
+    .casestudy-link:hover { text-decoration: underline; }
+    .casestudy-cta {
+        text-align: center; margin-top: 3rem; padding: 2rem;
+        background: var(--bg-card); border: 1px solid var(--border-color);
+        border-radius: var(--radius-lg);
+    }
+    .casestudy-cta p { font-size: 1rem; color: var(--text-secondary); margin-bottom: 1rem; }
+    @media (max-width: 768px) {
+        .casestudy-image { height: 180px; }
+        .casestudy-details { flex-direction: column; gap: 1rem; }
+        .cs-arrow { transform: rotate(90deg); text-align: center; padding-top: 0; }
+        .casestudy-footer { flex-direction: column; align-items: flex-start; }
+    }
+
     /* Timeline */
     .timeline-section { background: linear-gradient(180deg, var(--bg-primary) 0%, #080d1a 100%); }
     html.light-theme .timeline-section { background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%); }
@@ -2294,6 +2353,74 @@
             @endif
         </div>
     </section>
+
+    <!-- Case Studies Section -->
+    @if($caseStudies->isNotEmpty())
+    <section class="casestudy-section section-padding" id="case-studies">
+        <div class="container">
+            <div class="section-title reveal">
+                <div class="line"></div>
+                <h2>{{ __('messages.casestudy_title') }}</h2>
+                <p>{{ __('messages.casestudy_subtitle') }}</p>
+            </div>
+            <div class="casestudy-grid">
+                @foreach($caseStudies as $cs)
+                    <div class="casestudy-card reveal">
+                        @if($cs->image)
+                            <div class="casestudy-image">
+                                <img src="{{ config('app.storage_url') }}{{ $cs->image }}" alt="{{ $cs->title }}">
+                                @if($cs->category)<span class="casestudy-category">{{ $cs->category }}</span>@endif
+                            </div>
+                        @endif
+                        <div class="casestudy-body">
+                            <h3>{{ $cs->title }}</h3>
+                            @if($cs->client)<div class="casestudy-client"><i class="bi bi-building me-1"></i>{{ $cs->client }}</div>@endif
+                            <div class="casestudy-details">
+                                <div class="cs-detail">
+                                    <div class="cs-detail-icon" style="background:rgba(239,68,68,0.1); color:#ef4444;"><i class="bi bi-exclamation-triangle"></i></div>
+                                    <span class="cs-detail-label">{{ __('messages.problem') }}</span>
+                                    <p>{{ $cs->problem }}</p>
+                                </div>
+                                <div class="cs-arrow"><i class="bi bi-arrow-right"></i></div>
+                                <div class="cs-detail">
+                                    <div class="cs-detail-icon" style="background:rgba(59,130,246,0.1); color:#3b82f6;"><i class="bi bi-lightbulb"></i></div>
+                                    <span class="cs-detail-label">{{ __('messages.solution') }}</span>
+                                    <p>{{ $cs->solution }}</p>
+                                </div>
+                                <div class="cs-arrow"><i class="bi bi-arrow-right"></i></div>
+                                <div class="cs-detail">
+                                    <div class="cs-detail-icon" style="background:rgba(16,185,129,0.1); color:#10b981;"><i class="bi bi-graph-up-arrow"></i></div>
+                                    <span class="cs-detail-label">{{ __('messages.result') }}</span>
+                                    <p>{{ $cs->result }}</p>
+                                </div>
+                            </div>
+                            @if($cs->technologies || $cs->url)
+                            <div class="casestudy-footer">
+                                @if($cs->technologies)
+                                    <div class="casestudy-tech">
+                                        @foreach($cs->tech_list as $tech)
+                                            <span class="tech-badge">{{ $tech }}</span>
+                                        @endforeach
+                                    </div>
+                                @endif
+                                @if($cs->url)
+                                    <a href="{{ $cs->url }}" target="_blank" rel="noopener noreferrer" class="casestudy-link">
+                                        {{ __('messages.view_project') }} <i class="bi bi-box-arrow-up-right ms-1"></i>
+                                    </a>
+                                @endif
+                            </div>
+                            @endif
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+            <div class="casestudy-cta reveal">
+                <p>{{ __('messages.casestudy_cta') }}</p>
+                <a href="#contact" class="btn-primary-custom">{{ __('messages.start_project') }} <i class="bi bi-arrow-right ms-1"></i></a>
+            </div>
+        </div>
+    </section>
+    @endif
 
     <!-- Experience Timeline Section -->
     <section class="timeline-section section-padding" id="experience">

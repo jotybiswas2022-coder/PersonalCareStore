@@ -101,6 +101,16 @@ return [
     'no_faqs'         => 'No FAQs Added Yet',
     'no_faqs_desc'    => 'FAQ data coming soon!',
 
+    // Case Studies
+    'casestudy_title'    => 'Case Studies',
+    'casestudy_subtitle' => 'Real IT projects. Real challenges. Real outcomes.',
+    'problem'            => 'Problem',
+    'solution'           => 'Solution',
+    'result'             => 'Result',
+    'view_project'       => 'View Project',
+    'casestudy_cta'      => 'See how Infinite IT transforms business problems into competitive advantages.',
+    'start_project'      => 'Start Your Project',
+
     // Misc
     'loading'          => 'Loading...',
     'current'          => 'Current',

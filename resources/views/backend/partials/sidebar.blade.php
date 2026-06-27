@@ -58,6 +58,13 @@
             </a>
         </li>
         <li>
+            <a href="{{ url('/admin/case-studies') }}"
+               class="{{ request()->is('admin/case-studies*') ? 'active' : '' }}">
+                <i class="bi bi-journal-code"></i>
+                <span>Case Studies</span>
+            </a>
+        </li>
+        <li>
             <a href="{{ url('/admin/faqs') }}"
                class="{{ request()->is('admin/faqs*') ? 'active' : '' }}">
                 <i class="bi bi-question-circle"></i>
