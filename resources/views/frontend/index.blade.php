@@ -942,6 +942,49 @@
     .skill-card:hover .skill-circle {
         transform: scale(1.08);
     }
+    .skill-card .skill-circle::before {
+        content: '';
+        position: absolute;
+        inset: -4px;
+        border-radius: 50%;
+        padding: 3px;
+        background: conic-gradient(var(--accent) 0deg, #00d4ff 90deg, var(--accent) 180deg, #7c3aed 270deg, var(--accent) 360deg);
+        -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+        mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        mask-composite: exclude;
+        opacity: 0;
+        transition: opacity 0.4s ease;
+        animation: electricSpin 1.5s linear infinite;
+    }
+    .skill-card:hover .skill-circle::before {
+        opacity: 1;
+    }
+    .skill-card .skill-circle::after {
+        content: '';
+        position: absolute;
+        inset: -8px;
+        border-radius: 50%;
+        border: 2px solid transparent;
+        box-shadow: 0 0 15px var(--accent), 0 0 40px rgba(0, 212, 255, 0.3), 0 0 60px rgba(124, 58, 237, 0.15);
+        opacity: 0;
+        transition: opacity 0.4s ease;
+        animation: electricPulse 1.2s ease-in-out infinite;
+    }
+    .skill-card:hover .skill-circle::after {
+        opacity: 1;
+    }
+    @keyframes electricSpin {
+        0% { transform: rotate(0deg); opacity: 0.6; }
+        50% { opacity: 1; }
+        100% { transform: rotate(360deg); opacity: 0.6; }
+    }
+    @keyframes electricPulse {
+        0%, 100% { box-shadow: 0 0 10px var(--accent), 0 0 25px rgba(0, 212, 255, 0.2); }
+        25% { box-shadow: 0 0 20px #00d4ff, 0 0 50px rgba(0, 212, 255, 0.4); }
+        50% { box-shadow: 0 0 15px var(--accent), 0 0 35px rgba(124, 58, 237, 0.3); }
+        75% { box-shadow: 0 0 25px #7c3aed, 0 0 55px rgba(124, 58, 237, 0.35); }
+    }
     .skill-circle-svg {
         position: absolute;
         width: 100%;
@@ -966,6 +1009,14 @@
         display: block;
         z-index: 1;
         transition: color 0.3s ease;
+    }
+    .skill-card:hover .skill-icon {
+        animation: iconFlicker 0.8s ease-in-out infinite alternate;
+    }
+    @keyframes iconFlicker {
+        0% { filter: brightness(1) drop-shadow(0 0 0 transparent); }
+        50% { filter: brightness(1.4) drop-shadow(0 0 8px var(--accent)); }
+        100% { filter: brightness(1) drop-shadow(0 0 0 transparent); }
     }
     html.light-theme .skill-card .skill-icon {
         color: var(--accent);
