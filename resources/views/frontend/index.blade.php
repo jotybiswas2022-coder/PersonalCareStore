@@ -2127,8 +2127,8 @@
         .skill-card .skill-icon { font-size: 1.3rem; }
         .skill-card .skill-name { font-size: 0.72rem; }
         .skill-card .skill-percent { font-size: 0.6rem; }
-        .stat-item { min-width: 100% !important; }
-        .about-stats { flex-direction: column; }
+        .about-stats { flex-direction: row; flex-wrap: nowrap; gap: 0.5rem; }
+        .stat-item { min-width: 0; flex: 1; padding: 0.6rem 0.3rem; }
         .section-title h2 { font-size: 1.4rem; }
     }
 </style>
