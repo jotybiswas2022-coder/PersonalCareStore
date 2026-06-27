@@ -81,14 +81,37 @@
                         <h3>{{ $s->newsletter_heading ?? 'Stay in the Loop' }}</h3>
                         <p>{{ $s->newsletter_text ?? 'Subscribe to get notified about new listings and offers.' }}</p>
                     </div>
-                    <div class="fn-form">
-                        <input type="email" placeholder="{{ $s->newsletter_placeholder ?? 'Enter your email address' }}" readonly onfocus="this.removeAttribute('readonly')">
-                        <button type="button">{{ $s->newsletter_button_text ?? 'Subscribe' }}</button>
-                    </div>
+                    <form class="fn-form" method="POST" action="{{ route('newsletter.subscribe') }}" id="newsletterForm">
+                        @csrf
+                        <input type="email" name="email" placeholder="{{ $s->newsletter_placeholder ?? 'Enter your email address' }}" required>
+                        <button type="submit">{{ $s->newsletter_button_text ?? 'Subscribe' }}</button>
+                    </form>
                 </div>
             </div>
         </div>
     @endif
+    <script>
+    document.getElementById('newsletterForm')?.addEventListener('submit', function(e) {
+        e.preventDefault();
+        var btn = this.querySelector('button');
+        var input = this.querySelector('input[name="email"]');
+        btn.disabled = true;
+        btn.textContent = 'Subscribing...';
+        fetch(this.action, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded', 'X-Requested-With': 'XMLHttpRequest' },
+            body: new URLSearchParams(new FormData(this))
+        }).then(function(r) { return r.json(); }).then(function(data) {
+            Swal.fire({ icon: 'success', title: data.message, showConfirmButton: false, timer: 2500, toast: true, position: 'top-end' });
+            input.value = '';
+        }).catch(function() {
+            Swal.fire({ icon: 'error', title: 'Something went wrong. Try again.', showConfirmButton: false, timer: 3000, toast: true, position: 'top-end' });
+        }).finally(function() {
+            btn.disabled = false;
+            btn.textContent = '{{ $s->newsletter_button_text ?? "Subscribe" }}';
+        });
+    });
+    </script>
     <div class="footer-bottom">
         <div class="container">
             <div class="footer-bottom-inner">

@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\MessageController as AdminMessageController;
 use App\Http\Controllers\Frontend\ContactMessageController;
+use App\Http\Controllers\Frontend\NewsletterController;
 use App\Http\Controllers\Frontend\ToLetAdvertisementController as FrontendToLetController;
 use App\Http\Controllers\Admin\ToLetAdvertisementController as AdminToLetController;
 use App\Http\Controllers\ProfileController;
@@ -30,6 +31,8 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::post('/contact/submit', [ContactMessageController::class, 'store'])->name('contact.submit');
 Route::get('/contact/find', [ContactMessageController::class, 'find'])->name('contact.find');
 Route::get('/contact/message/{token}', [ContactMessageController::class, 'show'])->name('contact.message');
+
+Route::post('/newsletter/subscribe', [NewsletterController::class, 'subscribe'])->name('newsletter.subscribe');
 
 /*
 |--------------------------------------------------------------------------
