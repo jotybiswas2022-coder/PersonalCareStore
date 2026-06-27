@@ -944,7 +944,7 @@
         box-shadow: 0 8px 30px rgba(99,102,241,0.06);
         transform: translateY(-3px);
     }
-    .cs-step-header { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.6rem; }
+    .cs-step-header { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.6rem; position: relative; z-index: 2; }
     .cs-step-num {
         width: 30px; height: 26px; border-radius: 7px;
         display: flex; align-items: center; justify-content: center;
@@ -957,7 +957,7 @@
     .cs-step-label.lb-problem { color: var(--accent); }
     .cs-step-label.lb-solution { color: var(--accent); }
     .cs-step-label.lb-result { color: var(--accent); }
-    .cs-step p { font-size: 0.85rem; line-height: 1.65; color: var(--text-primary); margin: 0; }
+    .cs-step p { font-size: 0.85rem; line-height: 1.65; color: var(--text-primary); margin: 0; position: relative; z-index: 2; }
     .casestudy-footer {
         display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem;
         padding-top: 1rem; border-top: 1px solid var(--border-color);
