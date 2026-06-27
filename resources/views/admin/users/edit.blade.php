@@ -90,12 +90,12 @@
     </div>
     <div class="tf-group">
         <label for="password">New Password</label>
-        <input type="password" id="password" name="password" placeholder="Leave blank to keep current">
+        <input type="text" id="password" name="password" placeholder="Leave blank to keep current">
         <div class="tf-hint">Minimum 8 characters. Leave empty to keep the current password.</div>
     </div>
     <div class="tf-group">
         <label for="password_confirmation">Confirm New Password</label>
-        <input type="password" id="password_confirmation" name="password_confirmation" placeholder="Confirm new password">
+        <input type="text" id="password_confirmation" name="password_confirmation" placeholder="Confirm new password">
     </div>
 
     <div class="tf-actions">
