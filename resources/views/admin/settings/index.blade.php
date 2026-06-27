@@ -425,7 +425,7 @@
             </div>
 
             {{-- Delivery Charges --}}
-            <div class="st-section" style="margin-bottom:0;padding-bottom:0;border-bottom:none;">
+            <div class="st-section">
                 <div class="st-section-heading">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
                     <span class="sh-text">Delivery Charges</span>
@@ -444,6 +444,76 @@
                         <input type="number" name="delivery_charge_outside" id="delivery_charge_outside" value="{{ old('delivery_charge_outside', $setting->delivery_charge_outside) }}" step="0.01" min="0" placeholder="0.00">
                         <span class="hint">Delivery charge for addresses outside Khulna</span>
                         @error('delivery_charge_outside')<span class="error"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>{{ $message }}</span>@enderror
+                    </div>
+                </div>
+            </div>
+
+            {{-- Contact Information --}}
+            <div class="st-section">
+                <div class="st-section-heading">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                    <span class="sh-text">Contact Information</span>
+                    <span class="sh-sub">— Displayed on the frontend contact section</span>
+                </div>
+                <div class="st-grid">
+                    <div class="st-group">
+                        <label for="contact_phone">Phone</label>
+                        <input type="text" name="contact_phone" id="contact_phone" value="{{ old('contact_phone', $setting->contact_phone) }}" placeholder="+880 1XXX-XXXXXX">
+                        @error('contact_phone')<span class="error"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>{{ $message }}</span>@enderror
+                    </div>
+                    <div class="st-group">
+                        <label for="contact_email">Email</label>
+                        <input type="email" name="contact_email" id="contact_email" value="{{ old('contact_email', $setting->contact_email) }}" placeholder="info@example.com">
+                        @error('contact_email')<span class="error"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>{{ $message }}</span>@enderror
+                    </div>
+                    <div class="st-group full">
+                        <label for="contact_address">Address</label>
+                        <input type="text" name="contact_address" id="contact_address" value="{{ old('contact_address', $setting->contact_address) }}" placeholder="Street, city, zip code">
+                        @error('contact_address')<span class="error"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>{{ $message }}</span>@enderror
+                    </div>
+                    <div class="st-group full">
+                        <label for="contact_hours">Working Hours</label>
+                        <input type="text" name="contact_hours" id="contact_hours" value="{{ old('contact_hours', $setting->contact_hours) }}" placeholder="Sat–Thu: 9:00 AM – 6:00 PM">
+                        <span class="hint">Business hours displayed on the contact page</span>
+                        @error('contact_hours')<span class="error"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>{{ $message }}</span>@enderror
+                    </div>
+                </div>
+            </div>
+
+            {{-- Newsletter --}}
+            <div class="st-section" style="margin-bottom:0;padding-bottom:0;border-bottom:none;">
+                <div class="st-section-heading">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                    <span class="sh-text">Newsletter</span>
+                    <span class="sh-sub">— Subscription section on the frontend</span>
+                </div>
+                <div class="st-grid">
+                    <div class="st-group">
+                        <label for="newsletter_heading">Heading</label>
+                        <input type="text" name="newsletter_heading" id="newsletter_heading" value="{{ old('newsletter_heading', $setting->newsletter_heading) }}" placeholder="Stay in the Loop">
+                        @error('newsletter_heading')<span class="error"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>{{ $message }}</span>@enderror
+                    </div>
+                    <div class="st-group">
+                        <label for="newsletter_button_text">Button Text</label>
+                        <input type="text" name="newsletter_button_text" id="newsletter_button_text" value="{{ old('newsletter_button_text', $setting->newsletter_button_text) }}" placeholder="Subscribe">
+                        @error('newsletter_button_text')<span class="error"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>{{ $message }}</span>@enderror
+                    </div>
+                    <div class="st-group full">
+                        <label for="newsletter_text">Description Text</label>
+                        <input type="text" name="newsletter_text" id="newsletter_text" value="{{ old('newsletter_text', $setting->newsletter_text) }}" placeholder="Subscribe to get notified about new listings and offers.">
+                        @error('newsletter_text')<span class="error"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>{{ $message }}</span>@enderror
+                    </div>
+                    <div class="st-group full">
+                        <label for="newsletter_placeholder">Input Placeholder</label>
+                        <input type="text" name="newsletter_placeholder" id="newsletter_placeholder" value="{{ old('newsletter_placeholder', $setting->newsletter_placeholder) }}" placeholder="Enter your email address">
+                        @error('newsletter_placeholder')<span class="error"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>{{ $message }}</span>@enderror
+                    </div>
+                    <div class="st-group">
+                        <label style="flex-direction:row; gap:0.625rem; cursor:pointer;">
+                            <input type="checkbox" name="newsletter_enabled" value="1" {{ old('newsletter_enabled', $setting->newsletter_enabled) ? 'checked' : '' }} style="width:1.125rem;height:1.125rem;accent-color:#6366f1;">
+                            Enable Newsletter Section
+                        </label>
+                        <span class="hint">Show or hide the newsletter subscription form on the frontend</span>
                     </div>
                 </div>
             </div>

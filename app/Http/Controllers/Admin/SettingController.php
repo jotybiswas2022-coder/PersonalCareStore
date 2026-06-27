@@ -25,11 +25,22 @@ class SettingController extends Controller
     public function update(Request $request)
     {
         $validated = $request->validate([
-            'currency' => 'required|string|in:BDT,USD,INR',
-            'delivery_charge_inside' => 'required|numeric|min:0',
+            'currency'               => 'required|string|in:BDT,USD,INR',
+            'delivery_charge_inside'  => 'required|numeric|min:0',
             'delivery_charge_outside' => 'required|numeric|min:0',
-            'vat_percentage' => 'required|numeric|min:0|max:100',
+            'vat_percentage'         => 'required|numeric|min:0|max:100',
+            'contact_phone'          => 'nullable|string|max:30',
+            'contact_email'          => 'nullable|email|max:255',
+            'contact_address'        => 'nullable|string|max:500',
+            'contact_hours'          => 'nullable|string|max:255',
+            'newsletter_heading'     => 'nullable|string|max:255',
+            'newsletter_text'        => 'nullable|string|max:500',
+            'newsletter_placeholder' => 'nullable|string|max:255',
+            'newsletter_button_text' => 'nullable|string|max:100',
+            'newsletter_enabled'     => 'nullable|boolean',
         ]);
+
+        $validated['newsletter_enabled'] = $request->boolean('newsletter_enabled');
 
         $setting = Setting::first();
         if ($setting) {
