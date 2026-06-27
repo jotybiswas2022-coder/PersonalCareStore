@@ -2097,15 +2097,17 @@
 
     /* Back to Top */
     .back-to-top {
-        position: fixed; top: 50%; right: 1.5rem; transform: translateY(-50%);
+        position: fixed; top: 50%; right: 1.5rem; transform: translateY(-50%) scale(0);
         width: 50px; height: 50px;
         background: var(--accent-gradient); border-radius: 50%;
         display: flex; align-items: center; justify-content: center;
         font-size: 1.2rem; cursor: pointer; z-index: 100;
-        opacity: 1;
-        transition: all 0.35s cubic-bezier(0.16,1,0.3,1); border: none; color: #fff;
+        opacity: 0;
+        transition: all 0.4s cubic-bezier(0.16,1,0.3,1); border: none; color: #fff;
         box-shadow: 0 5px 20px rgba(59, 130, 246, 0.3);
+        pointer-events: none;
     }
+    .back-to-top.visible { opacity: 1; transform: translateY(-50%) scale(1); pointer-events: auto; }
     .back-to-top:hover { transform: translateY(-50%) scale(1.1); box-shadow: 0 10px 30px rgba(59, 130, 246, 0.45); }
 
     /* Floating Admin Button */
@@ -3343,6 +3345,7 @@
 // ===== COALESCED SCROLL HANDLER (passive + rAF throttled) =====
 (function() {
     var navbar = document.getElementById('navbar');
+    var backToTop = document.getElementById('backToTop');
     var adminFloat = document.querySelector('.admin-float-btn');
     var progressBar = document.getElementById('scrollProgress');
     var revealElements = document.querySelectorAll('.reveal');
@@ -3360,7 +3363,11 @@
             else navbar.classList.remove('scrolled');
         }
         
-        // Admin float
+        // Back to top & admin float
+        if (backToTop) {
+            if (scrollY > 400) backToTop.classList.add('visible');
+            else backToTop.classList.remove('visible');
+        }
         if (adminFloat) {
             if (scrollY > 300) adminFloat.classList.add('visible');
             else adminFloat.classList.remove('visible');
