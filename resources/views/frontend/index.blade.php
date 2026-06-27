@@ -958,6 +958,50 @@
     .cs-step-label.lb-solution { color: var(--accent); }
     .cs-step-label.lb-result { color: var(--accent); }
     .cs-step p { font-size: 0.85rem; line-height: 1.65; color: var(--text-primary); margin: 0; position: relative; z-index: 2; }
+
+    /* ===== GLASS CARD SHINE EFFECT (all glass cards) ===== */
+    .project-card::after,
+    .testimonial-card::after,
+    .faq-item::after,
+    .wave-service::after,
+    .contact-info-card::after,
+    .contact-item::after {
+        content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+        background: radial-gradient(circle at var(--shine-x, 50%) var(--shine-y, 50%), rgba(59,130,246,0.45) 0%, rgba(59,130,246,0.18) 30%, transparent 60%);
+        pointer-events: none; opacity: 0; transition: opacity 0.5s ease; z-index: 1; border-radius: inherit;
+    }
+    html.light-theme .project-card::after,
+    html.light-theme .testimonial-card::after,
+    html.light-theme .faq-item::after,
+    html.light-theme .wave-service::after,
+    html.light-theme .contact-info-card::after,
+    html.light-theme .contact-item::after {
+        background: radial-gradient(circle at var(--shine-x, 50%) var(--shine-y, 50%), rgba(59,130,246,0.35) 0%, rgba(59,130,246,0.12) 30%, transparent 60%);
+    }
+    .project-card:hover::after,
+    .testimonial-card:hover::after,
+    .faq-item:hover::after,
+    .wave-service:hover::after,
+    .contact-info-card:hover::after,
+    .contact-item:hover::after { opacity: 1; }
+    /* Ensure content stays above shine */
+    .project-card .card-image,
+    .project-card .card-body,
+    .testimonial-card .quote-icon,
+    .testimonial-card .testimonial-stars,
+    .testimonial-card .testimonial-text,
+    .testimonial-card .testimonial-author,
+    .faq-item button,
+    .faq-item .faq-answer,
+    .wave-service .ws-icon,
+    .wave-service h3,
+    .wave-service p,
+    .contact-info-card h3,
+    .contact-info-card p,
+    .contact-info-card .contact-item,
+    .contact-item .icon-box,
+    .contact-item .info { position: relative; z-index: 2; }
+
     .casestudy-footer {
         display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem;
         padding-top: 1rem; border-top: 1px solid var(--border-color);
@@ -3690,33 +3734,10 @@
     setTimeout(function() { if (isVisible) randomThunder(); }, 1000);
 })();
 
-// ===== CASESTUDY STEP SHINE EFFECT =====
+// ===== GLASS CARD SHINE EFFECT (all glass cards) =====
 (function() {
-    document.querySelectorAll('.cs-step').forEach(function(card) {
-        var rafId = null;
-        card.addEventListener('mousemove', function(e) {
-            if (rafId) return;
-            var self = this;
-            rafId = requestAnimationFrame(function() {
-                var rect = self.getBoundingClientRect();
-                var x = ((e.clientX - rect.left) / rect.width) * 100;
-                var y = ((e.clientY - rect.top) / rect.height) * 100;
-                self.style.setProperty('--shine-x', x + '%');
-                self.style.setProperty('--shine-y', y + '%');
-                rafId = null;
-            });
-        });
-        card.addEventListener('mouseleave', function() {
-            if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
-            this.style.setProperty('--shine-x', '50%');
-            this.style.setProperty('--shine-y', '50%');
-        });
-    });
-})();
-
-// ===== TIMELINE CARD SHINE EFFECT =====
-(function() {
-    document.querySelectorAll('.timeline-card').forEach(function(card) {
+    var selectors = '.cs-step, .timeline-card, .project-card, .testimonial-card, .faq-item, .wave-service, .contact-info-card, .contact-item';
+    document.querySelectorAll(selectors).forEach(function(card) {
         var rafId = null;
         card.addEventListener('mousemove', function(e) {
             if (rafId) return;
