@@ -868,10 +868,13 @@
     }
     .timeline-card::before {
         content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-        background: radial-gradient(circle at var(--shine-x, 50%) var(--shine-y, 50%), rgba(255,255,255,0.12) 0%, transparent 60%);
-        pointer-events: none; opacity: 0; transition: opacity 0.3s ease; z-index: 1;
+        background: radial-gradient(circle at var(--shine-x, 50%) var(--shine-y, 50%), rgba(59,130,246,0.25) 0%, rgba(59,130,246,0.08) 30%, transparent 60%);
+        pointer-events: none; opacity: 0; transition: opacity 0.5s ease; z-index: 1; border-radius: inherit;
     }
     .timeline-card:hover::before { opacity: 1; }
+    html.light-theme .timeline-card::before {
+        background: radial-gradient(circle at var(--shine-x, 50%) var(--shine-y, 50%), rgba(59,130,246,0.15) 0%, rgba(59,130,246,0.05) 30%, transparent 60%);
+    }
     .timeline-card:hover {
         border-color: var(--border-hover); transform: translateY(-5px);
         box-shadow: var(--shadow-md);
@@ -3453,12 +3456,23 @@
 // ===== TIMELINE CARD SHINE EFFECT =====
 (function() {
     document.querySelectorAll('.timeline-card').forEach(function(card) {
+        var rafId = null;
         card.addEventListener('mousemove', function(e) {
-            var rect = this.getBoundingClientRect();
-            var x = ((e.clientX - rect.left) / rect.width) * 100;
-            var y = ((e.clientY - rect.top) / rect.height) * 100;
-            this.style.setProperty('--shine-x', x + '%');
-            this.style.setProperty('--shine-y', y + '%');
+            if (rafId) return;
+            var self = this;
+            rafId = requestAnimationFrame(function() {
+                var rect = self.getBoundingClientRect();
+                var x = ((e.clientX - rect.left) / rect.width) * 100;
+                var y = ((e.clientY - rect.top) / rect.height) * 100;
+                self.style.setProperty('--shine-x', x + '%');
+                self.style.setProperty('--shine-y', y + '%');
+                rafId = null;
+            });
+        });
+        card.addEventListener('mouseleave', function() {
+            if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
+            this.style.setProperty('--shine-x', '50%');
+            this.style.setProperty('--shine-y', '50%');
         });
     });
 })();
