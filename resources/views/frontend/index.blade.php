@@ -2097,7 +2097,7 @@
 
     /* Back to Top */
     .back-to-top {
-        position: fixed; bottom: 2rem; right: 2rem; transform: scale(0);
+        position: fixed; top: 30%; right: 1.5rem; transform: scale(0);
         width: 50px; height: 50px;
         background: var(--accent-gradient); border-radius: 50%;
         display: flex; align-items: center; justify-content: center;
@@ -2257,7 +2257,7 @@
         .projects-grid { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
         .hero { padding: 5rem 1.5rem 2rem; }
         .whatsapp-float { width: 48px; height: 48px; font-size: 1.3rem; bottom: 1.5rem; left: 1.5rem; }
-        .back-to-top { width: 48px; height: 48px; font-size: 1.1rem; bottom: 1.5rem; right: 1.5rem; }
+        .back-to-top { width: 44px; height: 44px; font-size: 1rem; top: 30%; right: 1rem; }
         .admin-float-btn { width: 42px; height: 42px; font-size: 1rem; bottom: 4.5rem; right: 1.5rem; }
     }
     
@@ -2373,7 +2373,7 @@
         
         .whatsapp-tooltip { display: none; }
         .whatsapp-float { width: 44px; height: 44px; font-size: 1.2rem; bottom: 1rem; left: 1rem; }
-        .back-to-top { width: 40px; height: 40px; font-size: 0.9rem; bottom: 1rem; right: 1rem; }
+        .back-to-top { width: 38px; height: 38px; font-size: 0.85rem; top: 30%; right: 0.75rem; }
         .admin-float-btn { width: 38px; height: 38px; font-size: 0.9rem; bottom: 4rem; right: 1rem; border-radius: 10px; }
         
         .map-container iframe { height: 220px; }
@@ -3365,7 +3365,7 @@
         
         // Back to top & admin float
         if (backToTop) {
-            if (scrollY > 400) backToTop.classList.add('visible');
+            if (scrollY > 100) backToTop.classList.add('visible');
             else backToTop.classList.remove('visible');
         }
         if (adminFloat) {
