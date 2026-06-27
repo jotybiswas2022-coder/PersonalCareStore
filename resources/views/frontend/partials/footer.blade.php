@@ -81,11 +81,10 @@
                         <h3>{{ $s->newsletter_heading ?? 'Stay in the Loop' }}</h3>
                         <p>{{ $s->newsletter_text ?? 'Subscribe to get notified about new listings and offers.' }}</p>
                     </div>
-                    <form class="fn-form" method="POST" action="#">
-                        @csrf
-                        <input type="email" name="email" placeholder="{{ $s->newsletter_placeholder ?? 'Enter your email address' }}" required>
-                        <button type="submit">{{ $s->newsletter_button_text ?? 'Subscribe' }}</button>
-                    </form>
+                    <div class="fn-form">
+                        <input type="email" placeholder="{{ $s->newsletter_placeholder ?? 'Enter your email address' }}" readonly onfocus="this.removeAttribute('readonly')">
+                        <button type="button">{{ $s->newsletter_button_text ?? 'Subscribe' }}</button>
+                    </div>
                 </div>
             </div>
         </div>
