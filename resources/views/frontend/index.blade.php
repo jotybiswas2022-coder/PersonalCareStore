@@ -78,6 +78,48 @@
         z-index: 0; pointer-events: none;
     }
 
+    /* ===== HERO DECORATIVE EFFECTS ===== */
+
+    /* Speed Lines */
+    .hero-lines { position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; pointer-events: none; z-index: 0; }
+    .hline { position: absolute; height: 1px; background: linear-gradient(90deg, transparent, rgba(59,130,246,0.4), transparent); animation: hlineAnim 3s ease-in-out infinite; }
+    @keyframes hlineAnim { 0% { transform: translateX(-100%); opacity: 0; } 50% { opacity: 1; } 100% { transform: translateX(100vw); opacity: 0; } }
+
+    /* Orbit Rings */
+    .hero-orbits { position: absolute; top: 50%; left: 50%; width: 0; height: 0; pointer-events: none; z-index: 0; }
+    .orbit-ring { position: absolute; border: 1px solid rgba(59,130,246,0.15); border-radius: 50%; }
+    .orbit-ring:nth-child(1) { width: 300px; height: 300px; margin: -150px 0 0 -150px; animation: orbitSpin 12s linear infinite; }
+    .orbit-ring:nth-child(2) { width: 500px; height: 500px; margin: -250px 0 0 -250px; animation: orbitSpin 18s linear infinite reverse; }
+    .orbit-ring:nth-child(3) { width: 700px; height: 700px; margin: -350px 0 0 -350px; animation: orbitSpin 24s linear infinite; }
+    .orbit-dot { position: absolute; width: 6px; height: 6px; background: var(--accent); border-radius: 50%; box-shadow: 0 0 10px var(--accent); }
+    .orbit-ring:nth-child(1) .orbit-dot { top: -3px; left: 50%; margin-left: -3px; }
+    .orbit-ring:nth-child(2) .orbit-dot { top: 50%; right: -3px; margin-top: -3px; }
+    .orbit-ring:nth-child(3) .orbit-dot { bottom: -3px; left: 50%; margin-left: -3px; }
+    @keyframes orbitSpin { 100% { transform: rotate(360deg); } }
+
+    /* SVG Stripes Container */
+    .hero-stripes { position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; pointer-events: none; z-index: 0; }
+    .vis-stripes-svg { position: absolute; width: 100%; height: 100%; }
+    .vis-stripes-svg.diagonal { opacity: 0.3; animation: stripeDrift 8s ease-in-out infinite; }
+    .vis-stripes-svg.infinity { opacity: 0.2; animation: stripeDrift 10s ease-in-out infinite reverse; }
+    @keyframes stripeDrift { 0%,100% { transform: translateX(0); } 50% { transform: translateX(-5%); } }
+
+    /* Glow Disc */
+    .vis-glow { position: absolute; width: 600px; height: 600px; border-radius: 50%; background: radial-gradient(circle at center, rgba(59,130,246,0.15), transparent 70%); top: 50%; left: 50%; transform: translate(-50%, -50%); pointer-events: none; z-index: 0; animation: glowPulse 4s ease-in-out infinite; }
+    @keyframes glowPulse { 0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; } 50% { transform: translate(-50%, -50%) scale(1.3); opacity: 1; } }
+
+    /* Floating Chips */
+    .float-chip { position: absolute; display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem; background: rgba(15,23,42,0.7); backdrop-filter: blur(10px); border: 1px solid rgba(59,130,246,0.2); border-radius: 50px; font-size: 0.75rem; color: var(--accent-light); pointer-events: none; z-index: 1; white-space: nowrap; }
+    .float-chip i { font-size: 0.8rem; }
+    .float-chip.c1 { top: 15%; right: 5%; animation: floatChip 5s ease-in-out infinite; }
+    .float-chip.c2 { bottom: 25%; left: 3%; animation: floatChip 6s ease-in-out infinite 1s; }
+    .float-chip.c3 { top: 40%; left: 8%; animation: floatChip 4.5s ease-in-out infinite 0.5s; }
+    @keyframes floatChip { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+
+    /* Shimmer Text */
+    .shimmer-text { background: linear-gradient(90deg, var(--accent-light) 0%, #60a5fa 25%, #a78bfa 50%, #60a5fa 75%, var(--accent-light) 100%); background-size: 200% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; animation: shimmerMove 3s linear infinite; display: inline; }
+    @keyframes shimmerMove { 0% { background-position: 0% center; } 100% { background-position: 200% center; } }
+
     /* Custom Cursor */
     .cursor-dot {
         width: 8px; height: 8px; background: var(--accent);
@@ -108,7 +150,7 @@
         justify-content: center; text-align: center;
         position: relative; z-index: 1; padding: 6rem 2rem 2rem;
     }
-    .hero-content { max-width: 850px; }
+    .hero-content { max-width: 850px; position: relative; z-index: 2; }
     .hero::before {
         content: ''; position: absolute;
         width: 700px; height: 700px;
@@ -148,17 +190,7 @@
         50% { background-position: 100% 50%; }
         100% { background-position: 0% 50%; }
     }
-    .typing-wrapper {
-        display: inline-flex; align-items: center; gap: 3px;
-        color: var(--accent-light); font-size: 1.15rem;
-        margin-bottom: 1.5rem; font-weight: 500;
-        animation: fadeInUp 1s ease forwards; animation-delay: 0.3s;
-    }
-    .typing-cursor {
-        width: 2px; height: 1.3em;
-        background: var(--accent); animation: blink 0.8s step-end infinite;
-    }
-    @keyframes blink { 50% { opacity: 0; } }
+
     .hero p {
         font-size: 1.15rem; color: var(--text-secondary);
         max-width: 640px; margin: 0 auto 2.5rem;
@@ -2257,8 +2289,7 @@
         .hero h1 { font-size: clamp(2rem, 6vw, 3.5rem); }
         .hero p { font-size: 1rem; }
         .hero-badge { font-size: 0.75rem; padding: 0.3rem 1rem; }
-        .typing-wrapper { font-size: 1rem; }
-        .hero::before { width: 400px; height: 400px; }
+.hero::before { width: 400px; height: 400px; }
         
         .about-stats { flex-wrap: nowrap; gap: 0.75rem; }
         .stat-item .stat-icon { width: 36px; height: 36px; font-size: 0.95rem; }
@@ -2295,6 +2326,12 @@
         .toast { padding: 0.8rem 1.5rem; font-size: 0.85rem; max-width: 90%; }
         .empty-state { padding: 3rem 1.2rem; }
         .empty-state i { font-size: 2.2rem; }
+        
+        /* Tablet hero decorative */
+        .float-chip.c1 { top: 10%; right: 3%; }
+        .float-chip.c2 { display: none; }
+        .float-chip.c3 { display: none; }
+        .hero-orbits .orbit-ring:nth-child(3) { display: none; }
     }
     
     /* Mobile Small (max 480px) */
@@ -2386,6 +2423,14 @@
         .magnetic { transition: none !important; }
         .project-card { transform: none !important; }
         .project-card:hover { transform: translateY(-4px) !important; }
+        
+        /* Hero decorative responsive */
+        .hero-lines { display: none; }
+        .hero-orbits { display: none; }
+        .float-chip { display: none; }
+        .vis-glow { width: 300px; height: 300px; }
+        .vis-stripes-svg.diagonal { opacity: 0.15; }
+        .vis-stripes-svg.infinity { opacity: 0.1; }
     }
     
     /* Very Small Screens (max 360px) */
@@ -2412,14 +2457,58 @@
 
     <!-- Hero Section -->
     <section class="hero" id="hero">
+        <!-- Speed Lines -->
+        <div class="hero-lines" id="heroLines"></div>
+
+        <!-- Orbit Rings -->
+        <div class="hero-orbits">
+            <div class="orbit-ring"><div class="orbit-dot"></div></div>
+            <div class="orbit-ring"><div class="orbit-dot"></div></div>
+            <div class="orbit-ring"><div class="orbit-dot"></div></div>
+        </div>
+
+        <!-- Glow Disc -->
+        <div class="vis-glow"></div>
+
+        <!-- SVG Stripes: Diagonal -->
+        <div class="hero-stripes">
+            <svg class="vis-stripes-svg diagonal" viewBox="0 0 100 100" preserveAspectRatio="none">
+                <defs>
+                    <linearGradient id="diagStripe" x1="0" y1="0" x2="1" y2="1">
+                        <stop offset="0%" stop-color="rgba(59,130,246,0)" />
+                        <stop offset="50%" stop-color="rgba(59,130,246,0.15)" />
+                        <stop offset="100%" stop-color="rgba(59,130,246,0)" />
+                    </linearGradient>
+                </defs>
+                <line x1="0" y1="20" x2="100" y2="0" stroke="url(#diagStripe)" stroke-width="2" />
+                <line x1="0" y1="40" x2="100" y2="20" stroke="url(#diagStripe)" stroke-width="1.5" />
+                <line x1="0" y1="60" x2="100" y2="40" stroke="url(#diagStripe)" stroke-width="1" />
+                <line x1="0" y1="80" x2="100" y2="60" stroke="url(#diagStripe)" stroke-width="2" />
+                <line x1="0" y1="100" x2="100" y2="80" stroke="url(#diagStripe)" stroke-width="1.5" />
+            </svg>
+            <svg class="vis-stripes-svg infinity" viewBox="0 0 100 100" preserveAspectRatio="none">
+                <defs>
+                    <linearGradient id="infWave" x1="0" y1="0" x2="1" y2="0">
+                        <stop offset="0%" stop-color="rgba(139,92,246,0)" />
+                        <stop offset="50%" stop-color="rgba(139,92,246,0.2)" />
+                        <stop offset="100%" stop-color="rgba(139,92,246,0)" />
+                    </linearGradient>
+                </defs>
+                <path d="M0,50 Q25,20 50,50 T100,50" fill="none" stroke="url(#infWave)" stroke-width="1.5" />
+                <path d="M0,30 Q25,0 50,30 T100,30" fill="none" stroke="url(#infWave)" stroke-width="1" />
+                <path d="M0,70 Q25,40 50,70 T100,70" fill="none" stroke="url(#infWave)" stroke-width="1" />
+            </svg>
+        </div>
+
+        <!-- Floating Chips -->
+        <div class="float-chip c1"><i class="bi bi-star-fill"></i> 5+ Years Experience</div>
+        <div class="float-chip c2"><i class="bi bi-cup-hot-fill"></i> 99% Client Satisfaction</div>
+        <div class="float-chip c3"><i class="bi bi-rocket-takeoff-fill"></i> 50+ Projects Done</div>
+
         <div class="hero-content">
-            <div class="hero-badge"><i class="bi bi-briefcase-fill"></i> {{ __('messages.hero_badge') }}</div>
+            <div class="hero-badge"><i class="bi bi-briefcase-fill"></i> <span class="shimmer-text">{{ __('messages.hero_badge') }}</span></div>
             <h1>{{ __('messages.hero_greeting') }} <span class="gradient-text">{{ optional($account)->name ?? 'Portfolio' }}</span></h1>
-            <div class="typing-wrapper">
-                <span id="typingText"></span>
-                <span class="typing-cursor"></span>
-            </div>
-            <p>{{ __('messages.hero_tagline') }}</p>
+<p>{{ __('messages.hero_tagline') }}</p>
             <div class="hero-buttons">
                 <a href="#projects" class="btn-primary-custom magnetic">
                     <i class="bi bi-rocket-fill"></i> {{ __('messages.see_my_work') }}
@@ -3244,6 +3333,22 @@
     document.addEventListener('mousemove', function(e) { mouse.x = e.clientX; mouse.y = e.clientY; });
 })();
 
+// ===== SPEED LINES =====
+(function() {
+    var container = document.getElementById('heroLines');
+    if (!container) return;
+    var count = Math.min(12, Math.floor(window.innerWidth / 100));
+    for (var i = 0; i < count; i++) {
+        var line = document.createElement('div');
+        line.className = 'hline';
+        line.style.top = (Math.random() * 100) + '%';
+        line.style.width = (Math.random() * 80 + 40) + 'px';
+        line.style.animationDuration = (Math.random() * 2 + 2) + 's';
+        line.style.animationDelay = (Math.random() * 4) + 's';
+        container.appendChild(line);
+    }
+})();
+
 // ===== CUSTOM CURSOR =====
 (function() {
     var dot = document.getElementById('cursorDot');
@@ -3259,34 +3364,6 @@
         el.addEventListener('mouseenter', function() { ring.classList.add('active'); dot.classList.add('active'); });
         el.addEventListener('mouseleave', function() { ring.classList.remove('active'); dot.classList.remove('active'); });
     });
-})();
-
-// ===== TYPING EFFECT =====
-(function() {
-    var el = document.getElementById('typingText');
-    if (!el) return;
-    var texts = [
-        'Full Stack Web Developer',
-        'Laravel Specialist',
-        'UI/UX Designer',
-        'Problem Solver',
-        'Freelancer'
-    ];
-    var textIndex = 0, charIndex = 0, isDeleting = false;
-    function typeEffect() {
-        var currentText = texts[textIndex];
-        if (!isDeleting) {
-            el.textContent = currentText.substring(0, charIndex + 1);
-            charIndex++;
-            if (charIndex === currentText.length) { isDeleting = true; setTimeout(typeEffect, 2000); return; }
-        } else {
-            el.textContent = currentText.substring(0, charIndex - 1);
-            charIndex--;
-            if (charIndex === 0) { isDeleting = false; textIndex = (textIndex + 1) % texts.length; }
-        }
-        setTimeout(typeEffect, isDeleting ? 40 : 80);
-    }
-    typeEffect();
 })();
 
 // ===== MOBILE MENU =====
