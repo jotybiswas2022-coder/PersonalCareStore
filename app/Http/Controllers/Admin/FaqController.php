@@ -1,64 +1,82 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Faq;
 use Illuminate\Http\Request;
+use App\Models\Faq;
 
 class FaqController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $faqs = Faq::sorted()->paginate(20);
-        return view('admin.faqs.index', compact('faqs'));
+        $query = $request->input('q');
+
+        $faqs = Faq::query()
+            ->when($query, function ($q) use ($query) {
+                $q->where('question', 'like', "%{$query}%")
+                  ->orWhere('answer', 'like', "%{$query}%");
+            })
+            ->orderBy('sort_order')
+            ->get();
+
+        if ($request->ajax()) {
+            $html = view('backend.faq._table_rows', compact('faqs'))->render();
+            return response()->json([
+                'html'  => $html,
+                'count' => $faqs->count(),
+                'query' => $query,
+            ]);
+        }
+
+        return view('backend.faq.index', compact('faqs', 'query'));
     }
 
     public function create()
     {
-        return view('admin.faqs.form');
+        return view('backend.faq.create');
     }
 
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'question'   => 'required|string|max:255',
+        $request->validate([
+            'question'   => 'required|string|max:500',
             'answer'     => 'required|string',
             'sort_order' => 'nullable|integer|min:0',
-            'is_active'  => 'nullable|boolean',
         ]);
 
-        $validated['is_active'] = $request->boolean('is_active');
+        $data = $request->only(['question', 'answer', 'sort_order']);
+        $data['is_active'] = $request->has('is_active') ? true : false;
 
-        Faq::create($validated);
+        Faq::create($data);
 
         return redirect()->route('admin.faqs.index')
-            ->with('success', 'FAQ created successfully.');
+            ->with('success', 'FAQ created successfully!');
     }
 
     public function edit($id)
     {
         $faq = Faq::findOrFail($id);
-        return view('admin.faqs.form', compact('faq'));
+        return view('backend.faq.edit', compact('faq'));
     }
 
     public function update(Request $request, $id)
     {
         $faq = Faq::findOrFail($id);
 
-        $validated = $request->validate([
-            'question'   => 'required|string|max:255',
+        $request->validate([
+            'question'   => 'required|string|max:500',
             'answer'     => 'required|string',
             'sort_order' => 'nullable|integer|min:0',
-            'is_active'  => 'nullable|boolean',
         ]);
 
-        $validated['is_active'] = $request->boolean('is_active');
+        $data = $request->only(['question', 'answer', 'sort_order']);
+        $data['is_active'] = $request->has('is_active') ? true : false;
 
-        $faq->update($validated);
+        $faq->update($data);
 
         return redirect()->route('admin.faqs.index')
-            ->with('success', 'FAQ updated successfully.');
+            ->with('success', 'FAQ updated successfully!');
     }
 
     public function destroy($id)
@@ -67,6 +85,15 @@ class FaqController extends Controller
         $faq->delete();
 
         return redirect()->route('admin.faqs.index')
-            ->with('success', 'FAQ deleted successfully.');
+            ->with('success', 'FAQ deleted successfully!');
+    }
+
+    public function toggleStatus($id)
+    {
+        $faq = Faq::findOrFail($id);
+        $faq->update(['is_active' => !$faq->is_active]);
+
+        return redirect()->route('admin.faqs.index')
+            ->with('success', 'FAQ status updated!');
     }
 }

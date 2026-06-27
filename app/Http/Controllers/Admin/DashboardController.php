@@ -1,44 +1,75 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
-use App\Models\ContactMessage;
+use Illuminate\Http\Request;
+use App\Models\Account;
+use App\Models\Contact;
+use App\Models\Project;
+use App\Models\Service;
+use App\Models\Experience;
+use App\Models\Skill;
 use App\Models\Testimonial;
+use App\Models\Post;
 use App\Models\Faq;
-use App\Models\ToLetAdvertisement;
-use App\Models\Policy;
+use App\Models\User;
 
 class DashboardController extends Controller
 {
     public function index()
     {
-        $totalUsers        = User::count();
-        $totalProperties   = ToLetAdvertisement::count();
-        $pendingProperties = ToLetAdvertisement::pending()->count();
-        $approvedProperties = ToLetAdvertisement::approved()->count();
-        $rejectedProperties = ToLetAdvertisement::rejected()->count();
-        $totalMessages     = ContactMessage::count();
-        $unreadMessages    = ContactMessage::whereNull('admin_reply')->count();
-        $totalTestimonials = Testimonial::count();
-        $activeTestimonials = Testimonial::active()->count();
-        $totalFaqs         = Faq::count();
-        $activeFaqs        = Faq::active()->count();
-        $totalPolicies     = Policy::count();
-        $activePolicies    = Policy::active()->count();
+        $account     = Account::first();
+        $usersCount  = User::count();
 
-        $recentMessages    = ContactMessage::latest()->take(5)->get();
-        $recentProperties  = ToLetAdvertisement::latest()->take(5)->get();
+        $accountsCount    = Account::count();
+        $contactsCount    = Contact::count();
+        $projectsCount    = Project::count();
+        $servicesCount    = Service::count();
+        $experiencesCount = Experience::count();
+        $skillsCount      = Skill::count();
+        $testimonialsCount = Testimonial::count();
+        $postsCount       = Post::count();
+        $faqsCount        = Faq::count();
 
-        return view('admin.dashboard', compact(
-            'totalUsers', 'totalProperties', 'pendingProperties',
-            'approvedProperties', 'rejectedProperties',
-            'totalMessages', 'unreadMessages',
-            'totalTestimonials', 'activeTestimonials',
-            'totalFaqs', 'activeFaqs',
-            'totalPolicies', 'activePolicies',
-            'recentMessages', 'recentProperties'
+        $contacts    = Contact::latest()->take(5)->get();
+        $recentProjects = Project::latest()->take(5)->get();
+        $recentPosts    = Post::latest()->take(5)->get();
+        $recentServices = Service::latest()->take(5)->get();
+        $recentMessages = Contact::latest()->take(5)->get();
+
+        $activeProjects    = Project::where('is_active', true)->count();
+        $activeServices    = Service::where('is_active', true)->count();
+        $activeExperiences = Experience::where('is_active', true)->count();
+        $activeSkills      = Skill::where('is_active', true)->count();
+        $activeTestimonials = Testimonial::where('is_active', true)->count();
+        $publishedPosts    = Post::where('is_published', true)->count();
+        $activeFaqs        = Faq::where('is_active', true)->count();
+
+        return view('backend.index', compact(
+            'account',
+            'usersCount',
+            'accountsCount',
+            'contactsCount',
+            'projectsCount',
+            'servicesCount',
+            'experiencesCount',
+            'skillsCount',
+            'testimonialsCount',
+            'postsCount',
+            'faqsCount',
+            'contacts',
+            'recentProjects',
+            'recentPosts',
+            'recentServices',
+            'recentMessages',
+            'activeProjects',
+            'activeServices',
+            'activeExperiences',
+            'activeSkills',
+            'activeTestimonials',
+            'publishedPosts',
+            'activeFaqs',
         ));
     }
 }

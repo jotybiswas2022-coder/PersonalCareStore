@@ -13,21 +13,12 @@ class Faq extends Model
         'is_active',
     ];
 
-    protected function casts(): array
-    {
-        return [
-            'sort_order' => 'integer',
-            'is_active' => 'boolean',
-        ];
-    }
+    protected $casts = [
+        'is_active' => 'boolean',
+    ];
 
     public function scopeActive($query)
     {
-        return $query->where('is_active', true);
-    }
-
-    public function scopeSorted($query)
-    {
-        return $query->orderBy('sort_order')->latest();
+        return $query->where('is_active', true)->orderBy('sort_order');
     }
 }

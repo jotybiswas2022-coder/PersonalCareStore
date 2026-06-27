@@ -7,45 +7,53 @@ use Illuminate\Database\Eloquent\Model;
 class Testimonial extends Model
 {
     protected $fillable = [
-        'author_name',
-        'author_role',
-        'content',
+        'name',
+        'designation',
+        'company',
+        'message',
+        'avatar',
         'rating',
         'sort_order',
         'is_active',
     ];
 
-    protected function casts(): array
-    {
-        return [
-            'rating' => 'integer',
-            'sort_order' => 'integer',
-            'is_active' => 'boolean',
-        ];
-    }
+    protected $casts = [
+        'is_active' => 'boolean',
+        'rating'    => 'integer',
+    ];
 
+    /**
+     * Scope for active testimonials sorted by order.
+     */
     public function scopeActive($query)
     {
-        return $query->where('is_active', true);
+        return $query->where('is_active', true)->orderBy('sort_order');
     }
 
-    public function scopeSorted($query)
+    /**
+     * Get star rating as HTML-safe array of booleans.
+     */
+    public function getStarsAttribute(): array
     {
-        return $query->orderBy('sort_order')->latest();
-    }
-
-    public function getInitialAttribute(): string
-    {
-        $parts = explode(' ', $this->author_name, 2);
-        $initial = $parts[0][0] ?? '';
-        if (isset($parts[1])) {
-            $initial .= $parts[1][0] ?? '';
+        $stars = [];
+        for ($i = 1; $i <= 5; $i++) {
+            $stars[] = $i <= $this->rating;
         }
-        return strtoupper($initial);
+        return $stars;
     }
 
-    public function getStarsAttribute(): string
+    /**
+     * Get display designation (with company if available).
+     */
+    public function getDesignationDisplayAttribute(): string
     {
-        return str_repeat('★', $this->rating) . str_repeat('☆', 5 - $this->rating);
+        $parts = [];
+        if ($this->designation) {
+            $parts[] = $this->designation;
+        }
+        if ($this->company) {
+            $parts[] = $this->company;
+        }
+        return implode(', ', $parts);
     }
 }
