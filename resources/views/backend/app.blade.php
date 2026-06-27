@@ -16,16 +16,19 @@
 
     <link rel="stylesheet" href="{{ asset('backend/css/custom.css') }}">
 </head>
-<body style="overflow:hidden;">
+<body style="overflow:hidden; height:100vh;">
 
     {{-- Top Navigation Bar --}}
     @include('backend.partials.topbar')
 
-    {{-- Admin Layout --}}
-    <div style="margin-left:260px;">
+    {{-- Admin Layout: Sidebar + Content --}}
+    <div class="admin-layout" style="display:flex; height:calc(100vh - 57px);">
+
+        {{-- Sidebar --}}
+        @include('backend.partials.sidebar')
 
         {{-- Main Content --}}
-        <main class="admin-main" style="background:#f1f5f9; padding:1.5rem 2rem; overflow-y:auto; height:calc(100vh - 57px);">
+        <main class="admin-main" style="flex:1; min-width:0; background:#f1f5f9; padding:1.5rem 2rem; overflow-y:auto;">
             @yield('content')
         </main>
 

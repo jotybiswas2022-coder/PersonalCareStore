@@ -21,7 +21,7 @@ use Illuminate\Support\Str;
 .mobile-nav .logout-btn i { width:20px; text-align:center; color:rgba(248,113,113,0.5); }
 </style>
 
-<nav class="navbar navbar-expand-md py-0" style="height:auto; min-height:57px; background:linear-gradient(180deg,#0f172a,#1e293b); border-bottom:1px solid rgba(255,255,255,0.06); box-shadow:0 2px 12px rgba(0,0,0,0.15); color:#fff; position:fixed; top:0; left:0; right:0; z-index:1050;">
+<nav class="navbar navbar-expand-md py-0" style="height:auto; min-height:57px; background:linear-gradient(180deg,#0f172a,#1e293b); border-bottom:1px solid rgba(255,255,255,0.06); box-shadow:0 2px 12px rgba(0,0,0,0.15); color:#fff; position:sticky; top:0; z-index:1050;">
     <div class="container-fluid px-3">
         {{-- Brand --}}
         <a class="navbar-brand d-flex align-items-center fw-bold fs-5 py-0" href="/admin" style="color:#fff;">
