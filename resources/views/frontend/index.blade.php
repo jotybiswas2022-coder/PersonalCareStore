@@ -923,13 +923,22 @@
         transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
     html.light-theme .cs-step { background: rgba(255,255,255,0.5); }
-    .cs-step::before {
+    .cs-step::after {
         content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
         opacity: 0.6;
     }
-    .cs-step.cs-problem::before { background: var(--accent); }
-    .cs-step.cs-solution::before { background: var(--accent); }
-    .cs-step.cs-result::before { background: var(--accent); }
+    .cs-step.cs-problem::after { background: var(--accent); }
+    .cs-step.cs-solution::after { background: var(--accent); }
+    .cs-step.cs-result::after { background: var(--accent); }
+    .cs-step::before {
+        content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+        background: radial-gradient(circle at var(--shine-x, 50%) var(--shine-y, 50%), rgba(59,130,246,0.25) 0%, rgba(59,130,246,0.08) 30%, transparent 60%);
+        pointer-events: none; opacity: 0; transition: opacity 0.5s ease; z-index: 1; border-radius: inherit;
+    }
+    html.light-theme .cs-step::before {
+        background: radial-gradient(circle at var(--shine-x, 50%) var(--shine-y, 50%), rgba(59,130,246,0.15) 0%, rgba(59,130,246,0.05) 30%, transparent 60%);
+    }
+    .cs-step:hover::before { opacity: 1; }
     .cs-step:hover {
         border-color: rgba(99,102,241,0.2);
         box-shadow: 0 8px 30px rgba(99,102,241,0.06);
@@ -948,7 +957,7 @@
     .cs-step-label.lb-problem { color: var(--accent); }
     .cs-step-label.lb-solution { color: var(--accent); }
     .cs-step-label.lb-result { color: var(--accent); }
-    .cs-step p { font-size: 0.85rem; line-height: 1.65; color: var(--accent-light); margin: 0; }
+    .cs-step p { font-size: 0.85rem; line-height: 1.65; color: var(--text-primary); margin: 0; }
     .casestudy-footer {
         display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem;
         padding-top: 1rem; border-top: 1px solid var(--border-color);
@@ -3679,6 +3688,30 @@
     }
 
     setTimeout(function() { if (isVisible) randomThunder(); }, 1000);
+})();
+
+// ===== CASESTUDY STEP SHINE EFFECT =====
+(function() {
+    document.querySelectorAll('.cs-step').forEach(function(card) {
+        var rafId = null;
+        card.addEventListener('mousemove', function(e) {
+            if (rafId) return;
+            var self = this;
+            rafId = requestAnimationFrame(function() {
+                var rect = self.getBoundingClientRect();
+                var x = ((e.clientX - rect.left) / rect.width) * 100;
+                var y = ((e.clientY - rect.top) / rect.height) * 100;
+                self.style.setProperty('--shine-x', x + '%');
+                self.style.setProperty('--shine-y', y + '%');
+                rafId = null;
+            });
+        });
+        card.addEventListener('mouseleave', function() {
+            if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
+            this.style.setProperty('--shine-x', '50%');
+            this.style.setProperty('--shine-y', '50%');
+        });
+    });
 })();
 
 // ===== TIMELINE CARD SHINE EFFECT =====
