@@ -2196,17 +2196,6 @@
                             <div class="number" data-count="30">0</div>
                             <div class="label">{{ __('messages.stat_clients') }}</div>
                         </div>
-                        @if(isset($account) && $account->cv)
-                            <div class="stat-item stat-cv">
-                                <a href="{{ config('app.storage_url') }}{{ $account->cv }}" 
-                                   download
-                                   class="btn-download magnetic" style="display:flex;flex-direction:column;align-items:center;gap:0.3rem;text-decoration:none;color:inherit;background:none;border:none;padding:0;">
-                                    <span class="stat-icon" style="background:linear-gradient(135deg,#3b82f6,#2563eb);color:#fff;"><i class="bi bi-cloud-arrow-down-fill"></i></span>
-                                    <div class="number" style="font-size:0.75rem;line-height:1.2;">{{ __('messages.download_cv') }}</div>
-                                    <div class="label" style="font-size:0.65rem;">PDF</div>
-                                </a>
-                            </div>
-                        @endif
                         <div class="stat-item">
                             <div class="stat-glow"></div>
                             <div class="stat-icon"><i class="bi bi-trophy-fill"></i></div>
@@ -2214,6 +2203,24 @@
                             <div class="label">{{ __('messages.stat_years') }}</div>
                         </div>
                     </div>
+
+                    <!-- Download CV Button -->
+                    @if(isset($account) && $account->cv)
+                        <div class="btn-download-wrapper">
+                            <a href="{{ config('app.storage_url') }}{{ $account->cv }}" 
+                               download
+                               class="btn-download magnetic">
+                                <span class="download-icon"><i class="bi bi-cloud-arrow-down-fill"></i></span>
+                                <span class="btn-text">
+                                    {{ __('messages.download_cv') }}
+                                    <span class="format-badge"><i class="bi bi-filetype-pdf"></i> PDF</span>
+                                </span>
+                            </a>
+                            <span class="download-hint">
+                                <i class="bi bi-arrow-down-circle"></i> {{ __('messages.click_to_download') }}
+                            </span>
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>
