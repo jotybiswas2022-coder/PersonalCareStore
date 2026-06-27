@@ -23,17 +23,17 @@
             </a>
         </li>
         <li>
-            <a href="{{ url('/admin/projects') }}"
-               class="{{ request()->is('admin/projects*') ? 'active' : '' }}">
-                <i class="bi bi-folder2-open"></i>
-                <span>Projects</span>
-            </a>
-        </li>
-        <li>
             <a href="{{ url('/admin/services') }}"
                class="{{ request()->is('admin/services*') ? 'active' : '' }}">
                 <i class="bi bi-gear"></i>
                 <span>Services</span>
+            </a>
+        </li>
+        <li>
+            <a href="{{ url('/admin/case-studies') }}"
+               class="{{ request()->is('admin/case-studies*') ? 'active' : '' }}">
+                <i class="bi bi-journal-code"></i>
+                <span>Case Studies</span>
             </a>
         </li>
         <li>
@@ -51,17 +51,17 @@
             </a>
         </li>
         <li>
+            <a href="{{ url('/admin/projects') }}"
+               class="{{ request()->is('admin/projects*') ? 'active' : '' }}">
+                <i class="bi bi-folder2-open"></i>
+                <span>Projects</span>
+            </a>
+        </li>
+        <li>
             <a href="{{ url('/admin/testimonials') }}"
                class="{{ request()->is('admin/testimonials*') ? 'active' : '' }}">
                 <i class="bi bi-chat-quote"></i>
                 <span>Testimonials</span>
-            </a>
-        </li>
-        <li>
-            <a href="{{ url('/admin/case-studies') }}"
-               class="{{ request()->is('admin/case-studies*') ? 'active' : '' }}">
-                <i class="bi bi-journal-code"></i>
-                <span>Case Studies</span>
             </a>
         </li>
         <li>

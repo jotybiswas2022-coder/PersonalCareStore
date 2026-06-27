@@ -71,13 +71,13 @@ use Illuminate\Support\Str;
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link topbar-link {{ request()->is('admin/projects*') ? 'active-link' : '' }}" href="{{ url('/admin/projects') }}">
-                        <i class="bi bi-folder2-open"></i> Projects
+                    <a class="nav-link topbar-link {{ request()->is('admin/services*') ? 'active-link' : '' }}" href="{{ url('/admin/services') }}">
+                        <i class="bi bi-gear"></i> Services
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link topbar-link {{ request()->is('admin/services*') ? 'active-link' : '' }}" href="{{ url('/admin/services') }}">
-                        <i class="bi bi-gear"></i> Services
+                    <a class="nav-link topbar-link {{ request()->is('admin/case-studies*') ? 'active-link' : '' }}" href="{{ url('/admin/case-studies') }}">
+                        <i class="bi bi-journal-code"></i> Case Studies
                     </a>
                 </li>
                 <li class="nav-item">
@@ -91,13 +91,13 @@ use Illuminate\Support\Str;
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link topbar-link {{ request()->is('admin/testimonials*') ? 'active-link' : '' }}" href="{{ url('/admin/testimonials') }}">
-                        <i class="bi bi-chat-quote"></i> Testimonials
+                    <a class="nav-link topbar-link {{ request()->is('admin/projects*') ? 'active-link' : '' }}" href="{{ url('/admin/projects') }}">
+                        <i class="bi bi-folder2-open"></i> Projects
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link topbar-link {{ request()->is('admin/case-studies*') ? 'active-link' : '' }}" href="{{ url('/admin/case-studies') }}">
-                        <i class="bi bi-journal-code"></i> Case Studies
+                    <a class="nav-link topbar-link {{ request()->is('admin/testimonials*') ? 'active-link' : '' }}" href="{{ url('/admin/testimonials') }}">
+                        <i class="bi bi-chat-quote"></i> Testimonials
                     </a>
                 </li>
                 <li class="nav-item">
