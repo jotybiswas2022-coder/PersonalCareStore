@@ -913,14 +913,21 @@
     .casestudy-body h3 { font-size: 1.3rem; font-weight: 800; margin-bottom: 0.2rem; letter-spacing: -0.3px; }
     .casestudy-client { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1.25rem; display: flex; align-items: center; gap: 0.4rem; }
     .casestudy-steps {
-        display: flex; gap: 0; margin-bottom: 1.5rem;
-        background: rgba(99,102,241,0.03); border-radius: 16px;
-        padding: 0.75rem; position: relative;
+        display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem;
+        margin-bottom: 1.5rem;
     }
-    html.light-theme .casestudy-steps { background: rgba(99,102,241,0.04); }
-    .cs-step { flex: 1; min-width: 0; padding: 0.75rem; position: relative; }
-    .cs-step + .cs-step { border-left: 1px solid rgba(99,102,241,0.08); }
-    .cs-step-header { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.5rem; }
+    .cs-step {
+        background: rgba(255,255,255,0.03); border: 1px solid rgba(99,102,241,0.08);
+        border-radius: 16px; padding: 1.25rem;
+        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    html.light-theme .cs-step { background: rgba(255,255,255,0.5); }
+    .cs-step:hover {
+        border-color: rgba(99,102,241,0.2);
+        box-shadow: 0 8px 30px rgba(99,102,241,0.06);
+        transform: translateY(-3px);
+    }
+    .cs-step-header { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.75rem; }
     .cs-step-num {
         width: 28px; height: 28px; border-radius: 8px;
         display: flex; align-items: center; justify-content: center;
@@ -970,8 +977,8 @@
     .casestudy-cta p { font-size: 1rem; color: var(--text-secondary); margin-bottom: 1.25rem; max-width: 600px; margin-left: auto; margin-right: auto; }
     @media (max-width: 768px) {
         .casestudy-image { height: 180px; }
-        .casestudy-steps { flex-direction: column; gap: 0; padding: 0.5rem; }
-        .cs-step + .cs-step { border-left: none; border-top: 1px solid rgba(99,102,241,0.06); }
+        .casestudy-steps { grid-template-columns: 1fr; gap: 0.75rem; }
+        .cs-step { padding: 1rem; }
         .casestudy-footer { flex-direction: column; align-items: flex-start; }
         .casestudy-body { padding: 1.25rem; }
     }
