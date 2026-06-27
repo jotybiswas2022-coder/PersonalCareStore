@@ -3110,7 +3110,7 @@
                 <a href="#services">{{ __('messages.services') }}</a>
                 <a href="#skills">{{ __('messages.skills') }}</a>
                 <a href="#projects">{{ __('messages.projects') }}</a>
-                <a href="#faq">{{ __('messages.faq_title') }}</a>
+                <a href="#faq">FAQ</a>
                 <a href="#contact">{{ __('messages.contact') }}</a>
             </div>
 
@@ -3442,8 +3442,10 @@
 (function() {
     document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
         anchor.addEventListener('click', function(e) {
+            var href = this.getAttribute('href');
+            if (href === '#') { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); return; }
             e.preventDefault();
-            var target = document.querySelector(this.getAttribute('href'));
+            var target = document.querySelector(href);
             if (target) {
                 var pos = target.getBoundingClientRect().top + window.scrollY - 80;
                 window.scrollTo({ top: pos, behavior: 'smooth' });
