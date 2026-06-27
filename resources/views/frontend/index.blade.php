@@ -837,7 +837,7 @@
     }
     @media (max-width: 480px) {
         .wave-services { grid-template-columns: 1fr 1fr; gap: 0.75rem; }
-        .wave-service { padding: 1.2rem 0.75rem; }
+        .wave-service { padding: 0; background: none; border: none; }
         .wave-service .ws-icon { width: 38px; height: 38px; font-size: 1rem; }
         .wave-service h3 { font-size: 0.85rem; }
         .wave-service p { font-size: 0.75rem; }
