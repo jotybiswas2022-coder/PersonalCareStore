@@ -830,7 +830,7 @@
             gap: 1rem; padding: 1.5rem 0;
         }
         .wave-service { flex: none; text-align: center; padding: 0; background: none; border: none; border-radius: 0; }
-        .wave-service:hover { transform: none; box-shadow: none; }
+        .wave-service:hover .ws-icon { background: var(--accent-gradient); border-color: transparent; color: #fff; transform: scale(1.1) rotate(-4deg); box-shadow: 0 8px 25px rgba(59, 130, 246, 0.25); }
         .wave-service .ws-icon { width: 44px; height: 44px; font-size: 1.2rem; margin-bottom: 0.75rem; }
         .wave-service h3 { font-size: 0.95rem; }
         .wave-service p { font-size: 0.8rem; }
