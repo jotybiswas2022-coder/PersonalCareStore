@@ -6,7 +6,6 @@ use App\Http\Controllers\admin\AccountController;
 use App\Http\Controllers\admin\ContactController;
 use App\Http\Controllers\admin\ProjectController;
 use App\Http\Controllers\admin\TestimonialController;
-use App\Http\Controllers\admin\BlogController;
 use App\Http\Controllers\admin\ExperienceController;
 use App\Http\Controllers\admin\SkillController;
 use App\Http\Controllers\admin\ServiceController;
@@ -45,17 +44,6 @@ Route::prefix('/admin')->middleware('admin')->group(function () {
 
     // Testimonials
     Route::prefix('/testimonials')->name('admin.testimonials.')->controller(TestimonialController::class)->group(function () {
-        Route::get('/', 'index')->name('index');
-        Route::get('/create', 'create')->name('create');
-        Route::post('/store', 'store')->name('store');
-        Route::get('/edit/{id}', 'edit')->name('edit');
-        Route::put('/update/{id}', 'update')->name('update');
-        Route::delete('/delete/{id}', 'destroy')->name('destroy');
-        Route::get('/toggle-status/{id}', 'toggleStatus')->name('toggleStatus');
-    });
-
-    // Blog
-    Route::prefix('/blog')->name('admin.blog.')->controller(BlogController::class)->group(function () {
         Route::get('/', 'index')->name('index');
         Route::get('/create', 'create')->name('create');
         Route::post('/store', 'store')->name('store');

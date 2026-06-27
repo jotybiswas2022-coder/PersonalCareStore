@@ -58,13 +58,6 @@
             </a>
         </li>
         <li>
-            <a href="{{ url('/admin/blog') }}"
-               class="{{ request()->is('admin/blog*') ? 'active' : '' }}">
-                <i class="bi bi-pencil-square"></i>
-                <span>Blog</span>
-            </a>
-        </li>
-        <li>
             <a href="{{ url('/admin/faqs') }}"
                class="{{ request()->is('admin/faqs*') ? 'active' : '' }}">
                 <i class="bi bi-question-circle"></i>

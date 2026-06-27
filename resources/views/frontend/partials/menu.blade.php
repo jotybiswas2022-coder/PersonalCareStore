@@ -373,8 +373,6 @@
     <!-- Desktop Nav Links -->
     <ul class="nav-links" id="navLinks">
         <li><a href="/" class="{{ request()->is('/') ? 'nav-active' : '' }}"><i class="bi bi-house-fill me-1"></i>{{ __('messages.home') }}</a></li>
-        <li><a href="{{ url('/blog') }}" class="{{ request()->is('blog') || request()->is('blog/*') ? 'nav-active' : '' }}"><i class="bi bi-journal-text me-1"></i>{{ __('messages.blog') }}</a></li>
-
         @auth
             @if(auth()->user()->is_admin == 1)
                 <li><a href="/admin" class="nav-action-admin">{{ __('messages.admin') }}</a></li>
@@ -430,7 +428,6 @@
     <div class="drawer-body">
         <ul class="drawer-nav">
             <li><a href="/" class="{{ request()->is('/') ? 'active' : '' }}"><i class="bi bi-house-fill"></i>{{ __('messages.home') }}</a></li>
-            <li><a href="{{ url('/blog') }}" class="{{ request()->is('blog') || request()->is('blog/*') ? 'active' : '' }}"><i class="bi bi-journal-text me-1"></i>{{ __('messages.blog') }}</a></li>
         </ul>
 
         <div class="drawer-divider"></div>

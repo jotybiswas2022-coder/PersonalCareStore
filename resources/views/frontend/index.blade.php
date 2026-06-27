@@ -1227,65 +1227,504 @@
     .carousel-dots .dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(59, 130, 246, 0.2); cursor: pointer; transition: var(--transition); }
     .carousel-dots .dot.active { background: var(--accent); width: 28px; border-radius: 5px; }
 
-    /* Contact */
-    .contact-section { background: linear-gradient(180deg, #080d1a 0%, var(--bg-secondary) 100%); }
-    html.light-theme .contact-section { background: linear-gradient(180deg, #f1f5f9 0%, #eef2f7 100%); }
-    .contact-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 4rem; align-items: start; }
-    .contact-info h3 { font-size: 1.6rem; font-weight: 700; margin-bottom: 1rem; }
-    .contact-info p { color: var(--text-secondary); line-height: 1.8; margin-bottom: 2rem; }
+    /* ===== CONTACT — REDESIGNED MODERN ===== */
+    .contact-section {
+        background: linear-gradient(180deg, #060b18 0%, #0a1628 40%, #0d1f36 70%, #080d1a 100%);
+        position: relative;
+        overflow: hidden;
+    }
+    html.light-theme .contact-section {
+        background: linear-gradient(180deg, #e8f0fe 0%, #dce8f8 40%, #d0e0f5 70%, #eef2f7 100%);
+    }
+
+    /* ===== DECORATIVE BACKGROUND ELEMENTS ===== */
+    .contact-section::before {
+        content: '';
+        position: absolute;
+        top: -20%; left: -10%;
+        width: 500px; height: 500px;
+        background: radial-gradient(circle, rgba(59, 130, 246, 0.08), transparent 70%);
+        border-radius: 50%;
+        pointer-events: none;
+        animation: contactOrbFloat 8s ease-in-out infinite;
+        z-index: 0;
+    }
+    .contact-section::after {
+        content: '';
+        position: absolute;
+        bottom: -10%; right: -5%;
+        width: 400px; height: 400px;
+        background: radial-gradient(circle, rgba(139, 92, 246, 0.06), transparent 70%);
+        border-radius: 50%;
+        pointer-events: none;
+        animation: contactOrbFloat2 10s ease-in-out infinite;
+        z-index: 0;
+    }
+    @keyframes contactOrbFloat {
+        0%, 100% { transform: translate(0, 0) scale(1); }
+        33% { transform: translate(30px, -30px) scale(1.1); }
+        66% { transform: translate(-20px, 20px) scale(0.95); }
+    }
+    @keyframes contactOrbFloat2 {
+        0%, 100% { transform: translate(0, 0) scale(1); }
+        33% { transform: translate(-30px, 20px) scale(1.05); }
+        66% { transform: translate(20px, -30px) scale(0.9); }
+    }
+
+    /* Grid pattern overlay */
+    .contact-section .contact-bg-grid {
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background-image:
+            linear-gradient(rgba(59, 130, 246, 0.03) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(59, 130, 246, 0.03) 1px, transparent 1px);
+        background-size: 60px 60px;
+        pointer-events: none;
+        z-index: 0;
+    }
+    html.light-theme .contact-section .contact-bg-grid {
+        background-image:
+            linear-gradient(rgba(59, 130, 246, 0.05) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(59, 130, 246, 0.05) 1px, transparent 1px);
+    }
+
+    /* ===== MAIN CONTENT ===== */
+    .contact-section .container { position: relative; z-index: 1; }
+    .contact-grid {
+        display: grid;
+        grid-template-columns: 1fr 1.3fr;
+        gap: 3rem;
+        align-items: start;
+    }
+
+    /* ===== CONTACT INFO CARD ===== */
+    .contact-info-card {
+        background: rgba(17, 28, 46, 0.6);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(59, 130, 246, 0.12);
+        border-radius: 24px;
+        padding: 2.5rem;
+        position: relative;
+        overflow: hidden;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .contact-info-card:hover {
+        border-color: rgba(59, 130, 246, 0.25);
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3), 0 0 40px rgba(59, 130, 246, 0.05);
+        transform: translateY(-4px);
+    }
+    html.light-theme .contact-info-card {
+        background: rgba(255, 255, 255, 0.7);
+        border-color: rgba(59, 130, 246, 0.15);
+    }
+    html.light-theme .contact-info-card:hover {
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08), 0 0 40px rgba(59, 130, 246, 0.1);
+    }
+
+    /* Decorative gradient line on top of info card */
+    .contact-info-card::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; right: 0;
+        height: 3px;
+        background: linear-gradient(90deg, transparent, #3b82f6, #8b5cf6, #3b82f6, transparent);
+        background-size: 200% 100%;
+        animation: contactLineSweep 3s linear infinite;
+    }
+    @keyframes contactLineSweep {
+        0% { background-position: -200% 0; }
+        100% { background-position: 200% 0; }
+    }
+
+    .contact-info-card h3 {
+        font-size: 1.5rem;
+        font-weight: 800;
+        margin-bottom: 0.75rem;
+        letter-spacing: -0.5px;
+        background: linear-gradient(135deg, var(--accent-light), #a78bfa);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+    .contact-info-card > p {
+        color: var(--text-secondary);
+        line-height: 1.7;
+        margin-bottom: 2rem;
+        font-size: 0.92rem;
+    }
+
+    /* ===== CONTACT ITEMS — MODERN GLASS ===== */
     .contact-item {
-        display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;
-        padding: 1rem; background: var(--bg-card);
-        border-radius: var(--radius-md); border: 1px solid var(--border-color);
-        transition: var(--transition);
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1rem;
+        padding: 1.1rem 1.2rem;
+        background: rgba(59, 130, 246, 0.04);
+        border: 1px solid rgba(59, 130, 246, 0.08);
+        border-radius: 16px;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        cursor: default;
+        position: relative;
+        overflow: hidden;
     }
-    .contact-item:hover { border-color: rgba(59, 130, 246, 0.35); transform: translateX(8px); }
-    .contact-item .icon-box { width: 45px; height: 45px; background: rgba(59, 130, 246, 0.08); border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0; color: var(--accent); }
-    .contact-item .text .label { font-size: 0.78rem; color: var(--text-muted); }
-    .contact-item .text .value { font-weight: 600; margin-top: 0.15rem; font-size: 0.92rem; }
+    .contact-item::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; bottom: 0;
+        width: 3px;
+        background: linear-gradient(180deg, #3b82f6, #8b5cf6);
+        border-radius: 0 3px 3px 0;
+        transform: scaleY(0);
+        transform-origin: top;
+        transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .contact-item:hover::before { transform: scaleY(1); }
+    .contact-item:hover {
+        border-color: rgba(59, 130, 246, 0.25);
+        transform: translateX(8px) scale(1.02);
+        background: rgba(59, 130, 246, 0.07);
+        box-shadow: 0 8px 30px rgba(59, 130, 246, 0.08);
+    }
+    html.light-theme .contact-item {
+        background: rgba(255, 255, 255, 0.5);
+        border-color: rgba(59, 130, 246, 0.12);
+    }
+    html.light-theme .contact-item:hover {
+        background: rgba(255, 255, 255, 0.8);
+        box-shadow: 0 8px 30px rgba(59, 130, 246, 0.12);
+    }
+    .contact-item .icon-box {
+        width: 48px;
+        height: 48px;
+        min-width: 48px;
+        background: linear-gradient(135deg, rgba(59, 130, 246, 0.12), rgba(139, 92, 246, 0.08));
+        border-radius: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.25rem;
+        color: var(--accent-light);
+        transition: all 0.4s ease;
+        position: relative;
+    }
+    .contact-item:hover .icon-box {
+        background: var(--accent-gradient);
+        color: #fff;
+        transform: scale(1.1) rotate(-5deg);
+        box-shadow: 0 8px 25px rgba(59, 130, 246, 0.3);
+    }
+    .contact-item .text .label {
+        font-size: 0.72rem;
+        color: var(--text-muted);
+        text-transform: uppercase;
+        letter-spacing: 0.8px;
+        font-weight: 600;
+        margin-bottom: 2px;
+    }
+    .contact-item .text .value {
+        font-weight: 700;
+        font-size: 0.95rem;
+        color: var(--text-primary);
+        letter-spacing: 0.2px;
+        transition: color 0.3s ease;
+    }
+    .contact-item:hover .text .value {
+        color: var(--accent-light);
+    }
+
+    /* ===== SOCIAL LINKS ===== */
+    .contact-social {
+        margin-top: 1.5rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid rgba(59, 130, 246, 0.08);
+    }
+    .contact-social .social-label {
+        font-size: 0.75rem;
+        color: var(--text-muted);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-weight: 600;
+        margin-bottom: 0.8rem;
+    }
+    .contact-social .social-row {
+        display: flex;
+        gap: 0.6rem;
+        flex-wrap: wrap;
+    }
+    .contact-social .social-link {
+        width: 42px;
+        height: 42px;
+        border-radius: 12px;
+        background: rgba(59, 130, 246, 0.06);
+        border: 1px solid rgba(59, 130, 246, 0.1);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--text-muted);
+        font-size: 1.1rem;
+        text-decoration: none;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        position: relative;
+    }
+    .contact-social .social-link:hover {
+        background: var(--accent-gradient);
+        border-color: transparent;
+        color: #fff;
+        transform: translateY(-4px) scale(1.1);
+        box-shadow: 0 8px 25px rgba(59, 130, 246, 0.3);
+    }
+
+    /* ===== CONTACT FORM — GLASS CARD ===== */
     .contact-form {
-        background: var(--bg-card); border: 1px solid var(--border-color);
-        border-radius: var(--radius-xl); padding: 2.5rem;
+        background: rgba(17, 28, 46, 0.6);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(59, 130, 246, 0.12);
+        border-radius: 24px;
+        padding: 2.8rem;
+        transition: all 0.4s ease;
+        position: relative;
+        overflow: hidden;
     }
-    .form-group { margin-bottom: 1.5rem; }
-    .form-group label { display: block; font-weight: 600; font-size: 0.85rem; margin-bottom: 0.5rem; color: #cbd5e1; }
-    html.light-theme .form-group label { color: #334155; }
+    .contact-form:hover {
+        border-color: rgba(59, 130, 246, 0.2);
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    }
+    html.light-theme .contact-form {
+        background: rgba(255, 255, 255, 0.7);
+        border-color: rgba(59, 130, 246, 0.15);
+    }
+    html.light-theme .contact-form:hover {
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+    }
+
+    /* Form header */
+    .contact-form .form-header {
+        margin-bottom: 2rem;
+    }
+    .contact-form .form-header h4 {
+        font-size: 1.3rem;
+        font-weight: 700;
+        margin-bottom: 0.3rem;
+        color: var(--text-primary);
+    }
+    .contact-form .form-header p {
+        font-size: 0.85rem;
+        color: var(--text-secondary);
+        margin: 0;
+    }
+
+    /* ===== MODERN FORM FIELDS ===== */
+    .form-group {
+        margin-bottom: 1.5rem;
+        position: relative;
+    }
+    .form-group .field-wrapper {
+        position: relative;
+    }
+    .form-group label {
+        display: block;
+        font-size: 0.78rem;
+        font-weight: 600;
+        margin-bottom: 0.4rem;
+        color: var(--text-secondary);
+        letter-spacing: 0.3px;
+        transition: color 0.3s ease;
+    }
+    .form-group:focus-within label {
+        color: var(--accent-light);
+    }
     .form-group input, .form-group textarea {
-        width: 100%; padding: 0.9rem 1.2rem;
-        background: rgba(10, 15, 30, 0.7); border: 1px solid var(--border-color);
-        border-radius: var(--radius-md); color: var(--text-primary);
-        font-family: var(--font); font-size: 0.92rem;
-        transition: var(--transition); outline: none;
+        width: 100%;
+        padding: 0.85rem 1.2rem;
+        background: rgba(10, 15, 30, 0.5);
+        border: 1.5px solid rgba(59, 130, 246, 0.1);
+        border-radius: 14px;
+        color: var(--text-primary);
+        font-family: var(--font);
+        font-size: 0.92rem;
+        transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        outline: none;
     }
     html.light-theme .form-group input,
     html.light-theme .form-group textarea {
-        background: #ffffff !important;
+        background: rgba(255, 255, 255, 0.6) !important;
         color: #0f172a !important;
-        border-color: #d1d5db !important;
+        border-color: rgba(59, 130, 246, 0.15) !important;
     }
-    .form-group input:focus, .form-group textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1); }
+    .form-group input:focus, .form-group textarea:focus {
+        border-color: #3b82f6;
+        box-shadow:
+            0 0 0 3px rgba(59, 130, 246, 0.08),
+            0 4px 20px rgba(59, 130, 246, 0.05);
+        background: rgba(10, 15, 30, 0.7);
+    }
     html.light-theme .form-group input:focus,
     html.light-theme .form-group textarea:focus {
+        background: #ffffff !important;
         border-color: #3b82f6 !important;
-        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15) !important;
+        box-shadow:
+            0 0 0 3px rgba(59, 130, 246, 0.12),
+            0 4px 20px rgba(59, 130, 246, 0.1) !important;
     }
-    .form-group textarea { resize: vertical; min-height: 120px; }
+    .form-group input::placeholder, .form-group textarea::placeholder {
+        color: rgba(148, 163, 184, 0.4);
+    }
+    html.light-theme .form-group input::placeholder,
+    html.light-theme .form-group textarea::placeholder {
+        color: rgba(100, 116, 139, 0.4);
+    }
+    .form-group textarea {
+        resize: vertical;
+        min-height: 120px;
+        line-height: 1.6;
+    }
+
+    /* Input focus glow effect */
+    .form-group .field-glow {
+        position: absolute;
+        top: -2px; left: -2px; right: -2px; bottom: -2px;
+        border-radius: 16px;
+        background: linear-gradient(135deg, #3b82f6, #8b5cf6, #3b82f6);
+        background-size: 200% 200%;
+        opacity: 0;
+        z-index: -1;
+        transition: opacity 0.4s ease;
+        animation: fieldGlowRotate 2s linear infinite;
+        pointer-events: none;
+    }
+    @keyframes fieldGlowRotate {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+    .form-group:focus-within .field-glow {
+        opacity: 1;
+    }
+
+    /* Input icons */
+    .form-group .field-icon {
+        position: absolute;
+        right: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+        color: rgba(148, 163, 184, 0.3);
+        font-size: 1rem;
+        pointer-events: none;
+        transition: all 0.3s ease;
+    }
+    .form-group:focus-within .field-icon {
+        color: var(--accent);
+        opacity: 0.6;
+    }
+    .form-group textarea ~ .field-icon {
+        top: 1.2rem;
+        transform: none;
+    }
+
+    /* ===== MODERN SUBMIT BUTTON ===== */
     .btn-submit {
-        width: 100%; padding: 1rem;
-        background: var(--accent-gradient); color: #fff;
-        border: none; border-radius: var(--radius-md);
-        font-size: 0.95rem; font-weight: 700; cursor: pointer;
-        transition: var(--transition); position: relative; overflow: hidden;
+        width: 100%;
+        padding: 1rem 1.5rem;
+        background: linear-gradient(135deg, #3b82f6, #6366f1, #8b5cf6);
+        background-size: 200% 200%;
+        color: #fff;
+        border: none;
+        border-radius: 14px;
+        font-size: 0.95rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        position: relative;
+        overflow: hidden;
         font-family: var(--font);
+        letter-spacing: 0.3px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.6rem;
+        animation: btnGradShift 3s ease infinite;
     }
-    .btn-submit:hover { transform: translateY(-2px); box-shadow: var(--shadow-accent); }
-    .btn-submit::after {
-        content: ''; position: absolute; top: 50%; left: 50%;
-        width: 0; height: 0; background: rgba(255,255,255,0.15);
-        border-radius: 50%; transition: all 0.5s ease;
-        transform: translate(-50%, -50%);
+    @keyframes btnGradShift {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
     }
-    .btn-submit:active::after { width: 400px; height: 400px; }
+    .btn-submit:hover {
+        transform: translateY(-3px) scale(1.02);
+        box-shadow:
+            0 12px 40px rgba(59, 130, 246, 0.35),
+            0 0 60px rgba(59, 130, 246, 0.1);
+    }
+    .btn-submit:active {
+        transform: translateY(-1px) scale(0.98);
+    }
+    .btn-submit .btn-shimmer {
+        position: absolute;
+        top: 0; left: -100%;
+        width: 100%; height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+        transition: left 0.6s ease;
+    }
+    .btn-submit:hover .btn-shimmer { left: 100%; }
+    .btn-submit .btn-icon {
+        font-size: 1.1rem;
+        transition: transform 0.4s ease;
+    }
+    .btn-submit:hover .btn-icon {
+        transform: translateX(3px) rotate(-10deg);
+    }
+
+    /* ===== MODERN MAP SECTION ===== */
+    .map-wrapper {
+        margin-top: 3rem;
+        position: relative;
+    }
+    .map-container {
+        max-width: 900px;
+        margin: 0 auto;
+        border-radius: 24px;
+        overflow: hidden;
+        border: 1px solid rgba(59, 130, 246, 0.12);
+        box-shadow:
+            0 10px 40px rgba(0, 0, 0, 0.3),
+            0 0 60px rgba(59, 130, 246, 0.03);
+        transition: all 0.4s ease;
+        position: relative;
+    }
+    .map-container::before {
+        content: '';
+        position: absolute;
+        top: -1px; left: -1px; right: -1px; bottom: -1px;
+        border-radius: 25px;
+        background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), transparent, rgba(139, 92, 246, 0.1));
+        z-index: -1;
+        opacity: 0;
+        transition: opacity 0.5s ease;
+    }
+    .map-container:hover {
+        border-color: rgba(59, 130, 246, 0.25);
+        box-shadow:
+            0 20px 60px rgba(0, 0, 0, 0.4),
+            0 0 80px rgba(59, 130, 246, 0.06);
+        transform: translateY(-3px);
+    }
+    .map-container:hover::before { opacity: 1; }
+    .map-container iframe {
+        display: block;
+        filter: invert(0.9) hue-rotate(180deg) saturate(0.5);
+        transition: filter 0.5s ease;
+    }
+    .map-container:hover iframe { filter: invert(0.85) hue-rotate(180deg) saturate(0.6); }
+    html.light-theme .map-container iframe { filter: none !important; }
+    html.light-theme .map-container {
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+    }
+    html.light-theme .map-container:hover {
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+    }
 
     /* Map */
     .map-wrapper { margin-top: 3rem; }
@@ -2128,67 +2567,109 @@
         </div>
     </section>
 
-    <!-- Contact Section -->
+        <!-- Contact Section — REDESIGNED MODERN -->
     <section class="contact-section section-padding" id="contact">
+        <div class="contact-bg-grid"></div>
         <div class="container">
             <div class="section-title reveal">
                 <div class="line"></div>
-                <h2>{{ __('messages.contact_title') }}</h2>
-                <p>{{ __('messages.contact_subtitle') }}</p>
+                <h2>{{ __("messages.contact_title") }}</h2>
+                <p>{{ __("messages.contact_subtitle") }}</p>
             </div>
+
             <div class="contact-grid">
-                <div class="contact-info reveal reveal-delay-1">
-                    <h3>{{ __('messages.contact_heading') }}</h3>
-                    <p>{{ __('messages.contact_desc') }}</p>
+                <div class="contact-info-card reveal reveal-delay-1">
+                    <h3><i class="bi bi-chat-dots-fill me-2"></i>{{ __("messages.contact_heading") }}</h3>
+                    <p>{{ __("messages.contact_desc") }}</p>
 
                     <div class="contact-item">
                         <div class="icon-box"><i class="bi bi-envelope-fill"></i></div>
                         <div class="text">
-                            <div class="label">{{ __('messages.email_label') }}</div>
-                            <div class="value">{{ $account->email ?? 'joty@example.com' }}</div>
+                            <div class="label">{{ __("messages.email_label") }}</div>
+                            <div class="value">{{ $account->email ?? "joty@example.com" }}</div>
                         </div>
                     </div>
 
                     <div class="contact-item">
                         <div class="icon-box"><i class="bi bi-phone-fill"></i></div>
                         <div class="text">
-                            <div class="label">{{ __('messages.phone_label') }}</div>
-                            <div class="value">{{ $account->phone ?? '+880 1XXX-XXXXXX' }}</div>
+                            <div class="label">{{ __("messages.phone_label") }}</div>
+                            <div class="value">{{ $account->phone ?? "+880 1XXX-XXXXXX" }}</div>
                         </div>
                     </div>
 
                     <div class="contact-item">
                         <div class="icon-box"><i class="bi bi-geo-alt-fill"></i></div>
                         <div class="text">
-                            <div class="label">{{ __('messages.location_label') }}</div>
+                            <div class="label">{{ __("messages.location_label") }}</div>
                             <div class="value">Bangladesh</div>
                         </div>
                     </div>
+
+                    @if(isset($account) && ($account->github || $account->linkedin || $account->facebook || $account->twitter || $account->youtube))
+                        <div class="contact-social">
+                            <div class="social-label"><i class="bi bi-share-fill me-1"></i> {{ __("messages.connect") }}</div>
+                            <div class="social-row">
+                                @if(isset($account) && $account->github)
+                                    <a href="{{ $account->github }}" target="_blank" class="social-link" aria-label="GitHub"><i class="bi bi-github"></i></a>
+                                @endif
+                                @if(isset($account) && $account->linkedin)
+                                    <a href="{{ $account->linkedin }}" target="_blank" class="social-link" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+                                @endif
+                                @if(isset($account) && $account->facebook)
+                                    <a href="{{ $account->facebook }}" target="_blank" class="social-link" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+                                @endif
+                                @if(isset($account) && $account->twitter)
+                                    <a href="{{ $account->twitter }}" target="_blank" class="social-link" aria-label="Twitter"><i class="bi bi-twitter-x"></i></a>
+                                @endif
+                                @if(isset($account) && $account->youtube)
+                                    <a href="{{ $account->youtube }}" target="_blank" class="social-link" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+                                @endif
+                            </div>
+                        </div>
+                    @endif
                 </div>
 
                 <div class="contact-form reveal reveal-delay-2">
-                    <form action="{{ url('/contactus') }}" method="POST" id="contactForm">
+                    <div class="form-header">
+                        <h4><i class="bi bi-pencil-square me-2"></i>{{ __("messages.send_message") }}</h4>
+                        <p>{{ __("messages.contact_desc") }}</p>
+                    </div>
+                    <form action="{{ url("/contactus") }}" method="POST" id="contactForm">
                         @csrf
                         <div class="form-group">
-                            <label for="name">{{ __('messages.your_name') }}</label>
-                            <input type="text" id="name" name="name" class="form-control" placeholder="{{ __('messages.name_placeholder') }}" required>
+                            <label for="name"><i class="bi bi-person-fill me-1"></i> {{ __("messages.your_name") }}</label>
+                            <div class="field-wrapper">
+                                <input type="text" id="name" name="name" class="form-control" placeholder="{{ __("messages.name_placeholder") }}" required>
+                                <span class="field-glow"></span>
+                                <i class="bi bi-person field-icon"></i>
+                            </div>
                         </div>
                         <div class="form-group">
-                            <label for="email">{{ __('messages.your_email') }}</label>
-                            <input type="email" id="email" name="email" class="form-control" placeholder="{{ __('messages.email_placeholder') }}" required>
+                            <label for="email"><i class="bi bi-envelope-fill me-1"></i> {{ __("messages.your_email") }}</label>
+                            <div class="field-wrapper">
+                                <input type="email" id="email" name="email" class="form-control" placeholder="{{ __("messages.email_placeholder") }}" required>
+                                <span class="field-glow"></span>
+                                <i class="bi bi-envelope field-icon"></i>
+                            </div>
                         </div>
                         <div class="form-group">
-                            <label for="message">{{ __('messages.your_message') }}</label>
-                            <textarea id="message" name="message" class="form-control" placeholder="{{ __('messages.message_placeholder') }}" rows="4" required></textarea>
+                            <label for="message"><i class="bi bi-chat-text-fill me-1"></i> {{ __("messages.your_message") }}</label>
+                            <div class="field-wrapper">
+                                <textarea id="message" name="message" class="form-control" placeholder="{{ __("messages.message_placeholder") }}" rows="4" required></textarea>
+                                <span class="field-glow"></span>
+                                <i class="bi bi-chat-text field-icon"></i>
+                            </div>
                         </div>
-                        <button type="submit" class="btn-submit magnetic">
-                            <i class="bi bi-rocket-fill"></i> {{ __('messages.send_message') }}
+                        <button type="submit" class="btn-submit">
+                            <span class="btn-shimmer"></span>
+                            <i class="bi bi-send-fill btn-icon"></i>
+                            <span>{{ __("messages.send_message") }}</span>
                         </button>
                     </form>
                 </div>
             </div>
 
-            <!-- Google Map -->
             <div class="map-wrapper reveal reveal-delay-1">
                 <div class="map-container">
                     <iframe
@@ -2201,9 +2682,7 @@
                 </div>
             </div>
         </div>
-    </section>
-
-    <!-- FAQ Section -->
+    </section><!-- FAQ Section -->
     <section class="faq-section section-padding" id="faq">
         <div class="container">
             <div class="section-title reveal">
@@ -2268,7 +2747,6 @@
             <a href="#services">{{ __('messages.services') }}</a>
             <a href="#skills">{{ __('messages.skills') }}</a>
             <a href="#projects">{{ __('messages.projects') }}</a>
-            <a href="{{ url('/blog') }}">{{ __('messages.blog') }}</a>
             <a href="#faq">{{ __('messages.faq_title') }}</a>
             <a href="#contact">{{ __('messages.contact') }}</a>
         </div>

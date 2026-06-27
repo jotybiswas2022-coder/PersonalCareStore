@@ -329,8 +329,8 @@
                 <div style="font-size:1.2rem;font-weight:700;color:#fff;">{{ $activeProjects }}/{{ $projectsCount }}</div>
             </div>
             <div class="col-4 col-md-2">
-                <div style="font-size:0.65rem;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:0.5px;">Posts</div>
-                <div style="font-size:1.2rem;font-weight:700;color:#fff;">{{ $publishedPosts }}/{{ $postsCount }}</div>
+                <div style="font-size:0.65rem;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:0.5px;">FAQs</div>
+                <div style="font-size:1.2rem;font-weight:700;color:#fff;">{{ $faqsCount }}</div>
             </div>
             <div class="col-4 col-md-2">
                 <div style="font-size:0.65rem;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:0.5px;">Messages</div>
@@ -385,7 +385,6 @@
     <div class="row g-3 mb-4">
         @php
             $stats2 = [
-                ['count' => $postsCount, 'sub' => "$publishedPosts published", 'label' => 'Blog Posts', 'icon' => 'bi-pencil-square', 'color' => '#3b82f6', 'bg' => 'rgba(59,130,246,0.08)'],
                 ['count' => $faqsCount, 'sub' => "$activeFaqs active", 'label' => 'FAQs', 'icon' => 'bi-question-circle', 'color' => '#f97316', 'bg' => 'rgba(249,115,22,0.08)'],
                 ['count' => $contactsCount, 'sub' => 'all inbox', 'label' => 'Messages', 'icon' => 'bi-envelope', 'color' => '#ef4444', 'bg' => 'rgba(239,68,68,0.08)'],
                 ['count' => $usersCount, 'sub' => 'registered', 'label' => 'Users', 'icon' => 'bi-people', 'color' => '#0ea5e9', 'bg' => 'rgba(14,165,233,0.08)'],
@@ -439,37 +438,6 @@
                         </a>
                     @empty
                         <div class="text-center py-4 text-muted small"><i class="bi bi-folder2-open fs-2 d-block mb-2"></i>No projects yet</div>
-                    @endforelse
-                </div>
-            </div>
-        </div>
-
-        {{-- Recent Posts --}}
-        <div class="col-lg-6 dsb-fade">
-            <div class="dsb-card">
-                <div class="dsb-card-hd">
-                    <span><i class="bi bi-pencil-square" style="color:#3b82f6;"></i> Recent Blog Posts</span>
-                    <a href="{{ url('/admin/blog') }}" class="btn btn-sm" style="border-radius:50px;border:1px solid #e2e8f0;color:#64748b;font-weight:600;font-size:0.75rem;padding:0.3rem 0.9rem;background:transparent;">
-                        View All <i class="bi bi-arrow-right ms-1"></i>
-                    </a>
-                </div>
-                <div class="dsb-card-bd">
-                    @forelse($recentPosts as $p)
-                        <a href="{{ url('/admin/blog/edit/' . $p->id) }}" class="dsb-item" style="--accent:#3b82f6;">
-                            <span class="dsb-item-av" style="background:rgba(59,130,246,0.08); color:#3b82f6;">
-                                <i class="bi bi-file-text"></i>
-                            </span>
-                            <span class="dsb-item-info">
-                                <span class="dsb-item-title">{{ $p->title }}</span>
-                                <span class="dsb-item-meta">
-                                    @if($p->category)<span><i class="bi bi-folder"></i>{{ $p->category }} &middot; </span>@endif
-                                    <span><i class="bi bi-clock"></i>{{ $p->created_at->diffForHumans() }}</span>
-                                </span>
-                            </span>
-                            <span class="dsb-badge {{ $p->is_published ? 'text-bg-success' : 'text-bg-warning' }}">{{ $p->is_published ? 'Published' : 'Draft' }}</span>
-                        </a>
-                    @empty
-                        <div class="text-center py-4 text-muted small"><i class="bi bi-pencil-square fs-2 d-block mb-2"></i>No posts yet</div>
                     @endforelse
                 </div>
             </div>
@@ -577,7 +545,6 @@
                         <a href="{{ url('/admin/experiences/create') }}" class="dsb-qa"><i class="bi bi-plus-circle" style="color:#f59e0b;"></i> Experience</a>
                         <a href="{{ url('/admin/skills/create') }}" class="dsb-qa"><i class="bi bi-plus-circle" style="color:#8b5cf6;"></i> Skill</a>
                         <a href="{{ url('/admin/testimonials/create') }}" class="dsb-qa"><i class="bi bi-plus-circle" style="color:#ec4899;"></i> Testimonial</a>
-                        <a href="{{ url('/admin/blog/create') }}" class="dsb-qa"><i class="bi bi-plus-circle" style="color:#3b82f6;"></i> Blog Post</a>
                         <a href="{{ url('/admin/faqs/create') }}" class="dsb-qa"><i class="bi bi-plus-circle" style="color:#f97316;"></i> FAQ</a>
                         <a href="{{ url('/admin/account/edit') }}" class="dsb-qa"><i class="bi bi-pencil" style="color:#0ea5e9;"></i> Account</a>
                     </div>

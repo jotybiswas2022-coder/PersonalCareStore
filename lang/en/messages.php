@@ -8,7 +8,6 @@ return [
     'skills'         => 'Skills',
     'projects'       => 'Projects',
     'contact'        => 'Contact',
-    'blog'           => 'Blog',
     'admin'          => 'Admin',
     'login'          => 'Login',
     'signup'         => 'Signup',
@@ -101,23 +100,6 @@ return [
     'faq_subtitle'    => 'Answers to common questions',
     'no_faqs'         => 'No FAQs Added Yet',
     'no_faqs_desc'    => 'FAQ data coming soon!',
-
-    // Blog Search
-    'search_blog'     => 'Search blog posts...',
-    'search'          => 'Search',
-    'search_results'  => 'Search results for',
-    'no_results'      => 'No results found',
-    'no_results_desc' => 'Try searching with different keywords.',
-
-    // Blog
-    'blog_title'           => 'My',
-    'blog_subtitle'        => 'Thoughts, tutorials, and insights about web development',
-    'no_posts'             => 'No Posts Yet',
-    'no_posts_desc'        => 'Blog posts will appear here. Check back soon!',
-    'read_more'            => 'Read More',
-    'back_to_blog'         => 'Back to Blog',
-    'related_posts'        => 'Related Posts',
-    'related_subtitle'     => 'You might also enjoy reading',
 
     // Misc
     'loading'          => 'Loading...',
