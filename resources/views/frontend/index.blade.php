@@ -816,39 +816,27 @@
         background: rgba(6, 182, 212, 0.02);
     }
 
-    /* ---- Mobile: simplified card layout ---- */
+    /* ---- Mobile ---- */
     @media (max-width: 768px) {
-        .services-section .water-surface { display: none; }
-        .services-section .bottom-waves { display: none; }
-        .wave-scene::before, .wave-scene::after,
-        .wave-scene .wave-layer, .wave-scene .wave-layer-2,
-        .wave-scene .wave-shimmer, .wave-scene .wave-ripple,
-        .wave-scene .wave-bubbles { display: none; }
-        .wave-scene { min-height: auto; padding: 0; }
-        .wave-services {
-            display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-            gap: 1rem; padding: 0;
-        }
-        .wave-service {
-            flex: none; text-align: center;
-            background: var(--bg-card); border: 1px solid var(--border-color);
-            border-radius: var(--radius-lg); padding: 1.5rem 1rem;
-            transition: var(--transition);
-        }
-        .wave-service:hover { border-color: var(--border-hover); transform: translateY(-3px); box-shadow: var(--shadow-md); }
-        .wave-service .ws-icon { width: 44px; height: 44px; font-size: 1.2rem; margin-bottom: 0.75rem; }
-        .wave-service h3 { font-size: 0.95rem; text-shadow: none; }
-        .wave-service p { font-size: 0.8rem; text-shadow: none; }
+        .services-section .water-surface { height: 30px; }
+        .services-section .water-surface .wave { height: 40px; }
+        .services-section .bottom-waves { height: 40px; }
+        .wave-scene { min-height: auto; padding: 1rem 0; }
+        .wave-services { gap: 2rem 1.5rem; padding: 2rem 0; }
+        .wave-service { flex: 0 1 220px; }
+        .wave-service h3 { font-size: 1rem; }
+        .wave-service p { font-size: 0.8rem; }
+        .wave-service .ws-icon { width: 48px; height: 48px; font-size: 1.3rem; }
+        .wave-scene .wave-bubbles .bub { display: none; }
+        .wave-scene .wave-shimmer { opacity: 0.3; }
     }
     @media (max-width: 480px) {
-        .wave-services { grid-template-columns: 1fr 1fr; gap: 0.75rem; }
-        .wave-service { padding: 1.2rem 0.75rem; }
-        .wave-service .ws-icon { width: 38px; height: 38px; font-size: 1rem; }
-        .wave-service h3 { font-size: 0.85rem; }
-        .wave-service p { font-size: 0.75rem; }
-    }
-    @media (max-width: 360px) {
-        .wave-services { grid-template-columns: 1fr; }
+        .wave-services { flex-direction: column; align-items: center; gap: 2rem; }
+        .wave-service { flex: 0 0 auto; max-width: 260px; }
+        .wave-service h3 { font-size: 0.95rem; }
+        .wave-service p { font-size: 0.78rem; }
+        .wave-service .ws-icon { width: 44px; height: 44px; font-size: 1.1rem; }
+        .wave-scene .wave-layer-2 { display: none; }
     }
 
     /* ── Case Studies ── */
