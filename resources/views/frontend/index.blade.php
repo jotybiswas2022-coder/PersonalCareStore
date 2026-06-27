@@ -2743,6 +2743,114 @@
     });
 })();
 
+// ===== THUNDER / LIGHTNING EFFECT FOR SKILLS (HOVER-TRIGGERED) =====
+(function() {
+    var section = document.querySelector('.skills-section');
+    if (!section) return;
+
+    var allCards = document.querySelectorAll('.skills-grid .skill-card');
+    if (!allCards.length) return;
+
+    var originalCount = Math.ceil(allCards.length / 2);
+    var cards = [];
+    for (var i = 0; i < originalCount; i++) {
+        cards.push(allCards[i]);
+    }
+
+    var dupCards = [];
+    for (var i = originalCount; i < allCards.length; i++) {
+        dupCards.push(allCards[i]);
+    }
+
+    function getPair(index) {
+        return { orig: cards[index], dup: dupCards[index] };
+    }
+
+    function createSparks(card) {
+        var count = 8;
+        for (var i = 0; i < count; i++) {
+            var spark = document.createElement('div');
+            spark.className = 'spark';
+            var angle = (i / count) * 360;
+            var dist = 30 + Math.random() * 40;
+            spark.style.setProperty('--spark-x', Math.cos(angle * Math.PI / 180) * dist + 'px');
+            spark.style.setProperty('--spark-y', Math.sin(angle * Math.PI / 180) * dist + 'px');
+            var size = 2 + Math.random() * 3;
+            spark.style.width = size + 'px';
+            spark.style.height = size + 'px';
+            var hue = 200 + Math.random() * 40;
+            spark.style.background = 'hsl(' + hue + ', 100%, 70%)';
+            spark.style.boxShadow = '0 0 ' + (4 + Math.random() * 6) + 'px hsla(' + hue + ', 100%, 70%, 0.8)';
+            card.appendChild(spark);
+            setTimeout(function() {
+                spark.classList.add('spark-active');
+                setTimeout(function() { spark.remove(); }, 800);
+            }, i * 30);
+        }
+    }
+
+    function strikeCard(card) {
+        if (!card) return;
+        card.classList.add('thunder-strike', 'thunder-shake');
+        var flash = card.querySelector('.thunder-flash');
+        var electric = card.querySelector('.electric-ring');
+        var bolt = card.querySelector('.skill-lightning');
+        [flash, electric, bolt].forEach(function(el) {
+            if (!el) return;
+            var cls = el === flash ? 'flash-active' : el === electric ? 'arc-active' : 'thunder-active';
+            el.classList.remove(cls);
+            el.offsetWidth;
+            el.classList.add(cls);
+        });
+        createSparks(card);
+        setTimeout(function() {
+            card.classList.remove('thunder-strike', 'thunder-shake');
+            card.querySelectorAll('.skill-circle-progress').forEach(function(c) { c.style.filter = ''; });
+        }, 1000);
+    }
+
+    function triggerLightning(index) {
+        var pair = getPair(index);
+        strikeCard(pair.orig);
+        if (pair.dup) strikeCard(pair.dup);
+    }
+
+    function triggerBgFlash() {
+        if (!section) return;
+        section.classList.remove('thunder-bg-flash');
+        section.offsetWidth;
+        section.classList.add('thunder-bg-flash');
+        setTimeout(function() { section.classList.remove('thunder-bg-flash'); }, 700);
+    }
+
+    // Throttle helper to prevent rapid re-triggers (1.5s cooldown)
+    var hoverTimers = {};
+
+    function isThrottled(index) {
+        var now = Date.now();
+        if (hoverTimers[index] && now - hoverTimers[index] < 1500) return true;
+        hoverTimers[index] = now;
+        return false;
+    }
+
+    // Attach hover listeners to each card
+    cards.forEach(function(card, index) {
+        card.addEventListener('mouseenter', function() {
+            if (isThrottled(index)) return;
+            triggerLightning(index);
+            triggerBgFlash();
+        });
+    });
+
+    // Also attach hover to duplicate cards for seamless scroll continuity
+    dupCards.forEach(function(dup, index) {
+        dup.addEventListener('mouseenter', function() {
+            if (isThrottled(index)) return;
+            triggerLightning(index);
+            triggerBgFlash();
+        });
+    });
+})();
 // ===== THUNDER / LIGHTNING EFFECT FOR SKILLS =====
 (function() {
     var section = document.querySelector('.skills-section');
