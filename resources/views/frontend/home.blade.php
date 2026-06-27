@@ -5,20 +5,6 @@
 @push('styles')
 <style>
 /* ═══════════════════════════════════════════
-   SCROLL PROGRESS
-   ═══════════════════════════════════════════ */
-#scrollProgress {
-    position: fixed; top: 0; left: 0;
-    height: 2.5px; z-index: 9999;
-    background: linear-gradient(90deg, var(--primary), #7C3AED, var(--gold));
-    background-size: 200% 100%;
-    width: 0%;
-    transition: width 0.1s linear;
-    animation: progressGlow 3s ease-in-out infinite;
-}
-@keyframes progressGlow { 0%,100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
-
-/* ═══════════════════════════════════════════
    AURORA WAVE OVERLAY
    ═══════════════════════════════════════════ */
 .hero-aurora {
@@ -1306,61 +1292,10 @@ n/* ── Smooth scene restart transition ── */
     transition: opacity 0.35s ease-in-out;
 }
 
-   BACK TO TOP
-   ═══════════════════════════════════════════ */
-#backToTop {
-    position: fixed; bottom: 2rem; right: 2rem;
-    width: 3.25rem; height: 3.25rem;
-    background: linear-gradient(135deg, var(--primary), #6366f1);
-    color: #fff; border: none; border-radius: 50%;
-    cursor: pointer;
-    box-shadow: 0 4px 20px rgba(37,99,235,0.35);
-    z-index: 999;
-    display: flex; align-items: center; justify-content: center;
-    opacity: 0;
-    transform: translateY(20px) scale(0.8);
-    transition: all 0.4s cubic-bezier(0.34,1.56,0.64,1);
-    pointer-events: none;
-}
-#backToTop.visible { opacity: 1; transform: translateY(0) scale(1); pointer-events: auto; }
-#backToTop:hover { transform: translateY(-4px) scale(1.1); box-shadow: 0 12px 32px rgba(37,99,235,0.5); }
-#backToTop:active { transform: translateY(-1px) scale(0.95); }
-#backToTop svg {
-    animation: bounce-arrow 2s ease-in-out infinite;
-}
-#backToTop:hover svg {
-    animation: none;
-    transform: translateY(-3px);
-}
-#backToTop.visible svg {
-    animation: bounce-arrow 2s ease-in-out infinite;
-}
-#backToTop.visible:hover svg {
-    animation: none;
-    transform: translateY(-3px);
-}
-@keyframes bounce-arrow {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-6px); }
-}
-#backToTop .ring-pulse {
-    position: absolute; inset: 0; border-radius: 50%;
-    border: 2px solid rgba(37,99,235,0.3);
-    animation: pulse-ring 2s cubic-bezier(0.215,0.61,0.355,1) infinite;
-    pointer-events: none;
-}
-#backToTop .ring-pulse:nth-child(2) { animation-delay: 0.6s; }
-@keyframes pulse-ring {
-    0% { transform: scale(1); opacity: 1; }
-    100% { transform: scale(1.6); opacity: 0; }
-}
 </style>
 @endpush
 
 @section('content')
-<!-- ════════ SCROLL PROGRESS ════════ -->
-<div id="scrollProgress"></div>
-
 <!-- ════════ HERO ════════ -->
 <section class="hero" id="hero">
     <div class="hero-mesh"></div>
@@ -2080,21 +2015,10 @@ n/* ── Smooth scene restart transition ── */
     </div>
 </section>
 
-<button id="backToTop" aria-label="Back to top">
-    <span class="ring-pulse"></span>
-    <span class="ring-pulse"></span>
-    <svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-        <line x1="12" y1="20" x2="12" y2="4"/>
-        <polyline points="5 11 12 4 19 11"/>
-    </svg>
-</button>
 @endsection
 
 @push('scripts')
 <script>
-var scrollProgressEl = document.getElementById('scrollProgress');
-var backToTopBtn = document.getElementById('backToTop');
-
 // ── Hero Mouse Parallax ──
 (function() {
     var hero = document.getElementById('hero');
@@ -2147,15 +2071,6 @@ var backToTopBtn = document.getElementById('backToTop');
     }
     animateHero();
 })();
-
-// ── Scroll ──
-window.addEventListener('scroll', function() {
-    var scrollTop = window.scrollY;
-    scrollProgressEl.style.width = (scrollTop / (document.documentElement.scrollHeight - window.innerHeight) * 100) + '%';
-    backToTopBtn.classList.toggle('visible', scrollTop > 200);
-});
-
-backToTopBtn.addEventListener('click', function() { window.scrollTo({ top: 0, behavior: 'smooth' }); });
 
 // ── Reveal ──
 var revealObserver = new IntersectionObserver(function(entries) {
