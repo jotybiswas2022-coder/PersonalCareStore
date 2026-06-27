@@ -902,7 +902,6 @@
     .skills-section { background: linear-gradient(180deg, #080d1a 0%, var(--bg-secondary) 100%); }
     html.light-theme .skills-section { background: linear-gradient(180deg, #f1f5f9 0%, #eef2f7 100%); }
     .skills-wrapper {
-        overflow: hidden;
     }
     .skills-grid {
         display: flex;
