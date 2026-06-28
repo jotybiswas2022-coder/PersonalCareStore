@@ -1145,12 +1145,12 @@
     }
     .timeline-card::before {
         content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-        background: radial-gradient(circle at var(--shine-x, 50%) var(--shine-y, 50%), rgba(59,130,246,0.25) 0%, rgba(59,130,246,0.08) 30%, transparent 60%);
+        background: radial-gradient(circle at var(--shine-x, 50%) var(--shine-y, 50%), rgba(59,130,246,0.5) 0%, rgba(59,130,246,0.2) 30%, transparent 60%);
         pointer-events: none; opacity: 0; transition: opacity 0.5s ease; z-index: 1; border-radius: inherit;
     }
     .timeline-card:hover::before { opacity: 1; }
     html.light-theme .timeline-card::before {
-        background: radial-gradient(circle at var(--shine-x, 50%) var(--shine-y, 50%), rgba(59,130,246,0.15) 0%, rgba(59,130,246,0.05) 30%, transparent 60%);
+        background: radial-gradient(circle at var(--shine-x, 50%) var(--shine-y, 50%), rgba(59,130,246,0.4) 0%, rgba(59,130,246,0.15) 30%, transparent 60%);
     }
     .timeline-card:hover {
         border-color: var(--border-hover); transform: translateY(-5px);
