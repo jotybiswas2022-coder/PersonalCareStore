@@ -393,7 +393,7 @@
 
     <!-- Right Group -->
     <div class="nav-right-group">
-        <div class="lang-switcher d-none d-md-flex">
+        <div class="lang-switcher">
             <a href="{{ route('language.switch', 'en') }}" 
                class="lang-btn {{ app()->getLocale() == 'en' ? 'active' : '' }}"
                title="{{ __('messages.english') }}">EN</a>
