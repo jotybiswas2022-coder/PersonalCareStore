@@ -46,6 +46,33 @@
         --shadow-accent: 0 10px 40px rgba(59, 130, 246, 0.2);
     }
     html.light-theme body { background: #f8fafc; }
+
+    /* Hero Light Theme */
+    html.light-theme .hero {
+        background: linear-gradient(180deg, #eef4ff 0%, #f8fafc 100%);
+    }
+    html.light-theme .hero::before {
+        background: radial-gradient(circle, rgba(59, 130, 246, 0.07), transparent 70%);
+    }
+    html.light-theme .float-chip {
+        background: rgba(255, 255, 255, 0.9);
+        border-color: rgba(59, 130, 246, 0.25);
+        color: #475569;
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+    }
+    html.light-theme .float-chip i {
+        color: #3b82f6;
+    }
+    html.light-theme .orbit-ring {
+        border-color: rgba(59, 130, 246, 0.25);
+    }
+    html.light-theme .vis-glow {
+        background: radial-gradient(circle at center, rgba(59, 130, 246, 0.08), transparent 70%);
+    }
+    html.light-theme .hero-lines .hline {
+        background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.25), transparent);
+    }
+
     html.light-theme .project-card {
         background: linear-gradient(145deg, #ffffff, #f8fafc) !important;
     }
