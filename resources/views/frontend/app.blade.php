@@ -20,6 +20,11 @@
         /* Remove underline from ALL links across the entire site */
         a { text-decoration: none !important; }
 
+        /* Center page layout */
+        #pageContent {
+            width: 100%;
+        }
+
         /* Light Theme - works on ALL pages */
         html.light-theme {
             --bg-primary: #f8fafc;
@@ -101,6 +106,7 @@
         }
         /* Fade-in animation for page content */
         .page-content {
+            width: 100%;
             opacity: 1 !important;
             animation: pageFadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }

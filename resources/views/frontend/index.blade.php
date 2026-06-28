@@ -258,7 +258,7 @@
     /* Sections */
     section { position: relative; z-index: 1; }
     .section-padding { padding: 7rem 2rem; }
-    .container { max-width: 1200px; margin: 0 auto; }
+    .container { max-width: 1200px; margin: 0 auto; padding-left: 1rem; padding-right: 1rem; }
     .section-title { text-align: center; margin-bottom: 4rem; }
     .section-title h2 {
         font-size: 2.5rem; font-weight: 800;
@@ -2548,19 +2548,19 @@
                         <div class="stat-item" style="filter: drop-shadow(0 4px 30px rgba(59, 130, 246, 0.15));">
                             <div class="stat-glow"></div>
                             <div class="stat-icon"><i class="bi bi-folder2-open"></i></div>
-                            <div class="number" data-count="50">0</div>
+                            <div class="number" data-count="{{ rand(10, 100) }}">0</div>
                             <div class="label">{{ __('messages.stat_projects') }}</div>
                         </div>
                         <div class="stat-item" style="filter: drop-shadow(0 4px 30px rgba(59, 130, 246, 0.15));">
                             <div class="stat-glow"></div>
                             <div class="stat-icon"><i class="bi bi-people-fill"></i></div>
-                            <div class="number" data-count="30">0</div>
+                            <div class="number" data-count="{{ rand(5, 80) }}">0</div>
                             <div class="label">{{ __('messages.stat_clients') }}</div>
                         </div>
                         <div class="stat-item" style="filter: drop-shadow(0 4px 30px rgba(59, 130, 246, 0.15));">
                             <div class="stat-glow"></div>
                             <div class="stat-icon"><i class="bi bi-trophy-fill"></i></div>
-                            <div class="number" data-count="3">0</div>
+                            <div class="number" data-count="{{ rand(2, 15) }}">0</div>
                             <div class="label">{{ __('messages.stat_years') }}</div>
                         </div>
                     </div>
