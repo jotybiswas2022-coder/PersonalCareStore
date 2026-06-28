@@ -3451,6 +3451,7 @@
         }
         
         // Admin float
+        if (adminFloat) {
             if (scrollY > 300) adminFloat.classList.add('visible');
             else adminFloat.classList.remove('visible');
         }
