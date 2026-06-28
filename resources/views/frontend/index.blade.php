@@ -72,6 +72,12 @@
     html.light-theme .hero-lines .hline {
         background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.25), transparent);
     }
+    html.light-theme .stat-item .number {
+        filter: drop-shadow(0 0 12px rgba(59, 130, 246, 0.15));
+    }
+    html.light-theme .stat-item:hover .number {
+        filter: drop-shadow(0 0 20px rgba(59, 130, 246, 0.3));
+    }
 
     html.light-theme .project-card {
         background: linear-gradient(145deg, #ffffff, #f8fafc) !important;
@@ -413,12 +419,14 @@
         margin-bottom: 0.25rem;
         letter-spacing: -1px;
         transition: all 0.3s ease;
+        filter: drop-shadow(0 0 12px rgba(59, 130, 246, 0.25));
     }
     .stat-item:hover .number {
         background: linear-gradient(135deg, #60a5fa, #c084fc);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
+        filter: drop-shadow(0 0 20px rgba(59, 130, 246, 0.45));
     }
     .stat-item .label {
         font-size: 0.78rem;
