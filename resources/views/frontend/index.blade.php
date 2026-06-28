@@ -2576,19 +2576,19 @@
                         <div class="stat-item" style="filter: drop-shadow(0 4px 30px rgba(59, 130, 246, 0.15));">
                             <div class="stat-glow"></div>
                             <div class="stat-icon"><i class="bi bi-folder2-open"></i></div>
-                            <div class="number" data-count="20">0</div>
+                            <div class="number" data-count="{{ rand(10, 50) }}">0</div>
                             <div class="label">{{ __('messages.stat_projects') }}</div>
                         </div>
                         <div class="stat-item" style="filter: drop-shadow(0 4px 30px rgba(59, 130, 246, 0.15));">
                             <div class="stat-glow"></div>
                             <div class="stat-icon"><i class="bi bi-people-fill"></i></div>
-                            <div class="number" data-count="15">0</div>
+                            <div class="number" data-count="{{ rand(5, 30) }}">0</div>
                             <div class="label">{{ __('messages.stat_clients') }}</div>
                         </div>
                         <div class="stat-item" style="filter: drop-shadow(0 4px 30px rgba(59, 130, 246, 0.15));">
                             <div class="stat-glow"></div>
                             <div class="stat-icon"><i class="bi bi-trophy-fill"></i></div>
-                            <div class="number" data-count="3">0</div>
+                            <div class="number" data-count="{{ rand(1, 10) }}">0</div>
                             <div class="label">{{ __('messages.stat_years') }}</div>
                         </div>
                     </div>
