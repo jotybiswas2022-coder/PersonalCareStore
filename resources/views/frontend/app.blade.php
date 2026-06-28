@@ -17,12 +17,17 @@
 
         <!-- Page Loading Animation -->
     <style>
+        /* Ensure full-width layout */
+        html { width: 100%; margin: 0; padding: 0; }
+        body { width: 100%; margin: 0; padding: 0; }
+
         /* Remove underline from ALL links across the entire site */
         a { text-decoration: none !important; }
 
-        /* Center page layout */
+        /* Center page layout - full width wrapper */
         #pageContent {
             width: 100%;
+            overflow-x: hidden;
         }
 
         /* Light Theme - works on ALL pages */
