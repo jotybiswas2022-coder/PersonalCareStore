@@ -2,30 +2,22 @@
 
 namespace App\Providers;
 
+use App\Models\Cart;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
-use Illuminate\Support\Facades\Cache;
-use App\Models\Account;
 
 class AppServiceProvider extends ServiceProvider
 {
-    /**
-     * Register any application services.
-     */
     public function register(): void
     {
         //
     }
 
-    /**
-     * Bootstrap any application services.
-     */
     public function boot(): void
     {
-        View::composer(['frontend.app', 'frontend.partials.menu'], function ($view) {
-            $view->with('account', Cache::remember('portfolio.account', 300, function () {
-                return Account::first();
-            }));
+        View::composer('frontend.partials.nav', function ($view) {
+            $count = Cart::where('session_id', session()->getId())->count();
+            $view->with('cartCount', $count);
         });
     }
 }

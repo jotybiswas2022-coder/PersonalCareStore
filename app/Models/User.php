@@ -3,13 +3,14 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    /** @use HasFactory<\Database\Factories\UserFactory> */
+    /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable;
 
     /**
@@ -45,20 +46,5 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
-    }
-
-    public function conversations(): \Illuminate\Database\Eloquent\Relations\HasMany
-    {
-        return $this->hasMany(Conversation::class, 'user_id');
-    }
-
-    public function adminConversations(): \Illuminate\Database\Eloquent\Relations\HasMany
-    {
-        return $this->hasMany(Conversation::class, 'admin_id');
-    }
-
-    public function messages(): \Illuminate\Database\Eloquent\Relations\HasMany
-    {
-        return $this->hasMany(Message::class, 'sender_id');
     }
 }

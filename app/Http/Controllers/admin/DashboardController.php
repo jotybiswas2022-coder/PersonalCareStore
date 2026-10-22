@@ -1,78 +1,81 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\Models\Account;
-use App\Models\Contact;
-use App\Models\Project;
-use App\Models\Service;
-use App\Models\Experience;
-use App\Models\Skill;
-use App\Models\Testimonial;
-use App\Models\Faq;
-use App\Models\CaseStudy;
-use App\Models\Gig;
+use App\Models\Order;
+use App\Models\Product;
+use App\Models\Category;
 use App\Models\User;
+use App\Models\Review;
+use App\Models\ContactMessage;
+use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
-    public function index(): \Illuminate\View\View
+    public function index()
     {
-        $account     = Account::first();
-        $usersCount  = User::count();
+        $totalProducts = Product::count();
+        $totalCategories = Category::count();
+        $totalOrders = Order::count();
+        $totalCustomers = User::where('is_admin', false)->count();
+        $totalReviews = Review::count();
 
-        $accountsCount    = Account::count();
-        $contactsCount    = Contact::count();
-        $projectsCount    = Project::count();
-        $servicesCount    = Service::count();
-        $experiencesCount = Experience::count();
-        $skillsCount      = Skill::count();
-        $testimonialsCount = Testimonial::count();
-        $faqsCount        = Faq::count();
-        $caseStudiesCount = CaseStudy::count();
-        $gigsCount        = Gig::count();
+        // Today's stats
+        $todayOrders = Order::whereDate('created_at', today())->count();
+        $todayRevenue = Order::whereDate('created_at', today())
+            ->whereIn('payment_status', ['paid', 'approved'])
+            ->sum('total');
 
-        $contacts    = Contact::latest()->take(5)->get();
-        $recentProjects = Project::latest()->take(5)->get();
-        $recentServices = Service::latest()->take(5)->get();
-        $recentMessages = Contact::latest()->take(5)->get();
+        // Low stock products
+        $lowStockProducts = Product::where('stock_quantity', '<=', 5)->count();
 
-        $activeProjects    = Project::where('is_active', true)->count();
-        $activeServices    = Service::where('is_active', true)->count();
-        $activeExperiences = Experience::where('is_active', true)->count();
-        $activeSkills      = Skill::where('is_active', true)->count();
-        $activeTestimonials = Testimonial::where('is_active', true)->count();
-        $activeFaqs        = Faq::where('is_active', true)->count();
-        $activeCaseStudies = CaseStudy::where('is_active', true)->count();
-        $activeGigs        = Gig::where('is_active', true)->count();
+        // Order status counts
+        $pendingOrders = Order::where('status', 'pending')->count();
+        $processingOrders = Order::where('status', 'processing')->count();
+        $shippedOrders = Order::where('status', 'shipped')->count();
+        $deliveredOrders = Order::where('status', 'delivered')->count();
+        $cancelledOrders = Order::where('status', 'cancelled')->count();
 
-        return view('backend.index', compact(
-            'account',
-            'usersCount',
-            'accountsCount',
-            'contactsCount',
-            'projectsCount',
-            'servicesCount',
-            'experiencesCount',
-            'skillsCount',
-            'testimonialsCount',
-            'faqsCount',
-            'caseStudiesCount',
-            'gigsCount',
-            'contacts',
-            'recentProjects',
-            'recentServices',
-            'recentMessages',
-            'activeProjects',
-            'activeServices',
-            'activeExperiences',
-            'activeSkills',
-            'activeTestimonials',
-            'activeFaqs',
-            'activeCaseStudies',
-            'activeGigs',
+        // Payment stats
+        $paymentUnpaid = Order::where('payment_status', 'unpaid')->count();
+        $paymentPending = Order::where('payment_status', 'pending')->count();
+        $paymentPaid = Order::where('payment_status', 'paid')->count();
+        $paymentApproved = Order::where('payment_status', 'approved')->count();
+        $paymentRejected = Order::where('payment_status', 'rejected')->count();
+
+        // Profit & Loss stats
+        $plStats = DB::table('order_items')
+            ->join('orders', 'order_items.order_id', '=', 'orders.id')
+            ->leftJoin('products', 'order_items.product_id', '=', 'products.id')
+            ->whereIn('orders.status', ['delivered', 'shipped', 'processing'])
+            ->select(
+                DB::raw('SUM(order_items.product_price * order_items.quantity) as total_revenue'),
+                DB::raw('SUM(COALESCE(products.price, 0) * order_items.quantity) as total_base_cost'),
+                DB::raw('SUM(order_items.quantity) as total_qty')
+            )
+            ->first();
+
+        $recentOrders = Order::with('user')
+            ->orderBy('created_at', 'desc')
+            ->take(5)
+            ->get();
+
+        $recentProducts = Product::orderBy('created_at', 'desc')
+            ->take(5)
+            ->get();
+
+        $unreadMessages = ContactMessage::whereNull('admin_reply')->count();
+
+        return view('admin.dashboard', compact(
+            'totalProducts', 'totalCategories', 'totalOrders', 'totalCustomers', 'totalReviews',
+            'todayOrders', 'todayRevenue',
+            'lowStockProducts',
+            'pendingOrders', 'processingOrders', 'shippedOrders', 'deliveredOrders', 'cancelledOrders',
+            'paymentUnpaid', 'paymentPending', 'paymentPaid', 'paymentApproved', 'paymentRejected',
+            'plStats',
+            'recentOrders', 'recentProducts',
+            'unreadMessages'
         ));
     }
 }

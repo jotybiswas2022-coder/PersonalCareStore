@@ -1,4 +1,3 @@
-make_commits.ps1
 *.log
 .DS_Store
 .env
@@ -23,4 +22,3 @@ make_commits.ps1
 Homestead.json
 Homestead.yaml
 Thumbs.db
-nul
