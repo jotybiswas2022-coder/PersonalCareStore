@@ -32,7 +32,7 @@ class Review extends Model
     public function getImageUrlAttribute(): ?string
     {
         if (!$this->image) return null;
-        return config('app.storage_url') . ltrim(preg_replace('#^storage/#', '', $this->image), '/');
+        return url('media/' . ltrim(preg_replace('#^storage/#', '', $this->image), '/'));
     }
 
     public function product(): BelongsTo

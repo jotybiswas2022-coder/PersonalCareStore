@@ -69,6 +69,6 @@ class Order extends Model
     public function getProofImageUrlAttribute(): ?string
     {
         if (!$this->proof_image) return null;
-        return config('app.storage_url') . ltrim(preg_replace('#^storage/#', '', $this->proof_image), '/');
+        return url('media/' . ltrim(preg_replace('#^storage/#', '', $this->proof_image), '/'));
     }
 }

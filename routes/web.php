@@ -27,6 +27,23 @@ use App\Http\Controllers\ProfileController;
 |--------------------------------------------------------------------------
 */
 Route::get('/', [HomeController::class, 'index'])->name('home');
+
+/*
+|--------------------------------------------------------------------------
+| Uploaded media
+|--------------------------------------------------------------------------
+| Serves product, review and payment-proof images from the public disk so
+| they work without relying on a storage symlink at the web root.
+*/
+Route::get('/media/{path}', function (string $path) {
+    $disk = \Illuminate\Support\Facades\Storage::disk('public');
+    abort_unless($disk->exists($path), 404);
+
+    return $disk->response($path, null, [
+        'Cache-Control' => 'public, max-age=604800',
+        'X-Content-Type-Options' => 'nosniff',
+    ]);
+})->where('path', '(?i)(products|reviews|proofs)/[A-Za-z0-9][A-Za-z0-9._-]*\.(jpe?g|png|webp|gif)')->name('media');
 Route::get('/products', [ProductController::class, 'index'])->name('products.index');
 Route::get('/products/{id}', [ProductController::class, 'show'])->name('products.show');
 Route::get('/products/category/{categoryId}', [ProductController::class, 'byCategory'])->name('products.byCategory');

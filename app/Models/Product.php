@@ -73,10 +73,9 @@ class Product extends Model
     public function getImageUrlsAttribute(): array
     {
         if (!$this->images) return [];
-        $baseUrl = config('app.storage_url');
-        return array_map(function ($img) use ($baseUrl) {
+        return array_map(function ($img) {
             $path = preg_replace('#^storage/#', '', $img);
-            return rtrim($baseUrl, '/') . '/' . ltrim($path, '/');
+            return url('media/' . ltrim($path, '/'));
         }, $this->images);
     }
 }
