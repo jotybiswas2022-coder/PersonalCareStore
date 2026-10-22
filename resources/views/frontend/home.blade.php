@@ -723,291 +723,750 @@
         }
     }
 
-    /* ─────────────── STATS ─────────────── */
-    .stats-bar {
-        background: #ffffff;
-        border-top: 1px solid #e9ecef;
-        border-bottom: 1px solid #e9ecef;
-        padding: 2.5rem 1.5rem;
+    /* ─────────────── BELOW HERO — SHARED ─────────────── */
+    [data-reveal] {
+        opacity: 0;
+        transform: translateY(26px);
+        transition: opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1), transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+        transition-delay: var(--reveal-delay, 0s);
     }
-    .stats-inner {
-        max-width: 1280px;
-        margin: 0 auto;
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-        gap: 2rem;
-        text-align: center;
+    [data-reveal].is-visible {
+        opacity: 1;
+        transform: none;
     }
-    .stat-item .stat-num {
-        font-size: 2rem;
-        font-weight: 800;
-        color: #2E8B57;
-        line-height: 1;
-        margin-bottom: 0.25rem;
-    }
-    .stat-item .stat-label {
-        font-size: 0.8125rem;
-        color: #6b7280;
-        font-weight: 500;
-    }
-
-    /* ─────────────── FEATURES ─────────────── */
-    .section-title {
-        text-align: center;
-        margin-bottom: 3rem;
-    }
-    .section-title h2 {
-        font-size: 2rem;
-        font-weight: 700;
-        color: #212529;
-        margin-bottom: 0.75rem;
-        letter-spacing: -0.02em;
-    }
-    .section-title p {
-        color: #6b7280;
-        max-width: 32rem;
-        margin: 0 auto;
-        font-size: 0.9375rem;
-        line-height: 1.6;
-    }
-    .features-section {
-        padding: 4.5rem 1.5rem;
-        background: #FFFFFF;
-    }
-    .features-grid {
-        max-width: 1280px;
-        margin: 0 auto;
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 1.5rem;
-    }
-    .feature-card-mod {
-        background: #F8F9FA;
-        border: 1px solid #e9ecef;
-        border-radius: 1rem;
-        padding: 2rem;
-        transition: all 0.3s ease;
-        position: relative;
-        overflow: hidden;
-    }
-    .feature-card-mod::after {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        right: 0;
-        width: 80px;
-        height: 80px;
-        border-radius: 50%;
-        background: rgba(46,139,87,0.04);
-        transform: translate(30%, 30%);
-        transition: all 0.3s ease;
-    }
-    .feature-card-mod:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 12px 24px rgba(0,0,0,0.06);
-        border-color: #2E8B57;
-    }
-    .feature-card-mod:hover::after {
-        width: 120px;
-        height: 120px;
-        background: rgba(46,139,87,0.08);
-    }
-    .feature-card-mod .ficon {
-        width: 3rem;
-        height: 3rem;
-        background: #E8F5E9;
-        border-radius: 0.75rem;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: #2E8B57;
-        margin-bottom: 1.25rem;
-        transition: transform 0.3s ease;
-    }
-    .feature-card-mod:hover .ficon { transform: scale(1.1) rotate(-5deg); }
-    .feature-card-mod h3 {
-        font-size: 1.125rem;
-        font-weight: 600;
-        color: #212529;
-        margin-bottom: 0.5rem;
-    }
-    .feature-card-mod p {
-        font-size: 0.875rem;
-        color: #6b7280;
-        line-height: 1.6;
-    }
-
-    /* ─────────────── CTA ─────────────── */
-    .cta-section {
-        padding: 5rem 1.5rem;
-        background: linear-gradient(135deg, #2E8B57 0%, #1B5E20 100%);
-        position: relative;
-        overflow: hidden;
-    }
-    .cta-section::before {
-        content: '';
-        position: absolute;
-        inset: 0;
-        background:
-            radial-gradient(circle 400px at 20% 50%, rgba(255,255,255,0.06) 0%, transparent 70%),
-            radial-gradient(circle 300px at 80% 30%, rgba(255,209,102,0.10) 0%, transparent 70%);
-    }
-    .cta-inner {
-        max-width: 1280px;
-        margin: 0 auto;
-        text-align: center;
-        position: relative;
-        z-index: 1;
-    }
-    .cta-inner h2 {
-        font-size: 2rem;
-        font-weight: 700;
-        color: #ffffff;
-        margin-bottom: 1rem;
-        letter-spacing: -0.02em;
-    }
-    .cta-inner p {
-        color: rgba(255,255,255,0.85);
-        max-width: 32rem;
-        margin: 0 auto 2rem;
-        font-size: 1rem;
-        line-height: 1.6;
-    }
-    .cta-inner .btn-cta {
+    .eyebrow-label {
         display: inline-flex;
         align-items: center;
         gap: 0.5rem;
-        background: #FFD166;
-        color: #212529;
-        padding: 0.875rem 2.5rem;
-        border-radius: 0.625rem;
-        text-decoration: none;
+        font-size: 0.6875rem;
+        font-weight: 700;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: #2E8B57;
+        margin-bottom: 1rem;
+    }
+    .eyebrow-label::before {
+        content: '';
+        width: 1.5rem;
+        height: 1px;
+        background: currentColor;
+        opacity: 0.5;
+    }
+
+    /* ─────────────── STATS ─────────────── */
+    .stats-section {
+        position: relative;
+        overflow: hidden;
+        background: linear-gradient(180deg, #03190F 0%, #052A1A 55%, #07331F 100%);
+        padding: 2rem 1.5rem 4rem;
+    }
+    .stats-section::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(700px 300px at 50% 0%, rgba(72,199,132,0.12), transparent 70%);
+        pointer-events: none;
+    }
+    .stats-panel {
+        position: relative;
+        z-index: 1;
+        max-width: 1280px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        background: rgba(255,255,255,0.035);
+        border: 1px solid rgba(255,255,255,0.09);
+        border-radius: 1.5rem;
+        -webkit-backdrop-filter: blur(14px);
+        backdrop-filter: blur(14px);
+        padding: 2.25rem 0.75rem;
+        box-shadow: inset 0 1px 0 rgba(255,255,255,0.06), 0 26px 60px -30px rgba(0,0,0,0.8);
+    }
+    .stat {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 0.375rem 0.75rem;
+    }
+    .stat + .stat::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 14%;
+        height: 72%;
+        width: 1px;
+        background: linear-gradient(180deg, transparent, rgba(255,255,255,0.14), transparent);
+    }
+    .stat-ico {
+        width: 2.125rem;
+        height: 2.125rem;
+        border-radius: 0.6875rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(123,241,168,0.10);
+        border: 1px solid rgba(123,241,168,0.14);
+        color: #9DF3BE;
+        margin-bottom: 0.625rem;
+    }
+    .stat-num {
+        display: flex;
+        align-items: baseline;
+        gap: 0.0625rem;
+        font-size: clamp(1.5rem, 2.4vw, 2.125rem);
+        font-weight: 800;
+        letter-spacing: -0.035em;
+        line-height: 1;
+        color: #FFFFFF;
+        margin-bottom: 0.4375rem;
+    }
+    .stat-num .suffix {
+        font-size: 0.72em;
+        color: #FFD166;
+    }
+    .stat-label {
+        font-size: 0.6875rem;
         font-weight: 600;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: rgba(226,245,232,0.55);
+    }
+
+    /* ─────────────── FEATURES ─────────────── */
+    .features-section {
+        position: relative;
+        overflow: hidden;
+        padding: 5.5rem 1.5rem;
+        background: #F6FAF7;
+    }
+    .features-section::before {
+        content: '';
+        position: absolute;
+        top: -12%;
+        right: -8%;
+        width: 520px;
+        height: 520px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(46,139,87,0.09), transparent 68%);
+        pointer-events: none;
+    }
+    .section-head {
+        position: relative;
+        max-width: 1280px;
+        margin: 0 auto 3rem;
+        display: grid;
+        grid-template-columns: 1.15fr 0.85fr;
+        gap: 2.5rem;
+        align-items: end;
+    }
+    .section-head h2 {
+        font-size: clamp(2rem, 3.6vw, 2.875rem);
+        font-weight: 800;
+        line-height: 1.06;
+        letter-spacing: -0.04em;
+        color: #10261A;
+    }
+    .section-head h2 em {
+        font-family: Georgia, 'Times New Roman', serif;
+        font-style: italic;
+        font-weight: 500;
+        letter-spacing: -0.025em;
+        background: linear-gradient(100deg, #2E8B57 0%, #4EB47C 55%, #7BCB9B 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        color: transparent;
+        padding-right: 0.04em;
+    }
+    .section-head .head-right p {
+        font-size: 0.9375rem;
+        line-height: 1.7;
+        color: #5C6B62;
+        margin-bottom: 1rem;
+        max-width: 26rem;
+    }
+    .head-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 0.875rem;
+        font-weight: 600;
+        color: #17603C;
+        text-decoration: none;
+        padding-bottom: 0.1875rem;
+        border-bottom: 1px solid rgba(23,96,60,0.25);
+        transition: gap 0.25s ease, border-color 0.25s ease;
+    }
+    .head-link:hover { gap: 0.75rem; border-color: #17603C; }
+
+    .features-grid {
+        position: relative;
+        max-width: 1280px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        grid-auto-rows: minmax(205px, auto);
+        gap: 1.25rem;
+    }
+    .feature-card {
+        position: relative;
+        overflow: hidden;
+        padding: 1.875rem;
+        background: #FFFFFF;
+        border: 1px solid #E4EEE8;
+        border-radius: 1.5rem;
+        transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.45s ease, border-color 0.3s ease;
+    }
+    .feature-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 28px 52px -30px rgba(10, 60, 38, 0.4);
+        border-color: #B9E2C9;
+    }
+    .feature-card .fc-ico {
+        width: 2.75rem;
+        height: 2.75rem;
+        border-radius: 0.875rem;
+        background: #EDF9F2;
+        border: 1px solid #D6F0E0;
+        color: #2E8B57;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 1.375rem;
+        transition: transform 0.35s ease, background 0.3s ease, color 0.3s ease;
+    }
+    .feature-card:hover .fc-ico {
+        transform: rotate(-6deg) scale(1.06);
+        background: #2E8B57;
+        color: #FFFFFF;
+    }
+    .feature-card h3 {
+        font-size: 1.0625rem;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        color: #10261A;
+        margin-bottom: 0.5rem;
+    }
+    .feature-card p {
+        font-size: 0.875rem;
+        line-height: 1.65;
+        color: #617067;
+    }
+    .feature-index {
+        position: absolute;
+        top: 1.6rem;
+        right: 1.75rem;
+        font-size: 0.6875rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        color: #B4C6BB;
+    }
+
+    /* Feature: large dark card */
+    .feature-hero {
+        grid-column: span 2;
+        grid-row: span 2;
+        min-height: 430px;
+        display: flex;
+        flex-direction: column;
+        padding: 2.5rem;
+        color: #F2FBF5;
+        background:
+            radial-gradient(120% 90% at 90% 0%, rgba(72,199,132,0.32), transparent 55%),
+            linear-gradient(160deg, #0C3D28 0%, #072B1C 100%);
+        border-color: transparent;
+    }
+    .feature-hero:hover {
+        border-color: transparent;
+        box-shadow: 0 32px 60px -30px rgba(4, 32, 20, 0.85);
+    }
+    .feature-hero .fh-top {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+    }
+    .feature-hero .fh-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.375rem;
+        font-size: 0.625rem;
+        font-weight: 800;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: #FFE6A8;
+        background: rgba(255,209,102,0.12);
+        border: 1px solid rgba(255,209,102,0.22);
+        padding: 0.3125rem 0.625rem;
+        border-radius: 9999px;
+    }
+    .feature-hero .fh-stars {
+        display: flex;
+        gap: 0.125rem;
+        color: #FFD166;
+    }
+    .feature-hero .fh-body {
+        position: relative;
+        z-index: 1;
+        margin-top: auto;
+    }
+    .feature-hero h3 {
+        font-size: 1.875rem;
+        font-weight: 800;
+        letter-spacing: -0.035em;
+        color: #FFFFFF;
+        margin-bottom: 0.75rem;
+    }
+    .feature-hero p {
+        font-size: 0.9375rem;
+        line-height: 1.7;
+        color: rgba(226,245,232,0.7);
+        max-width: 30rem;
+    }
+    .feature-hero .fc-ico {
+        background: rgba(255,255,255,0.08);
+        border-color: rgba(255,255,255,0.14);
+        color: #9DF3BE;
+    }
+    .feature-hero:hover .fc-ico {
+        background: #FFD166;
+        color: #0B2E1D;
+    }
+    .feature-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-top: 1.5rem;
+    }
+    .feature-list span {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.375rem;
+        font-size: 0.75rem;
+        font-weight: 600;
+        padding: 0.4375rem 0.75rem;
+        border-radius: 9999px;
+        background: rgba(255,255,255,0.07);
+        border: 1px solid rgba(255,255,255,0.12);
+        color: #DDF6E8;
+    }
+    .feature-list svg { color: #9DF3BE; }
+    .feature-hero .fa-art {
+        position: absolute;
+        top: -14%;
+        right: -10%;
+        width: 62%;
+        height: auto;
+        opacity: 0.9;
+        pointer-events: none;
+        animation: spinSlow 70s linear infinite;
+    }
+
+    /* Feature: wide support card */
+    .feature-wide {
+        grid-column: span 3;
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+        padding: 1.75rem 2.25rem;
+        min-height: 0;
+    }
+    .feature-wide .fc-ico {
+        margin-bottom: 0;
+        flex-shrink: 0;
+    }
+    .feature-wide .fw-text { flex: 1; min-width: 0; }
+    .feature-wide h3 { margin-bottom: 0.25rem; }
+    .feature-wide p { max-width: 46rem; margin-bottom: 0; }
+    .feature-wide .head-link { flex-shrink: 0; }
+
+    /* ─────────────── CTA ─────────────── */
+    .cta-section {
+        padding: 0 1.5rem 5rem;
+        background: #F6FAF7;
+    }
+    .cta-panel {
+        position: relative;
+        overflow: hidden;
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 4.5rem 2rem;
+        border-radius: 2rem;
+        text-align: center;
+        background:
+            radial-gradient(80% 120% at 50% 0%, rgba(46,139,87,0.35), transparent 60%),
+            linear-gradient(145deg, #0B3A25 0%, #062719 55%, #042014 100%);
+        box-shadow: 0 45px 90px -55px rgba(5, 40, 26, 0.9);
+    }
+    .cta-panel::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background-image:
+            linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
+        background-size: 58px 58px;
+        -webkit-mask-image: radial-gradient(circle at 50% 30%, #000, transparent 78%);
+        mask-image: radial-gradient(circle at 50% 30%, #000, transparent 78%);
+        pointer-events: none;
+    }
+    .cta-panel .cta-orb {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(70px);
+        pointer-events: none;
+    }
+    .cta-panel .cta-orb-1 {
+        width: 380px;
+        height: 380px;
+        top: -170px;
+        left: -90px;
+        background: radial-gradient(circle, rgba(72,199,132,0.5), transparent 66%);
+        animation: orbFloat 20s ease-in-out infinite;
+    }
+    .cta-panel .cta-orb-2 {
+        width: 300px;
+        height: 300px;
+        bottom: -150px;
+        right: -70px;
+        background: radial-gradient(circle, rgba(255,209,102,0.32), transparent 66%);
+        animation: orbFloat 26s ease-in-out infinite reverse;
+    }
+    .cta-inner {
+        position: relative;
+        z-index: 1;
+        max-width: 46rem;
+        margin: 0 auto;
+    }
+    .cta-inner .eyebrow-label {
+        color: #9DF3BE;
+        justify-content: center;
+        margin-bottom: 1.125rem;
+    }
+    .cta-inner h2 {
+        font-size: clamp(1.9rem, 4vw, 3rem);
+        font-weight: 800;
+        line-height: 1.07;
+        letter-spacing: -0.04em;
+        color: #FFFFFF;
+        margin-bottom: 1rem;
+    }
+    .cta-inner h2 em {
+        font-family: Georgia, 'Times New Roman', serif;
+        font-style: italic;
+        font-weight: 500;
+        letter-spacing: -0.02em;
+        background: linear-gradient(100deg, #FFEFC2 0%, #FFD166 48%, #9DF3BE 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        color: transparent;
+        padding-right: 0.04em;
+    }
+    .cta-inner p {
         font-size: 1rem;
-        transition: all 0.25s ease;
-        box-shadow: 0 4px 14px rgba(0,0,0,0.2);
+        line-height: 1.7;
+        color: rgba(226,245,232,0.7);
+        max-width: 34rem;
+        margin: 0 auto 2rem;
     }
-    .cta-inner .btn-cta:hover {
-        background: #F0C14B;
-        transform: translateY(-2px);
-        box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+    .cta-actions {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.75rem;
+        flex-wrap: wrap;
     }
-    .cta-inner .btn-cta svg { transition: transform 0.25s ease; }
-    .cta-inner .btn-cta:hover svg { transform: translateX(4px); }
+    .cta-actions .btn-cta {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.625rem;
+        overflow: hidden;
+        padding: 1rem 2rem;
+        border-radius: 0.875rem;
+        background: linear-gradient(135deg, #FFE08A 0%, #FFD166 55%, #F5C14E 100%);
+        color: #12261B;
+        font-size: 0.9375rem;
+        font-weight: 700;
+        text-decoration: none;
+        box-shadow: 0 14px 34px -12px rgba(255,209,102,0.65), inset 0 1px 0 rgba(255,255,255,0.6);
+        transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s ease;
+    }
+    .cta-actions .btn-cta::after {
+        content: '';
+        position: absolute;
+        top: -60%;
+        left: -30%;
+        width: 40%;
+        height: 220%;
+        background: linear-gradient(100deg, transparent 0%, rgba(255,255,255,0.75) 50%, transparent 100%);
+        transform: translateX(-160%) rotate(12deg);
+        transition: transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .cta-actions .btn-cta:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 20px 40px -14px rgba(255,209,102,0.8), inset 0 1px 0 rgba(255,255,255,0.6);
+    }
+    .cta-actions .btn-cta:hover::after { transform: translateX(420%) rotate(12deg); }
+    .cta-actions .btn-cta svg { transition: transform 0.3s ease; }
+    .cta-actions .btn-cta:hover svg { transform: translateX(4px); }
+    .cta-actions .btn-cta-ghost {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 1rem 1.5rem;
+        border-radius: 0.875rem;
+        border: 1px solid rgba(255,255,255,0.22);
+        background: rgba(255,255,255,0.05);
+        -webkit-backdrop-filter: blur(10px);
+        backdrop-filter: blur(10px);
+        color: #EAF8EF;
+        font-size: 0.9375rem;
+        font-weight: 600;
+        text-decoration: none;
+        transition: background 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+    }
+    .cta-actions .btn-cta-ghost:hover {
+        background: rgba(255,255,255,0.12);
+        border-color: rgba(255,255,255,0.34);
+        transform: translateY(-3px);
+    }
+    .cta-note {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-top: 1.5rem;
+        font-size: 0.75rem;
+        color: rgba(226,245,232,0.45);
+    }
+    .cta-note svg { color: #9DF3BE; }
 
     /* ─────────────── NEWSLETTER ─────────────── */
     .newsletter-section {
-        padding: 4.5rem 1.5rem;
-        background: #FFFFFF;
+        padding: 0 1.5rem 5.5rem;
+        background: #F6FAF7;
     }
     .newsletter-inner {
-        max-width: 640px;
+        position: relative;
+        overflow: hidden;
+        max-width: 1180px;
         margin: 0 auto;
-        text-align: center;
+        display: grid;
+        grid-template-columns: 1.02fr 0.98fr;
+        gap: 2.5rem;
+        align-items: center;
+        padding: 2.75rem 3rem;
+        background: #FFFFFF;
+        border: 1px solid #E4EEE8;
+        border-radius: 1.75rem;
+        box-shadow: 0 32px 64px -48px rgba(9, 50, 32, 0.4);
+    }
+    .newsletter-inner::before {
+        content: '';
+        position: absolute;
+        top: -60%;
+        left: -10%;
+        width: 380px;
+        height: 380px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(46,139,87,0.09), transparent 68%);
+        pointer-events: none;
+    }
+    .nl-copy {
+        position: relative;
+        display: flex;
+        gap: 1.125rem;
+        align-items: flex-start;
+    }
+    .nl-ico {
+        flex-shrink: 0;
+        width: 3rem;
+        height: 3rem;
+        border-radius: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, #EDF9F2, #D9F2E3);
+        border: 1px solid #CDEBD8;
+        color: #2E8B57;
+        animation: floatSoft 6s ease-in-out infinite;
     }
     .newsletter-inner h2 {
         font-size: 1.625rem;
-        font-weight: 700;
-        color: #212529;
-        margin-bottom: 0.75rem;
+        font-weight: 800;
+        letter-spacing: -0.03em;
+        color: #10261A;
+        margin-bottom: 0.5rem;
     }
     .newsletter-inner p {
-        color: #6b7280;
         font-size: 0.9375rem;
-        line-height: 1.6;
-        margin-bottom: 2rem;
+        line-height: 1.65;
+        color: #617067;
+        max-width: 27rem;
     }
+    .nl-form-wrap { position: relative; }
     .newsletter-form {
         display: flex;
-        gap: 0.75rem;
-        max-width: 480px;
-        margin: 0 auto;
+        align-items: center;
+        gap: 0.375rem;
+        padding: 0.375rem;
+        border-radius: 9999px;
+        background: #F4F9F5;
+        border: 1px solid #E0ECE5;
+        transition: border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+    .newsletter-form:focus-within {
+        border-color: #7BCB9B;
+        box-shadow: 0 0 0 4px rgba(46,139,87,0.10);
     }
     .newsletter-form input {
         flex: 1;
-        padding: 0.8125rem 1rem;
-        border: 2px solid #e9ecef;
-        border-radius: 0.625rem;
-        font-size: 0.9375rem;
-        outline: none;
-        transition: border-color 0.2s, box-shadow 0.2s;
-        background: #F8F9FA;
-    }
-    .newsletter-form input:focus {
-        border-color: #2E8B57;
-        box-shadow: 0 0 0 3px rgba(46,139,87,0.10);
-    }
-    .newsletter-form button {
-        background: #2E8B57;
-        color: #ffffff;
+        min-width: 0;
         border: none;
-        padding: 0.8125rem 1.5rem;
-        border-radius: 0.625rem;
-        font-weight: 600;
+        outline: none;
+        background: transparent;
+        padding: 0.625rem 0.875rem;
         font-size: 0.9375rem;
+        color: #10261A;
+    }
+    .newsletter-form input::placeholder { color: #93A39A; }
+    .newsletter-form button {
+        flex-shrink: 0;
+        border: none;
         cursor: pointer;
-        transition: all 0.25s ease;
         white-space: nowrap;
+        padding: 0.75rem 1.375rem;
+        border-radius: 9999px;
+        background: linear-gradient(135deg, #FFE08A, #FFD166);
+        color: #12261B;
+        font-size: 0.875rem;
+        font-weight: 700;
+        box-shadow: 0 8px 20px -10px rgba(255,209,102,0.85);
+        transition: transform 0.25s ease, box-shadow 0.25s ease;
     }
     .newsletter-form button:hover {
-        background: #217645;
         transform: translateY(-1px);
+        box-shadow: 0 12px 24px -10px rgba(255,209,102,0.95);
+    }
+    .nl-note {
+        display: flex;
+        align-items: center;
+        gap: 0.375rem;
+        margin-top: 0.75rem;
+        padding-left: 0.5rem;
+        font-size: 0.75rem;
+        color: #7A8B82;
+    }
+    .nl-note svg { color: #2E8B57; }
+
+    @keyframes spinSlow {
+        to { transform: rotate(360deg); }
     }
 
     /* ─────────────── RESPONSIVE ─────────────── */
-    @media (max-width: 768px) {
-        .section-title { margin-bottom: 2rem; }
-        .section-title h2 { font-size: 1.5rem; }
-        .section-title p { font-size: 0.875rem; }
-
-        .features-section { padding: 3rem 1.25rem; }
-        .features-grid { gap: 1rem; }
-        .feature-card-mod { padding: 1.5rem; }
-        .feature-card-mod h3 { font-size: 1rem; }
-        .feature-card-mod p { font-size: 0.8125rem; }
-
-        .stats-bar { padding: 2rem 1.25rem; }
-        .stats-inner {
-            grid-template-columns: repeat(2, 1fr);
+    @media (max-width: 1024px) {
+        .section-head {
+            grid-template-columns: 1fr;
             gap: 1.25rem;
+            align-items: start;
+            margin-bottom: 2.5rem;
         }
-        .stat-item .stat-num { font-size: 1.75rem; }
-        .stat-item .stat-label { font-size: 0.75rem; }
-
-        .cta-section { padding: 3rem 1.25rem; }
-        .cta-inner h2 { font-size: 1.5rem; }
-        .cta-inner p { font-size: 0.875rem; }
-        .cta-inner .btn-cta { width: 100%; justify-content: center; max-width: 20rem; }
-
-        .newsletter-section { padding: 3rem 1.25rem; }
+        .section-head .head-right p { max-width: 34rem; }
+        .features-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+        .feature-hero {
+            grid-column: span 2;
+            grid-row: span 1;
+            min-height: 360px;
+        }
+        .feature-wide { grid-column: span 2; }
+        .nl-form-wrap { width: 100%; }
+        .newsletter-inner { padding: 2.25rem; gap: 1.75rem; }
+    }
+    @media (max-width: 900px) {
+        .stats-panel {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 0.75rem;
+            background: transparent;
+            border: none;
+            box-shadow: none;
+            -webkit-backdrop-filter: none;
+            backdrop-filter: none;
+            padding: 0;
+        }
+        .stat {
+            padding: 1.25rem 1rem;
+            border: 1px solid rgba(255,255,255,0.09);
+            border-radius: 1rem;
+            background: rgba(255,255,255,0.035);
+        }
+        .stat + .stat::before { display: none; }
+        .stat:last-child { grid-column: span 2; }
+    }
+    @media (max-width: 760px) {
+        .features-section { padding: 4rem 1.25rem; }
+        .feature-card { padding: 1.5rem; }
+        .feature-hero { padding: 1.75rem; min-height: 330px; }
+        .feature-hero h3 { font-size: 1.5rem; }
+        .feature-wide { padding: 1.5rem; gap: 1rem; flex-wrap: wrap; }
+        .feature-wide .head-link { margin-left: 3.75rem; }
+        .cta-section { padding: 0 1.25rem 4rem; }
+        .cta-panel { padding: 3.5rem 1.5rem; border-radius: 1.5rem; }
+        .newsletter-section { padding: 0 1.25rem 4rem; }
+        .newsletter-inner {
+            grid-template-columns: 1fr;
+            gap: 1.75rem;
+            padding: 2rem 1.5rem;
+            border-radius: 1.5rem;
+        }
         .newsletter-inner h2 { font-size: 1.375rem; }
         .newsletter-inner p { font-size: 0.875rem; }
-        .newsletter-form { flex-direction: column; max-width: 100%; }
-        .newsletter-form input { text-align: center; }
+        .stats-section { padding: 1.5rem 1.25rem 3rem; }
+    }
+    @media (max-width: 560px) {
+        .stats-section { padding: 1.25rem 1rem 2.5rem; }
+        .stat { padding: 1rem 0.75rem; }
+        .stat-label { font-size: 0.625rem; letter-spacing: 0.06em; }
+        .features-section { padding: 3.5rem 1rem; }
+        .features-grid { grid-template-columns: 1fr; }
+        .feature-hero { grid-column: span 1; grid-row: span 1; min-height: 320px; }
+        .feature-wide { grid-column: span 1; flex-direction: column; align-items: flex-start; }
+        .feature-wide .head-link { margin-left: 0; }
+        .section-head h2 { font-size: 1.75rem; }
+        .eyebrow-label { font-size: 0.625rem; }
+        .cta-section { padding: 0 1rem 3.5rem; }
+        .cta-panel { padding: 3rem 1.25rem; }
+        .cta-actions { flex-direction: column; align-items: stretch; }
+        .cta-actions .btn-cta,
+        .cta-actions .btn-cta-ghost { width: 100%; justify-content: center; }
+        .newsletter-section { padding: 0 1rem 3.5rem; }
+        .newsletter-inner { padding: 1.75rem 1.25rem; }
+        .nl-copy { flex-direction: column; gap: 0.875rem; }
+        .newsletter-form { flex-direction: column; align-items: stretch; border-radius: 1rem; }
+        .newsletter-form input { text-align: center; padding: 0.75rem; }
         .newsletter-form button { width: 100%; }
+        .nl-note { justify-content: center; padding-left: 0; }
     }
-    @media (max-width: 480px) {
-        .stats-inner {
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1rem;
+    @media (prefers-reduced-motion: reduce) {
+        [data-reveal] {
+            opacity: 1 !important;
+            transform: none !important;
+            transition: none !important;
         }
-        .stat-item .stat-num { font-size: 1.375rem; }
-        .stat-item .stat-label { font-size: 0.6875rem; }
-
-        .features-section { padding: 2.5rem 1rem; }
-        .features-grid { grid-template-columns: 1fr; gap: 0.875rem; }
-
-        .section-title h2 { font-size: 1.25rem; }
-        .section-title p { font-size: 0.8125rem; }
-
-        .cta-section { padding: 2.5rem 1rem; }
-        .cta-inner h2 { font-size: 1.25rem; }
-        .cta-inner p { font-size: 0.8125rem; }
-        .cta-inner .btn-cta { font-size: 0.875rem; padding: 0.75rem 1.5rem; }
-
-        .newsletter-section { padding: 2.5rem 1rem; }
-        .newsletter-inner h2 { font-size: 1.125rem; }
+        .feature-hero .fa-art,
+        .cta-panel .cta-orb,
+        .nl-ico {
+            animation: none !important;
+        }
     }
+
 </style>
 @endpush
 
@@ -1217,107 +1676,233 @@
     </section>
 
     <!-- ════════ STATS ════════ -->
-    <div class="stats-bar">
-        <div class="stats-inner">
-            <div class="stat-item">
-                <div class="stat-num">1000+</div>
-                <div class="stat-label">Happy Customers</div>
+    <section class="stats-section">
+        <div class="stats-panel" data-reveal>
+            <div class="stat" aria-label="1000 plus happy customers">
+                <span class="stat-ico" aria-hidden="true">
+                    <svg width="17" height="17" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.8">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
+                        <circle cx="9" cy="7" r="4"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/>
+                    </svg>
+                </span>
+                <div class="stat-num" aria-hidden="true"><span data-count="1000">0</span><span class="suffix">+</span></div>
+                <div class="stat-label" aria-hidden="true">Happy customers</div>
             </div>
-            <div class="stat-item">
-                <div class="stat-num">500+</div>
-                <div class="stat-label">Products</div>
+            <div class="stat" aria-label="500 plus products">
+                <span class="stat-ico" aria-hidden="true">
+                    <svg width="17" height="17" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.8">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
+                    </svg>
+                </span>
+                <div class="stat-num" aria-hidden="true"><span data-count="500">0</span><span class="suffix">+</span></div>
+                <div class="stat-label" aria-hidden="true">Products</div>
             </div>
-            <div class="stat-item">
-                <div class="stat-num">50+</div>
-                <div class="stat-label">Brands</div>
+            <div class="stat" aria-label="50 plus brands">
+                <span class="stat-ico" aria-hidden="true">
+                    <svg width="17" height="17" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.8">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/>
+                        <circle cx="7" cy="7" r="1.2"/>
+                    </svg>
+                </span>
+                <div class="stat-num" aria-hidden="true"><span data-count="50">0</span><span class="suffix">+</span></div>
+                <div class="stat-label" aria-hidden="true">Brands</div>
             </div>
-            <div class="stat-item">
-                <div class="stat-num">99%</div>
-                <div class="stat-label">Satisfaction</div>
+            <div class="stat" aria-label="99 percent satisfaction">
+                <span class="stat-ico" aria-hidden="true">
+                    <svg width="17" height="17" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.8">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 3l2.7 5.9 6.3.7-4.7 4.3 1.3 6.3L12 17l-5.6 3.2 1.3-6.3L3 9.6l6.3-.7z"/>
+                    </svg>
+                </span>
+                <div class="stat-num" aria-hidden="true"><span data-count="99">0</span><span class="suffix">%</span></div>
+                <div class="stat-label" aria-hidden="true">Satisfaction</div>
             </div>
-            <div class="stat-item">
-                <div class="stat-num">24/7</div>
-                <div class="stat-label">Support</div>
+            <div class="stat" aria-label="24 by 7 support">
+                <span class="stat-ico" aria-hidden="true">
+                    <svg width="17" height="17" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.8">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 18v-6a9 9 0 0118 0v6"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M21 19a2 2 0 01-2 2h-1a2 2 0 01-2-2v-3a2 2 0 012-2h3zM3 19a2 2 0 002 2h1a2 2 0 002-2v-3a2 2 0 00-2-2H3z"/>
+                    </svg>
+                </span>
+                <div class="stat-num" aria-hidden="true">24/7</div>
+                <div class="stat-label" aria-hidden="true">Support</div>
             </div>
         </div>
-    </div>
-
-
+    </section>
 
     <!-- ════════ FEATURES ════════ -->
-    <div class="features-section">
-        <div class="section-title">
-            <h2>Why Choose Us</h2>
-            <p>We go the extra mile to ensure you get the best shopping experience</p>
-        </div>
-        <div class="features-grid">
-            <div class="feature-card-mod">
-                <div class="ficon">
-                    <svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"/>
-                    </svg>
-                </div>
-                <h3>Premium Quality</h3>
-                <p>Handpicked products from trusted brands, ensuring only the best for your personal and home care needs.</p>
+    <section class="features-section">
+        <div class="section-head" data-reveal>
+            <div class="head-left">
+                <span class="eyebrow-label">The difference</span>
+                <h2>Care that goes the <em>extra mile</em>.</h2>
             </div>
-            <div class="feature-card-mod">
-                <div class="ficon">
+            <div class="head-right">
+                <p>We sweat the small stuff — the ingredients, the packaging, the delivery — so every order feels considered from click to doorstep.</p>
+                <a href="{{ route('products.index') }}" class="head-link">
+                    Browse the collection
+                    <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.4">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 12h15m0 0l-6-6m6 6l-6 6"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+
+        <div class="features-grid">
+            <article class="feature-card feature-hero" data-reveal>
+                <svg class="fa-art" viewBox="0 0 420 420" fill="none" aria-hidden="true">
+                    <circle cx="210" cy="210" r="200" stroke="rgba(255,255,255,0.07)"/>
+                    <circle cx="210" cy="210" r="152" stroke="rgba(157,243,190,0.18)" stroke-dasharray="2 8"/>
+                    <circle cx="210" cy="210" r="104" stroke="rgba(255,209,102,0.22)"/>
+                    <path d="M210 140c-30 20-44 48-44 78 30 4 58-6 78-30 18-22 20-48 14-72-18 2-34 10-48 24z" stroke="rgba(157,243,190,0.5)" stroke-width="1.4"/>
+                    <path d="M196 236c8-30 22-52 44-70" stroke="rgba(255,209,102,0.4)" stroke-width="1.2" stroke-linecap="round"/>
+                    <circle cx="354" cy="118" r="4" fill="#FFD166" opacity=".8"/>
+                </svg>
+                <div class="fh-top">
+                    <span class="fh-badge">Signature standard</span>
+                    <span class="fh-stars" aria-hidden="true">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8z"/></svg>
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8z"/></svg>
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8z"/></svg>
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8z"/></svg>
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8z"/></svg>
+                    </span>
+                </div>
+                <div class="fh-body">
+                    <div class="fc-ico">
+                        <svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"/>
+                        </svg>
+                    </div>
+                    <h3>Premium quality</h3>
+                    <p>Handpicked products from trusted brands — only what we'd use ourselves. Every formula is vetted for ingredients, safety and real results.</p>
+                    <div class="feature-list">
+                        <span>
+                            <svg width="11" height="11" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M20 6L9 17l-5-5"/></svg>
+                            Dermatologist tested
+                        </span>
+                        <span>
+                            <svg width="11" height="11" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M20 6L9 17l-5-5"/></svg>
+                            Clean ingredients
+                        </span>
+                        <span>
+                            <svg width="11" height="11" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M20 6L9 17l-5-5"/></svg>
+                            Cruelty-free
+                        </span>
+                    </div>
+                </div>
+            </article>
+
+            <article class="feature-card" data-reveal style="--reveal-delay: 0.08s;">
+                <span class="feature-index" aria-hidden="true">02</span>
+                <div class="fc-ico">
                     <svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/>
                     </svg>
                 </div>
-                <h3>Lightning Fast Delivery</h3>
-                <p>Quick and reliable shipping right to your doorstep. We ensure your order reaches you in perfect condition.</p>
-            </div>
-            <div class="feature-card-mod">
-                <div class="ficon">
+                <h3>Lightning-fast delivery</h3>
+                <p>Quick, reliable shipping right to your door — packed with care and tracked all the way.</p>
+            </article>
+
+            <article class="feature-card" data-reveal style="--reveal-delay: 0.16s;">
+                <span class="feature-index" aria-hidden="true">03</span>
+                <div class="fc-ico">
                     <svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
                     </svg>
                 </div>
-                <h3>Secure Payments</h3>
-                <p>Your privacy and security are our top priorities. Shop with confidence knowing your data is protected.</p>
-            </div>
-            <div class="feature-card-mod">
-                <div class="ficon">
+                <h3>Secure payments</h3>
+                <p>Your privacy comes first. Checkout is encrypted and your details never leave our store.</p>
+            </article>
+
+            <article class="feature-card feature-wide" data-reveal style="--reveal-delay: 0.24s;">
+                <span class="feature-index" aria-hidden="true">04</span>
+                <div class="fc-ico">
                     <svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"/>
                     </svg>
                 </div>
-                <h3>24/7 Support</h3>
-                <p>Our dedicated support team is always here to help. Reach out anytime — we're just a message away.</p>
-            </div>
+                <div class="fw-text">
+                    <h3>24/7 support, real humans</h3>
+                    <p>Our team is always a message away — quick answers before you order and help long after it arrives.</p>
+                </div>
+                <a href="mailto:{{ settings()?->contact_email ?? 'support@personalcarestore.com' }}" class="head-link">
+                    Message us
+                    <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.4">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 12h15m0 0l-6-6m6 6l-6 6"/>
+                    </svg>
+                </a>
+            </article>
         </div>
-    </div>
+    </section>
 
     <!-- ════════ CTA ════════ -->
-    <div class="cta-section">
-        <div class="cta-inner">
-            <h2>Ready to Elevate Your Self-Care?</h2>
-            <p>Browse our collection and discover products that will transform your daily routine. Start shopping today!</p>
-            <a href="{{ route('products.index') }}" class="btn-cta">
-                Start Shopping
-                <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
-                </svg>
-            </a>
+    <section class="cta-section">
+        <div class="cta-panel" data-reveal>
+            <span class="cta-orb cta-orb-1" aria-hidden="true"></span>
+            <span class="cta-orb cta-orb-2" aria-hidden="true"></span>
+            <div class="cta-inner">
+                <span class="eyebrow-label">Start today</span>
+                <h2>Ready to elevate your <em>self-care</em>?</h2>
+                <p>Browse our collection and discover the products that will transform your daily routine — delivered to your door, loved every day.</p>
+                <div class="cta-actions">
+                    <a href="{{ route('products.index') }}" class="btn-cta">
+                        Start shopping
+                        <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.4">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M4 12h15m0 0l-6-6m6 6l-6 6"/>
+                        </svg>
+                    </a>
+                    <a href="{{ route('track-order.index') }}" class="btn-cta-ghost">
+                        <svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
+                        </svg>
+                        Track your order
+                    </a>
+                </div>
+                <div class="cta-note">
+                    <svg width="13" height="13" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M20 6L9 17l-5-5"/>
+                    </svg>
+                    Free delivery over BDT 2,000 · 7-day easy returns
+                </div>
+            </div>
         </div>
-    </div>
+    </section>
 
     <!-- ════════ NEWSLETTER ════════ -->
     @php $s = settings(); @endphp
     @if($s && $s->newsletter_enabled)
-    <div class="newsletter-section">
-        <div class="newsletter-inner">
-            <h2>{{ $s->newsletter_heading ?? 'Stay in the Loop' }}</h2>
-            <p>{{ $s->newsletter_text ?? 'Subscribe to get notified about new products, exclusive offers, and care tips delivered to your inbox.' }}</p>
-            <form class="newsletter-form" id="newsletterForm">
-                <input type="email" id="newsletterEmail" placeholder="{{ $s->newsletter_placeholder ?? 'Enter your email address' }}" required>
-                <button type="submit">{{ $s->newsletter_button_text ?? 'Subscribe' }}</button>
-            </form>
+    <section class="newsletter-section">
+        <div class="newsletter-inner" data-reveal>
+            <div class="nl-copy">
+                <span class="nl-ico" aria-hidden="true">
+                    <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.9">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 5h16a1 1 0 011 1v12a1 1 0 01-1 1H4a1 1 0 01-1-1V6a1 1 0 011-1z"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 7l9 6 9-6"/>
+                    </svg>
+                </span>
+                <div class="nl-text">
+                    <h2>{{ $s->newsletter_heading ?? 'Stay in the loop' }}</h2>
+                    <p>{{ $s->newsletter_text ?? 'Subscribe to get notified about new products, exclusive offers, and care tips delivered to your inbox.' }}</p>
+                </div>
+            </div>
+            <div class="nl-form-wrap">
+                <form class="newsletter-form" id="newsletterForm">
+                    <input type="email" id="newsletterEmail" placeholder="{{ $s->newsletter_placeholder ?? 'Enter your email address' }}" required aria-label="Email address">
+                    <button type="submit">{{ $s->newsletter_button_text ?? 'Subscribe' }}</button>
+                </form>
+                <div class="nl-note">
+                    <svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.4">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M20 6L9 17l-5-5"/>
+                    </svg>
+                    No spam — just new drops and care tips.
+                </div>
+            </div>
         </div>
-    </div>
+    </section>
     @endif
+
+
 @push('scripts')
 <script>
     (function () {
@@ -1346,6 +1931,53 @@
         hero.addEventListener('mouseleave', function () {
             layers.forEach(function (el) { el.style.translate = '0px 0px'; });
         });
+    })();
+</script>
+<script>
+    (function () {
+        const revealEls = document.querySelectorAll('[data-reveal]');
+        const counters = document.querySelectorAll('[data-count]');
+        const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        const setFinalCounts = function () {
+            counters.forEach(function (el) {
+                el.textContent = Number(el.dataset.count).toLocaleString('en-US');
+            });
+        };
+
+        if (reduceMotion || !('IntersectionObserver' in window)) {
+            revealEls.forEach(function (el) { el.classList.add('is-visible'); });
+            setFinalCounts();
+            return;
+        }
+
+        const revealObserver = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                if (!entry.isIntersecting) return;
+                entry.target.classList.add('is-visible');
+                revealObserver.unobserve(entry.target);
+            });
+        }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+        revealEls.forEach(function (el) { revealObserver.observe(el); });
+
+        const countObserver = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                if (!entry.isIntersecting) return;
+                const el = entry.target;
+                countObserver.unobserve(el);
+                const target = Number(el.dataset.count) || 0;
+                const duration = 1400;
+                const start = performance.now();
+                const tick = function (now) {
+                    const progress = Math.min((now - start) / duration, 1);
+                    const eased = 1 - Math.pow(1 - progress, 3);
+                    el.textContent = Math.round(target * eased).toLocaleString('en-US');
+                    if (progress < 1) requestAnimationFrame(tick);
+                };
+                requestAnimationFrame(tick);
+            });
+        }, { threshold: 0.4 });
+        counters.forEach(function (el) { countObserver.observe(el); });
     })();
 </script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
