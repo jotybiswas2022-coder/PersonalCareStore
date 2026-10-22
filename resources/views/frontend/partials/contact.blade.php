@@ -398,7 +398,7 @@
     }
 </style>
 
-<section class="contact-section">
+<section class="contact-section" id="contact">
     <div class="contact-wrap">
         {{-- Info panel --}}
         <div class="contact-panel contact-reveal">
