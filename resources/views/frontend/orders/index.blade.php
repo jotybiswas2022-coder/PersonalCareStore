@@ -23,7 +23,7 @@
         position: relative;
         isolation: isolate;
         overflow: hidden;
-        padding: 3.25rem 1.5rem 4.25rem;
+        padding: 3.25rem 1.5rem 5rem;
         color: #F2FBF5;
         background:
             radial-gradient(900px 420px at 84% 0%, rgba(46,139,87,0.42), transparent 64%),
@@ -140,7 +140,7 @@
     /* ─────────────── WRAP ─────────────── */
     .orders-wrap {
         max-width: 1180px;
-        margin: -2.25rem auto 0;
+        margin: -2.75rem auto 0;
         padding: 0 1.5rem 4.5rem;
         display: flex;
         flex-direction: column;
@@ -666,8 +666,8 @@
         }
     }
     @media (max-width: 640px) {
-        .orders-hero { padding: 2.25rem 1.25rem 3.5rem; }
-        .orders-wrap { padding: 0 1rem 3.5rem; margin-top: -1.75rem; gap: 1rem; }
+        .orders-hero { padding: 2.25rem 1.25rem 4rem; }
+        .orders-wrap { padding: 0 1rem 3.5rem; margin-top: -2.25rem; gap: 1rem; }
         .orders-toolbar {
             border-radius: 1rem;
             flex-direction: column;
