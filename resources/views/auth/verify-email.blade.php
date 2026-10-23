@@ -2,6 +2,8 @@
 
 @section('title', 'Verify Email')
 
+@section('hide-footer', true)
+
 @section('content')
 <div style="min-height: 70vh; display: flex; align-items: center; justify-content: center; padding: 3rem 1rem;">
     <div style="width: 100%; max-width: 28rem;">

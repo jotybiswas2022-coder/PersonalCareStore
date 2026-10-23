@@ -2,206 +2,175 @@
 
 @section('title', 'Register')
 
+@section('hide-footer', true)
+
 @push('styles')
-<style>
-    /* ─── HERO ─── */
-    .auth-hero {
-        background: linear-gradient(135deg, #F0FDF4 0%, #FFFFFF 50%, #FEFCE8 100%);
-        padding: 2.5rem 1rem 2rem;
-        text-align: center;
-        position: relative;
-        overflow: hidden;
-    }
-    .auth-hero::before {
-        content: '';
-        position: absolute;
-        top: -60px; right: -60px;
-        width: 180px; height: 180px;
-        border-radius: 50%;
-        background: radial-gradient(circle, rgba(46,139,87,0.07) 0%, transparent 70%);
-        pointer-events: none;
-    }
-    .auth-hero h1 { font-size: 1.75rem; font-weight: 700; color: #212529; letter-spacing: -0.02em; position: relative; }
-    .auth-hero p { color: #6b7280; font-size: 0.875rem; margin-top: 0.375rem; position: relative; }
-
-    /* ─── WRAP ─── */
-    .auth-wrap {
-        max-width: 28rem; margin: 0 auto;
-        padding: 2rem 1rem 4rem;
-        animation: authFadeUp 0.4s ease-out;
-    }
-
-    /* ─── CARD ─── */
-    .auth-card {
-        background: #ffffff;
-        border-radius: 0.75rem;
-        border: 1px solid #e9ecef;
-        padding: 2rem;
-        box-shadow: 0 1px 3px rgba(0,0,0,0.04);
-    }
-    .auth-card .auth-icon {
-        display: flex; align-items: center; justify-content: center;
-        width: 3rem; height: 3rem;
-        background: linear-gradient(135deg, #E8F5E9, #C8E6C9);
-        border-radius: 50%;
-        margin: 0 auto 1rem;
-        color: #2E8B57;
-    }
-    .auth-card h2 { text-align: center; font-size: 1.25rem; font-weight: 700; color: #212529; margin-bottom: 0.25rem; }
-    .auth-card .sub { text-align: center; color: #6b7280; font-size: 0.8125rem; margin-bottom: 1.5rem; }
-
-    /* ─── ALERTS ─── */
-    .alert-box {
-        display: flex; align-items: center; gap: 0.5rem;
-        padding: 0.75rem 1rem; border-radius: 0.5rem;
-        font-size: 0.8125rem; margin-bottom: 1rem;
-    }
-    .alert-error { background: #fef2f2; border: 1px solid #fecaca; color: #dc2626; }
-    .alert-error ul { list-style: none; margin: 0; padding: 0; }
-    .alert-error ul li + li { margin-top: 0.125rem; }
-
-    /* ─── FIELDS ─── */
-    .field { margin-bottom: 1.125rem; }
-    .field label { display: block; font-size: 0.8125rem; font-weight: 500; color: #374151; margin-bottom: 0.375rem; }
-    .field .input-wrap { position: relative; }
-    .field .input-wrap .input-icon {
-        position: absolute; left: 0.75rem; top: 50%; transform: translateY(-50%);
-        color: #9ca3af; pointer-events: none;
-        display: flex; align-items: center;
-    }
-    .field input {
-        width: 100%; padding: 0.625rem 0.875rem 0.625rem 2.25rem;
-        border: 1.5px solid #d1d5db; border-radius: 0.5rem;
-        font-size: 0.875rem; outline: none;
-        transition: border-color 0.2s, box-shadow 0.2s;
-        color: #212529;
-    }
-    .field input:focus { border-color: #2E8B57; box-shadow: 0 0 0 3px rgba(46,139,87,0.1); }
-
-    /* ─── BUTTON ─── */
-    .btn-auth {
-        width: 100%; display: flex; align-items: center; justify-content: center; gap: 0.5rem;
-        background: linear-gradient(135deg, #2E8B57, #3CB371); color: #fff; border: none;
-        padding: 0.75rem; border-radius: 0.5rem; font-size: 0.9375rem; font-weight: 600;
-        cursor: pointer; transition: all 0.25s ease;
-        box-shadow: 0 4px 14px rgba(46,139,87,0.2);
-    }
-    .btn-auth:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(46,139,87,0.3); }
-    .btn-auth:active { transform: translateY(0); }
-
-    /* ─── DIVIDER ─── */
-    .auth-divider {
-        margin-top: 1.5rem; padding-top: 1.5rem;
-        border-top: 1px solid #e9ecef; text-align: center;
-    }
-    .auth-divider p { font-size: 0.8125rem; color: #6b7280; }
-    .auth-divider p a { color: #2E8B57; text-decoration: none; font-weight: 600; transition: color 0.2s; }
-    .auth-divider p a:hover { color: #1B5E20; }
-
-    /* ─── PASSWORD HINT ─── */
-    .pass-hint { font-size: 0.75rem; color: #9ca3af; margin-top: 0.25rem; }
-
-    /* ─── RESPONSIVE ─── */
-    @media (max-width: 640px) {
-        .auth-hero { padding: 1.5rem 1rem 1.25rem; }
-        .auth-hero h1 { font-size: 1.375rem; }
-        .auth-wrap { padding: 1.25rem 1rem 3rem; }
-        .auth-card { padding: 1.25rem; }
-    }
-
-    /* ─── ANIMATIONS ─── */
-    @keyframes authFadeUp {
-        from { opacity: 0; transform: translateY(16px); }
-        to { opacity: 1; transform: translateY(0); }
-    }
-</style>
+    @include('auth.partials.auth-styles')
 @endpush
 
 @section('content')
-<section class="auth-hero">
-    <h1>Create Account</h1>
-    <p>Join us and start shopping for your favorite products</p>
-</section>
+<div class="auth-page">
 
-<div class="auth-wrap">
-    <div class="auth-card">
-        {{-- Icon --}}
-        <div class="auth-icon">
-            <svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-                <path d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
-                <circle cx="8.5" cy="7" r="4"/>
-                <polyline points="17 11 19 13 23 9"/>
-            </svg>
+    {{-- ══════ BRAND PANEL ══════ --}}
+    <aside class="auth-aside">
+        <a href="{{ route('home') }}" class="auth-brand">
+            <span class="mark">P</span>
+            <span>PersonalCareStore</span>
+        </a>
+
+        <div class="auth-pitch">
+            <h2>Create an account and make every reorder <em>effortless</em>.</h2>
+            <p>Save your details once, then shop faster and keep an eye on every delivery from your account.</p>
+
+            <ul class="auth-features">
+                <li>
+                    <span class="fi">
+                        <svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="8.5" cy="7" r="4"/><polyline points="17 11 19 13 23 9"/></svg>
+                    </span>
+                    One account for orders and reorders
+                </li>
+                <li>
+                    <span class="fi">
+                        <svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+                    </span>
+                    Fast delivery across the country
+                </li>
+                <li>
+                    <span class="fi">
+                        <svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+                    </span>
+                    Secure checkout &amp; protected payments
+                </li>
+            </ul>
         </div>
-        <h2>Register</h2>
-        <p class="sub">Fill in the details to create your account</p>
 
-        {{-- Errors --}}
-        @if($errors->any())
-            <div class="alert-box alert-error">
-                <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" style="flex-shrink:0;"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-                <ul>
-                    @foreach($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
+        <div class="auth-quote">
+            <div class="stars">
+                <svg width="13" height="13" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                <svg width="13" height="13" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                <svg width="13" height="13" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                <svg width="13" height="13" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                <svg width="13" height="13" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
             </div>
-        @endif
-
-        {{-- Form --}}
-        <form method="POST" action="{{ route('register') }}">
-            @csrf
-
-            <div class="field">
-                <label for="name">Full Name</label>
-                <div class="input-wrap">
-                    <span class="input-icon">
-                        <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                    </span>
-                    <input id="name" type="text" name="name" value="{{ old('name') }}" required autofocus autocomplete="name" placeholder="John Doe">
-                </div>
+            <p>&ldquo;Creating an account took a minute and all my orders are in one place now. Highly recommended.&rdquo;</p>
+            <div class="who">
+                <span class="avatar">NS</span>
+                <span>Verified customer &middot; member since 2024</span>
             </div>
-
-            <div class="field">
-                <label for="email">Email Address</label>
-                <div class="input-wrap">
-                    <span class="input-icon">
-                        <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-                    </span>
-                    <input id="email" type="email" name="email" value="{{ old('email') }}" required autocomplete="username" placeholder="you@example.com">
-                </div>
-            </div>
-
-            <div class="field">
-                <label for="password">Password</label>
-                <div class="input-wrap">
-                    <span class="input-icon">
-                        <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
-                    </span>
-                    <input id="password" type="password" name="password" required autocomplete="new-password" placeholder="••••••••">
-                </div>
-                <p class="pass-hint">Must be at least 8 characters</p>
-            </div>
-
-            <div class="field">
-                <label for="password_confirmation">Confirm Password</label>
-                <div class="input-wrap">
-                    <span class="input-icon">
-                        <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/><polyline points="9 14 11 16 15 12"/></svg>
-                    </span>
-                    <input id="password_confirmation" type="password" name="password_confirmation" required autocomplete="new-password" placeholder="••••••••">
-                </div>
-            </div>
-
-            <button type="submit" class="btn-auth">
-                <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="8.5" cy="7" r="4"/><polyline points="17 11 19 13 23 9"/></svg>
-                Create Account
-            </button>
-        </form>
-
-        <div class="auth-divider">
-            <p>Already have an account? <a href="{{ route('login') }}">Sign In</a></p>
         </div>
-    </div>
+    </aside>
+
+    {{-- ══════ FORM PANEL ══════ --}}
+    <section class="auth-main" aria-labelledby="registerHeading">
+        <div class="auth-card">
+            <span class="eyebrow">
+                <svg width="11" height="11" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg>
+                Create your account
+            </span>
+
+            <h1 id="registerHeading">Sign up</h1>
+            <p class="sub">A few details and you're ready to start shopping.</p>
+
+            {{-- Errors --}}
+            @if($errors->any())
+                <div class="alert-box alert-error">
+                    <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                    <ul>
+                        @foreach($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
+            {{-- Form --}}
+            <form method="POST" action="{{ route('register') }}" class="auth-form">
+                @csrf
+
+                <div class="field">
+                    <div class="label-row">
+                        <label for="name">Full name</label>
+                    </div>
+                    <div class="input-wrap">
+                        <span class="input-icon">
+                            <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                        </span>
+                        <input id="name" type="text" name="name" value="{{ old('name') }}" required autofocus autocomplete="name"
+                               placeholder="John Doe" class="{{ $errors->has('name') ? 'has-error' : '' }}">
+                    </div>
+                </div>
+
+                <div class="field">
+                    <div class="label-row">
+                        <label for="email">Email address</label>
+                    </div>
+                    <div class="input-wrap">
+                        <span class="input-icon">
+                            <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                        </span>
+                        <input id="email" type="email" name="email" value="{{ old('email') }}" required autocomplete="username"
+                               placeholder="you@example.com" class="{{ $errors->has('email') ? 'has-error' : '' }}">
+                    </div>
+                </div>
+
+                <div class="field">
+                    <div class="label-row">
+                        <label for="password">Password</label>
+                    </div>
+                    <div class="input-wrap">
+                        <span class="input-icon">
+                            <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+                        </span>
+                        <input id="password" type="password" name="password" required autocomplete="new-password"
+                               placeholder="At least 8 characters" class="has-toggle {{ $errors->has('password') ? 'has-error' : '' }}">
+                        <button type="button" class="pw-toggle" aria-label="Show password" aria-pressed="false">
+                            <svg width="17" height="17" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                            <svg width="17" height="17" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" style="display:none;"><path d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19m-6.72-1.07a3 3 0 11-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+                        </button>
+                    </div>
+                    <p class="pass-hint">
+                        <svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                        Must be at least 8 characters
+                    </p>
+                </div>
+
+                <div class="field">
+                    <div class="label-row">
+                        <label for="password_confirmation">Confirm password</label>
+                    </div>
+                    <div class="input-wrap">
+                        <span class="input-icon">
+                            <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/><polyline points="9 14 11 16 15 12"/></svg>
+                        </span>
+                        <input id="password_confirmation" type="password" name="password_confirmation" required autocomplete="new-password"
+                               placeholder="Re-enter your password" class="has-toggle">
+                        <button type="button" class="pw-toggle" aria-label="Show password" aria-pressed="false">
+                            <svg width="17" height="17" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                            <svg width="17" height="17" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" style="display:none;"><path d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19m-6.72-1.07a3 3 0 11-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+                        </button>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-auth">
+                    Create account
+                    <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                </button>
+
+                <div class="secure-note">
+                    <svg width="13" height="13" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    Your information is encrypted and never shared.
+                </div>
+            </form>
+
+            <div class="auth-divider">Already shopping with us?</div>
+            <p class="signup-row">
+                <a href="{{ route('login') }}">Sign in to your account</a>
+            </p>
+        </div>
+    </section>
 </div>
 @endsection
+
+@push('scripts')
+    @include('auth.partials.auth-scripts')
+@endpush

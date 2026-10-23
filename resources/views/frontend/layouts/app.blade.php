@@ -54,8 +54,12 @@
     <main>
         @yield('content')
     </main>
-    @include('frontend.partials.contact')
-    @include('frontend.partials.footer')
+    {{-- Auth screens opt out of the storefront contact + footer blocks --}}
+    @hasSection('hide-footer')
+    @else
+        @include('frontend.partials.contact')
+        @include('frontend.partials.footer')
+    @endif
     @stack('scripts')
 </body>
 </html>
