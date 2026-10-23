@@ -1,127 +1,676 @@
-<nav style="background: linear-gradient(135deg, #2E8B57 0%, #1B5E20 100%); padding: 0 1.5rem; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 2px 12px rgba(0,0,0,0.15); position: sticky; top: 0; z-index: 1000; min-height: 64px;">
-    {{-- Logo + Hamburger row --}}
-    <div style="display: flex; align-items: center; gap: 0.75rem;">
-        {{-- Hamburger (mobile) --}}
-        <button id="navToggle" style="display: none; background: none; border: none; color: #ffffff; cursor: pointer; padding: 0.25rem;" aria-label="Toggle menu">
-            <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
-                <path id="hamburgerIcon" stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
-            </svg>
-        </button>
-        <a href="{{ route('home') }}" style="display: flex; align-items: center; gap: 0.625rem; color: #ffffff; text-decoration: none; font-size: 1.375rem; font-weight: 800; letter-spacing: -0.03em;">
-            <span style="width: 2rem; height: 2rem; background: #FFD166; border-radius: 0.5rem; display: flex; align-items: center; justify-content: center; color: #212529; font-weight: 800; font-size: 1rem;">P</span>
-            <span>PersonalCareStore</span>
+<header class="site-nav" id="siteNav">
+    <div class="nav-inner">
+        {{-- Logo --}}
+        <a href="{{ route('home') }}" class="nav-logo" aria-label="PersonalCareStore — Home">
+            <span class="nav-logo-mark">P</span>
+            <span class="nav-logo-text">PersonalCareStore</span>
         </a>
-    </div>
 
-    {{-- Mobile cart icon (visible only on mobile, always accessible) --}}
-    <a href="{{ route('cart.index') }}" class="mobile-cart" aria-label="View cart">
-        <svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-            <path d="M9 20a1 1 0 100 2 1 1 0 000-2zM20 20a1 1 0 100 2 1 1 0 000-2z"/>
-            <path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/>
-        </svg>
-        <span class="mobile-cart-badge">{{ $cartCount }}</span>
-    </a>
+        {{-- Primary navigation (collapses into a panel on mobile) --}}
+        <nav class="nav-menu" id="navLinks" aria-label="Main navigation">
+            <div class="nav-links">
+                <a href="{{ route('products.index') }}" class="nav-link {{ request()->routeIs('products.*') ? 'is-active' : '' }}"
+                   @if(request()->routeIs('products.*')) aria-current="page" @endif>Products</a>
+                <a href="{{ route('track-order.index') }}" class="nav-link {{ request()->routeIs('track-order.*') ? 'is-active' : '' }}"
+                   @if(request()->routeIs('track-order.*')) aria-current="page" @endif>Track Order</a>
+                @auth
+                    <a href="{{ route('orders.index') }}" class="nav-link {{ request()->routeIs('orders.*') ? 'is-active' : '' }}"
+                       @if(request()->routeIs('orders.*')) aria-current="page" @endif>My Orders</a>
+                @endauth
+            </div>
 
-    {{-- Desktop nav links --}}
-    <div id="navLinks" style="display: flex; align-items: center; gap: 0.5rem;">
-        <a href="{{ route('products.index') }}" style="color: rgba(255,255,255,0.85); text-decoration: none; padding: 0.5rem 0.875rem; border-radius: 0.5rem; font-size: 0.875rem; font-weight: 500; transition: all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.12)'; this.style.color='#ffffff'" onmouseout="this.style.background='transparent'; this.style.color='rgba(255,255,255,0.85)'">Products</a>
-        <a href="{{ route('cart.index') }}" style="color: rgba(255,255,255,0.85); text-decoration: none; padding: 0.5rem 0.875rem; border-radius: 0.5rem; font-size: 0.875rem; font-weight: 500; transition: all 0.2s; display: flex; align-items: center; gap: 0.375rem; position: relative;" onmouseover="this.style.background='rgba(255,255,255,0.12)'; this.style.color='#ffffff'" onmouseout="this.style.background='transparent'; this.style.color='rgba(255,255,255,0.85)'">
-            Cart
-            <span style="background: #FFD166; color: #212529; font-size: 0.6875rem; font-weight: 700; padding: 0.0625rem 0.4375rem; border-radius: 9999px; min-width: 1.25rem; text-align: center;">{{ $cartCount }}</span>
-        </a>
-        <a href="{{ route('track-order.index') }}" style="color: rgba(255,255,255,0.85); text-decoration: none; padding: 0.5rem 0.875rem; border-radius: 0.5rem; font-size: 0.875rem; font-weight: 500; transition: all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.12)'; this.style.color='#ffffff'" onmouseout="this.style.background='transparent'; this.style.color='rgba(255,255,255,0.85)'">Track Order</a>
-
-        @auth
-            <div class="nav-divider" style="width: 1px; height: 1.5rem; background: rgba(255,255,255,0.2); margin: 0 0.25rem;"></div>
-            <a href="{{ route('orders.index') }}" style="color: rgba(255,255,255,0.85); text-decoration: none; padding: 0.5rem 0.875rem; border-radius: 0.5rem; font-size: 0.875rem; font-weight: 500; transition: all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.12)'; this.style.color='#ffffff'" onmouseout="this.style.background='transparent'; this.style.color='rgba(255,255,255,0.85)'">My Orders</a>
-            <a href="{{ route('profile.edit') }}" style="color: rgba(255,255,255,0.85); text-decoration: none; padding: 0.5rem 0.875rem; border-radius: 0.5rem; font-size: 0.875rem; font-weight: 500; transition: all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.12)'; this.style.color='#ffffff'" onmouseout="this.style.background='transparent'; this.style.color='rgba(255,255,255,0.85)'">Profile</a>
-            @if(Auth::user()->is_admin)
-                <a href="{{ route('admin.dashboard') }}" style="background: #FFD166; color: #212529; text-decoration: none; font-size: 0.8125rem; font-weight: 600; padding: 0.5rem 1rem; border-radius: 0.5rem; transition: all 0.2s; box-shadow: 0 2px 8px rgba(255,209,102,0.3);" onmouseover="this.style.background='#F0C14B'; this.style.transform='translateY(-1px)'; this.style.boxShadow='0 4px 12px rgba(255,209,102,0.4)'" onmouseout="this.style.background='#FFD166'; this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 8px rgba(255,209,102,0.3)'">
-                    <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" style="vertical-align: middle; margin-right: 0.25rem;">
-                        <circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
-                    </svg>
-                    Admin
+            <div class="nav-actions">
+                <a href="{{ route('cart.index') }}" class="nav-cart {{ request()->routeIs('cart.*') ? 'is-active' : '' }}"
+                   aria-label="Cart, {{ $cartCount }} {{ Str::plural('item', $cartCount) }}">
+                    <span class="nav-cart-icon">
+                        <svg width="19" height="19" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                            <path d="M9 20a1 1 0 100 2 1 1 0 000-2zM20 20a1 1 0 100 2 1 1 0 000-2z"/>
+                            <path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/>
+                        </svg>
+                        <span class="nav-cart-badge">{{ $cartCount }}</span>
+                    </span>
+                    <span class="nav-cart-text">Cart</span>
                 </a>
-            @endif
-            <form method="POST" action="{{ route('logout') }}" style="display: inline; margin-left: 0.25rem;">
-                @csrf
-                <button type="submit" style="background: rgba(255,255,255,0.10); border: 1px solid rgba(255,255,255,0.15); color: rgba(255,255,255,0.85); padding: 0.5rem 1rem; border-radius: 0.5rem; font-size: 0.8125rem; font-weight: 500; cursor: pointer; transition: all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.2)'; this.style.color='#ffffff'" onmouseout="this.style.background='rgba(255,255,255,0.10)'; this.style.color='rgba(255,255,255,0.85)'">Logout</button>
-            </form>
-        @else
-            <div class="nav-divider" style="width: 1px; height: 1.5rem; background: rgba(255,255,255,0.2); margin: 0 0.25rem;"></div>
-            <a href="{{ route('login') }}" style="color: rgba(255,255,255,0.85); text-decoration: none; padding: 0.5rem 0.875rem; border-radius: 0.5rem; font-size: 0.875rem; font-weight: 500; transition: all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.12)'; this.style.color='#ffffff'" onmouseout="this.style.background='transparent'; this.style.color='rgba(255,255,255,0.85)'">Login</a>
-            <a href="{{ route('register') }}" style="background: #FFD166; color: #212529; text-decoration: none; font-size: 0.8125rem; font-weight: 600; padding: 0.5rem 1rem; border-radius: 0.5rem; transition: all 0.2s; box-shadow: 0 2px 8px rgba(255,209,102,0.3);" onmouseover="this.style.background='#F0C14B'; this.style.transform='translateY(-1px)'; this.style.boxShadow='0 4px 12px rgba(255,209,102,0.4)'" onmouseout="this.style.background='#FFD166'; this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 8px rgba(255,209,102,0.3)'">Register</a>
-        @endauth
+
+                <span class="nav-divider" aria-hidden="true"></span>
+
+                @auth
+                    <details class="nav-user">
+                        <summary class="nav-user-btn" aria-label="Account menu">
+                            <span class="nav-avatar">{{ strtoupper(mb_substr(Auth::user()->name, 0, 1)) }}</span>
+                            <span class="nav-user-name">{{ Auth::user()->name }}</span>
+                            <svg class="nav-chevron" width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+                        </summary>
+
+                        <div class="nav-dropdown">
+                            <div class="nav-dropdown-head">
+                                <span class="nav-dropdown-name">{{ Auth::user()->name }}</span>
+                                <span class="nav-dropdown-mail">{{ Auth::user()->email }}</span>
+                            </div>
+
+                            <a href="{{ route('profile.edit') }}" class="nav-dropdown-item">
+                                <svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                                Profile
+                            </a>
+                            <a href="{{ route('orders.index') }}" class="nav-dropdown-item">
+                                <svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M16 4h2a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M9 12h6M9 16h6"/></svg>
+                                My Orders
+                            </a>
+                            @if(Auth::user()->is_admin)
+                                <a href="{{ route('admin.dashboard') }}" class="nav-dropdown-item is-admin">
+                                    <svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg>
+                                    Admin dashboard
+                                </a>
+                            @endif
+
+                            <form method="POST" action="{{ route('logout') }}" class="nav-dropdown-form">
+                                @csrf
+                                <button type="submit" class="nav-dropdown-item is-danger">
+                                    <svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+                                    Logout
+                                </button>
+                            </form>
+                        </div>
+                    </details>
+                @else
+                    <a href="{{ route('login') }}" class="nav-btn nav-btn-ghost">Sign in</a>
+                    <a href="{{ route('register') }}" class="nav-btn nav-btn-accent">Register</a>
+                @endauth
+            </div>
+        </nav>
+
+        {{-- Mobile-only cart shortcut --}}
+        <a href="{{ route('cart.index') }}" class="nav-cart-mobile" aria-label="Cart, {{ $cartCount }} {{ Str::plural('item', $cartCount) }}">
+            <svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                <path d="M9 20a1 1 0 100 2 1 1 0 000-2zM20 20a1 1 0 100 2 1 1 0 000-2z"/>
+                <path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/>
+            </svg>
+            <span class="nav-cart-badge">{{ $cartCount }}</span>
+        </a>
+
+        {{-- Mobile menu toggle --}}
+        <button type="button" class="nav-toggle" id="navToggle" aria-label="Open menu" aria-controls="navLinks" aria-expanded="false">
+            <span></span><span></span><span></span>
+        </button>
     </div>
-</nav>
+</header>
 
 <style>
-    #navLinks { flex-wrap: wrap; }
-    @media (max-width: 1024px) and (min-width: 769px) {
-        #navLinks { gap: 0.25rem; }
-        #navLinks a { padding: 0.5rem 0.625rem; font-size: 0.8125rem; }
+    /* ═══════════════ SHELL ═══════════════ */
+    .site-nav {
+        --nav-h: 64px;
+        --brand: #2E8B57;
+        --brand-dark: #1B5E20;
+        --accent: #FFD166;
+
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        background: linear-gradient(135deg, #2E8B57 0%, #1B5E20 100%);
+        border-bottom: 1px solid rgba(255,255,255,0.08);
+        box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+        transition: box-shadow 0.3s ease, background 0.3s ease;
     }
-    /* Mobile cart icon (visible only on ≤768px) */
-    .mobile-cart {
-        display: none;
+    .site-nav::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(180deg, rgba(6,30,18,0.22), rgba(6,30,18,0));
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        pointer-events: none;
+    }
+    .site-nav.is-scrolled {
+        box-shadow: 0 10px 30px -8px rgba(6,30,18,0.45);
+    }
+    .site-nav.is-scrolled::after { opacity: 1; }
+
+    .nav-inner {
         position: relative;
+        z-index: 1;
+        max-width: 1280px;
+        min-height: var(--nav-h);
+        margin: 0 auto;
+        padding: 0 1.5rem;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+    }
+    @media (min-width: 1024px) {
+        .nav-inner { padding: 0 2rem; }
+    }
+
+    /* ═══════════════ LOGO ═══════════════ */
+    .nav-logo {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.625rem;
         color: #ffffff;
         text-decoration: none;
-        padding: 0.375rem;
+        font-size: 1.25rem;
+        font-weight: 800;
+        letter-spacing: -0.03em;
+        white-space: nowrap;
     }
-    .mobile-cart-badge {
+    .nav-logo-mark {
+        width: 2rem; height: 2rem;
+        display: flex; align-items: center; justify-content: center;
+        background: var(--accent);
+        color: #16221B;
+        border-radius: 0.5rem;
+        font-weight: 800;
+        font-size: 1rem;
+        box-shadow: 0 2px 10px rgba(255,209,102,0.35);
+        transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+    }
+    .nav-logo:hover .nav-logo-mark {
+        transform: rotate(-8deg) scale(1.07);
+        box-shadow: 0 4px 16px rgba(255,209,102,0.5);
+    }
+    .nav-logo:focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 4px;
+        border-radius: 0.5rem;
+    }
+
+    /* ═══════════════ LINKS ═══════════════ */
+    .nav-menu {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-left: auto;
+    }
+    .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+    }
+    .nav-link {
+        position: relative;
+        color: rgba(255,255,255,0.84);
+        text-decoration: none;
+        padding: 0.5rem 0.875rem;
+        border-radius: 0.5rem;
+        font-size: 0.875rem;
+        font-weight: 500;
+        white-space: nowrap;
+        transition: color 0.2s ease, background 0.2s ease;
+    }
+    .nav-link::after {
+        content: '';
         position: absolute;
-        top: -2px;
-        right: -4px;
-        background: #FFD166;
-        color: #212529;
-        font-size: 0.625rem;
-        font-weight: 700;
+        left: 0.875rem;
+        right: 0.875rem;
+        bottom: 0.25rem;
+        height: 2px;
+        border-radius: 2px;
+        background: var(--accent);
+        transform: scaleX(0);
+        transform-origin: left center;
+        transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .nav-link:hover {
+        color: #ffffff;
+        background: rgba(255,255,255,0.10);
+    }
+    .nav-link:hover::after { transform: scaleX(1); }
+    .nav-link.is-active {
+        color: #ffffff;
+        background: rgba(255,255,255,0.08);
+    }
+    .nav-link.is-active::after { transform: scaleX(1); }
+    .nav-link:focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 2px;
+    }
+
+    /* ═══════════════ ACTIONS ═══════════════ */
+    .nav-actions {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    .nav-divider {
+        width: 1px;
+        height: 1.5rem;
+        background: rgba(255,255,255,0.18);
+        margin: 0 0.25rem;
+    }
+
+    /* Cart */
+    .nav-cart {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4375rem;
+        color: rgba(255,255,255,0.86);
+        text-decoration: none;
+        padding: 0.4375rem 0.75rem;
+        border-radius: 0.5rem;
+        font-size: 0.875rem;
+        font-weight: 500;
+        transition: background 0.2s ease, color 0.2s ease;
+    }
+    .nav-cart:hover, .nav-cart.is-active {
+        color: #ffffff;
+        background: rgba(255,255,255,0.10);
+    }
+    .nav-cart-icon {
+        position: relative;
+        display: inline-flex;
+        transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .nav-cart:hover .nav-cart-icon { transform: translateY(-1px) scale(1.08); }
+    .nav-cart-badge {
+        position: absolute;
+        top: -0.4375rem;
+        right: -0.5625rem;
         min-width: 1.125rem;
         height: 1.125rem;
+        padding: 0 0.25rem;
         display: flex;
         align-items: center;
         justify-content: center;
+        background: var(--accent);
+        color: #16221B;
+        font-size: 0.625rem;
+        font-weight: 700;
+        line-height: 1;
         border-radius: 9999px;
-        padding: 0 0.25rem;
-        box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+        box-shadow: 0 1px 4px rgba(0,0,0,0.25);
+        animation: navBadgePop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both;
     }
-    @media (max-width: 768px) {
-        #navToggle { display: block !important; }
-        .mobile-cart { display: inline-flex !important; }
-        #navLinks {
-            display: none !important;
+
+    /* Auth buttons */
+    .nav-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.375rem;
+        padding: 0.5rem 1rem;
+        border-radius: 0.5rem;
+        font-size: 0.8125rem;
+        font-weight: 600;
+        text-decoration: none;
+        white-space: nowrap;
+        transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .nav-btn-ghost {
+        color: rgba(255,255,255,0.9);
+        border: 1px solid rgba(255,255,255,0.22);
+    }
+    .nav-btn-ghost:hover {
+        color: #ffffff;
+        background: rgba(255,255,255,0.12);
+        border-color: rgba(255,255,255,0.34);
+    }
+    .nav-btn-accent {
+        background: var(--accent);
+        color: #16221B;
+        box-shadow: 0 2px 8px rgba(255,209,102,0.3);
+    }
+    .nav-btn-accent:hover {
+        background: #F0C14B;
+        transform: translateY(-1px);
+        box-shadow: 0 6px 16px rgba(255,209,102,0.45);
+    }
+    .nav-btn-accent:active { transform: translateY(0); }
+    .nav-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+    /* ═══════════════ ACCOUNT DROPDOWN ═══════════════ */
+    .nav-user { position: relative; }
+    .nav-user > summary {
+        list-style: none;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.3125rem 0.5rem 0.3125rem 0.3125rem;
+        border-radius: 9999px;
+        background: rgba(255,255,255,0.10);
+        border: 1px solid rgba(255,255,255,0.14);
+        color: #ffffff;
+        transition: background 0.2s ease, border-color 0.2s ease;
+    }
+    .nav-user > summary::-webkit-details-marker { display: none; }
+    .nav-user > summary:hover,
+    .nav-user[open] > summary {
+        background: rgba(255,255,255,0.18);
+        border-color: rgba(255,255,255,0.28);
+    }
+    .nav-user > summary:focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 2px;
+    }
+    .nav-avatar {
+        width: 1.75rem; height: 1.75rem;
+        flex-shrink: 0;
+        display: flex; align-items: center; justify-content: center;
+        border-radius: 50%;
+        background: var(--accent);
+        color: #16221B;
+        font-size: 0.8125rem;
+        font-weight: 800;
+    }
+    .nav-user-name {
+        max-width: 8rem;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-size: 0.8125rem;
+        font-weight: 600;
+    }
+    .nav-chevron {
+        color: rgba(255,255,255,0.7);
+        transition: transform 0.25s ease;
+    }
+    .nav-user[open] .nav-chevron { transform: rotate(180deg); }
+
+    .nav-dropdown {
+        position: absolute;
+        top: calc(100% + 0.625rem);
+        right: 0;
+        min-width: 15.5rem;
+        padding: 0.5rem;
+        background: #ffffff;
+        border: 1px solid #eceff1;
+        border-radius: 0.75rem;
+        box-shadow: 0 24px 48px -16px rgba(6,30,18,0.35), 0 2px 8px rgba(6,30,18,0.08);
+        transform-origin: top right;
+        animation: navDropIn 0.18s ease-out both;
+        z-index: 20;
+    }
+    .nav-dropdown::before {
+        content: '';
+        position: absolute;
+        top: -0.375rem;
+        right: 1.5rem;
+        width: 0.75rem; height: 0.75rem;
+        background: #ffffff;
+        border-left: 1px solid #eceff1;
+        border-top: 1px solid #eceff1;
+        transform: rotate(45deg);
+        border-radius: 2px 0 0 0;
+    }
+    .nav-dropdown-head {
+        padding: 0.5rem 0.625rem 0.625rem;
+        margin-bottom: 0.375rem;
+        border-bottom: 1px solid #f1f4f5;
+        display: flex;
+        flex-direction: column;
+        gap: 0.125rem;
+    }
+    .nav-dropdown-name {
+        font-size: 0.8125rem;
+        font-weight: 700;
+        color: #16221B;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+    .nav-dropdown-mail {
+        font-size: 0.75rem;
+        color: #6b7280;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+    .nav-dropdown-item {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        width: 100%;
+        padding: 0.5625rem 0.625rem;
+        border: none;
+        background: none;
+        border-radius: 0.5rem;
+        font-family: inherit;
+        font-size: 0.8125rem;
+        font-weight: 500;
+        color: #374151;
+        text-align: left;
+        text-decoration: none;
+        cursor: pointer;
+        transition: background 0.18s ease, color 0.18s ease;
+    }
+    .nav-dropdown-item svg { flex-shrink: 0; opacity: 0.75; }
+    .nav-dropdown-item:hover {
+        background: #F1F7F3;
+        color: var(--brand-dark);
+    }
+    .nav-dropdown-item.is-admin { color: #8a5b00; }
+    .nav-dropdown-item.is-admin:hover { background: #FFF8E6; color: #6b4700; }
+    .nav-dropdown-item.is-danger { color: #b91c1c; }
+    .nav-dropdown-item.is-danger:hover { background: #FEF2F2; color: #991b1b; }
+    .nav-dropdown-form { margin: 0; }
+
+    /* ═══════════════ MOBILE CART + TOGGLE ═══════════════ */
+    .nav-cart-mobile {
+        display: none;
+        position: relative;
+        margin-left: auto;
+        padding: 0.5rem;
+        border-radius: 0.5rem;
+        color: #ffffff;
+        transition: background 0.2s ease;
+    }
+    .nav-cart-mobile:hover { background: rgba(255,255,255,0.12); }
+
+    .nav-toggle {
+        display: none;
+        flex-direction: column;
+        justify-content: center;
+        gap: 4px;
+        width: 2.375rem;
+        height: 2.375rem;
+        padding: 0 0.375rem;
+        background: rgba(255,255,255,0.10);
+        border: 1px solid rgba(255,255,255,0.16);
+        border-radius: 0.5rem;
+        cursor: pointer;
+        transition: background 0.2s ease;
+    }
+    .nav-toggle:hover { background: rgba(255,255,255,0.18); }
+    .nav-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+    .nav-toggle span {
+        display: block;
+        height: 2px;
+        width: 100%;
+        border-radius: 2px;
+        background: #ffffff;
+        transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.2s ease;
+    }
+    .nav-toggle.is-open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+    .nav-toggle.is-open span:nth-child(2) { opacity: 0; transform: scaleX(0.4); }
+    .nav-toggle.is-open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+    /* ═══════════════ MOBILE PANEL ═══════════════ */
+    @media (max-width: 900px) {
+        .nav-inner { padding: 0 1rem; gap: 0.5rem; }
+        .nav-logo { font-size: 1.0625rem; }
+        .nav-cart-mobile { display: inline-flex; }
+        .nav-toggle { display: flex; }
+
+        .nav-menu {
             position: absolute;
-            top: 64px;
+            top: 100%;
             left: 0;
             right: 0;
-            background: linear-gradient(180deg, #1B5E20 0%, #2E8B57 100%);
+            margin: 0;
+            display: none;
             flex-direction: column;
-            padding: 0.75rem;
+            align-items: stretch;
             gap: 0.25rem;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.2);
-            border-top: 1px solid rgba(255,255,255,0.1);
+            padding: 0.75rem;
+            background: linear-gradient(180deg, #1B5E20 0%, #2E8B57 100%);
+            border-top: 1px solid rgba(255,255,255,0.12);
+            box-shadow: 0 24px 40px -12px rgba(6,30,18,0.5);
+            max-height: calc(100vh - var(--nav-h));
+            overflow-y: auto;
         }
-        #navLinks.open { display: flex !important; }
-        #navLinks a,
-        #navLinks form { width: 100%; }
-        #navLinks form button { width: 100%; }
-        #navLinks a[href*="cart"] {
-            display: none !important;
+        .nav-menu.is-open {
+            display: flex;
+            animation: navPanelDrop 0.26s cubic-bezier(0.22, 1, 0.36, 1) both;
         }
+
+        .nav-links,
+        .nav-actions {
+            flex-direction: column;
+            align-items: stretch;
+            gap: 0.25rem;
+            width: 100%;
+        }
+        .nav-link { padding: 0.6875rem 0.875rem; }
+        .nav-link::after {
+            left: 0.5rem;
+            top: 50%;
+            bottom: auto;
+            width: 3px;
+            height: 1.125rem;
+            margin-top: -0.5625rem;
+            transform: scaleY(0);
+            transform-origin: center top;
+        }
+        .nav-link:hover::after,
+        .nav-link.is-active::after { transform: scaleY(1); }
+
+        .nav-actions {
+            margin-top: 0.5rem;
+            padding-top: 0.625rem;
+            border-top: 1px solid rgba(255,255,255,0.14);
+        }
+        .nav-actions .nav-cart,
         .nav-divider { display: none; }
-        #navLinks a[style*="border-radius"] { text-align: center; }
+        .nav-btn { width: 100%; padding: 0.625rem 1rem; }
+
+        .nav-user { width: 100%; }
+        .nav-user > summary { width: 100%; border-radius: 0.5rem; }
+        .nav-user-name { max-width: none; margin-right: auto; }
+        .nav-dropdown {
+            position: static;
+            width: 100%;
+            margin-top: 0.375rem;
+            animation: none;
+            box-shadow: none;
+            border-color: rgba(255,255,255,0.12);
+        }
+        .nav-dropdown::before { display: none; }
+
+        /* Staggered item entrance */
+        .nav-menu.is-open .nav-link,
+        .nav-menu.is-open .nav-btn,
+        .nav-menu.is-open .nav-user {
+            animation: navItemIn 0.3s cubic-bezier(0.22, 1, 0.36, 1) both;
+        }
+        .nav-menu.is-open .nav-link:nth-child(1) { animation-delay: 0.03s; }
+        .nav-menu.is-open .nav-link:nth-child(2) { animation-delay: 0.07s; }
+        .nav-menu.is-open .nav-link:nth-child(3) { animation-delay: 0.11s; }
+        .nav-menu.is-open .nav-btn:nth-child(1) { animation-delay: 0.15s; }
+        .nav-menu.is-open .nav-btn:nth-child(2) { animation-delay: 0.19s; }
+        .nav-menu.is-open .nav-user { animation-delay: 0.15s; }
+    }
+    @media (max-width: 420px) {
+        .nav-logo-text { font-size: 0.9375rem; }
+    }
+
+    /* ═══════════════ KEYFRAMES ═══════════════ */
+    @keyframes navBadgePop {
+        0% { transform: scale(0.3); opacity: 0; }
+        60% { transform: scale(1.15); opacity: 1; }
+        100% { transform: scale(1); opacity: 1; }
+    }
+    @keyframes navDropIn {
+        from { opacity: 0; transform: translateY(-6px) scale(0.97); }
+        to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    @keyframes navPanelDrop {
+        from { opacity: 0; transform: translateY(-10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes navItemIn {
+        from { opacity: 0; transform: translateX(-8px); }
+        to { opacity: 1; transform: translateX(0); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .site-nav,
+        .site-nav::after,
+        .nav-link,
+        .nav-link::after,
+        .nav-cart-icon,
+        .nav-btn,
+        .nav-toggle span,
+        .nav-chevron,
+        .nav-logo-mark {
+            transition: none !important;
+        }
+        .nav-cart-badge,
+        .nav-menu.is-open,
+        .nav-menu.is-open .nav-link,
+        .nav-menu.is-open .nav-btn,
+        .nav-menu.is-open .nav-user,
+        .nav-dropdown {
+            animation: none !important;
+        }
     }
 </style>
 
 <script>
-    document.getElementById('navToggle')?.addEventListener('click', function() {
-        document.getElementById('navLinks').classList.toggle('open');
-        const icon = document.getElementById('hamburgerIcon');
-        if (document.getElementById('navLinks').classList.contains('open')) {
-            icon.setAttribute('d', 'M6 18L18 6M6 6l12 12');
-        } else {
-            icon.setAttribute('d', 'M4 6h16M4 12h16M4 18h16');
+    (function () {
+        var nav = document.getElementById('siteNav');
+        var toggle = document.getElementById('navToggle');
+        var menu = document.getElementById('navLinks');
+        if (!nav || !toggle || !menu) return;
+
+        function setMenu(open) {
+            menu.classList.toggle('is-open', open);
+            toggle.classList.toggle('is-open', open);
+            toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+            toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
         }
-    });
+
+        toggle.addEventListener('click', function () {
+            setMenu(!menu.classList.contains('is-open'));
+        });
+
+        function closeAccountMenus(except) {
+            document.querySelectorAll('.nav-user[open]').forEach(function (item) {
+                if (item !== except) item.removeAttribute('open');
+            });
+        }
+
+        document.addEventListener('click', function (event) {
+            if (!event.target.closest('.nav-user')) closeAccountMenus(null);
+            if (menu.classList.contains('is-open') &&
+                !event.target.closest('#navLinks') &&
+                !event.target.closest('#navToggle')) {
+                setMenu(false);
+            }
+        });
+
+        document.addEventListener('keydown', function (event) {
+            if (event.key !== 'Escape') return;
+            if (menu.classList.contains('is-open')) {
+                setMenu(false);
+                toggle.focus();
+            }
+            closeAccountMenus(null);
+        });
+
+        window.addEventListener('resize', function () {
+            if (window.innerWidth > 900) setMenu(false);
+        });
+
+        // Shrink/darken the bar once the page scrolls away from the top.
+        var ticking = false;
+        function syncScrollState() {
+            nav.classList.toggle('is-scrolled', window.scrollY > 8);
+            ticking = false;
+        }
+        window.addEventListener('scroll', function () {
+            if (ticking) return;
+            ticking = true;
+            window.requestAnimationFrame(syncScrollState);
+        }, { passive: true });
+        syncScrollState();
+    })();
 </script>
