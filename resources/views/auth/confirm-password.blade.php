@@ -4,16 +4,74 @@
 
 @section('hide-footer', true)
 
-@section('content')
-<div style="min-height: 70vh; display: flex; align-items: center; justify-content: center; padding: 3rem 1rem;">
-    <div style="width: 100%; max-width: 28rem;">
-        <div style="background: #ffffff; border-radius: 0.5rem; border: 1px solid #e5e7eb; padding: 2rem; box-shadow: 0 1px 2px rgba(0,0,0,0.05);">
-            <h1 style="font-size: 1.5rem; font-weight: 700; color: #111827; text-align: center; margin-bottom: 0.5rem;">Confirm Password</h1>
-            <p style="font-size: 0.875rem; color: #6b7280; text-align: center; margin-bottom: 2rem;">Please confirm your password before continuing</p>
+@push('styles')
+    @include('auth.partials.auth-styles')
+@endpush
 
+@section('content')
+<div class="auth-page">
+
+    {{-- ══════ BRAND PANEL ══════ --}}
+    <aside class="auth-aside">
+        <a href="{{ route('home') }}" class="auth-brand">
+            <span class="mark">P</span>
+            <span>PersonalCareStore</span>
+        </a>
+
+        <div class="auth-pitch">
+            <h2>One quick check and you're <em>back</em> in.</h2>
+            <p>Confirm your password to open the secure parts of your account, like order history and saved details.</p>
+
+            <ul class="auth-features">
+                <li>
+                    <span class="fi">
+                        <svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+                    </span>
+                    Sensitive pages stay protected
+                </li>
+                <li>
+                    <span class="fi">
+                        <svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+                    </span>
+                    Verified before any change is saved
+                </li>
+                <li>
+                    <span class="fi">
+                        <svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    </span>
+                    Takes only a few seconds
+                </li>
+            </ul>
+        </div>
+
+        <div class="auth-quote">
+            <div class="quote-icon">
+                <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <p><strong>Why am I seeing this?</strong> This step appears before protected pages so an unlocked device can't change your account settings.</p>
+            <div class="who">
+                <span class="avatar">S</span>
+                <span>Account security &middot; this session only</span>
+            </div>
+        </div>
+    </aside>
+
+    {{-- ══════ FORM PANEL ══════ --}}
+    <section class="auth-main" aria-labelledby="confirmHeading">
+        <div class="auth-card">
+            <span class="eyebrow">
+                <svg width="11" height="11" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+                Security check
+            </span>
+
+            <h1 id="confirmHeading">Confirm password</h1>
+            <p class="sub">Enter your password to continue to this protected area.</p>
+
+            {{-- Errors --}}
             @if($errors->any())
-                <div style="margin-bottom: 1rem; padding: 0.75rem 1rem; background: #fef2f2; border: 1px solid #fecaca; border-radius: 0.5rem; color: #991b1b; font-size: 0.875rem;">
-                    <ul style="list-style: none; margin: 0; padding: 0;">
+                <div class="alert-box alert-error">
+                    <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                    <ul>
                         @foreach($errors->all() as $error)
                             <li>{{ $error }}</li>
                         @endforeach
@@ -21,21 +79,42 @@
                 </div>
             @endif
 
-            <form method="POST" action="{{ route('password.confirm') }}">
+            {{-- Form --}}
+            <form method="POST" action="{{ route('password.confirm') }}" class="auth-form">
                 @csrf
 
-                <div style="margin-bottom: 1.25rem;">
-                    <label for="password" style="display: block; font-size: 0.875rem; font-weight: 500; color: #374151; margin-bottom: 0.375rem;">Password</label>
-                    <input id="password" type="password" name="password" required autocomplete="current-password"
-                           style="width: 100%; padding: 0.625rem 0.75rem; border: 1px solid #d1d5db; border-radius: 0.5rem; font-size: 0.875rem; color: #111827; outline: none; transition: border-color 0.2s, box-shadow 0.2s;"
-                           onfocus="this.style.borderColor='#4f46e5'; this.style.boxShadow='0 0 0 3px rgba(79,70,229,0.1)'"
-                           onblur="this.style.borderColor='#d1d5db'; this.style.boxShadow='none'">
+                <div class="field">
+                    <div class="label-row">
+                        <label for="password">Password</label>
+                    </div>
+                    <div class="input-wrap">
+                        <span class="input-icon">
+                            <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+                        </span>
+                        <input id="password" type="password" name="password" required autofocus autocomplete="current-password"
+                               placeholder="Enter your password" class="has-toggle {{ $errors->has('password') ? 'has-error' : '' }}">
+                        <button type="button" class="pw-toggle" aria-label="Show password" aria-pressed="false">
+                            <svg width="17" height="17" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                            <svg width="17" height="17" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" style="display:none;"><path d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19m-6.72-1.07a3 3 0 11-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+                        </button>
+                    </div>
                 </div>
 
-                <button type="submit" style="width: 100%; background: #4f46e5; color: #ffffff; border: none; padding: 0.625rem 1rem; border-radius: 0.5rem; font-size: 0.875rem; font-weight: 600; cursor: pointer; transition: background 0.2s;"
-                        onmouseover="this.style.background='#4338ca'" onmouseout="this.style.background='#4f46e5'">Confirm</button>
+                <button type="submit" class="btn-auth">
+                    Confirm &amp; continue
+                    <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                </button>
+
+                <div class="secure-note">
+                    <svg width="13" height="13" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    Your password is never stored in plain text.
+                </div>
             </form>
         </div>
-    </div>
+    </section>
 </div>
 @endsection
+
+@push('scripts')
+    @include('auth.partials.auth-scripts')
+@endpush
