@@ -11,56 +11,7 @@
 @section('content')
 <div class="auth-page">
 
-    {{-- ══════ BRAND PANEL ══════ --}}
-    <aside class="auth-aside">
-        <a href="{{ route('home') }}" class="auth-brand">
-            <span class="mark">P</span>
-            <span>PersonalCareStore</span>
-        </a>
-
-        <div class="auth-pitch">
-            <h2>Create an account and make every reorder <em>effortless</em>.</h2>
-            <p>Save your details once, then shop faster and keep an eye on every delivery from your account.</p>
-
-            <ul class="auth-features">
-                <li>
-                    <span class="fi">
-                        <svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="8.5" cy="7" r="4"/><polyline points="17 11 19 13 23 9"/></svg>
-                    </span>
-                    One account for orders and reorders
-                </li>
-                <li>
-                    <span class="fi">
-                        <svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
-                    </span>
-                    Fast delivery across the country
-                </li>
-                <li>
-                    <span class="fi">
-                        <svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
-                    </span>
-                    Secure checkout &amp; protected payments
-                </li>
-            </ul>
-        </div>
-
-        <div class="auth-quote">
-            <div class="stars">
-                <svg width="13" height="13" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                <svg width="13" height="13" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                <svg width="13" height="13" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                <svg width="13" height="13" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                <svg width="13" height="13" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-            </div>
-            <p>&ldquo;Creating an account took a minute and all my orders are in one place now. Highly recommended.&rdquo;</p>
-            <div class="who">
-                <span class="avatar">NS</span>
-                <span>Verified customer &middot; member since 2024</span>
-            </div>
-        </div>
-    </aside>
-
-    {{-- ══════ FORM PANEL ══════ --}}
+    {{-- ══════ FORM PANEL ONLY - MOBILE SHORT & CLEAN ══════ --}}
     <section class="auth-main" aria-labelledby="registerHeading">
         <div class="auth-card">
             <span class="eyebrow">
@@ -102,7 +53,7 @@
 
                 <div class="field">
                     <div class="label-row">
-                        <label for="email">Email address</label>
+                        <label for="email">Email</label>
                     </div>
                     <div class="input-wrap">
                         <span class="input-icon">
@@ -155,22 +106,11 @@
                     Create account
                     <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
                 </button>
-
-                <div class="secure-note">
-                    <svg width="13" height="13" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-                    Your information is encrypted and never shared.
-                </div>
             </form>
-
-            <div class="auth-divider">Already shopping with us?</div>
-            <p class="signup-row">
-                <a href="{{ route('login') }}">Sign in to your account</a>
-            </p>
         </div>
     </section>
 </div>
-@endsection
 
-@push('scripts')
+@endpush('scripts')
     @include('auth.partials.auth-scripts')
 @endpush
