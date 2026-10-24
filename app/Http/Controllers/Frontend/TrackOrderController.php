@@ -32,7 +32,10 @@ class TrackOrderController extends Controller
                     ->with('error', 'No orders found with that email address.');
             }
 
-            return view('frontend.track-order.index', compact('orders'));
+            return view('frontend.track-order.index', [
+                'orders' => $orders,
+                'email' => $validated['email'],
+            ]);
         }
 
         // Order number + email lookup: show specific order (guest only)
