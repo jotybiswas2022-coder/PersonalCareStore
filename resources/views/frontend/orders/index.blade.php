@@ -15,7 +15,6 @@
         --surface: #FFFFFF;
         --ease: cubic-bezier(0.22, 1, 0.36, 1);
         background: #F6FAF7;
-        padding-bottom: 4.5rem;
     }
 
     /* ─────────────── HERO ─────────────── */
@@ -139,6 +138,8 @@
 
     /* ─────────────── WRAP ─────────────── */
     .orders-wrap {
+        position: relative;
+        z-index: 1;
         max-width: 1180px;
         margin: -2.75rem auto 0;
         padding: 0 1.5rem 4.5rem;
@@ -256,6 +257,19 @@
         border-color: #B9E2C9;
     }
     .order-card:active { transform: translateY(-2px); }
+    /* Full-card link keeps the whole card clickable without wrapping
+       buttons and anchors inside an interactive element. */
+    .order-card .card-hit {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        border-radius: inherit;
+        text-decoration: none;
+    }
+    .order-card .card-hit:focus-visible {
+        outline: 2px solid #2E8B57;
+        outline-offset: -3px;
+    }
 
     .order-main {
         display: flex;
@@ -298,6 +312,8 @@
         box-shadow: 0 0 0 6px rgba(123,203,155,0.12);
     }
     .copy-pill {
+        position: relative;
+        z-index: 2;
         display: inline-flex;
         align-items: center;
         gap: 0.375rem;
@@ -441,6 +457,8 @@
     }
 
     .order-actions {
+        position: relative;
+        z-index: 2;
         display: flex;
         align-items: center;
         gap: 0.5rem;
@@ -608,13 +626,12 @@
     /* ─────────────── PAGINATION ─────────────── */
     .orders-pagi {
         display: flex;
+        flex-wrap: wrap;
         justify-content: center;
+        gap: 0.375rem;
         margin-top: 0.5rem;
     }
-    .orders-pagi nav { display: flex; flex-wrap: wrap; gap: 0.375rem; }
-    .orders-pagi .page-link,
-    .orders-pagi .page-item a,
-    .orders-pagi .page-item span {
+    .orders-pagi .page-link {
         display: inline-flex;
         align-items: center;
         justify-content: center;
@@ -630,18 +647,17 @@
         text-decoration: none;
         transition: background 0.25s var(--ease), border-color 0.25s var(--ease), color 0.25s var(--ease);
     }
-    .orders-pagi .page-item.active span,
-    .orders-pagi .page-item.active .page-link {
+    .orders-pagi .page-link.is-current {
         background: linear-gradient(135deg, #2E8B57 0%, #17603C 100%);
         border-color: transparent;
         color: #FFFFFF;
     }
-    .orders-pagi .page-item a:hover {
+    .orders-pagi a.page-link:hover {
         background: #F3FBF6;
         border-color: #B9E2C9;
         color: var(--green-deep);
     }
-    .orders-pagi .page-item.disabled span {
+    .orders-pagi .page-link.is-disabled {
         opacity: 0.4;
         pointer-events: none;
     }
@@ -790,8 +806,18 @@
                             'pending', 'unpaid' => 'is-pending',
                             default => '',
                         };
+                        $paymentLabel = match($order->payment_status) {
+                            'paid' => 'Payment confirmed',
+                            'approved' => 'Payment approved',
+                            'pending' => 'Payment pending',
+                            'rejected' => 'Payment rejected',
+                            'cancelled' => 'Payment cancelled',
+                            default => 'Awaiting payment',
+                        };
                     @endphp
-                    <article class="order-card" onclick="window.location='{{ route('orders.show', $order->id) }}'">
+                    <article class="order-card">
+                        <a class="card-hit" href="{{ route('orders.show', $order->id) }}"
+                           aria-label="View order {{ $order->order_number }}"></a>
                         <div class="order-main">
                             <div class="order-head">
                                 <div class="order-id-group">
@@ -800,7 +826,7 @@
                                             <span class="dot" aria-hidden="true"></span>
                                             {{ $order->order_number }}
                                         </div>
-                                        <button type="button" class="copy-pill js-copy" onclick="event.stopPropagation(); copyOrderNumber('{{ $order->order_number }}', this)">
+                                        <button type="button" class="copy-pill js-copy" onclick="copyOrderNumber('{{ $order->order_number }}', this)">
                                             <svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
                                             Copy
                                         </button>
@@ -823,10 +849,6 @@
                                             <span class="sub">by {{ $order->cancelled_by === 'user' ? 'You' : 'Admin' }}</span>
                                         @endif
                                     </span>
-                                    <span class="payment-chip {{ $paymentClass }}">
-                                        <svg width="11" height="11" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.4"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
-                                        Payment {{ ucfirst($order->payment_status) }}
-                                    </span>
                                 </div>
                             </div>
                             <div class="order-footer">
@@ -834,25 +856,25 @@
                                     <span class="label">Order total</span>
                                     <span class="amount">{{ currencyFormat($order->total) }}</span>
                                 </div>
-                                <div class="payment-chip {{ $paymentClass }}">
-                                    <svg width="11" height="11" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.4"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
-                                    {{ ($order->payment_status === 'paid' || $order->payment_status === 'approved') ? 'Payment confirmed' : 'Awaiting payment' }}
-                                </div>
+                                <span class="payment-chip {{ $paymentClass }}">
+                                    <svg width="11" height="11" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.4"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+                                    {{ $paymentLabel }}
+                                </span>
                             </div>
                         </div>
                         <div class="order-actions">
                             <div class="action-stack">
-                                <a href="{{ route('orders.show', $order->id) }}" class="btn-solid" onclick="event.stopPropagation();">
+                                <a href="{{ route('orders.show', $order->id) }}" class="btn-solid">
                                     <svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
                                     View order
                                 </a>
                                 @if(in_array($order->status, ['pending', 'processing']))
-                                    <button type="button" class="btn-danger" onclick="event.stopPropagation(); confirmCancel({{ $order->id }}, '{{ $order->order_number }}')">
+                                    <button type="button" class="btn-danger" onclick="confirmCancel({{ $order->id }}, '{{ $order->order_number }}')">
                                         <svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
                                         Cancel order
                                     </button>
-                                @else
-                                    <a href="{{ route('track-order.index') }}" class="btn-ghost" onclick="event.stopPropagation();">
+                                @elseif(in_array($order->status, ['shipped', 'delivered']))
+                                    <a href="{{ route('track-order.index') }}" class="btn-ghost">
                                         <svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
                                         Track order
                                     </a>
@@ -864,9 +886,40 @@
             </div>
 
             @if($orders->hasPages())
-                <div class="orders-pagi">
-                    {{ $orders->links() }}
-                </div>
+                @php
+                    $pageStart = max(1, $orders->currentPage() - 2);
+                    $pageEnd = min($orders->lastPage(), $pageStart + 4);
+                    $pageStart = max(1, $pageEnd - 4);
+                @endphp
+                <nav class="orders-pagi" aria-label="Orders pagination">
+                    @if($orders->onFirstPage())
+                        <span class="page-link is-disabled" aria-disabled="true" aria-label="Previous page">
+                            <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M15 18l-6-6 6-6"/></svg>
+                        </span>
+                    @else
+                        <a class="page-link" href="{{ $orders->previousPageUrl() }}" aria-label="Previous page" rel="prev">
+                            <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M15 18l-6-6 6-6"/></svg>
+                        </a>
+                    @endif
+
+                    @for($page = $pageStart; $page <= $pageEnd; $page++)
+                        @if($page === $orders->currentPage())
+                            <span class="page-link is-current" aria-current="page">{{ $page }}</span>
+                        @else
+                            <a class="page-link" href="{{ $orders->url($page) }}">{{ $page }}</a>
+                        @endif
+                    @endfor
+
+                    @if($orders->hasMorePages())
+                        <a class="page-link" href="{{ $orders->nextPageUrl() }}" aria-label="Next page" rel="next">
+                            <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M9 6l6 6-6 6"/></svg>
+                        </a>
+                    @else
+                        <span class="page-link is-disabled" aria-disabled="true" aria-label="Next page">
+                            <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M9 6l6 6-6 6"/></svg>
+                        </span>
+                    @endif
+                </nav>
             @endif
         @else
             <div class="empty-card">
