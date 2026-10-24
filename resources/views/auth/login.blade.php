@@ -11,56 +11,7 @@
 @section('content')
 <div class="auth-page">
 
-    {{-- ══════ BRAND PANEL ══════ --}}
-    <aside class="auth-aside">
-        <a href="{{ route('home') }}" class="auth-brand">
-            <span class="mark">P</span>
-            <span>PersonalCareStore</span>
-        </a>
-
-        <div class="auth-pitch">
-            <h2>Welcome back. Your everyday essentials are <em>waiting</em>.</h2>
-            <p>Sign in to reorder favourites, track deliveries and keep your care routine running without a hitch.</p>
-
-            <ul class="auth-features">
-                <li>
-                    <span class="fi">
-                        <svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
-                    </span>
-                    Secure checkout &amp; protected payments
-                </li>
-                <li>
-                    <span class="fi">
-                        <svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
-                    </span>
-                    Fast delivery across the country
-                </li>
-                <li>
-                    <span class="fi">
-                        <svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
-                    </span>
-                    100% genuine, quality-checked products
-                </li>
-            </ul>
-        </div>
-
-        <div class="auth-quote">
-            <div class="stars">
-                <svg width="13" height="13" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                <svg width="13" height="13" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                <svg width="13" height="13" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                <svg width="13" height="13" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                <svg width="13" height="13" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-            </div>
-            <p>&ldquo;Ordering is effortless and everything arrives on time. My monthly essentials never run out anymore.&rdquo;</p>
-            <div class="who">
-                <span class="avatar">AR</span>
-                <span>Verified customer &middot; repeat buyer</span>
-            </div>
-        </div>
-    </aside>
-
-    {{-- ══════ FORM PANEL ══════ --}}
+    {{-- ══════ FORM PANEL ONLY - MOBILE SHORT & CLEAN ══════ --}}
     <section class="auth-main" aria-labelledby="loginHeading">
         <div class="auth-card">
             <span class="eyebrow">
@@ -97,7 +48,7 @@
 
                 <div class="field">
                     <div class="label-row">
-                        <label for="email">Email address</label>
+                        <label for="email">Email</label>
                     </div>
                     <div class="input-wrap">
                         <span class="input-icon">
@@ -139,20 +90,11 @@
                     Sign in
                     <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
                 </button>
-
-                <div class="secure-note">
-                    <svg width="13" height="13" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-                    Your information is encrypted and never shared.
-                </div>
             </form>
-
-            <div class="auth-divider">New to PersonalCareStore?</div>
-            <p class="signup-row">
-                <a href="{{ route('register') }}">Create an account</a> — it only takes a minute.
-            </p>
         </div>
     </section>
 </div>
+
 @endsection
 
 @push('scripts')
