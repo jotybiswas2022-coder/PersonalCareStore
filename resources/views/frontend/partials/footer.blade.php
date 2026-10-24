@@ -434,17 +434,88 @@
         .footer-brand { grid-column: 1 / -1; }
         .footer-about { max-width: 32rem; }
     }
+    /* ═══════ MOBILE: compact footer ═══════ */
     @media (max-width: 640px) {
-        .footer-inner { padding: 2.75rem 1.25rem 1.75rem; }
-        .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
-        .footer-brand { grid-column: auto; }
+        .footer-inner { padding: 2.25rem 1.125rem 1.5rem; }
+        .footer-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+        .footer-brand {
+            grid-column: auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+        .footer-logo { margin-bottom: 0; }
+        .footer-about { display: none; }
+        .footer-social { margin-top: 0; gap: 0.375rem; }
+        .footer-social a {
+            width: 2.125rem;
+            height: 2.125rem;
+            border-radius: 0.625rem;
+        }
+
+        .footer-title {
+            margin-bottom: 0.75rem;
+            padding-bottom: 0.4375rem;
+            font-size: 0.625rem;
+            letter-spacing: 0.14em;
+        }
+        .footer-title::after { width: 1.25rem; }
+
+        /* Links become a single wrapping row of pills */
+        .footer-links {
+            flex-direction: row;
+            flex-wrap: wrap;
+            gap: 0.4375rem;
+        }
+        .footer-link {
+            padding: 0.4375rem 0.8125rem;
+            border: 1px solid rgba(255,255,255,0.14);
+            border-radius: 9999px;
+            background: rgba(255,255,255,0.04);
+            font-size: 0.8125rem;
+        }
+        .footer-link svg { display: none; }
+        .footer-link:hover {
+            transform: none;
+            background: rgba(255,255,255,0.09);
+            border-color: rgba(255,255,255,0.26);
+        }
+
+        /* Contact lines stay readable but tighten up */
+        .footer-contact { gap: 0.4375rem; }
+        .footer-contact-item {
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.8125rem;
+            line-height: 1.5;
+        }
+        .footer-contact-item .f-ic {
+            width: 1.5rem;
+            height: 1.5rem;
+            border-radius: 0.4375rem;
+        }
+
+        .footer-hours {
+            align-items: center;
+            padding: 0.5625rem 0.75rem;
+            border-radius: 0.75rem;
+            font-size: 0.75rem;
+            line-height: 1.5;
+        }
+        .footer-hours .f-ic { width: 1.5rem; height: 1.5rem; }
+        .footer-closed { margin-top: 0.5rem; padding: 0.1875rem 0.5rem; font-size: 0.625rem; }
+
         .footer-bottom {
             flex-direction: column;
             align-items: flex-start;
-            gap: 0.75rem;
-            margin-top: 2.25rem;
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+            padding-top: 1.125rem;
         }
-        .footer-legal { gap: 1.125rem; }
+        .footer-bottom p { font-size: 0.75rem; }
+        .footer-legal { gap: 1rem; }
+        .footer-legal a { font-size: 0.75rem; }
     }
 
     /* ═══════ ANIMATION ═══════ */
