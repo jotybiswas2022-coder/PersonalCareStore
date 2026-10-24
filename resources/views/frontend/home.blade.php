@@ -1454,6 +1454,46 @@
         .newsletter-form button { width: 100%; }
         .nl-note { justify-content: center; padding-left: 0; }
     }
+    /* ─────────────── MOBILE: essentials only ─────────────── */
+    @media (max-width: 640px) {
+        /* The short page lets the hero take any leftover height */
+        main { display: flex; flex-direction: column; }
+
+        /* Compact hero: headline and one clear action */
+        .hero {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 2rem 0 2.5rem;
+        }
+        .hero-inner { padding: 0 1rem; gap: 0; }
+        .hero-eyebrow { margin-bottom: 1rem; }
+        .hero-title { font-size: clamp(1.875rem, 8.6vw, 2.375rem); margin-bottom: 0.75rem; }
+        .hero-sub {
+            max-width: 21rem;
+            margin-bottom: 1.375rem;
+            font-size: 0.875rem;
+            line-height: 1.65;
+        }
+        .hero-actions { width: 100%; max-width: none; }
+        .hero-actions .btn-primary {
+            width: 100%;
+            justify-content: center;
+            padding: 0.9375rem 1.5rem;
+        }
+        .hero-actions .btn-ghost { display: none; }
+
+        /* Secondary and decorative blocks are desktop-only */
+        .hero-trust,
+        .hero-stage,
+        .hero-marquee,
+        .stats-section,
+        .features-section,
+        .cta-section,
+        .newsletter-section,
+        .contact-section { display: none !important; }
+    }
     @media (prefers-reduced-motion: reduce) {
         [data-reveal] {
             opacity: 1 !important;
