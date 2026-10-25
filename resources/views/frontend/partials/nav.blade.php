@@ -625,12 +625,12 @@
         .nav-actions {
             flex-direction: column;
             align-items: stretch;
-            gap: 0.25rem;
+            gap: 0.5rem;
             width: 100%;
         }
         .nav-section-label {
             display: block;
-            padding: 0.75rem 0.875rem 0.4375rem;
+            padding: 0.75rem 0.875rem 0.25rem;
             font-size: 0.625rem;
             font-weight: 800;
             letter-spacing: 0.16em;
@@ -646,7 +646,7 @@
             background: rgba(255,255,255,0.035);
             border: 1px solid rgba(255,255,255,0.08);
         }
-        .nav-link + .nav-link { margin-top: 0.375rem; }
+        .nav-link + .nav-link { margin-top: 0; }
         .nav-link::after { display: none; }
         .nav-link:hover,
         .nav-link.is-active {
@@ -672,12 +672,14 @@
         }
 
         .nav-actions {
-            margin-top: 0.5rem;
-            padding-top: 0.75rem;
+            gap: 0.625rem;
+            margin-top: 0.75rem;
+            padding-top: 1rem;
             border-top: 1px solid rgba(255,255,255,0.10);
         }
+        .nav-actions .nav-section-label { padding-bottom: 0.125rem; }
         .nav-actions .nav-cart { display: none; }
-        .nav-btn { width: 100%; padding: 0.6875rem 1rem; border-radius: 0.75rem; }
+        .nav-btn { width: 100%; min-height: 2.75rem; padding: 0.6875rem 1rem; border-radius: 0.75rem; }
 
         .nav-user { width: 100%; }
         .nav-user > summary { width: 100%; border-radius: 0.75rem; padding: 0.4375rem 0.625rem 0.4375rem 0.4375rem; }
