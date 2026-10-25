@@ -64,6 +64,6 @@
     </section>
 </div>
 
-@endpush('scripts')
+@push('scripts')
     @include('auth.partials.auth-scripts')
 @endpush

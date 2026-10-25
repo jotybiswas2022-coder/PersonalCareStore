@@ -16,8 +16,9 @@
         position: relative;
         isolation: isolate;
         overflow: hidden;
-        display: grid;
-        grid-template-columns: minmax(0, 1.02fr) minmax(0, 1fr);
+        display: flex;
+        align-items: center;
+        justify-content: center;
         min-height: calc(100vh - 64px);
         background:
             radial-gradient(1100px 620px at 84% 4%, rgba(46,139,87,0.40), transparent 62%),
@@ -211,6 +212,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        width: 100%;
         padding: 3rem 1.5rem;
     }
     .auth-card {
@@ -546,7 +548,7 @@
 
     /* ═══════════════ RESPONSIVE ═══════════════ */
     @media (max-width: 960px) {
-        .auth-page { grid-template-columns: 1fr; min-height: 0; }
+        .auth-page { min-height: 0; }
         .auth-aside {
             gap: 1.25rem;
             padding: 2rem 1.5rem 2.25rem;
