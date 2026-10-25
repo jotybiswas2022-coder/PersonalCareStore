@@ -9,17 +9,37 @@
         {{-- Primary navigation (collapses into a panel on mobile) --}}
         <nav class="nav-menu" id="navLinks" aria-label="Main navigation">
             <div class="nav-links">
+                <span class="nav-section-label">Browse</span>
                 <a href="{{ route('products.index') }}" class="nav-link {{ request()->routeIs('products.*') ? 'is-active' : '' }}"
-                   @if(request()->routeIs('products.*')) aria-current="page" @endif>Products</a>
+                   @if(request()->routeIs('products.*')) aria-current="page" @endif>
+                    <span class="nav-link-icon" aria-hidden="true">
+                        <svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/></svg>
+                    </span>
+                    <span class="nav-link-text">Products</span>
+                    <svg class="nav-link-chevron" aria-hidden="true" width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.4"><polyline points="9 18 15 12 9 6"/></svg>
+                </a>
                 <a href="{{ route('track-order.index') }}" class="nav-link {{ request()->routeIs('track-order.*') ? 'is-active' : '' }}"
-                   @if(request()->routeIs('track-order.*')) aria-current="page" @endif>Track Order</a>
+                   @if(request()->routeIs('track-order.*')) aria-current="page" @endif>
+                    <span class="nav-link-icon" aria-hidden="true">
+                        <svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    </span>
+                    <span class="nav-link-text">Track Order</span>
+                    <svg class="nav-link-chevron" aria-hidden="true" width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.4"><polyline points="9 18 15 12 9 6"/></svg>
+                </a>
                 @auth
                     <a href="{{ route('orders.index') }}" class="nav-link {{ request()->routeIs('orders.*') ? 'is-active' : '' }}"
-                       @if(request()->routeIs('orders.*')) aria-current="page" @endif>My Orders</a>
+                       @if(request()->routeIs('orders.*')) aria-current="page" @endif>
+                        <span class="nav-link-icon" aria-hidden="true">
+                            <svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M16 4h2a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M9 12h6M9 16h6"/></svg>
+                        </span>
+                        <span class="nav-link-text">My Orders</span>
+                        <svg class="nav-link-chevron" aria-hidden="true" width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.4"><polyline points="9 18 15 12 9 6"/></svg>
+                    </a>
                 @endauth
             </div>
 
             <div class="nav-actions">
+                <span class="nav-section-label">Account</span>
                 <a href="{{ route('cart.index') }}" class="nav-cart {{ request()->routeIs('cart.*') ? 'is-active' : '' }}"
                    aria-label="Cart, {{ $cartCount }} {{ Str::plural('item', $cartCount) }}">
                     <span class="nav-cart-icon">
@@ -94,6 +114,8 @@
             <span></span><span></span><span></span>
         </button>
     </div>
+
+    <div class="nav-scrim" id="navScrim" aria-hidden="true"></div>
 </header>
 
 <style>
@@ -189,6 +211,9 @@
         align-items: center;
         gap: 0.25rem;
     }
+    .nav-section-label,
+    .nav-link-icon,
+    .nav-link-chevron { display: none; }
     .nav-link {
         position: relative;
         color: rgba(233,247,238,0.72);
@@ -535,6 +560,7 @@
     .nav-toggle.is-open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
 
     /* ═══════════════ MOBILE PANEL ═══════════════ */
+    .nav-scrim { display: none; }
     @media (max-width: 900px) {
         .nav-inner { padding: 0 1.25rem; gap: 0.5rem; }
         .nav-logo { font-size: 1.0625rem; }
@@ -547,23 +573,53 @@
             left: 0;
             right: 0;
             margin: 0;
-            display: none;
+            display: flex;
             flex-direction: column;
             align-items: stretch;
             gap: 0.25rem;
-            padding: 0.875rem;
+            padding: 0.75rem 0.875rem 1rem;
             background:
                 radial-gradient(600px 200px at 88% -10%, rgba(46,139,87,0.4), transparent 70%),
                 linear-gradient(180deg, #07301E 0%, #03190F 100%);
             border-top: 1px solid rgba(255,255,255,0.10);
-            box-shadow: 0 30px 50px -20px rgba(0,0,0,0.85);
+            border-radius: 0 0 1.25rem 1.25rem;
+            box-shadow: 0 34px 60px -24px rgba(0,0,0,0.9);
             max-height: calc(100vh - var(--nav-h));
+            max-height: calc(100dvh - var(--nav-h));
             overflow-y: auto;
+            overscroll-behavior: contain;
+            visibility: hidden;
+            opacity: 0;
+            transform: translateY(-10px);
+            pointer-events: none;
+            transition: opacity 0.24s ease, transform 0.24s var(--ease), visibility 0s linear 0.24s;
         }
         .nav-menu.is-open {
-            display: flex;
-            animation: navPanelDrop 0.32s var(--ease) both;
+            visibility: visible;
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+            transition: opacity 0.28s var(--ease), transform 0.28s var(--ease), visibility 0s;
         }
+
+        .nav-scrim {
+            display: block;
+            position: fixed;
+            inset: var(--nav-h) 0 0;
+            z-index: 0;
+            background: rgba(3,25,15,0.55);
+            -webkit-backdrop-filter: blur(4px);
+            backdrop-filter: blur(4px);
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity 0.24s ease, visibility 0s linear 0.24s;
+        }
+        .nav-scrim.is-open {
+            visibility: visible;
+            opacity: 1;
+            transition: opacity 0.28s ease, visibility 0s;
+        }
+        body.nav-locked { overflow: hidden; }
 
         .nav-links,
         .nav-actions {
@@ -572,24 +628,48 @@
             gap: 0.25rem;
             width: 100%;
         }
+        .nav-section-label {
+            display: block;
+            padding: 0.75rem 0.875rem 0.4375rem;
+            font-size: 0.625rem;
+            font-weight: 800;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: rgba(233,247,238,0.45);
+        }
         .nav-link {
-            padding: 0.6875rem 0.875rem;
-            border-radius: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.8125rem 0.875rem;
+            border-radius: 0.875rem;
+            background: rgba(255,255,255,0.035);
+            border: 1px solid rgba(255,255,255,0.08);
         }
-        .nav-link::after {
-            left: 0.5rem;
-            top: 50%;
-            bottom: auto;
-            width: 3px;
-            height: 1.125rem;
-            margin-top: -0.5625rem;
-            border-radius: 2px;
-            background: linear-gradient(180deg, #FFD166, #9DF3BE);
-            transform: scaleY(0);
-            transform-origin: center top;
+        .nav-link + .nav-link { margin-top: 0.375rem; }
+        .nav-link::after { display: none; }
+        .nav-link:hover,
+        .nav-link.is-active {
+            background: rgba(157,243,190,0.10);
+            border-color: rgba(157,243,190,0.26);
         }
-        .nav-link:hover::after,
-        .nav-link.is-active::after { transform: scaleY(1); }
+        .nav-link-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            width: 1.875rem;
+            height: 1.875rem;
+            border-radius: 0.5rem;
+            background: rgba(255,255,255,0.06);
+            color: var(--mint);
+        }
+        .nav-link-text { font-weight: 600; }
+        .nav-link-chevron {
+            display: block;
+            margin-left: auto;
+            color: rgba(233,247,238,0.4);
+        }
 
         .nav-actions {
             margin-top: 0.5rem;
@@ -615,7 +695,8 @@
         /* Staggered item entrance */
         .nav-menu.is-open .nav-link,
         .nav-menu.is-open .nav-btn,
-        .nav-menu.is-open .nav-user {
+        .nav-menu.is-open .nav-user,
+        .nav-menu.is-open .nav-section-label {
             animation: navItemIn 0.36s var(--ease) both;
         }
         .nav-menu.is-open .nav-link:nth-child(1) { animation-delay: 0.04s; }
@@ -666,7 +747,9 @@
         .nav-toggle span,
         .nav-chevron,
         .nav-logo-mark,
-        .nav-dropdown-item {
+        .nav-dropdown-item,
+        .nav-menu,
+        .nav-scrim {
             transition: none !important;
         }
         .nav-logo,
@@ -677,6 +760,7 @@
         .nav-menu.is-open .nav-link,
         .nav-menu.is-open .nav-btn,
         .nav-menu.is-open .nav-user,
+        .nav-menu.is-open .nav-section-label,
         .nav-dropdown {
             animation: none !important;
         }
@@ -688,17 +772,25 @@
         var nav = document.getElementById('siteNav');
         var toggle = document.getElementById('navToggle');
         var menu = document.getElementById('navLinks');
+        var scrim = document.getElementById('navScrim');
         if (!nav || !toggle || !menu) return;
 
         function setMenu(open) {
             menu.classList.toggle('is-open', open);
             toggle.classList.toggle('is-open', open);
+            if (scrim) scrim.classList.toggle('is-open', open);
+            document.body.classList.toggle('nav-locked', open);
             toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
             toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
         }
 
         toggle.addEventListener('click', function () {
             setMenu(!menu.classList.contains('is-open'));
+        });
+
+        // Close the drawer as soon as a destination is chosen.
+        menu.addEventListener('click', function (event) {
+            if (event.target.closest('a')) setMenu(false);
         });
 
         function closeAccountMenus(except) {
