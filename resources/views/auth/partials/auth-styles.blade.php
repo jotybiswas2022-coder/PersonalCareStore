@@ -12,6 +12,7 @@
         --muted: rgba(226,245,232,0.64);
         --line: rgba(255,255,255,0.12);
         --ease: cubic-bezier(0.22, 1, 0.36, 1);
+        --nav-h: 65px;
 
         position: relative;
         isolation: isolate;
@@ -19,7 +20,8 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        min-height: calc(100vh - 64px);
+        min-height: calc(100vh - var(--nav-h));
+        min-height: calc(100dvh - var(--nav-h));
         background:
             radial-gradient(1100px 620px at 84% 4%, rgba(46,139,87,0.40), transparent 62%),
             radial-gradient(760px 480px at 0% 100%, rgba(255,209,102,0.10), transparent 68%),
@@ -548,7 +550,7 @@
 
     /* ═══════════════ RESPONSIVE ═══════════════ */
     @media (max-width: 960px) {
-        .auth-page { min-height: 0; }
+        .auth-page { min-height: calc(100vh - var(--nav-h)); min-height: calc(100dvh - var(--nav-h)); }
         .auth-aside {
             gap: 1.25rem;
             padding: 2rem 1.5rem 2.25rem;
