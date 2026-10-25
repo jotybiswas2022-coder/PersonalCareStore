@@ -571,17 +571,44 @@
     /* ═══════════════ RESPONSIVE ═══════════════ */
     @media (max-width: 960px) {
         .auth-page {
-            align-items: flex-start;
+            flex-direction: column;
+            align-items: stretch;
+            justify-content: flex-start;
             min-height: calc(100vh - var(--nav-h));
             min-height: calc(100dvh - var(--nav-h));
         }
-        .auth-aside { display: none; }
-        .auth-main { padding: 2rem 1.25rem 3rem; align-items: flex-start; }
+        .auth-aside { display: contents; }
+        .auth-aside::before,
+        .auth-aside::after { display: none; }
+        .auth-pitch {
+            order: 1;
+            margin: 0;
+            padding: 1.75rem 1.25rem 0;
+        }
+        .auth-pitch h2 { font-size: 1.4375rem; max-width: none; }
+        .auth-pitch p { font-size: 0.875rem; max-width: none; }
+        .auth-features { display: none; }
+        .auth-trust {
+            order: 3;
+            justify-content: center;
+            margin: auto 1.25rem 1.5rem;
+            font-size: 0.6875rem;
+        }
+        .auth-main {
+            order: 2;
+            padding: 1.25rem 1.25rem 0;
+            align-items: flex-start;
+        }
     }
     @media (max-width: 480px) {
         .auth-card { padding: 1.5rem 1.25rem; border-radius: 1.25rem; }
-        .auth-aside { padding: 1.5rem 1.25rem 1.75rem; }
-        .auth-pitch h2 { font-size: 1.3125rem; }
+        .auth-pitch { padding: 1.5rem 1.25rem 0; }
+        .auth-pitch h2 { font-size: 1.375rem; }
+    }
+    /* Short phones: keep the sign-in button above the fold */
+    @media (max-width: 960px) and (max-height: 720px) {
+        .auth-pitch p { display: none; }
+        .auth-pitch { padding-top: 1.25rem; }
     }
 
     /* ═══════════════ ANIMATION ═══════════════ */
