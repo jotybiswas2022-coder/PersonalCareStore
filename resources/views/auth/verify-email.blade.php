@@ -11,6 +11,8 @@
 @section('content')
 <div class="auth-page">
 
+    @include('auth.partials.auth-aside')
+
     {{-- ══════ FORM PANEL ONLY - MOBILE SHORT & CLEAN ══════ --}}
     <section class="auth-main" aria-labelledby="verifyHeading">
         <div class="auth-card">
@@ -63,6 +65,8 @@
         </div>
     </section>
 </div>
+
+@endsection
 
 @push('scripts')
     @include('auth.partials.auth-scripts')

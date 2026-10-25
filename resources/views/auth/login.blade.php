@@ -11,6 +11,8 @@
 @section('content')
 <div class="auth-page">
 
+    @include('auth.partials.auth-aside')
+
     {{-- ══════ FORM PANEL ONLY - MOBILE SHORT & CLEAN ══════ --}}
     <section class="auth-main" aria-labelledby="loginHeading">
         <div class="auth-card">

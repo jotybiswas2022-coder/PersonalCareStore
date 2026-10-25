@@ -52,8 +52,8 @@
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        gap: 2.5rem;
-        padding: 3.25rem clamp(2rem, 4vw, 4rem);
+        gap: 2rem;
+        padding: 2.75rem clamp(1.75rem, 3.5vw, 3.5rem);
         border-right: 1px solid rgba(255,255,255,0.06);
     }
     .auth-aside::before,
@@ -103,6 +103,7 @@
     }
     .auth-brand:hover .mark { transform: rotate(-8deg) scale(1.07); }
 
+    .auth-pitch { margin: auto 0; }
     .auth-pitch h2 {
         font-size: clamp(1.75rem, 2.6vw, 2.375rem);
         font-weight: 800;
@@ -162,6 +163,16 @@
         backdrop-filter: blur(10px);
         color: var(--mint);
     }
+
+    /* Trust line at the bottom of the panel */
+    .auth-trust {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 0.75rem;
+        color: rgba(226,245,232,0.5);
+    }
+    .auth-trust svg { flex-shrink: 0; color: var(--mint); }
 
     /* Quote / support card */
     .auth-quote {
@@ -548,19 +559,23 @@
     }
     .signup-row a:hover { color: #FFFFFF; text-decoration: underline; }
 
+    /* ═══════════════ WIDE SCREENS: COMPACT BRAND PANEL ═══════════════ */
+    @media (min-width: 961px) {
+        .auth-page {
+            display: grid;
+            grid-template-columns: minmax(0, 1.02fr) minmax(0, 1fr);
+            align-items: stretch;
+        }
+    }
+
     /* ═══════════════ RESPONSIVE ═══════════════ */
     @media (max-width: 960px) {
-        .auth-page { min-height: calc(100vh - var(--nav-h)); min-height: calc(100dvh - var(--nav-h)); }
-        .auth-aside {
-            gap: 1.25rem;
-            padding: 2rem 1.5rem 2.25rem;
-            border-right: none;
-            border-bottom: 1px solid rgba(255,255,255,0.06);
+        .auth-page {
+            align-items: flex-start;
+            min-height: calc(100vh - var(--nav-h));
+            min-height: calc(100dvh - var(--nav-h));
         }
-        .auth-pitch h2 { font-size: 1.5rem; max-width: none; }
-        .auth-pitch p { font-size: 0.875rem; }
-        .auth-features,
-        .auth-quote { display: none; }
+        .auth-aside { display: none; }
         .auth-main { padding: 2rem 1.25rem 3rem; align-items: flex-start; }
     }
     @media (max-width: 480px) {
