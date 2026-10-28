@@ -991,7 +991,11 @@
                             <span class="pill {{ $paymentPill }}">{{ $paymentLabel }}</span>
                         </div>
                         <div class="addr-grid">
-                            <div class="addr-item addr-full">
+                            <div class="addr-item">
+                                <div class="lbl">Payment Method</div>
+                                <div class="val">{{ strtoupper($order->payment_method ?? 'N/A') }}</div>
+                            </div>
+                            <div class="addr-item">
                                 <div class="lbl">Transaction ID</div>
                                 <div class="val">{{ $order->transaction_id ?? 'N/A' }}</div>
                             </div>

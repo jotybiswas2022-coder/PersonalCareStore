@@ -864,7 +864,7 @@
 </div>
 
 {{-- Payment Proof --}}
-@if($order->transaction_id || $order->proof_image)
+@if($order->transaction_id || $order->proof_image || $order->payment_method)
     <div class="os-card os-proof-card os-animate os-animate-d3">
         <div class="os-section" style="margin-bottom:0;">
             <h2>
@@ -872,6 +872,17 @@
                 Payment Proof
             </h2>
             <div class="os-proof-detail">
+                @if($order->payment_method)
+                    <div class="os-proof-row">
+                        <div class="pr-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+                        </div>
+                        <div class="pr-content">
+                            <div class="pr-lbl">Payment Method</div>
+                            <div class="pr-val" style="text-transform: uppercase;">{{ $order->payment_method }}</div>
+                        </div>
+                    </div>
+                @endif
                 @if($order->transaction_id)
                     <div class="os-proof-row">
                         <div class="pr-icon">

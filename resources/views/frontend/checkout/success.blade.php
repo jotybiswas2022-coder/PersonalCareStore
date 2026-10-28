@@ -1476,16 +1476,34 @@
                     <div class="panel-body">
                         <form action="{{ route('checkout.proof', $order->id) }}" method="POST" enctype="multipart/form-data" class="proof-form">
                             @csrf
-                            <div class="form-group">
-                                <label for="transaction_id">Transaction ID <span class="required">*</span></label>
-                                <input type="text" name="transaction_id" id="transaction_id" value="{{ old('transaction_id') }}" required placeholder="e.g. TRX123456789" autocomplete="off">
-                                @error('transaction_id')
-                                    <p class="form-error">
-                                        <svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
-                                        {{ $message }}
-                                    </p>
-                                @enderror
-                            </div>
+                    <div class="form-group">
+                        <label for="payment_method_used">Payment Method Used <span class="required">*</span></label>
+                        <select name="payment_method_used" id="payment_method_used" required style="width:100%; padding:0.875rem 1rem; border-radius:0.875rem; border:1px solid #DCE7E1; font-size:0.9375rem;">
+                            <option value="">Select payment method</option>
+                            <option value="bkash" {{ old('payment_method_used') == 'bkash' ? 'selected' : '' }}>bKash</option>
+                            <option value="nagad" {{ old('payment_method_used') == 'nagad' ? 'selected' : '' }}>Nagad</option>
+                            <option value="rocket" {{ old('payment_method_used') == 'rocket' ? 'selected' : '' }}>Rocket</option>
+                            <option value="bank" {{ old('payment_method_used') == 'bank' ? 'selected' : '' }}>Bank Transfer</option>
+                            <option value="card" {{ old('payment_method_used') == 'card' ? 'selected' : '' }}>Card</option>
+                            <option value="other" {{ old('payment_method_used') == 'other' ? 'selected' : '' }}>Other</option>
+                        </select>
+                        @error('payment_method_used')
+                            <p class="form-error">
+                                <svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+                                {{ $message }}
+                            </p>
+                        @enderror
+                    </div>
+                    <div class="form-group">
+                        <label for="transaction_id">Transaction ID <span class="required">*</span></label>
+                        <input type="text" name="transaction_id" id="transaction_id" value="{{ old('transaction_id') }}" required placeholder="e.g. TRX123456789" autocomplete="off">
+                        @error('transaction_id')
+                            <p class="form-error">
+                                <svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+                                {{ $message }}
+                            </p>
+                        @enderror
+                    </div>
                     <div class="form-group">
                         <label for="proof_image">Payment screenshot <span class="required">*</span></label>
                         <input type="file" name="proof_image" id="proof_image" accept="image/*" required onchange="previewProofImage(this)">

@@ -173,6 +173,7 @@ class CheckoutController extends Controller
         }
 
         $validated = $request->validate([
+            'payment_method_used' => 'required|string|max:50',
             'transaction_id' => 'required|string|max:255',
             'proof_image' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:10240',
         ]);
@@ -180,6 +181,7 @@ class CheckoutController extends Controller
         $path = $request->file('proof_image')->store('proofs', 'public');
 
         $order->update([
+            'payment_method' => $validated['payment_method_used'],
             'transaction_id' => $validated['transaction_id'],
             'proof_image' => $path,
             'payment_status' => 'paid',
