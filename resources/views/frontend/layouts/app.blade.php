@@ -4,6 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
     <meta name="description" content="@yield('meta_description', 'PersonalCareStore - Premium personal care and home care products. Quality you can trust, delivered to your door.')">
     <link rel="canonical" href="@yield('canonical', url()->current())">
     <meta property="og:title" content="@yield('title', 'PersonalCareStore')">
