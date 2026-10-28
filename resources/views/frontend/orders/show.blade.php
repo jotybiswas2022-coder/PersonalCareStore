@@ -1196,8 +1196,10 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
     function openProofModal(src) {
-        document.getElementById('proofModalImg').src = src;
-        document.getElementById('proofModal').style.display = 'flex';
+        var modal = document.getElementById('proofModal');
+        var img = document.getElementById('proofModalImg');
+        img.src = src;
+        modal.style.display = 'flex';
         document.body.style.overflow = 'hidden';
     }
     function closeProofModal() {
