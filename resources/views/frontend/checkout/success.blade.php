@@ -1480,12 +1480,16 @@
                         <label for="payment_method_used">Payment Method Used <span class="required">*</span></label>
                         <select name="payment_method_used" id="payment_method_used" required style="width:100%; padding:0.875rem 1rem; border-radius:0.875rem; border:1px solid #DCE7E1; font-size:0.9375rem;">
                             <option value="">Select payment method</option>
-                            <option value="bkash" {{ old('payment_method_used') == 'bkash' ? 'selected' : '' }}>bKash</option>
-                            <option value="nagad" {{ old('payment_method_used') == 'nagad' ? 'selected' : '' }}>Nagad</option>
-                            <option value="rocket" {{ old('payment_method_used') == 'rocket' ? 'selected' : '' }}>Rocket</option>
-                            <option value="bank" {{ old('payment_method_used') == 'bank' ? 'selected' : '' }}>Bank Transfer</option>
-                            <option value="card" {{ old('payment_method_used') == 'card' ? 'selected' : '' }}>Card</option>
-                            <option value="other" {{ old('payment_method_used') == 'other' ? 'selected' : '' }}>Other</option>
+                            @if(isset($paymentDetails) && $paymentDetails->count() > 0)
+                                @foreach($paymentDetails as $pd)
+                                    <option value="{{ strtolower(str_replace(' ', '_', $pd->bank_name)) }}" {{ old('payment_method_used') == strtolower(str_replace(' ', '_', $pd->bank_name)) ? 'selected' : '' }}>{{ $pd->bank_name }}</option>
+                                @endforeach
+                            @else
+                                <option value="bkash" {{ old('payment_method_used') == 'bkash' ? 'selected' : '' }}>bKash</option>
+                                <option value="nagad" {{ old('payment_method_used') == 'nagad' ? 'selected' : '' }}>Nagad</option>
+                                <option value="rocket" {{ old('payment_method_used') == 'rocket' ? 'selected' : '' }}>Rocket</option>
+                                <option value="bank" {{ old('payment_method_used') == 'bank' ? 'selected' : '' }}>Bank Transfer</option>
+                            @endif
                         </select>
                         @error('payment_method_used')
                             <p class="form-error">
