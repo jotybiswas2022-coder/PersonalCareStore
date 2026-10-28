@@ -1,6 +1,7 @@
 @extends('frontend.layouts.app')
 
 @section('title', isset($category) ? $category->name : 'Products')
+@section('meta_description', isset($category) && $category->description ? Str::limit(strip_tags($category->description), 160) : 'Browse our complete collection of premium personal care and home care products.')
 
 @push('styles')
 <style>

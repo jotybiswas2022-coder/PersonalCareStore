@@ -1,6 +1,7 @@
 @extends('frontend.layouts.app')
 
 @section('title', 'Home')
+@section('meta_description', 'PersonalCareStore - Premium personal care and home care products. Quality you can trust, delivered to your door.')
 
 @push('styles')
 <style>

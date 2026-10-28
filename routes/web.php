@@ -27,6 +27,7 @@ use App\Http\Controllers\ProfileController;
 |--------------------------------------------------------------------------
 */
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::view('/privacy-policy', 'frontend.pages.privacy-policy')->name('privacy-policy');
 
 /*
 |--------------------------------------------------------------------------

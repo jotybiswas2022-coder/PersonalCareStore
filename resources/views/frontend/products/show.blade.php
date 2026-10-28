@@ -1,6 +1,10 @@
 @extends('frontend.layouts.app')
 
 @section('title', $product->name)
+@section('meta_description', Str::limit(strip_tags($product->description), 160))
+@section('canonical', route('products.show', $product->id))
+@section('og_type', 'product')
+@section('og_image', $product->images && count($product->images) > 0 ? $product->image_urls[0] : asset('logo.svg'))
 
 @push('styles')
 <style>
@@ -319,47 +323,48 @@
     }
 
     /* Add to cart */
-    .pdp-cart { margin-top: 1.75rem; }
+    .pdp-cart { margin-top: 2rem; }
     .pdp-cart-row {
         display: flex;
         align-items: stretch;
-        gap: 0.75rem;
+        gap: 0.875rem;
     }
     .pdp-qty {
         display: flex;
         align-items: center;
-        border: 1px solid var(--line);
-        border-radius: 0.875rem;
+        border: 1.5px solid var(--line);
+        border-radius: 1rem;
         overflow: hidden;
         background: var(--surface);
-        box-shadow: 0 12px 26px -24px rgba(10,60,38,0.6);
+        box-shadow: 0 18px 38px -28px rgba(10,60,38,0.7);
     }
     .pdp-qty button {
-        width: 2.75rem;
-        height: 3.25rem;
+        width: 3rem;
+        height: 3.5rem;
         border: none;
         background: transparent;
         color: var(--ink);
-        font-size: 1.125rem;
-        font-weight: 600;
+        font-size: 1.25rem;
+        font-weight: 700;
         cursor: pointer;
         display: flex;
         align-items: center;
         justify-content: center;
         transition: background 0.25s var(--ease), color 0.25s var(--ease);
     }
-    .pdp-qty button:hover { background: #EDF9F2; color: var(--green-deep); }
+    .pdp-qty button:hover { background: #F0FAF4; color: var(--green-deep); }
+    .pdp-qty button:active { background: #E6F7EE; }
     .pdp-qty input {
-        width: 3rem;
-        height: 3.25rem;
+        width: 3.25rem;
+        height: 3.5rem;
         border: none;
-        border-left: 1px solid var(--line);
-        border-right: 1px solid var(--line);
-        background: #F6FAF7;
+        border-left: 1.5px solid var(--line);
+        border-right: 1.5px solid var(--line);
+        background: linear-gradient(180deg, #F8FCFA 0%, #F2F9F6 100%);
         text-align: center;
         font-family: inherit;
-        font-size: 0.9375rem;
-        font-weight: 700;
+        font-size: 1rem;
+        font-weight: 800;
         color: var(--ink);
         outline: none;
         -moz-appearance: textfield;
@@ -374,22 +379,22 @@
         position: relative;
         overflow: hidden;
         flex: 1;
-        height: 3.25rem;
+        height: 3.5rem;
         display: flex;
         align-items: center;
         justify-content: center;
-        gap: 0.625rem;
+        gap: 0.75rem;
         border: none;
-        border-radius: 0.875rem;
-        background: linear-gradient(135deg, #FFE08A 0%, #FFD166 55%, #F5C14E 100%);
-        color: #12261B;
+        border-radius: 1rem;
+        background: linear-gradient(135deg, #22C55E 0%, #16A34A 55%, #15803D 100%);
+        color: #FFFFFF;
         font-family: inherit;
-        font-size: 0.9375rem;
-        font-weight: 700;
+        font-size: 1rem;
+        font-weight: 800;
         letter-spacing: -0.01em;
         cursor: pointer;
-        box-shadow: 0 14px 34px -14px rgba(255,209,102,0.9), inset 0 1px 0 rgba(255,255,255,0.6);
-        transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease);
+        box-shadow: 0 18px 40px -16px rgba(22,163,74,0.95), inset 0 1px 0 rgba(255,255,255,0.25);
+        transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease), filter 0.3s var(--ease);
     }
     .pdp-atc::after {
         content: '';
@@ -398,25 +403,27 @@
         left: -30%;
         width: 40%;
         height: 220%;
-        background: linear-gradient(100deg, transparent 0%, rgba(255,255,255,0.75) 50%, transparent 100%);
+        background: linear-gradient(100deg, transparent 0%, rgba(255,255,255,0.4) 50%, transparent 100%);
         transform: translateX(-160%) rotate(12deg);
-        transition: transform 0.75s var(--ease);
+        transition: transform 0.8s var(--ease);
         pointer-events: none;
     }
     .pdp-atc:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 20px 40px -16px rgba(255,209,102,1), inset 0 1px 0 rgba(255,255,255,0.65);
+        transform: translateY(-3px);
+        filter: brightness(1.02);
+        box-shadow: 0 24px 48px -14px rgba(22,163,74,1), inset 0 1px 0 rgba(255,255,255,0.3);
     }
     .pdp-atc:hover::after { transform: translateX(420%) rotate(12deg); }
-    .pdp-atc:active { transform: translateY(0); }
+    .pdp-atc:active { transform: translateY(-1px); }
     .pdp-atc:disabled {
-        opacity: 0.55;
+        opacity: 0.5;
         cursor: not-allowed;
         transform: none !important;
         box-shadow: none !important;
+        filter: none !important;
     }
-    .pdp-atc svg { transition: transform 0.3s var(--ease); }
-    .pdp-atc:hover svg { transform: translateX(2px); }
+    .pdp-atc svg { transition: transform 0.3s var(--ease); flex-shrink: 0; }
+    .pdp-atc:hover svg { transform: translateX(3px); }
 
     /* Trust chips */
     .pdp-trust {
@@ -842,22 +849,86 @@
         .pdp-related-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
     }
     @media (max-width: 960px) {
-        .pdp-main { grid-template-columns: 1fr; gap: 2.25rem; }
+        .pdp-main { grid-template-columns: 1fr; gap: 2rem; }
         .pdp-gallery { position: static; }
-        .pdp-stage { border-radius: 1.5rem; }
+        .pdp-stage { border-radius: 1.25rem; }
         .pdp-info h1 { font-size: clamp(1.5rem, 4.6vw, 2rem); }
     }
     @media (max-width: 640px) {
-        .pdp-container { padding: 0 1rem; }
-        .pdp-crumb { padding-top: 1rem; }
-        .pdp-price { padding: 1rem 1.125rem; }
-        .pdp-price .save { margin-left: 0; }
-        .pdp-cart-row { flex-direction: column; }
-        .pdp-qty { align-self: flex-start; }
-        .pdp-atc { width: 100%; }
-        .pdp-section { margin-top: 2.75rem; padding: 0 1rem; }
-        .pdp-card { padding: 1.375rem; border-radius: 1.25rem; }
-        .pdp-related-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.75rem; }
+        html, body { overflow-x: hidden; }
+        .pdp { padding-bottom: 2.5rem; overflow-x: hidden; }
+        .pdp-container { padding: 0 0.75rem; width: 100%; max-width: 100%; box-sizing: border-box; }
+        .pdp-crumb { padding-top: 0.75rem; font-size: 0.6875rem; gap: 0.3125rem; flex-wrap: nowrap; overflow-x: auto; white-space: nowrap; -webkit-overflow-scrolling: touch; }
+        .pdp-crumb::-webkit-scrollbar { display: none; }
+        .pdp-crumb .current { max-width: 10rem; }
+        .pdp-main { gap: 1.5rem; margin-top: 1rem; }
+        .pdp-gallery { width: 100%; max-width: 100%; }
+        .pdp-stage { border-radius: 1rem; width: 100%; }
+        .pdp-stage img { padding: 0.875rem; }
+        .pdp-flags { top: 0.625rem; left: 0.625rem; gap: 0.1875rem; }
+        .pdp-flag { padding: 0.1875rem 0.4375rem; font-size: 0.5rem; }
+        .pdp-like { top: 0.625rem; right: 0.625rem; width: 2rem; height: 2rem; }
+        .pdp-thumbs { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0.4375rem; margin-top: 0.625rem; }
+        .pdp-thumbs .thumb { border-radius: 0.625rem; }
+        .pdp-info { width: 100%; max-width: 100%; }
+        .pdp-info h1 { font-size: clamp(1.25rem, 6.5vw, 1.625rem); }
+        .pdp-eyebrow { font-size: 0.625rem; letter-spacing: 0.12em; margin-bottom: 0.625rem; }
+        .pdp-meta { gap: 0.5rem; margin-top: 0.625rem; }
+        .pdp-rating, .pdp-brand { font-size: 0.6875rem; }
+        .pdp-price { padding: 0.75rem 0.875rem; border-radius: 0.875rem; gap: 0.5rem; flex-wrap: wrap; }
+        .pdp-price .amount { font-size: clamp(1.375rem, 7.5vw, 1.75rem); }
+        .pdp-price .was { font-size: 0.8125rem; }
+        .pdp-price .save { margin-left: 0; font-size: 0.5625rem; padding: 0.1875rem 0.5rem; }
+        .pdp-stock-row { gap: 0.4375rem; }
+        .pdp-stock { font-size: 0.6875rem; padding: 0.3125rem 0.625rem; }
+        .pdp-sku { margin-left: 0; width: 100%; order: 3; font-size: 0.6875rem; }
+        .pdp-desc { margin-top: 0.875rem; font-size: 0.8125rem; line-height: 1.65; }
+        .pdp-cart { margin-top: 1.125rem; }
+        .pdp-cart-row { flex-direction: column; gap: 0.625rem; }
+        .pdp-qty { align-self: stretch; width: 100%; border-radius: 0.875rem; }
+        .pdp-qty button { width: 3rem; height: 3rem; font-size: 1.125rem; }
+        .pdp-qty input { flex: 1; height: 3rem; font-size: 0.9375rem; }
+        .pdp-atc { width: 100%; height: 3rem; font-size: 0.875rem; border-radius: 0.875rem; gap: 0.625rem; box-shadow: 0 16px 34px -14px rgba(22,163,74,0.9); }
+        .pdp-trust { margin-top: 1rem; gap: 0.3125rem; }
+        .pdp-trust span { font-size: 0.625rem; padding: 0.375rem 0.5rem; gap: 0.3125rem; }
+        .pdp-section { margin-top: 2rem; padding: 0 0.75rem; width: 100%; max-width: 100%; box-sizing: border-box; }
+        .pdp-section-head { margin-bottom: 1rem; gap: 0.75rem; }
+        .pdp-section-head h2 { font-size: clamp(1.125rem, 6vw, 1.5rem); }
+        .pdp-link { font-size: 0.75rem; }
+        .pdp-card { padding: 1rem; border-radius: 0.875rem; }
+        .pdp-prose { font-size: 0.8125rem; line-height: 1.7; }
+        .pdp-avg { font-size: 0.6875rem; padding: 0.3125rem 0.75rem; }
+        .pdp-review { padding: 0.875rem; border-radius: 0.875rem; margin-bottom: 0.75rem; }
+        .pdp-reviewer { gap: 0.5rem; }
+        .pdp-avatar { width: 2rem; height: 2rem; font-size: 0.6875rem; }
+        .pdp-reviewer-name { font-size: 0.8125rem; }
+        .pdp-reviewer-name small { display: block; margin-left: 0; margin-top: 0.0625rem; font-size: 0.6875rem; }
+        .pdp-stars svg { width: 0.75rem; height: 0.75rem; }
+        .pdp-review-title { font-size: 0.75rem; }
+        .pdp-review-body { font-size: 0.8125rem; line-height: 1.65; margin-top: 0.625rem; }
+        .pdp-review-img img { max-width: 100%; width: 100%; height: auto; border-radius: 0.625rem; }
+        .pdp-reply { padding: 0.75rem 0.875rem; border-radius: 0.75rem; }
+        .pdp-reply .label { font-size: 0.5625rem; }
+        .pdp-reply .text { font-size: 0.8125rem; }
+        .pdp-textarea { font-size: 0.8125rem; }
+        .pdp-reply-btn { font-size: 0.75rem; padding: 0.4375rem 0.75rem; }
+        .pdp-related-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.5rem; }
+        .pdp-related { border-radius: 0.875rem; }
+        .pdp-related .shot { aspect-ratio: 1 / 1; }
+        .pdp-related .body { padding: 0.625rem; gap: 0.375rem; }
+        .pdp-related .cat { font-size: 0.5rem; }
+        .pdp-related .name { font-size: 0.75rem; line-height: 1.4; }
+        .pdp-related .meta { font-size: 0.625rem; }
+        .pdp-related .meta .rate { padding: 0.125rem 0.375rem; }
+        .pdp-related .price { gap: 0.375rem; }
+        .pdp-related .price .now { font-size: 0.8125rem; }
+        .pdp-related .price .was { font-size: 0.6875rem; }
+        .pdp-related .atc { font-size: 0.6875rem; height: 2rem; border-radius: 0.625rem; }
+        .pdp-related .flags { top: 0.375rem; left: 0.375rem; }
+        .pdp-related .flag { font-size: 0.5rem; padding: 0.125rem 0.375rem; }
+        .pdp-empty { padding: 2rem 1rem; }
+        .pdp-empty h3 { font-size: 1rem; }
+        .pdp-empty p { font-size: 0.8125rem; }
     }
 
     @media (prefers-reduced-motion: reduce) {

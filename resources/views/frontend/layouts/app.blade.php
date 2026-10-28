@@ -4,7 +4,28 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>PersonalCareStore - @yield('title', 'Home')</title>
+    <meta name="description" content="@yield('meta_description', 'PersonalCareStore - Premium personal care and home care products. Quality you can trust, delivered to your door.')">
+    <link rel="canonical" href="@yield('canonical', url()->current())">
+    <meta property="og:title" content="@yield('title', 'PersonalCareStore')">
+    <meta property="og:description" content="@yield('meta_description', 'Premium personal care and home care products.')">
+    <meta property="og:type" content="@yield('og_type', 'website')">
+    <meta property="og:url" content="@yield('canonical', url()->current())">
+    <meta property="og:image" content="@yield('og_image', asset('logo.svg'))">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="@yield('title', 'PersonalCareStore')">
+    <meta name="twitter:description" content="@yield('meta_description', 'Premium personal care and home care products.')">
+    <meta name="twitter:image" content="@yield('og_image', asset('logo.svg'))">
+    <title>@yield('title', 'PersonalCareStore') - PersonalCareStore</title>
+    @if(config('services.google.analytics_id'))
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id={{ config('services.google.analytics_id') }}"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', '{{ config('services.google.analytics_id') }}');
+    </script>
+    @endif
     <style>
         * {
             margin: 0;
