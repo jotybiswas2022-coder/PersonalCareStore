@@ -323,47 +323,47 @@
     }
 
     /* Add to cart */
-    .pdp-cart { margin-top: 2rem; }
+    .pdp-cart { margin-top: 1.75rem; }
     .pdp-cart-row {
         display: flex;
-        align-items: stretch;
-        gap: 0.875rem;
+        align-items: center;
+        gap: 0.75rem;
     }
     .pdp-qty {
         display: flex;
         align-items: center;
-        border: 1.5px solid var(--line);
-        border-radius: 1rem;
+        border: 1px solid var(--line);
+        border-radius: 9999px;
         overflow: hidden;
         background: var(--surface);
-        box-shadow: 0 18px 38px -28px rgba(10,60,38,0.7);
+        box-shadow: 0 12px 28px -22px rgba(10,60,38,0.6);
     }
     .pdp-qty button {
-        width: 3rem;
-        height: 3.5rem;
+        width: 2.75rem;
+        height: 3rem;
         border: none;
         background: transparent;
         color: var(--ink);
-        font-size: 1.25rem;
+        font-size: 1.125rem;
         font-weight: 700;
         cursor: pointer;
         display: flex;
         align-items: center;
         justify-content: center;
-        transition: background 0.25s var(--ease), color 0.25s var(--ease);
+        transition: background 0.2s var(--ease), color 0.2s var(--ease);
     }
-    .pdp-qty button:hover { background: #F0FAF4; color: var(--green-deep); }
-    .pdp-qty button:active { background: #E6F7EE; }
+    .pdp-qty button:hover { background: #F2FBF6; color: var(--green-deep); }
+    .pdp-qty button:active { background: #E8F7EF; }
     .pdp-qty input {
-        width: 3.25rem;
-        height: 3.5rem;
+        width: 2.5rem;
+        height: 3rem;
         border: none;
-        border-left: 1.5px solid var(--line);
-        border-right: 1.5px solid var(--line);
-        background: linear-gradient(180deg, #F8FCFA 0%, #F2F9F6 100%);
+        border-left: 1px solid var(--line);
+        border-right: 1px solid var(--line);
+        background: #F7FBF9;
         text-align: center;
         font-family: inherit;
-        font-size: 1rem;
+        font-size: 0.9375rem;
         font-weight: 800;
         color: var(--ink);
         outline: none;
@@ -379,22 +379,22 @@
         position: relative;
         overflow: hidden;
         flex: 1;
-        height: 3.5rem;
+        height: 3rem;
         display: flex;
         align-items: center;
         justify-content: center;
-        gap: 0.75rem;
+        gap: 0.625rem;
         border: none;
-        border-radius: 1rem;
-        background: linear-gradient(135deg, #22C55E 0%, #16A34A 55%, #15803D 100%);
-        color: #FFFFFF;
+        border-radius: 9999px;
+        background: linear-gradient(135deg, #FFE08A 0%, #FFD166 55%, #F5C14E 100%);
+        color: #12261B;
         font-family: inherit;
-        font-size: 1rem;
+        font-size: 0.9375rem;
         font-weight: 800;
         letter-spacing: -0.01em;
         cursor: pointer;
-        box-shadow: 0 18px 40px -16px rgba(22,163,74,0.95), inset 0 1px 0 rgba(255,255,255,0.25);
-        transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease), filter 0.3s var(--ease);
+        box-shadow: 0 14px 34px -14px rgba(255,209,102,0.9), inset 0 1px 0 rgba(255,255,255,0.6);
+        transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease);
     }
     .pdp-atc::after {
         content: '';
@@ -403,27 +403,25 @@
         left: -30%;
         width: 40%;
         height: 220%;
-        background: linear-gradient(100deg, transparent 0%, rgba(255,255,255,0.4) 50%, transparent 100%);
+        background: linear-gradient(100deg, transparent 0%, rgba(255,255,255,0.75) 50%, transparent 100%);
         transform: translateX(-160%) rotate(12deg);
-        transition: transform 0.8s var(--ease);
+        transition: transform 0.75s var(--ease);
         pointer-events: none;
     }
     .pdp-atc:hover {
-        transform: translateY(-3px);
-        filter: brightness(1.02);
-        box-shadow: 0 24px 48px -14px rgba(22,163,74,1), inset 0 1px 0 rgba(255,255,255,0.3);
+        transform: translateY(-2px);
+        box-shadow: 0 20px 40px -16px rgba(255,209,102,1), inset 0 1px 0 rgba(255,255,255,0.65);
     }
     .pdp-atc:hover::after { transform: translateX(420%) rotate(12deg); }
-    .pdp-atc:active { transform: translateY(-1px); }
+    .pdp-atc:active { transform: translateY(0); }
     .pdp-atc:disabled {
-        opacity: 0.5;
+        opacity: 0.55;
         cursor: not-allowed;
         transform: none !important;
         box-shadow: none !important;
-        filter: none !important;
     }
-    .pdp-atc svg { transition: transform 0.3s var(--ease); flex-shrink: 0; }
-    .pdp-atc:hover svg { transform: translateX(3px); }
+    .pdp-atc svg { transition: transform 0.25s var(--ease); flex-shrink: 0; }
+    .pdp-atc:hover svg { transform: translateX(2px); }
 
     /* Trust chips */
     .pdp-trust {
@@ -883,12 +881,13 @@
         .pdp-stock { font-size: 0.6875rem; padding: 0.3125rem 0.625rem; }
         .pdp-sku { margin-left: 0; width: 100%; order: 3; font-size: 0.6875rem; }
         .pdp-desc { margin-top: 0.875rem; font-size: 0.8125rem; line-height: 1.65; }
-        .pdp-cart { margin-top: 1.125rem; }
-        .pdp-cart-row { flex-direction: column; gap: 0.625rem; }
-        .pdp-qty { align-self: stretch; width: 100%; border-radius: 0.875rem; }
-        .pdp-qty button { width: 3rem; height: 3rem; font-size: 1.125rem; }
-        .pdp-qty input { flex: 1; height: 3rem; font-size: 0.9375rem; }
-        .pdp-atc { width: 100%; height: 3rem; font-size: 0.875rem; border-radius: 0.875rem; gap: 0.625rem; box-shadow: 0 16px 34px -14px rgba(22,163,74,0.9); }
+        .pdp-cart { margin-top: 1rem; }
+        .pdp-cart-row { flex-direction: row; align-items: center; gap: 0.5rem; }
+        .pdp-qty { flex: 0 0 auto; border-radius: 9999px; }
+        .pdp-qty button { width: 2.5rem; height: 2.75rem; font-size: 1rem; }
+        .pdp-qty input { width: 2.25rem; height: 2.75rem; font-size: 0.875rem; background: transparent; border-left: 1px solid var(--line); border-right: 1px solid var(--line); }
+        .pdp-atc { flex: 1; height: 2.75rem; font-size: 0.8125rem; border-radius: 9999px; gap: 0.5rem; box-shadow: 0 12px 28px -14px rgba(255,209,102,0.9); }
+        .pdp-atc svg { width: 14px; height: 14px; }
         .pdp-trust { margin-top: 1rem; gap: 0.3125rem; }
         .pdp-trust span { font-size: 0.625rem; padding: 0.375rem 0.5rem; gap: 0.3125rem; }
         .pdp-section { margin-top: 2rem; padding: 0 0.75rem; width: 100%; max-width: 100%; box-sizing: border-box; }
