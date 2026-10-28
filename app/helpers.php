@@ -10,8 +10,12 @@ if (!function_exists('settings')) {
 }
 
 if (!function_exists('currencyFormat')) {
-    function currencyFormat(float $amount): string
+    function currencyFormat($amount): string
     {
+        if ($amount === null) {
+            $amount = 0;
+        }
+        $amount = (float) $amount;
         $setting = settings();
         $currency = $setting?->currency ?? 'BDT';
         return $currency . ' ' . number_format($amount, 2);
