@@ -996,9 +996,11 @@
                                 <div class="val">{{ $order->transaction_id ?? 'N/A' }}</div>
                             </div>
                         </div>
-                        <div style="position: relative; display: inline-block; margin-top: 1rem;">
-                            <img src="{{ $order->proof_image_url }}" alt="Payment proof" class="proof-img" style="cursor: zoom-in;" onclick="openProofModal('{{ $order->proof_image_url }}')">
-                            <button type="button" onclick="openProofModal('{{ $order->proof_image_url }}')" style="position: absolute; bottom: 0.75rem; right: 0.75rem; background: rgba(0,0,0,0.7); color: white; border: none; padding: 0.375rem 0.75rem; border-radius: 0.5rem; font-size: 0.75rem; cursor: pointer;">View</button>
+                        <div style="position: relative; margin-top: 1rem;">
+                            <a href="javascript:void(0);" onclick="openProofModal('{{ $order->proof_image_url }}')">
+                                <img src="{{ $order->proof_image_url }}" alt="Payment proof" class="proof-img" style="cursor: zoom-in; max-width: 100%;">
+                            </a>
+                            <button type="button" onclick="openProofModal('{{ $order->proof_image_url }}')" style="position: absolute; bottom: 0.75rem; right: 0.75rem; background: rgba(0,0,0,0.8); color: white; border: none; padding: 0.375rem 0.875rem; border-radius: 0.5rem; font-size: 0.75rem; cursor: pointer; z-index: 10;">🔍 View Full Size</button>
                         </div>
                         @if($order->payment_status === 'paid' || $order->payment_status === 'pending')
                             <form action="{{ route('checkout.proof', $order->id) }}" method="POST" style="margin-top: 0.75rem;">
