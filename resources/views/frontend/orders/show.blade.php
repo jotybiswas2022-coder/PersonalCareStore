@@ -996,7 +996,18 @@
                                 <div class="val">{{ $order->transaction_id ?? 'N/A' }}</div>
                             </div>
                         </div>
-                        <img src="{{ $order->proof_image_url }}" alt="Payment proof" class="proof-img" onclick="window.open(this.src, '_blank')">
+                        <div style="position: relative; display: inline-block; margin-top: 1rem;">
+                            <img src="{{ $order->proof_image_url }}" alt="Payment proof" class="proof-img" style="cursor: zoom-in;" onclick="openProofModal('{{ $order->proof_image_url }}')">
+                            <button type="button" onclick="openProofModal('{{ $order->proof_image_url }}')" style="position: absolute; bottom: 0.75rem; right: 0.75rem; background: rgba(0,0,0,0.7); color: white; border: none; padding: 0.375rem 0.75rem; border-radius: 0.5rem; font-size: 0.75rem; cursor: pointer;">View</button>
+                        </div>
+                        @if($order->payment_status === 'paid' || $order->payment_status === 'pending')
+                            <form action="{{ route('checkout.proof', $order->id) }}" method="POST" style="margin-top: 0.75rem;">
+                                @csrf
+                                <input type="hidden" name="transaction_id" value="{{ $order->transaction_id }}">
+                                <input type="hidden" name="delete_proof" value="1">
+                                <button type="submit" onclick="return confirm('Are you sure you want to delete the payment proof?')" style="background: #dc2626; color: white; border: none; padding: 0.5rem 0.875rem; border-radius: 0.5rem; font-size: 0.8125rem; cursor: pointer;">Delete Proof</button>
+                            </form>
+                        @endif
                     </div>
                 @endif
 
@@ -1172,12 +1183,28 @@
             @endif
         </div>
     </div>
+    <div id="proofModal" style="display:none; position:fixed; z-index:9999; left:0; top:0; width:100%; height:100%; background:rgba(0,0,0,0.92); align-items:center; justify-content:center;" onclick="closeProofModal()">
+        <span style="position:absolute; top:1rem; right:1.5rem; color:white; font-size:2rem; cursor:pointer; line-height:1;">&times;</span>
+        <img id="proofModalImg" src="" alt="Payment proof" style="max-width:95%; max-height:95%; margin:auto; display:block; border-radius:0.75rem;" onclick="event.stopPropagation();">
+    </div>
 </div>
 @endsection
 
 @push('scripts')
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
+    function openProofModal(src) {
+        document.getElementById('proofModalImg').src = src;
+        document.getElementById('proofModal').style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    }
+    function closeProofModal() {
+        document.getElementById('proofModal').style.display = 'none';
+        document.body.style.overflow = '';
+    }
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') closeProofModal();
+    });
     function copyOrder(btn) {
         const text = '{{ $order->order_number }}';
         const label = document.getElementById('copyLabel');

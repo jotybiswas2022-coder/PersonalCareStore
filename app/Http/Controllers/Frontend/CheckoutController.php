@@ -160,6 +160,18 @@ class CheckoutController extends Controller
                 ->with('error', 'This order has been cancelled and cannot accept payment proof.');
         }
 
+        if ($request->has('delete_proof')) {
+            if ($order->proof_image && \Illuminate\Support\Facades\Storage::disk('public')->exists($order->proof_image)) {
+                \Illuminate\Support\Facades\Storage::disk('public')->delete($order->proof_image);
+            }
+            $order->update([
+                'proof_image' => null,
+                'transaction_id' => null,
+                'payment_status' => 'unpaid',
+            ]);
+            return redirect()->back()->with('success', 'Payment proof deleted successfully.');
+        }
+
         $validated = $request->validate([
             'transaction_id' => 'required|string|max:255',
             'proof_image' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:10240',
