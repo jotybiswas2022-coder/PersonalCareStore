@@ -1183,9 +1183,9 @@
             @endif
         </div>
     </div>
-    <div id="proofModal" style="display:none; position:fixed; z-index:9999; left:0; top:0; width:100%; height:100%; background:rgba(0,0,0,0.92); align-items:center; justify-content:center;" onclick="closeProofModal()">
-        <span style="position:absolute; top:1rem; right:1.5rem; color:white; font-size:2rem; cursor:pointer; line-height:1;">&times;</span>
-        <img id="proofModalImg" src="" alt="Payment proof" style="max-width:95%; max-height:95%; margin:auto; display:block; border-radius:0.75rem;" onclick="event.stopPropagation();">
+    <div id="proofModal" style="display:none; position:fixed; z-index:99999; left:0; top:0; width:100%; height:100%; background:rgba(0,0,0,0.95); align-items:center; justify-content:center;" onclick="closeProofModal()">
+        <span style="position:absolute; top:0.5rem; right:1rem; color:white; font-size:2.5rem; cursor:pointer; line-height:1; z-index:100000;">&times;</span>
+        <img id="proofModalImg" src="" alt="Payment proof" style="max-width:90vw; max-height:90vh; margin:auto; display:block; border-radius:0.5rem; box-shadow:0 20px 60px rgba(0,0,0,0.8);" onclick="event.stopPropagation();">
     </div>
 </div>
 @endsection
