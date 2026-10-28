@@ -1486,20 +1486,27 @@
                                     </p>
                                 @enderror
                             </div>
-                            <div class="form-group">
-                                <label for="proof_image">Payment screenshot <span class="required">*</span></label>
-                                <input type="file" name="proof_image" id="proof_image" accept="image/*" required>
-                                <p class="file-hint">
-                                    <svg width="13" height="13" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
-                                    JPEG, PNG, JPG, GIF or WebP &middot; max 10MB
-                                </p>
-                                @error('proof_image')
-                                    <p class="form-error">
-                                        <svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
-                                        {{ $message }}
-                                    </p>
-                                @enderror
+                    <div class="form-group">
+                        <label for="proof_image">Payment screenshot <span class="required">*</span></label>
+                        <input type="file" name="proof_image" id="proof_image" accept="image/*" required onchange="previewProofImage(this)">
+                        <div id="proofPreviewWrap" style="display:none; margin-top:0.875rem;">
+                            <p class="label" style="font-size:0.8125rem; font-weight:600; margin-bottom:0.5rem; color:#374151;">Image Preview</p>
+                            <div style="position:relative; display:inline-block;">
+                                <img id="proofPreviewImg" src="" alt="Preview" style="max-width:200px; max-height:200px; border-radius:0.75rem; border:1px solid #e5e7eb; display:block;">
+                                <button type="button" onclick="removeProofPreview()" style="position:absolute; top:-8px; right:-8px; background:#dc2626; color:white; border:none; border-radius:50%; width:24px; height:24px; cursor:pointer; font-size:14px; line-height:1;">&times;</button>
                             </div>
+                        </div>
+                        <p class="file-hint">
+                            <svg width="13" height="13" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+                            JPEG, PNG, JPG, GIF or WebP &middot; max 10MB
+                        </p>
+                        @error('proof_image')
+                            <p class="form-error">
+                                <svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+                                {{ $message }}
+                            </p>
+                        @enderror
+                    </div>
                             <button type="submit" class="s-btn s-btn-green">
                                 <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
                                 Submit payment
@@ -1610,6 +1617,25 @@
 
 @push('scripts')
 <script>
+    function previewProofImage(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('proofPreviewImg').src = e.target.result;
+                document.getElementById('proofPreviewWrap').style.display = 'block';
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    function removeProofPreview() {
+        var input = document.getElementById('proof_image');
+        if (input) input.value = '';
+        var wrap = document.getElementById('proofPreviewWrap');
+        if (wrap) wrap.style.display = 'none';
+        var img = document.getElementById('proofPreviewImg');
+        if (img) img.src = '';
+    }
+
     function copyToClipboard(text) {
         if (navigator.clipboard && window.isSecureContext) {
             return navigator.clipboard.writeText(text);
