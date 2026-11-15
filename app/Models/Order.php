@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Support\Facades\DB;
 
 class Order extends Model
 {
@@ -24,6 +25,7 @@ class Order extends Model
         'transaction_id',
         'proof_image',
         'cancelled_by',
+        'stock_reserved_at',
     ];
 
     protected function casts(): array
@@ -33,7 +35,43 @@ class Order extends Model
             'shipping_cost' => 'decimal:2',
             'tax' => 'decimal:2',
             'total' => 'decimal:2',
+            'stock_reserved_at' => 'datetime',
         ];
+    }
+
+    /**
+     * Restore product stock for a cancelled order exactly once.
+     *
+     * The order row is locked and re-checked so two concurrent cancellations
+     * (user and admin) cannot return the same units twice.
+     */
+    public function releaseStock(): void
+    {
+        if (! $this->stock_reserved_at) {
+            return;
+        }
+
+        DB::transaction(function () {
+            $order = self::whereKey($this->getKey())->lockForUpdate()->first();
+
+            if (! $order || ! $order->stock_reserved_at) {
+                return;
+            }
+
+            $order->loadMissing('items');
+
+            foreach ($order->items as $item) {
+                if (! $item->product_id) {
+                    continue;
+                }
+
+                Product::whereKey($item->product_id)->increment('stock_quantity', $item->quantity);
+            }
+
+            $order->forceFill(['stock_reserved_at' => null])->save();
+
+            $this->stock_reserved_at = null;
+        });
     }
 
     public function user(): BelongsTo

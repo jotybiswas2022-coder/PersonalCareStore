@@ -40,6 +40,8 @@ class OrderController extends Controller
             'cancelled_by' => 'user',
         ]);
 
+        $order->releaseStock();
+
         return redirect()->route('orders.index')
             ->with('success', 'Your order has been cancelled successfully.');
     }

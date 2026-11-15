@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\Exceptions\CheckoutException;
 use App\Http\Controllers\Controller;
 use App\Models\Cart;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\PaymentDetail;
+use App\Models\Product;
 use App\Models\ShippingAddress;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 class CheckoutController extends Controller
@@ -69,63 +72,94 @@ class CheckoutController extends Controller
             'country' => 'nullable|string|max:255',
         ]);
 
-        $subtotal = $cartItems->sum(function ($item) {
-            $price = $item->product->final_price;
-            return $price * $item->quantity;
-        });
+        try {
+            $order = DB::transaction(function () use ($cartItems, $sessionId, $validated) {
+                // Lock the ordered rows so two checkouts cannot oversell the same units.
+                $products = Product::whereIn('id', $cartItems->pluck('product_id')->unique()->values())
+                    ->lockForUpdate()
+                    ->get()
+                    ->keyBy('id');
 
-        $setting = settings();
-        $deliveryArea = session('delivery_area', 'inside');
-        $shippingCost = $deliveryArea === 'inside' ? ($setting?->delivery_charge_inside ?? 0) : ($setting?->delivery_charge_outside ?? 0);
-        $vatPercent = $setting?->vat_percentage ?? 0;
-        $tax = round($subtotal * ($vatPercent / 100), 2);
-        $total = $subtotal + $shippingCost + $tax;
+                foreach ($cartItems as $cartItem) {
+                    $product = $products->get($cartItem->product_id);
 
-        $order = Order::create([
-            'order_number' => 'ORD-' . strtoupper(Str::random(10)),
-            'guest_email' => $validated['email'],
-            'user_id' => auth()->id(),
-            'status' => 'pending',
-            'subtotal' => $subtotal,
-            'shipping_cost' => $shippingCost,
-            'tax' => $tax,
-            'total' => $total,
-            'payment_status' => 'unpaid',
-            'payment_method' => null,
-        ]);
+                    if (! $product || ! $product->is_active) {
+                        throw new CheckoutException('An item in your cart is no longer available. Please remove it and try again.');
+                    }
 
-        foreach ($cartItems as $cartItem) {
-            $price = $cartItem->product->final_price;
+                    if ($cartItem->quantity > $product->stock_quantity) {
+                        throw new CheckoutException($product->stock_quantity > 0
+                            ? 'Only ' . $product->stock_quantity . ' left of "' . $product->name . '". Please update your cart.'
+                            : '"' . $product->name . '" is out of stock. Please remove it from your cart.');
+                    }
+                }
 
-            OrderItem::create([
-                'order_id' => $order->id,
-                'product_id' => $cartItem->product_id,
-                'product_name' => $cartItem->product->name,
-                'product_price' => $price,
-                'quantity' => $cartItem->quantity,
-                'subtotal' => $price * $cartItem->quantity,
-            ]);
+                $subtotal = $cartItems->sum(function ($cartItem) use ($products) {
+                    return $products->get($cartItem->product_id)->final_price * $cartItem->quantity;
+                });
+
+                $setting = settings();
+                $deliveryArea = session('delivery_area', 'inside');
+                $shippingCost = $deliveryArea === 'inside' ? ($setting?->delivery_charge_inside ?? 0) : ($setting?->delivery_charge_outside ?? 0);
+                $vatPercent = $setting?->vat_percentage ?? 0;
+                $tax = round($subtotal * ($vatPercent / 100), 2);
+                $total = $subtotal + $shippingCost + $tax;
+
+                $order = Order::create([
+                    'order_number' => 'ORD-' . strtoupper(Str::random(10)),
+                    'guest_email' => $validated['email'],
+                    'user_id' => auth()->id(),
+                    'status' => 'pending',
+                    'subtotal' => $subtotal,
+                    'shipping_cost' => $shippingCost,
+                    'tax' => $tax,
+                    'total' => $total,
+                    'payment_status' => 'unpaid',
+                    'payment_method' => null,
+                    'stock_reserved_at' => now(),
+                ]);
+
+                foreach ($cartItems as $cartItem) {
+                    $product = $products->get($cartItem->product_id);
+                    $price = $product->final_price;
+
+                    OrderItem::create([
+                        'order_id' => $order->id,
+                        'product_id' => $cartItem->product_id,
+                        'product_name' => $product->name,
+                        'product_price' => $price,
+                        'quantity' => $cartItem->quantity,
+                        'subtotal' => $price * $cartItem->quantity,
+                    ]);
+
+                    $product->decrement('stock_quantity', $cartItem->quantity);
+                }
+
+                ShippingAddress::create([
+                    'order_id' => $order->id,
+                    'first_name' => $validated['first_name'],
+                    'last_name' => $validated['last_name'],
+                    'email' => $validated['email'],
+                    'phone' => $validated['phone'],
+                    'address_line1' => $validated['address_line1'],
+                    'address_line2' => $validated['address_line2'] ?? null,
+                    'city' => $validated['city'],
+                    'state' => $validated['state'] ?? null,
+                    'postal_code' => $validated['postal_code'],
+                    'country' => $validated['country'] ?? 'Bangladesh',
+                ]);
+
+                // Clear the cart only once the order is safely stored
+                Cart::where('session_id', $sessionId)->delete();
+
+                return $order;
+            });
+        } catch (CheckoutException $e) {
+            return redirect()->route('cart.index')->with('error', $e->getMessage());
         }
-
-        ShippingAddress::create([
-            'order_id' => $order->id,
-            'first_name' => $validated['first_name'],
-            'last_name' => $validated['last_name'],
-            'email' => $validated['email'],
-            'phone' => $validated['phone'],
-            'address_line1' => $validated['address_line1'],
-            'address_line2' => $validated['address_line2'] ?? null,
-            'city' => $validated['city'],
-            'state' => $validated['state'] ?? null,
-            'postal_code' => $validated['postal_code'],
-            'country' => $validated['country'] ?? 'Bangladesh',
-        ]);
 
         // Store email in session for guest success page access
         session()->put('checkout_email', $validated['email']);
-
-        // Clear the cart
-        Cart::where('session_id', $sessionId)->delete();
 
         return redirect()->route('checkout.success', $order->id);
     }
@@ -137,12 +171,7 @@ class CheckoutController extends Controller
     {
         $order = Order::with(['items', 'shippingAddress'])->findOrFail($orderId);
 
-        // Security: only allow the session that created this order to view it
-        if ($order->user_id !== auth()->id() && $order->guest_email !== session()->get('checkout_email')) {
-            if (!session()->has('checkout_email') || session('checkout_email') !== $order->guest_email) {
-                abort(404);
-            }
-        }
+        $this->ensureOrderAccess($order);
 
         $paymentDetails = PaymentDetail::where('is_active', true)->get();
 
@@ -152,6 +181,8 @@ class CheckoutController extends Controller
     public function uploadProof(Request $request, string $orderId)
     {
         $order = Order::findOrFail($orderId);
+
+        $this->ensureOrderAccess($order);
 
         // Prevent proof submission for cancelled orders
         if ($order->status === 'cancelled') {
@@ -188,6 +219,25 @@ class CheckoutController extends Controller
 
         return redirect()->route('checkout.success', $order->id)
             ->with('success', 'Payment proof submitted successfully.');
+    }
+
+    /**
+     * Only the customer who placed the order may see it or attach its payment
+     * proof: the owning account, or the guest session that checked out.
+     */
+    private function ensureOrderAccess(Order $order): void
+    {
+        if (auth()->check() && $order->user_id === auth()->id()) {
+            return;
+        }
+
+        $sessionEmail = session()->get('checkout_email');
+
+        if ($sessionEmail && $order->guest_email && hash_equals((string) $order->guest_email, (string) $sessionEmail)) {
+            return;
+        }
+
+        abort(404);
     }
 
     /**
