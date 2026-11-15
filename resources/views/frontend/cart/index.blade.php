@@ -370,30 +370,200 @@
         letter-spacing: -0.03em;
         color: var(--ink);
     }
-    .summary-card .delivery-label {
-        display: block;
-        margin-bottom: 0.375rem;
-        font-size: 0.75rem;
-        font-weight: 600;
+    /* ═══════════════ DELIVERY DRAWER ═══════════════ */
+    .dd { margin-bottom: 1rem; }
+    .dd-trigger {
+        display: flex;
+        align-items: center;
+        gap: 0.6875rem;
+        width: 100%;
+        padding: 0.625rem 0.6875rem 0.625rem 0.625rem;
+        border: 1px solid var(--line);
+        border-radius: 0.9375rem;
+        background: linear-gradient(135deg, #FFFFFF 0%, #F1FAF5 100%);
+        font-family: inherit;
+        text-align: left;
+        cursor: pointer;
+        transition: border-color 0.28s var(--ease), box-shadow 0.28s var(--ease), transform 0.28s var(--ease);
+    }
+    .dd-trigger:hover {
+        border-color: #B9E2C9;
+        box-shadow: 0 18px 32px -28px rgba(10,60,38,0.75);
+    }
+    .dd-trigger:active { transform: scale(0.995); }
+    .dd-trigger:focus-visible {
+        outline: none;
+        border-color: #7BCB9B;
+        box-shadow: 0 0 0 4px rgba(46,139,87,0.12);
+    }
+    .dd.is-open .dd-trigger {
+        border-color: #7BCB9B;
+        box-shadow: 0 0 0 4px rgba(46,139,87,0.10);
+    }
+    .dd-pin {
+        width: 2.125rem;
+        height: 2.125rem;
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 0.6875rem;
+        background: linear-gradient(135deg, #DFF7E8 0%, #BFF3D2 100%);
+        border: 1px solid #CFE9DA;
+        color: var(--green-deep);
+        transition: transform 0.35s var(--ease);
+    }
+    .dd.is-open .dd-pin { transform: scale(1.05); }
+    .dd-texts {
+        flex: 1;
+        min-width: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.125rem;
+    }
+    .dd-label {
+        font-size: 0.5938rem;
+        font-weight: 800;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--green);
+    }
+    .dd-value {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-size: 0.875rem;
+        font-weight: 700;
+        letter-spacing: -0.01em;
+        color: var(--ink);
+    }
+    .dd-chevron {
+        width: 1.5rem;
+        height: 1.5rem;
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        background: #EDF9F2;
+        border: 1px solid #D6F0E0;
+        color: var(--green-deep);
+        transition: transform 0.4s var(--ease), background 0.28s var(--ease);
+    }
+    .dd.is-open .dd-chevron { transform: rotate(180deg); background: #DFF7E8; }
+
+    .dd-panel {
+        overflow: hidden;
+        max-height: 0;
+        opacity: 0;
+        transform: translateY(-6px);
+        transition:
+            max-height 0.42s var(--ease),
+            opacity 0.3s var(--ease),
+            transform 0.38s var(--ease),
+            margin-top 0.38s var(--ease);
+    }
+    .dd.is-open .dd-panel {
+        opacity: 1;
+        transform: none;
+        margin-top: 0.5rem;
+    }
+    .dd-panel-inner {
+        padding: 0.375rem;
+        border: 1px solid var(--line);
+        border-radius: 0.9375rem;
+        background: var(--surface);
+        box-shadow: 0 24px 46px -36px rgba(10,60,38,0.65);
+    }
+    .dd-option {
+        position: relative;
+        display: flex;
+        align-items: center;
+        gap: 0.625rem;
+        padding: 0.5625rem 0.625rem;
+        border: 1px solid transparent;
+        border-radius: 0.6875rem;
+        cursor: pointer;
+        transition: background 0.25s var(--ease), border-color 0.25s var(--ease);
+    }
+    .dd-option + .dd-option { margin-top: 0.25rem; }
+    .dd-option:hover { background: #F6FAF7; }
+    .dd-option input {
+        position: absolute;
+        opacity: 0;
+        width: 1px;
+        height: 1px;
+        pointer-events: none;
+    }
+    .dd-option:has(input:checked) {
+        background: linear-gradient(135deg, #F4FCF7 0%, #EAF9F0 100%);
+        border-color: #CFE9DA;
+    }
+    .dd-option:has(input:focus-visible) {
+        outline: 2px solid #7BCB9B;
+        outline-offset: 1px;
+    }
+    .dd-radio {
+        width: 1rem;
+        height: 1rem;
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        border: 1.5px solid #C3D4C9;
+        background: #FFFFFF;
+        transition: border-color 0.25s var(--ease), box-shadow 0.25s var(--ease);
+    }
+    .dd-radio::after {
+        content: '';
+        width: 0.375rem;
+        height: 0.375rem;
+        border-radius: 50%;
+        background: var(--green);
+        transform: scale(0);
+        transition: transform 0.28s var(--ease);
+    }
+    .dd-option input:checked ~ .dd-radio {
+        border-color: var(--green);
+        box-shadow: 0 0 0 3px rgba(46,139,87,0.13);
+    }
+    .dd-option input:checked ~ .dd-radio::after { transform: scale(1); }
+    .dd-option-body {
+        flex: 1;
+        min-width: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.0625rem;
+    }
+    .dd-option-title {
+        font-size: 0.8125rem;
+        font-weight: 700;
+        letter-spacing: -0.01em;
+        color: var(--ink);
+    }
+    .dd-option-sub {
+        font-size: 0.6563rem;
+        line-height: 1.4;
         color: var(--muted);
     }
-    .summary-card .delivery-select {
-        width: 100%;
-        padding: 0.6875rem 0.875rem;
-        border: 1px solid var(--line);
-        border-radius: 0.75rem;
-        background: #F6FAF7;
-        font-family: inherit;
-        font-size: 0.8125rem;
-        color: var(--ink);
-        outline: none;
-        cursor: pointer;
-        transition: border-color 0.25s var(--ease), box-shadow 0.25s var(--ease), background 0.25s var(--ease);
+    .dd-check {
+        width: 1.25rem;
+        height: 1.25rem;
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #3AA86B 0%, #17603C 100%);
+        color: #F1FBF5;
+        opacity: 0;
+        transform: scale(0.7);
+        transition: opacity 0.25s var(--ease), transform 0.28s var(--ease);
     }
-    .summary-card .delivery-select:focus {
-        border-color: #7BCB9B;
-        background: #FFFFFF;
-        box-shadow: 0 0 0 4px rgba(46,139,87,0.10);
+    .dd-option input:checked ~ .dd-check {
+        opacity: 1;
+        transform: none;
     }
     .summary-row {
         display: flex;
@@ -578,6 +748,10 @@
         .cart-item .item-subtotal { font-size: 1rem; }
         .cart-item .stock-label { display: none; }
         .summary-card { padding: 1.375rem; border-radius: 1.25rem; }
+        .dd-trigger { padding: 0.5rem; gap: 0.5625rem; }
+        .dd-pin { width: 1.875rem; height: 1.875rem; border-radius: 0.5625rem; }
+        .dd-option { padding: 0.5rem 0.5625rem; gap: 0.5rem; }
+        .dd-option-sub { font-size: 0.625rem; }
         .empty-cart { padding: 3.25rem 1.5rem; }
         .empty-cart h2 { font-size: 1.25rem; }
     }
@@ -616,6 +790,14 @@
             animation: none !important;
         }
         .cart-eyebrow .pulse::after { animation: none !important; }
+        .dd-panel,
+        .dd-trigger,
+        .dd-pin,
+        .dd-chevron,
+        .dd-option,
+        .dd-radio,
+        .dd-radio::after,
+        .dd-check,
         .cart-item,
         .cart-item .thumb img,
         .checkout-btn,
@@ -735,12 +917,47 @@
             <aside class="summary-card">
                 <h2>Order summary</h2>
 
-                <div style="margin-bottom: 0.875rem;">
-                    <label for="deliveryArea" class="delivery-label">Delivery area</label>
-                    <select id="deliveryArea" onchange="setDeliveryArea(this.value)" class="delivery-select">
-                        <option value="inside" {{ session('delivery_area', 'inside') === 'inside' ? 'selected' : '' }}>Inside Khulna</option>
-                        <option value="outside" {{ session('delivery_area') === 'outside' ? 'selected' : '' }}>Outside Khulna</option>
-                    </select>
+                <div class="dd" id="deliveryDrawer">
+                    <button type="button" class="dd-trigger" id="ddTrigger" aria-expanded="false" aria-controls="ddPanel">
+                        <span class="dd-pin" aria-hidden="true">
+                            <svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 1118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        </span>
+                        <span class="dd-texts">
+                            <span class="dd-label">Delivery area</span>
+                            <span class="dd-value" id="ddValue">{{ session('delivery_area') === 'outside' ? 'Outside Khulna' : 'Inside Khulna' }}</span>
+                        </span>
+                        <span class="dd-chevron" aria-hidden="true">
+                            <svg width="13" height="13" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+                        </span>
+                    </button>
+
+                    <div class="dd-panel" id="ddPanel">
+                        <div class="dd-panel-inner" role="radiogroup" aria-label="Delivery area">
+                            <label class="dd-option">
+                                <input type="radio" name="deliveryArea" value="inside" data-label="Inside Khulna" data-sub="Fast local delivery" onchange="chooseDeliveryArea(this)" {{ session('delivery_area', 'inside') === 'inside' ? 'checked' : '' }}>
+                                <span class="dd-radio" aria-hidden="true"></span>
+                                <span class="dd-option-body">
+                                    <span class="dd-option-title">Inside Khulna</span>
+                                    <span class="dd-option-sub">Fast local delivery &middot; 1&ndash;2 days</span>
+                                </span>
+                                <span class="dd-check" aria-hidden="true">
+                                    <svg width="11" height="11" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3.5"><polyline points="20 6 9 17 4 12"/></svg>
+                                </span>
+                            </label>
+
+                            <label class="dd-option">
+                                <input type="radio" name="deliveryArea" value="outside" data-label="Outside Khulna" data-sub="Nationwide courier" onchange="chooseDeliveryArea(this)" {{ session('delivery_area') === 'outside' ? 'checked' : '' }}>
+                                <span class="dd-radio" aria-hidden="true"></span>
+                                <span class="dd-option-body">
+                                    <span class="dd-option-title">Outside Khulna</span>
+                                    <span class="dd-option-sub">Nationwide courier &middot; 2&ndash;4 days</span>
+                                </span>
+                                <span class="dd-check" aria-hidden="true">
+                                    <svg width="11" height="11" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3.5"><polyline points="20 6 9 17 4 12"/></svg>
+                                </span>
+                            </label>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="summary-row">
@@ -777,10 +994,65 @@
             const removeUrl = '{{ route("cart.remove", "_id_") }}';
 
             function setDeliveryArea(area) {
-                fetch('{{ route("cart.deliveryArea") }}', {
+                return fetch('{{ route("cart.deliveryArea") }}', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json', 'X-CSRF-TOKEN': csrfToken },
                     body: JSON.stringify({ area: area })
+                }).then(function (res) {
+                    if (!res.ok) throw new Error('Delivery area update failed');
+                    return res.json();
+                });
+            }
+
+            /* ── Delivery area drawer ── */
+            const ddRoot = document.getElementById('deliveryDrawer');
+            const ddTrigger = document.getElementById('ddTrigger');
+            const ddPanel = document.getElementById('ddPanel');
+
+            function openDeliveryDrawer() {
+                ddRoot.classList.add('is-open');
+                ddTrigger.setAttribute('aria-expanded', 'true');
+                ddPanel.style.maxHeight = ddPanel.scrollHeight + 'px';
+            }
+
+            function closeDeliveryDrawer() {
+                ddRoot.classList.remove('is-open');
+                ddTrigger.setAttribute('aria-expanded', 'false');
+                ddPanel.style.maxHeight = '0px';
+            }
+
+            function toggleDeliveryDrawer() {
+                if (ddRoot.classList.contains('is-open')) closeDeliveryDrawer();
+                else openDeliveryDrawer();
+            }
+
+            function chooseDeliveryArea(input) {
+                document.getElementById('ddValue').textContent = input.dataset.label;
+                closeDeliveryDrawer();
+                ddTrigger.focus({ preventScroll: true });
+
+                setDeliveryArea(input.value).catch(function (err) {
+                    console.error('Delivery area update failed', err);
+                    Swal.fire({ icon: 'error', title: 'Could not save delivery area', text: 'Please check your connection and try again.' });
+                });
+            }
+
+            if (ddRoot && ddTrigger && ddPanel) {
+                ddTrigger.addEventListener('click', toggleDeliveryDrawer);
+
+                document.addEventListener('click', function (e) {
+                    if (ddRoot.classList.contains('is-open') && !ddRoot.contains(e.target)) closeDeliveryDrawer();
+                });
+
+                document.addEventListener('keydown', function (e) {
+                    if (e.key === 'Escape' && ddRoot.classList.contains('is-open')) {
+                        closeDeliveryDrawer();
+                        ddTrigger.focus({ preventScroll: true });
+                    }
+                });
+
+                window.addEventListener('resize', function () {
+                    if (ddRoot.classList.contains('is-open')) ddPanel.style.maxHeight = ddPanel.scrollHeight + 'px';
                 });
             }
 
