@@ -139,7 +139,6 @@ class CheckoutController extends Controller
 
         // Security: only allow the session that created this order to view it
         if ($order->user_id !== auth()->id() && $order->guest_email !== session()->get('checkout_email')) {
-            // For guest checkout, store the email in session when they place the order
             if (!session()->has('checkout_email') || session('checkout_email') !== $order->guest_email) {
                 abort(404);
             }
