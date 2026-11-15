@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 23, 2026 at 03:23 PM
+-- Generation Time: Oct 28, 2026 at 06:42 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -60,14 +60,6 @@ CREATE TABLE `carts` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `carts`
---
-
-INSERT INTO `carts` (`id`, `session_id`, `product_id`, `quantity`, `created_at`, `updated_at`) VALUES
-(13, 'tKdPIDnAOfpltHzovc18YvWGD3EAs6yx6gpdbkV6', 2, 1, '2026-06-19 12:07:51', '2026-06-19 12:07:51'),
-(22, 'Zhw1TPMhsRxrJVuEgorVqV7K6iyHD8gGi2gHOecz', 3, 1, '2026-06-21 08:00:58', '2026-06-21 08:00:58');
-
 -- --------------------------------------------------------
 
 --
@@ -92,9 +84,8 @@ CREATE TABLE `categories` (
 --
 
 INSERT INTO `categories` (`id`, `name`, `slug`, `description`, `image`, `parent_id`, `is_active`, `sort_order`, `created_at`, `updated_at`) VALUES
-(2, 'cafe', 'cafe', NULL, NULL, NULL, 1, 0, '2026-06-19 12:29:36', '2026-06-19 12:29:36'),
-(3, 'phone', 'phone', NULL, NULL, NULL, 1, 0, '2026-06-19 12:29:42', '2026-06-19 12:29:42'),
-(4, 'wmni', 'wmni', NULL, NULL, NULL, 1, 0, '2026-06-21 11:56:40', '2026-06-21 11:56:40');
+(1, 'Personal Care', 'personal-care', NULL, NULL, NULL, 1, 1, '2026-10-28 11:35:26', '2026-10-28 11:35:26'),
+(2, 'Home Care', 'home-care', NULL, NULL, NULL, 1, 2, '2026-10-28 11:35:26', '2026-10-28 11:35:26');
 
 -- --------------------------------------------------------
 
@@ -112,14 +103,6 @@ CREATE TABLE `contact_messages` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `contact_messages`
---
-
-INSERT INTO `contact_messages` (`id`, `name`, `email`, `message`, `admin_reply`, `replied_at`, `created_at`, `updated_at`) VALUES
-(1, 'Joty Prokash Biswas', 'jotybiswas0199@gmail.com', 'xfgfdbgcn ghjygki', 'dfrrgtrf', '2026-06-21 08:39:06', '2026-06-21 08:34:53', '2026-06-21 08:39:06'),
-(2, 'Joty Prokash Biswas', 'jotybiswas0199@gmail.com', 'dfgrt ghjy dgyhuj76 ghjyu77i', NULL, NULL, '2026-06-21 08:39:38', '2026-06-21 08:39:38');
 
 -- --------------------------------------------------------
 
@@ -200,17 +183,17 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (9, '2026_06_19_141442_create_reviews_table', 1),
 (10, '2026_06_19_141442_create_shipping_addresses_table', 1),
 (11, '2026_06_19_141443_create_carts_table', 1),
-(12, '2026_06_19_141444_create_payment_details_table', 2),
-(13, '2026_06_19_141445_add_payment_proof_to_orders_table', 2),
-(14, '2026_06_19_150000_create_settings_table', 3),
-(15, '2026_06_19_160000_update_settings_delivery_charge', 4),
-(16, '2026_06_19_160001_add_discount_name_to_products', 5),
-(17, '2026_06_19_170001_add_discount_percent_to_products', 6),
-(18, '2026_06_20_120000_add_contact_fields_to_settings_table', 7),
-(19, '2026_06_20_130000_add_image_to_reviews_table', 8),
-(20, '2026_06_21_141332_add_newsletter_fields_to_settings_table', 9),
-(21, '2026_06_21_143038_create_contact_messages_table', 10),
-(22, '2026_06_21_140000_add_cancelled_by_to_orders_table', 11);
+(12, '2026_06_19_141444_create_payment_details_table', 1),
+(13, '2026_06_19_141445_add_payment_proof_to_orders_table', 1),
+(14, '2026_06_19_150000_create_settings_table', 1),
+(15, '2026_06_19_160000_update_settings_delivery_charge', 1),
+(16, '2026_06_19_160001_add_discount_name_to_products', 1),
+(17, '2026_06_19_170001_add_discount_percent_to_products', 1),
+(18, '2026_06_20_120000_add_contact_fields_to_settings_table', 1),
+(19, '2026_06_20_130000_add_image_to_reviews_table', 1),
+(20, '2026_06_21_140000_add_cancelled_by_to_orders_table', 1),
+(21, '2026_06_21_141332_add_newsletter_fields_to_settings_table', 1),
+(22, '2026_06_21_143038_create_contact_messages_table', 1);
 
 -- --------------------------------------------------------
 
@@ -238,24 +221,6 @@ CREATE TABLE `orders` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `orders`
---
-
-INSERT INTO `orders` (`id`, `order_number`, `guest_email`, `user_id`, `status`, `subtotal`, `shipping_cost`, `tax`, `total`, `payment_status`, `payment_method`, `cancelled_by`, `stripe_payment_id`, `transaction_id`, `proof_image`, `created_at`, `updated_at`) VALUES
-(11, 'ORD-JWLSDWFFMT', 'jotybiswas0199@gmail.com', 1, 'delivered', 135.00, 150.00, 6.75, 291.75, 'approved', NULL, NULL, NULL, '34r55e4t5rtyr6tr', 'proofs/7Q0MOsDJU4f4cUkSxEOTzJbxavRmAyN3LoM0lLCm.jpg', '2026-06-19 12:06:24', '2026-06-19 12:06:47'),
-(12, 'ORD-EKKP42BADS', 'jotybiswas0199@gmail.com', NULL, 'delivered', 135.00, 60.00, 6.75, 201.75, 'approved', NULL, NULL, NULL, '34r55e4t5rtyr6tr', 'proofs/CzLqtz4XhbeKfJd8rxASYaJ7Pb11WVXeVaz51q0V.png', '2026-06-19 12:08:08', '2026-06-21 11:28:34'),
-(13, 'ORD-WWBXP9NAIC', 'jotybiswas019@gmail.com', NULL, 'cancelled', 135.00, 60.00, 6.75, 201.75, 'rejected', NULL, NULL, NULL, '34r55e4t5rtyr6tr', 'proofs/nLnxuOrg98J4JuqGdZzeUIuD0U3Tq8VJXBd8vmRa.png', '2026-06-19 12:20:11', '2026-06-21 08:47:53'),
-(14, 'ORD-BLTOMCETQM', 'jotybiswas01@gmail.com', 3, 'delivered', 135.00, 60.00, 6.75, 201.75, 'approved', NULL, NULL, NULL, '34r55e4t5rtyr6tr', 'proofs/aSLrhDM2QlwyD33JkYTxkNBGBYtu0q6zquvjqo6s.png', '2026-06-19 12:21:21', '2026-06-19 12:22:47'),
-(15, 'ORD-LWPQLXD5HN', 'jotybiswas0199@gmail.com', 1, 'delivered', 250.00, 60.00, 12.50, 322.50, 'approved', NULL, NULL, NULL, '34r55e4t5rtyr6tr', 'proofs/FcDPSC8AluzjdRPcfG8lU61qhyt0gQoD3iABVoOk.jpg', '2026-06-19 12:30:15', '2026-06-19 12:30:51'),
-(16, 'ORD-GVFYXV6JYJ', 'jotybiswas0199@gmail.com', 1, 'delivered', 810.00, 60.00, 40.50, 910.50, 'approved', NULL, NULL, NULL, '34r55e4t5rtyr6tr', 'proofs/muiIO7COtMLUNVogMNBMiQI0CnRtpSfEBq4qYQDK.png', '2026-06-19 13:58:30', '2026-06-19 13:58:52'),
-(17, 'ORD-8QEI8Q0YB5', 'jotybiswas0199@gmail.com', 1, 'delivered', 855.00, 60.00, 42.75, 957.75, 'approved', NULL, NULL, NULL, '34r55e4t5rtyr6tr', 'proofs/0FNNXefu3P5E1NPIQksEn5jDhLBwWNe6vw8e2i7X.png', '2026-06-19 13:59:53', '2026-06-19 14:00:20'),
-(18, 'ORD-W7YBIE4H47', 'jotybiswas0199@gmail.com', 1, 'cancelled', 480.00, 60.00, 24.00, 564.00, 'cancelled', NULL, NULL, NULL, '34r55e4t5rtyr6tr', 'proofs/glv1169bx7CcxqR2fsLdYrwy46l5tQ9ANw1rvvs3.png', '2026-06-21 09:08:27', '2026-06-21 09:20:46'),
-(19, 'ORD-AE1ZC3LRDF', 'test@example.com', NULL, 'delivered', 480.00, 60.00, 24.00, 564.00, 'unpaid', NULL, NULL, NULL, NULL, NULL, '2026-06-21 09:21:43', '2026-06-21 13:01:26'),
-(20, 'ORD-XHR46LO4EO', 'jotybiswas0199@gmail.com', 1, 'cancelled', 135.00, 60.00, 6.75, 201.75, 'cancelled', NULL, 'user', NULL, NULL, NULL, '2026-06-21 09:26:45', '2026-06-21 09:26:50'),
-(21, 'ORD-DLIARISA1J', 'jotybiswas0199@gmail.com', 1, 'cancelled', 135.00, 60.00, 6.75, 201.75, 'paid', NULL, 'admin', NULL, '34r55e4t5rtyr6tr', 'proofs/UjoXw1mSb1uJNcAdNqgW62mnhLceZc7VMLKVLuG7.png', '2026-06-21 09:27:45', '2026-06-21 09:32:46'),
-(22, 'ORD-SWXSGJFCSL', 'jotybiswas0199@gmail.com', 1, 'cancelled', 225.00, 60.00, 11.25, 296.25, 'unpaid', NULL, 'admin', NULL, NULL, NULL, '2026-06-21 09:36:46', '2026-06-21 09:37:00');
-
 -- --------------------------------------------------------
 
 --
@@ -273,25 +238,6 @@ CREATE TABLE `order_items` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `order_items`
---
-
-INSERT INTO `order_items` (`id`, `order_id`, `product_id`, `product_name`, `product_price`, `quantity`, `subtotal`, `created_at`, `updated_at`) VALUES
-(12, 11, 2, 'Espresso', 135.00, 1, 135.00, '2026-06-19 12:06:24', '2026-06-19 12:06:24'),
-(13, 12, 2, 'Espresso', 135.00, 1, 135.00, '2026-06-19 12:08:08', '2026-06-19 12:08:08'),
-(14, 13, 2, 'Espresso', 135.00, 1, 135.00, '2026-06-19 12:20:11', '2026-06-19 12:20:11'),
-(15, 14, 2, 'Espresso', 135.00, 1, 135.00, '2026-06-19 12:21:21', '2026-06-19 12:21:21'),
-(16, 15, 3, 'iphone 12', 250.00, 1, 250.00, '2026-06-19 12:30:15', '2026-06-19 12:30:15'),
-(17, 16, 2, 'Espresso', 135.00, 6, 810.00, '2026-06-19 13:58:30', '2026-06-19 13:58:30'),
-(18, 17, 3, 'iphone 12', 225.00, 2, 450.00, '2026-06-19 13:59:53', '2026-06-19 13:59:53'),
-(19, 17, 2, 'Espresso', 135.00, 3, 405.00, '2026-06-19 13:59:53', '2026-06-19 13:59:53'),
-(20, 18, 4, 'Masum', 240.00, 2, 480.00, '2026-06-21 09:08:27', '2026-06-21 09:08:27'),
-(21, 19, 4, 'Masum', 240.00, 2, 480.00, '2026-06-21 09:21:43', '2026-06-21 09:21:43'),
-(22, 20, 2, 'Espresso', 135.00, 1, 135.00, '2026-06-21 09:26:45', '2026-06-21 09:26:45'),
-(23, 21, 2, 'Espresso', 135.00, 1, 135.00, '2026-06-21 09:27:45', '2026-06-21 09:27:45'),
-(24, 22, 3, 'iphone 12', 225.00, 1, 225.00, '2026-06-21 09:36:46', '2026-06-21 09:36:46');
 
 -- --------------------------------------------------------
 
@@ -321,13 +267,6 @@ CREATE TABLE `payment_details` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `payment_details`
---
-
-INSERT INTO `payment_details` (`id`, `bank_name`, `account_number`, `account_holder`, `instructions`, `is_active`, `created_at`, `updated_at`) VALUES
-(1, 'ttyty', '4565696', 'tytyt', 'gfdghhfg fghutyu fhtyu', 1, '2026-06-19 09:37:00', '2026-06-19 09:37:00');
 
 -- --------------------------------------------------------
 
@@ -364,10 +303,11 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `name`, `slug`, `description`, `short_description`, `price`, `sale_price`, `discount_name`, `discount_percent`, `stock_quantity`, `sku`, `category_id`, `brand`, `images`, `is_active`, `is_featured`, `meta_title`, `meta_description`, `weight`, `created_at`, `updated_at`) VALUES
-(2, 'Espresso', 'espresso', 'tytr5u rty56 tryuy6u try56\r\nrdygt566uh tyjh76o\r\nfhggtjuu7 thj6ik8 tgjyu7ki\r\ntytr5u rty56 tryuy6u try56\r\nrdygt566uh tyjh76o\r\nfhggtjuu7 thj6ik8 tgjyu7ki\r\ntytr5u rty56 tryuy6u try56\r\nrdygt566uh tyjh76o\r\nfhggtjuu7 thj6ik8 tgjyu7ki', 'etrr rthuyk', 100.00, 150.00, 'Stock Clearance', 10.00, 5, 'rtrytr', 2, 'fdrg', '[\"products\\/sQ7C4haTm3OMRyHRhmcUKEpuSGh0ZPDKWsvqQQHk.png\"]', 1, 0, NULL, NULL, NULL, '2026-06-19 11:49:23', '2026-06-21 11:28:34'),
-(3, 'iphone 12', 'iphone-12', 'fdghtyj dghjyu dghhjyuk', 'sdg fgjhtyg fhbgjh', 200.00, 250.00, NULL, 10.00, 17, NULL, 3, 'iphone', '[\"products\\/0IQTCybSjJJ9j7Gyh0b2VrIF8UXJ9wGWbsKV34w5.jpg\"]', 1, 0, NULL, NULL, NULL, '2026-06-19 12:29:08', '2026-06-19 14:00:20'),
-(4, 'Masum', 'masum', 'fgchth tju76 tyik8k yuik8', 'rgtter fghtyj tyjyu', 200.00, 300.00, NULL, 20.00, 48, NULL, 3, 'fdrg', '[\"products\\/P3rHReTI10foYfpm2C1MULChq5FFWofLlOzRwTG8.png\"]', 1, 0, NULL, NULL, NULL, '2026-06-21 08:43:57', '2026-06-21 13:01:26'),
-(5, 'Dark Algo 5', 'dark-algo-5', NULL, 'tr fdg', 100.00, 120.00, NULL, NULL, 10, NULL, 4, 'wasa', '[\"products\\/XcGueingTphsuVITTOek6pxQ5byT8Yjom0fcQN5O.png\"]', 1, 0, NULL, NULL, NULL, '2026-06-21 11:56:15', '2026-06-21 11:56:51');
+(1, 'Hand Sanitizer 500ml', 'hand-sanitizer-500ml', '<p>Alcohol based hand sanitizer.</p>', 'Kills germs', 150.00, NULL, NULL, NULL, 200, NULL, 1, NULL, '[\"products\\/daqji1mOWSwOI0s04ksYCosVwkZg66K8mRUAGEuO.jpg\"]', 1, 0, NULL, NULL, NULL, '2026-10-28 11:35:26', '2026-10-28 11:38:28'),
+(2, 'Liquid Hand Wash', 'liquid-hand-wash', '<p>Gentle liquid hand wash.</p>', 'Moisturizing', 250.00, NULL, NULL, NULL, 150, NULL, 1, NULL, '[\"products\\/cQv2NsooIjNqyrOlHhHzlbyyC83Al0VhL1OP7bjP.jpg\"]', 1, 0, NULL, NULL, NULL, '2026-10-28 11:35:26', '2026-10-28 11:39:36'),
+(3, 'Body Lotion 200ml', 'body-lotion-200ml', '<p>Nourishing body lotion.</p>', '24hr moisture', 450.00, NULL, NULL, NULL, 100, NULL, 1, NULL, '[\"products\\/P1UDSFiAvUnSXaDDzunveUxqZXNJbUwl62UEj9Td.webp\"]', 1, 0, NULL, NULL, NULL, '2026-10-28 11:35:26', '2026-10-28 11:40:16'),
+(4, 'Dishwashing Liquid', 'dishwashing-liquid', '<p>Grease cutting formula.</p>', 'Sparkling clean', 200.00, NULL, NULL, NULL, 180, NULL, 2, NULL, '[\"products\\/byfqxcmAd43WXamM3qWufcAqe8Gtu6y7NvJLHQvm.jpg\"]', 1, 0, NULL, NULL, NULL, '2026-10-28 11:35:26', '2026-10-28 11:40:37'),
+(5, 'Floor Cleaner 1L', 'floor-cleaner-1l', '<p>Multi-surface floor cleaner.</p>', 'Fresh fragrance', 320.00, NULL, NULL, NULL, 120, NULL, 2, NULL, '[\"products\\/CWpC2A0ccy0kuNvVOogJSOyjELf8BsFKCGRab8zI.webp\"]', 1, 0, NULL, NULL, NULL, '2026-10-28 11:35:26', '2026-10-28 11:40:58');
 
 -- --------------------------------------------------------
 
@@ -391,15 +331,6 @@ CREATE TABLE `reviews` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `reviews`
---
-
-INSERT INTO `reviews` (`id`, `product_id`, `order_id`, `guest_name`, `guest_email`, `user_id`, `rating`, `title`, `body`, `image`, `is_approved`, `admin_reply`, `created_at`, `updated_at`) VALUES
-(1, 3, 15, NULL, NULL, 1, 3, NULL, 'good', 'reviews/W99vwh9TgTrdlDJxW1pTqKckkKWJNrEUr3EBhe25.jpg', 0, NULL, '2026-06-19 12:52:49', '2026-06-19 12:52:49'),
-(2, 2, 11, NULL, NULL, 1, 3, NULL, 'rtferetygr', NULL, 1, 'ggfh', '2026-06-19 12:57:30', '2026-06-19 12:58:20'),
-(3, 2, 16, NULL, NULL, 1, 3, NULL, 'dthyt  hgjyujki', 'reviews/URSeUbox7rOxpwTu9J8CkT6Rt8UJpKYlsRhbncHi.png', 1, NULL, '2026-06-21 08:45:38', '2026-06-21 08:45:38');
 
 -- --------------------------------------------------------
 
@@ -446,7 +377,7 @@ CREATE TABLE `settings` (
 --
 
 INSERT INTO `settings` (`id`, `currency`, `delivery_charge_inside`, `delivery_charge_outside`, `vat_percentage`, `contact_phone`, `contact_email`, `contact_address`, `contact_hours`, `created_at`, `updated_at`, `newsletter_heading`, `newsletter_text`, `newsletter_placeholder`, `newsletter_button_text`, `newsletter_enabled`) VALUES
-(1, 'BDT', 60.00, 150.00, 5.00, '+8801403107510', 'jotybiswas0199@gmail.com', '22/2, Kabi Nazrul Sarak, west Tootpara', NULL, NULL, '2026-06-21 11:55:08', 'Stay in the Loop', 'Subscribe to get notified about new products, exclusive offers, and care tips delivered to your inbox.', 'Enter your email address', 'Subscribe', 0);
+(1, 'BDT', 0.00, 0.00, 0.00, NULL, NULL, NULL, NULL, NULL, NULL, 'Stay in the Loop', 'Subscribe to get notified about new products, exclusive offers, and care tips delivered to your inbox.', 'Enter your email address', 'Subscribe', 1);
 
 -- --------------------------------------------------------
 
@@ -471,24 +402,6 @@ CREATE TABLE `shipping_addresses` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `shipping_addresses`
---
-
-INSERT INTO `shipping_addresses` (`id`, `order_id`, `first_name`, `last_name`, `email`, `phone`, `address_line1`, `address_line2`, `city`, `state`, `postal_code`, `country`, `created_at`, `updated_at`) VALUES
-(11, 11, 'Joty Prokash', 'Biswas', 'jotybiswas0199@gmail.com', '01403107510', '22/2, Kabi Nazrul Sarak, west Tootpara', '22/2, Kabi Nazrul Sarak, west Tootpara', 'Khulna', NULL, '9100', 'Bangladesh', '2026-06-19 12:06:24', '2026-06-19 12:06:24'),
-(12, 12, 'Joty Prokash', 'Biswas', 'jotybiswas0199@gmail.com', '01403107510', '22/2, Kabi Nazrul Sarak, west Tootpara', '22/2, Kabi Nazrul Sarak, west Tootpara', 'Khulna', 'Bangladesh', '9100', 'Bangladesh', '2026-06-19 12:08:08', '2026-06-19 12:08:08'),
-(13, 13, 'Joty Prokash', 'Biswas', 'jotybiswas019@gmail.com', '01403107510', '22/2, Kabi Nazrul Sarak, west Tootpara', '22/2, Kabi Nazrul Sarak, west Tootpara', 'Khulna', NULL, '9100', 'Bangladesh', '2026-06-19 12:20:11', '2026-06-19 12:20:11'),
-(14, 14, 'Joty Prokash', 'Biswas', 'jotybiswas01@gmail.com', '01403107510', '22/2, Kabi Nazrul Sarak, west Tootpara', '22/2, Kabi Nazrul Sarak, west Tootpara', 'Khulna', 'Bangladesh', '9100', 'Bangladesh', '2026-06-19 12:21:21', '2026-06-19 12:21:21'),
-(15, 15, 'Joty Prokash', 'Biswas', 'jotybiswas0199@gmail.com', '01403107510', '22/2, Kabi Nazrul Sarak, west Tootpara', '22/2, Kabi Nazrul Sarak, west Tootpara', 'Khulna', 'Bangladesh', '9100', 'Bangladesh', '2026-06-19 12:30:15', '2026-06-19 12:30:15'),
-(16, 16, 'Joty Prokash', 'Biswas', 'jotybiswas0199@gmail.com', '01403107510', '22/2, Kabi Nazrul Sarak, west Tootpara', '22/2, Kabi Nazrul Sarak, west Tootpara', 'Khulna', 'Bangladesh', '9100', 'Bangladesh', '2026-06-19 13:58:30', '2026-06-19 13:58:30'),
-(17, 17, 'Joty Prokash', 'Biswas', 'jotybiswas0199@gmail.com', '01403107510', '22/2, Kabi Nazrul Sarak, west Tootpara', '22/2, Kabi Nazrul Sarak, west Tootpara', 'Khulna', 'Bangladesh', '9100', 'Bangladesh', '2026-06-19 13:59:53', '2026-06-19 13:59:53'),
-(18, 18, 'Joty Prokash', 'Biswas', 'jotybiswas0199@gmail.com', '01403107510', '22/2, Kabi Nazrul Sarak, west Tootpara', '22/2, Kabi Nazrul Sarak, west Tootpara', 'Khulna', 'Bangladesh', '9100', 'Bangladesh', '2026-06-21 09:08:27', '2026-06-21 09:08:27'),
-(19, 19, 'Test', 'User', 'test@example.com', '01700000000', '123 Test Street', NULL, 'Khulna', NULL, '9000', 'Bangladesh', '2026-06-21 09:21:43', '2026-06-21 09:21:43'),
-(20, 20, 'Joty Prokash', 'Biswas', 'jotybiswas0199@gmail.com', '01403107510', '22/2, Kabi Nazrul Sarak, west Tootpara', '22/2, Kabi Nazrul Sarak, west Tootpara', 'Khulna', 'Bangladesh', '9100', 'Bangladesh', '2026-06-21 09:26:45', '2026-06-21 09:26:45'),
-(21, 21, 'Joty Prokash', 'Biswas', 'jotybiswas0199@gmail.com', '01403107510', '22/2, Kabi Nazrul Sarak, west Tootpara', '22/2, Kabi Nazrul Sarak, west Tootpara', 'Khulna', 'Bangladesh', '9100', 'Bangladesh', '2026-06-21 09:27:45', '2026-06-21 09:27:45'),
-(22, 22, 'Joty Prokash', 'Biswas', 'jotybiswas0199@gmail.com', '01403107510', '22/2, Kabi Nazrul Sarak, west Tootpara', '22/2, Kabi Nazrul Sarak, west Tootpara', 'Khulna', NULL, '9100', 'Bangladesh', '2026-06-21 09:36:46', '2026-06-21 09:36:46');
-
 -- --------------------------------------------------------
 
 --
@@ -512,11 +425,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `is_admin`) VALUES
-(1, 'Joty Prokash Biswas', 'jotybiswas0199@gmail.com', '2026-06-19 14:51:12', '$2y$12$TjPDU3f0E3oK7QSuRkOZOOCXyU3Cb/qDYKtlzvQNnVVEzbRRo7DNy', NULL, '2026-06-19 08:51:03', '2026-06-21 12:19:20', 1),
-(2, 'tyt ytjuy', 'jotybiswas099@gmail.com', NULL, '$2y$12$l4An.313djoY82qhSu0TXOKv0R3B0MLNIBI4MNPi7t6naUD27IOC.', NULL, '2026-06-19 10:45:13', '2026-06-19 10:45:13', 0),
-(3, 'Joty Prokash Biswas', 'jotybiswas01@gmail.com', NULL, '$2y$12$KuJvJKAZ20KgDQ7iPpSTvOKW3deRkOQJRwm8PmbJYZpS6zRJ/rhVC', NULL, '2026-06-19 12:21:11', '2026-06-19 12:21:11', 0),
-(4, 'Test User', 'test@example.com', NULL, '$2y$12$a09iVIz.J4ZlBBKVZwVBwuA7Ituf81ait.MiihGjfxO6dd7xe6IlW', NULL, '2026-06-21 12:53:55', '2026-06-21 12:53:55', 0),
-(5, 'Admin', 'admin@test.com', NULL, '$2y$12$9tWgpmEhN7Ftvw4bZMNOreNU7nodZ9i/vnTdsITBm02yMggtYTdvi', NULL, '2026-06-21 12:54:47', '2026-06-21 12:54:47', 1);
+(1, 'Test User', 'test@example.com', '2026-10-28 11:34:00', '$2y$12$tEFac5bBjnk75FY1G4Opgeovn6GsoQfNOsbSD.byG15jlOJCLAgjG', '223IJPSZ8R5ujsk3081xHJAXtP7ie7c9dXYzyrR1NDP88AyD0FPqzcpDSNJJ', '2026-10-28 11:34:00', '2026-10-28 11:34:00', 0),
+(2, 'Joty Prokash Biswas', 'jotybiswas0199@gmail.com', NULL, '$2y$12$DYU4fk/02L9Xi4/ZmvrFF.qTsnTjXeii5CMyae5QsN457MXWnOeCe', NULL, '2026-10-28 11:36:46', '2026-10-28 11:36:46', 1);
 
 --
 -- Indexes for dumped tables
@@ -665,19 +575,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `carts`
 --
 ALTER TABLE `carts`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `contact_messages`
 --
 ALTER TABLE `contact_messages`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -701,19 +611,19 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `order_items`
 --
 ALTER TABLE `order_items`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `payment_details`
 --
 ALTER TABLE `payment_details`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `products`
@@ -725,7 +635,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `reviews`
 --
 ALTER TABLE `reviews`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `settings`
@@ -737,13 +647,13 @@ ALTER TABLE `settings`
 -- AUTO_INCREMENT for table `shipping_addresses`
 --
 ALTER TABLE `shipping_addresses`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables
