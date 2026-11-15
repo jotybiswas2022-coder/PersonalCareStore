@@ -42,6 +42,21 @@ Route::get('/sitemap.xml', [SeoController::class, 'sitemap'])->name('seo.sitemap
 
 /*
 |--------------------------------------------------------------------------
+| Favicon fallback
+|--------------------------------------------------------------------------
+| When the web root is not the public/ directory (as in this local XAMPP
+| setup), static icons are not reachable. These routes serve them when the
+| file is missing; in production Apache serves the static files directly.
+*/
+foreach (['favicon.svg' => 'image/svg+xml', 'favicon-32x32.png' => 'image/png', 'apple-touch-icon.png' => 'image/png'] as $icon => $mime) {
+    Route::get('/' . $icon, fn () => response()->file(public_path($icon), [
+        'Content-Type' => $mime,
+        'Cache-Control' => 'public, max-age=604800',
+    ]));
+}
+
+/*
+|--------------------------------------------------------------------------
 | Uploaded media
 |--------------------------------------------------------------------------
 | Serves product, review and payment-proof images from the public disk so
