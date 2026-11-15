@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Cart;
+use App\Models\Coupon;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -24,7 +25,60 @@ class CartController extends Controller
             return $price * $item->quantity;
         });
 
-        return view('frontend.cart.index', compact('cartItems', 'subtotal'));
+        $couponState = Coupon::resolveSessionCoupon(session('coupon_code'), (float) $subtotal);
+
+        if ($couponState['error']) {
+            session()->forget('coupon_code');
+            session()->flash('error', $couponState['error']);
+        }
+
+        $coupon = $couponState['coupon'];
+        $discount = $couponState['discount'];
+        $subtotalAfterDiscount = max(0, (float) $subtotal - $discount);
+
+        return view('frontend.cart.index', compact('cartItems', 'subtotal', 'coupon', 'discount', 'subtotalAfterDiscount'));
+    }
+
+    /**
+     * Apply a coupon code to the current cart.
+     */
+    public function applyCoupon(Request $request)
+    {
+        $validated = $request->validate([
+            'code' => 'required|string|max:50',
+        ]);
+
+        $cartItems = Cart::where('session_id', session()->getId())->with('product')->get();
+
+        if ($cartItems->isEmpty()) {
+            return back()->with('error', 'Add something to your cart before applying a coupon.');
+        }
+
+        $subtotal = $cartItems->sum(fn ($item) => $item->product->final_price * $item->quantity);
+
+        $coupon = Coupon::findByCode($validated['code']);
+
+        if (! $coupon) {
+            return back()->with('error', 'That coupon code is not valid.');
+        }
+
+        if ($error = $coupon->validationError((float) $subtotal)) {
+            return back()->with('error', $error);
+        }
+
+        session()->put('coupon_code', $coupon->code);
+
+        return back()->with('success', 'Coupon "' . $coupon->code . '" applied - you save ' . currencyFormat($coupon->discountFor((float) $subtotal)) . '.');
+    }
+
+    /**
+     * Remove the coupon from the current cart.
+     */
+    public function removeCoupon()
+    {
+        session()->forget('coupon_code');
+
+        return back()->with('success', 'Coupon removed.');
     }
 
     /**

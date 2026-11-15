@@ -57,6 +57,13 @@
             <span class="sb-item-text">Categories</span>
         </a>
 
+        <a href="{{ route('admin.coupons.index') }}" class="sb-item {{ request()->routeIs('admin.coupons.*') ? 'active' : '' }}">
+            <span class="sb-item-icon" style="background:{{ request()->routeIs('admin.coupons.*') ? 'rgba(16,185,129,0.18)' : 'transparent' }};color:{{ request()->routeIs('admin.coupons.*') ? '#34d399' : '#9ca3af' }};">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+            </span>
+            <span class="sb-item-text">Coupons</span>
+        </a>
+
         <div class="sb-label">Engage</div>
         <a href="{{ route('admin.reviews.index') }}" class="sb-item {{ request()->routeIs('admin.reviews.*') ? 'active' : '' }}">
             <span class="sb-item-icon" style="background:{{ request()->routeIs('admin.reviews.*') ? 'rgba(236,72,153,0.2)' : 'transparent' }};color:{{ request()->routeIs('admin.reviews.*') ? '#f472b6' : '#9ca3af' }};">

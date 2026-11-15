@@ -586,6 +586,89 @@
         line-height: 1.5;
         color: #93A39A;
     }
+    .summary-row .value.discount { color: #166534; }
+
+    /* Coupon */
+    .coupon-form {
+        display: flex;
+        gap: 0.375rem;
+        margin-top: 0.75rem;
+    }
+    .coupon-form input {
+        flex: 1;
+        min-width: 0;
+        padding: 0.5625rem 0.75rem;
+        border: 1px solid var(--line);
+        border-radius: 0.625rem;
+        background: #F6FAF7;
+        font-family: inherit;
+        font-size: 0.75rem;
+        font-weight: 600;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--ink);
+        outline: none;
+        transition: border-color 0.25s var(--ease), box-shadow 0.25s var(--ease), background 0.25s var(--ease);
+    }
+    .coupon-form input::placeholder {
+        text-transform: none;
+        letter-spacing: 0;
+        font-weight: 400;
+        color: #93A39A;
+    }
+    .coupon-form input:focus {
+        border-color: #7BCB9B;
+        background: #FFFFFF;
+        box-shadow: 0 0 0 4px rgba(46,139,87,0.10);
+    }
+    .coupon-form button {
+        padding: 0 0.9375rem;
+        border: none;
+        border-radius: 0.625rem;
+        background: var(--green-deep);
+        color: #F1FBF5;
+        font-family: inherit;
+        font-size: 0.75rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: background 0.25s var(--ease);
+    }
+    .coupon-form button:hover { background: #1F7A4D; }
+    .coupon-applied {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-top: 0.75rem;
+        padding: 0.5rem 0.625rem;
+        border: 1px dashed #B9E2C9;
+        border-radius: 0.625rem;
+        background: #F4FCF7;
+    }
+    .coupon-applied .code {
+        font-size: 0.75rem;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        color: #166534;
+    }
+    .coupon-applied .save {
+        margin-left: auto;
+        font-size: 0.6875rem;
+        font-weight: 700;
+        color: #166534;
+        white-space: nowrap;
+    }
+    .coupon-applied form { display: flex; }
+    .coupon-applied button {
+        border: none;
+        background: transparent;
+        padding: 0.125rem 0.25rem;
+        font-family: inherit;
+        font-size: 0.6875rem;
+        font-weight: 700;
+        color: #B91C1C;
+        cursor: pointer;
+    }
+    .coupon-applied button:hover { text-decoration: underline; }
 
     .checkout-btn {
         position: relative;
@@ -965,6 +1048,33 @@
                     <span class="label">Subtotal</span>
                     <span class="value" id="cartSubtotal">{{ currencyFormat($subtotal) }}</span>
                 </div>
+
+                @if($coupon)
+                    <div class="coupon-applied">
+                        <span class="code">{{ $coupon->code }}</span>
+                        <span class="save">&minus;{{ currencyFormat($discount) }}</span>
+                        <form method="POST" action="{{ route('cart.coupon.remove') }}">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit">Remove</button>
+                        </form>
+                    </div>
+                    <div class="summary-row">
+                        <span class="label">Discount</span>
+                        <span class="value discount">&minus;{{ currencyFormat($discount) }}</span>
+                    </div>
+                    <div class="summary-row">
+                        <span class="label">After discount</span>
+                        <span class="value" id="cartTotal">{{ currencyFormat($subtotalAfterDiscount) }}</span>
+                    </div>
+                @else
+                    <form method="POST" action="{{ route('cart.coupon.apply') }}" class="coupon-form">
+                        @csrf
+                        <input type="text" name="code" placeholder="Coupon code" autocomplete="off" aria-label="Coupon code">
+                        <button type="submit">Apply</button>
+                    </form>
+                @endif
+
                 <p class="summary-note">Delivery charge is confirmed on the checkout page.</p>
 
                 <hr class="summary-divider">

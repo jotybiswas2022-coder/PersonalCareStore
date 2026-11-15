@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProductController as AdminProductController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\PaymentDetailController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\ProfitLossController;
@@ -102,6 +103,8 @@ Route::post('/cart/add/{productId}', [CartController::class, 'add'])->name('cart
 Route::post('/cart/update/{cartId}', [CartController::class, 'update'])->name('cart.update');
 Route::delete('/cart/remove/{cartId}', [CartController::class, 'remove'])->name('cart.remove');
 Route::post('/cart/delivery-area', [CartController::class, 'setDeliveryArea'])->name('cart.deliveryArea');
+Route::post('/cart/coupon', [CartController::class, 'applyCoupon'])->name('cart.coupon.apply');
+Route::delete('/cart/coupon', [CartController::class, 'removeCoupon'])->name('cart.coupon.remove');
 
 /*
 |--------------------------------------------------------------------------
@@ -146,6 +149,15 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
 
     // Product Management
     Route::resource('products', AdminProductController::class);
+
+    // Coupons
+    Route::get('/coupons', [CouponController::class, 'index'])->name('coupons.index');
+    Route::get('/coupons/create', [CouponController::class, 'create'])->name('coupons.create');
+    Route::post('/coupons', [CouponController::class, 'store'])->name('coupons.store');
+    Route::get('/coupons/{coupon}/edit', [CouponController::class, 'edit'])->name('coupons.edit');
+    Route::put('/coupons/{coupon}', [CouponController::class, 'update'])->name('coupons.update');
+    Route::delete('/coupons/{coupon}', [CouponController::class, 'destroy'])->name('coupons.destroy');
+    Route::patch('/coupons/{coupon}/toggle', [CouponController::class, 'toggle'])->name('coupons.toggle');
 
     // Category Management
     Route::resource('categories', CategoryController::class);

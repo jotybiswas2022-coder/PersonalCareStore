@@ -1050,6 +1050,12 @@
                             <span class="lbl">Subtotal</span>
                             <span class="val">{{ currencyFormat($order->subtotal) }}</span>
                         </div>
+                        @if((float) $order->discount > 0)
+                            <div class="sum-row">
+                                <span class="lbl">Discount{{ $order->coupon_code ? ' (' . $order->coupon_code . ')' : '' }}</span>
+                                <span class="val">&minus;{{ currencyFormat($order->discount) }}</span>
+                            </div>
+                        @endif
                         <div class="sum-row">
                             <span class="lbl">Shipping</span>
                             <span class="val">{{ currencyFormat($order->shipping_cost) }}</span>

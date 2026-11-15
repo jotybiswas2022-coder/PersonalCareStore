@@ -7,6 +7,7 @@ use App\Mail\OrderPlacedMail;
 use App\Mail\PaymentProofReceivedMail;
 use App\Http\Controllers\Controller;
 use App\Models\Cart;
+use App\Models\Coupon;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\PaymentDetail;
@@ -41,10 +42,23 @@ class CheckoutController extends Controller
         $deliveryArea = session('delivery_area', 'inside');
         $deliveryCharge = $deliveryArea === 'inside' ? ($setting?->delivery_charge_inside ?? 0) : ($setting?->delivery_charge_outside ?? 0);
         $vatPercent = $setting?->vat_percentage ?? 0;
-        $vatAmount = round($subtotal * ($vatPercent / 100), 2);
-        $total = $subtotal + $deliveryCharge + $vatAmount;
 
-        return view('frontend.checkout.index', compact('cartItems', 'subtotal', 'deliveryCharge', 'vatPercent', 'vatAmount', 'total', 'deliveryArea'));
+        $couponState = Coupon::resolveSessionCoupon(session('coupon_code'), (float) $subtotal);
+
+        if ($couponState['error']) {
+            session()->forget('coupon_code');
+            session()->flash('error', $couponState['error']);
+        }
+
+        $coupon = $couponState['coupon'];
+        $discount = $couponState['discount'];
+        $taxableSubtotal = max(0, (float) $subtotal - $discount);
+        $vatAmount = round($taxableSubtotal * ($vatPercent / 100), 2);
+        $total = $taxableSubtotal + $deliveryCharge + $vatAmount;
+
+        return view('frontend.checkout.index', compact(
+            'cartItems', 'subtotal', 'deliveryCharge', 'vatPercent', 'vatAmount', 'total', 'deliveryArea', 'coupon', 'discount'
+        ));
     }
 
     /**
@@ -104,8 +118,29 @@ class CheckoutController extends Controller
                 $deliveryArea = session('delivery_area', 'inside');
                 $shippingCost = $deliveryArea === 'inside' ? ($setting?->delivery_charge_inside ?? 0) : ($setting?->delivery_charge_outside ?? 0);
                 $vatPercent = $setting?->vat_percentage ?? 0;
-                $tax = round($subtotal * ($vatPercent / 100), 2);
-                $total = $subtotal + $shippingCost + $tax;
+
+                // Lock the coupon row so a limited-use code cannot be redeemed
+                // twice by two checkouts at the same moment.
+                $coupon = null;
+                $discount = 0.0;
+
+                if ($couponCode = session('coupon_code')) {
+                    $coupon = Coupon::whereRaw('UPPER(code) = ?', [Coupon::normalizeCode($couponCode)])
+                        ->lockForUpdate()
+                        ->first();
+
+                    if ($coupon) {
+                        if ($error = $coupon->validationError((float) $subtotal)) {
+                            throw new CheckoutException('Coupon "' . $coupon->code . '": ' . $error);
+                        }
+
+                        $discount = $coupon->discountFor((float) $subtotal);
+                    }
+                }
+
+                $taxableSubtotal = max(0, (float) $subtotal - $discount);
+                $tax = round($taxableSubtotal * ($vatPercent / 100), 2);
+                $total = $taxableSubtotal + $shippingCost + $tax;
 
                 $order = Order::create([
                     'order_number' => 'ORD-' . strtoupper(Str::random(10)),
@@ -119,6 +154,8 @@ class CheckoutController extends Controller
                     'payment_status' => 'unpaid',
                     'payment_method' => null,
                     'stock_reserved_at' => now(),
+                    'coupon_code' => $coupon?->code,
+                    'discount' => $discount,
                 ]);
 
                 foreach ($cartItems as $cartItem) {
@@ -151,6 +188,10 @@ class CheckoutController extends Controller
                     'country' => $validated['country'] ?? 'Bangladesh',
                 ]);
 
+                if ($coupon) {
+                    $coupon->increment('used_count');
+                }
+
                 // Clear the cart only once the order is safely stored
                 Cart::where('session_id', $sessionId)->delete();
 
@@ -159,6 +200,8 @@ class CheckoutController extends Controller
         } catch (CheckoutException $e) {
             return redirect()->route('cart.index')->with('error', $e->getMessage());
         }
+
+        session()->forget('coupon_code');
 
         // Store email in session for guest success page access
         session()->put('checkout_email', $validated['email']);

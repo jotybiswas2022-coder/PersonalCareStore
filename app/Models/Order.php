@@ -26,6 +26,8 @@ class Order extends Model
         'proof_image',
         'cancelled_by',
         'stock_reserved_at',
+        'coupon_code',
+        'discount',
     ];
 
     protected function casts(): array
@@ -35,6 +37,7 @@ class Order extends Model
             'shipping_cost' => 'decimal:2',
             'tax' => 'decimal:2',
             'total' => 'decimal:2',
+            'discount' => 'decimal:2',
             'stock_reserved_at' => 'datetime',
         ];
     }

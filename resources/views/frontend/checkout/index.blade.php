@@ -488,6 +488,19 @@
     }
     .summary-totals .row .lbl { color: var(--muted); }
     .summary-totals .row .val { font-weight: 600; color: var(--ink); }
+    .summary-totals .row .val.discount { color: #166534; }
+    .summary-totals .row .coupon-code {
+        display: inline-block;
+        margin-left: 0.375rem;
+        padding: 0.0625rem 0.4375rem;
+        border-radius: 9999px;
+        background: #EDF9F2;
+        border: 1px solid #D6F0E0;
+        font-size: 0.625rem;
+        font-weight: 800;
+        letter-spacing: 0.06em;
+        color: #166534;
+    }
     .summary-totals .divider {
         border: none;
         border-top: 1px solid var(--line);
@@ -754,6 +767,15 @@
                 <span class="lbl">Subtotal</span>
                 <span class="val">{{ currencyFormat($subtotal) }}</span>
             </div>
+            @if($discount > 0)
+                <div class="row">
+                    <span class="lbl">
+                        Discount
+                        @if($coupon)<span class="coupon-code">{{ $coupon->code }}</span>@endif
+                    </span>
+                    <span class="val discount">&minus;{{ currencyFormat($discount) }}</span>
+                </div>
+            @endif
             <div class="row">
                 <span class="lbl">Shipping ({{ $deliveryArea === 'inside' ? 'Inside Khulna' : 'Outside Khulna' }})</span>
                 <span class="val">{{ currencyFormat($deliveryCharge) }}</span>

@@ -826,6 +826,9 @@
                     </tbody>
                     <tfoot>
                         <tr><td colspan="3" class="right total-label">Subtotal</td><td class="right">{{ currencyFormat($order->subtotal) }}</td></tr>
+                        @if((float) $order->discount > 0)
+                            <tr><td colspan="3" class="right total-label">Discount{{ $order->coupon_code ? ' (' . $order->coupon_code . ')' : '' }}</td><td class="right">&minus;{{ currencyFormat($order->discount) }}</td></tr>
+                        @endif
                         <tr><td colspan="3" class="right total-label">Shipping</td><td class="right">{{ currencyFormat($order->shipping_cost) }}</td></tr>
                         <tr><td colspan="3" class="right total-label">VAT</td><td class="right">{{ currencyFormat($order->tax) }}</td></tr>
                         <tr class="grand-total">
