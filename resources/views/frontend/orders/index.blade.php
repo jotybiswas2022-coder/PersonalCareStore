@@ -1,6 +1,7 @@
 @extends('frontend.layouts.app')
 
 @section('title', 'My Orders')
+@section('robots', 'noindex, nofollow')
 
 @push('styles')
 <style>

@@ -2,6 +2,45 @@
 
 @section('title', isset($category) ? $category->name : 'Products')
 @section('meta_description', isset($category) && $category->description ? Str::limit(strip_tags($category->description), 160) : 'Browse our complete collection of premium personal care and home care products.')
+@section('canonical', isset($category) ? route('products.byCategory', $category->id) : route('products.index'))
+@if(request()->filled('search'))
+    @section('robots', 'noindex, follow')
+@endif
+
+@php
+    $listingCrumbs = [[
+        '@type' => 'ListItem',
+        'position' => 1,
+        'name' => 'Home',
+        'item' => route('home'),
+    ]];
+
+    $listingCrumbs[] = [
+        '@type' => 'ListItem',
+        'position' => 2,
+        'name' => 'Products',
+        'item' => isset($category) ? route('products.index') : url()->current(),
+    ];
+
+    if (isset($category)) {
+        $listingCrumbs[] = [
+            '@type' => 'ListItem',
+            'position' => 3,
+            'name' => $category->name,
+            'item' => route('products.byCategory', $category->id),
+        ];
+    }
+
+    $listingBreadcrumbSchema = [
+        '@context' => 'https://schema.org',
+        '@type' => 'BreadcrumbList',
+        'itemListElement' => $listingCrumbs,
+    ];
+@endphp
+
+@push('head')
+<script type="application/ld+json">{!! json_encode($listingBreadcrumbSchema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) !!}</script>
+@endpush
 
 @push('styles')
 <style>
@@ -716,7 +755,7 @@
                 <article class="shop-card">
                     <a href="{{ route('products.show', $product->id) }}" class="shop-media">
                         @if($product->images && count($product->images) > 0)
-                            <img src="{{ $product->image_urls[0] }}" alt="{{ $product->name }}" loading="lazy">
+                            <img src="{{ $product->image_urls[0] }}" alt="{{ $product->name }}" loading="lazy" decoding="async">
                         @else
                             <div class="shop-noimg">
                                 <svg width="38" height="38" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">

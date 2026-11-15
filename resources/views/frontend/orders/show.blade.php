@@ -1,6 +1,7 @@
 @extends('frontend.layouts.app')
 
 @section('title', 'Order ' . $order->order_number)
+@section('robots', 'noindex, nofollow')
 
 @php
     $statusPill = match($order->status) {
@@ -963,7 +964,7 @@
                             @foreach($order->items as $item)
                                 <li class="item-row">
                                     @if($item->product && $item->product->images && count($item->product->images) > 0)
-                                        <img src="{{ $item->product->image_urls[0] }}" alt="{{ $item->product_name }}" class="item-thumb">
+                                        <img src="{{ $item->product->image_urls[0] }}" alt="{{ $item->product_name }}" class="item-thumb" loading="lazy" decoding="async">
                                     @else
                                         <div class="item-thumb empty">N/A</div>
                                     @endif

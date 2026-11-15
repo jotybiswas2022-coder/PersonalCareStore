@@ -1,6 +1,7 @@
 @extends('frontend.layouts.app')
 
 @section('title', $order->status === 'cancelled' ? 'Order Cancelled' : (($order->payment_status === 'paid' || $order->proof_image) ? 'Order Confirmed' : 'Payment Required'))
+@section('robots', 'noindex, nofollow')
 
 @push('styles')
 <style>
@@ -1290,7 +1291,7 @@
                         <div class="item-row">
                             <div class="thumb">
                                 @if($item->product && $item->product->images && count($item->product->images) > 0)
-                                    <img src="{{ $item->product->image_urls[0] }}" alt="{{ $item->product_name }}">
+                                    <img src="{{ $item->product->image_urls[0] }}" alt="{{ $item->product_name }}" loading="lazy" decoding="async">
                                 @else
                                     <span class="no-img">
                                         <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">

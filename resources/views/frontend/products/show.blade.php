@@ -4,7 +4,78 @@
 @section('meta_description', Str::limit(strip_tags($product->description), 160))
 @section('canonical', route('products.show', $product->id))
 @section('og_type', 'product')
-@section('og_image', $product->images && count($product->images) > 0 ? $product->image_urls[0] : asset('logo.svg'))
+@section('og_image', $product->images && count($product->images) > 0 ? $product->image_urls[0] : asset('og-default.png'))
+
+@php
+    $reviewCount = $product->reviews->count();
+    $avgRating = $reviewCount ? $product->reviews->avg('rating') : 0;
+    $productUrl = route('products.show', $product->id);
+
+    $crumbs = [[
+        '@type' => 'ListItem',
+        'position' => 1,
+        'name' => 'Home',
+        'item' => route('home'),
+    ], [
+        '@type' => 'ListItem',
+        'position' => 2,
+        'name' => 'Products',
+        'item' => route('products.index'),
+    ]];
+
+    if ($product->category) {
+        $crumbs[] = [
+            '@type' => 'ListItem',
+            'position' => count($crumbs) + 1,
+            'name' => $product->category->name,
+            'item' => route('products.byCategory', $product->category_id),
+        ];
+    }
+
+    $crumbs[] = [
+        '@type' => 'ListItem',
+        'position' => count($crumbs) + 1,
+        'name' => $product->name,
+        'item' => $productUrl,
+    ];
+
+    $productSchema = array_filter([
+        '@context' => 'https://schema.org',
+        '@type' => 'Product',
+        'name' => $product->name,
+        'description' => Str::limit(trim(strip_tags($product->description ?? '')), 500),
+        'sku' => $product->sku ?: 'PCS-' . $product->id,
+        'brand' => ['@type' => 'Brand', 'name' => $product->brand ?: 'PersonalCareStore'],
+        'category' => $product->category?->name,
+        'image' => $product->image_urls,
+        'url' => $productUrl,
+        'offers' => [
+            '@type' => 'Offer',
+            'url' => $productUrl,
+            'priceCurrency' => settings()?->currency ?? 'BDT',
+            'price' => number_format((float) $product->final_price, 2, '.', ''),
+            'availability' => $product->stock_quantity > 0 ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
+            'itemCondition' => 'https://schema.org/NewCondition',
+            'seller' => ['@type' => 'Organization', 'name' => 'PersonalCareStore'],
+        ],
+        'aggregateRating' => $reviewCount > 0 ? [
+            '@type' => 'AggregateRating',
+            'ratingValue' => round((float) $avgRating, 1),
+            'reviewCount' => $reviewCount,
+        ] : null,
+    ]);
+
+    $breadcrumbSchema = [
+        '@context' => 'https://schema.org',
+        '@type' => 'BreadcrumbList',
+        'itemListElement' => $crumbs,
+    ];
+@endphp
+
+@push('head')
+<script type="application/ld+json">{!! json_encode($productSchema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) !!}</script>
+<script type="application/ld+json">{!! json_encode($breadcrumbSchema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) !!}</script>
+@endpush
 
 @push('styles')
 <style>
@@ -962,8 +1033,6 @@
 
 @section('content')
 @php
-    $reviewCount = $product->reviews->count();
-    $avgRating = $reviewCount ? $product->reviews->avg('rating') : 0;
     $avgRounded = (int) round($avgRating);
     $inStock = $product->stock_quantity > 0;
     $lowStock = $inStock && $product->stock_quantity <= 5;
@@ -989,7 +1058,7 @@
             <div class="pdp-gallery" data-reveal>
                 <div class="pdp-stage">
                     @if($product->images && count($product->images) > 0)
-                        <img id="mainImage" src="{{ $product->image_urls[0] }}" alt="{{ $product->name }}">
+                        <img id="mainImage" src="{{ $product->image_urls[0] }}" alt="{{ $product->name }}" fetchpriority="high" decoding="async">
                     @else
                         <div class="no-image">
                             <svg width="64" height="64" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
@@ -1021,8 +1090,8 @@
                 @if($product->images && count($product->images) > 1)
                     <div class="pdp-thumbs" id="thumbnails">
                         @foreach($product->images as $index => $image)
-                            <div class="thumb {{ $index === 0 ? 'active' : '' }}" onclick="changeImage(this, '{{ config('app.storage_url') . ltrim(preg_replace('#^storage/#', '', $image), '/') }}')">
-                                <img src="{{ config('app.storage_url') . ltrim(preg_replace('#^storage/#', '', $image), '/') }}" alt="{{ $product->name }} — view {{ $index + 1 }}">
+                            <div class="thumb {{ $index === 0 ? 'active' : '' }}" onclick="changeImage(this, '{{ $product->image_urls[$index] }}')">
+                                <img src="{{ $product->image_urls[$index] }}" alt="{{ $product->name }} — view {{ $index + 1 }}" loading="lazy" decoding="async">
                             </div>
                         @endforeach
                     </div>
@@ -1182,7 +1251,7 @@
 
                     @if($review->image)
                         <div class="pdp-review-img">
-                            <img src="{{ $review->image_url }}" alt="Review image">
+                            <img src="{{ $review->image_url }}" alt="Review image" loading="lazy" decoding="async">
                         </div>
                     @endif
 
@@ -1230,7 +1299,7 @@
                     <article class="pdp-related">
                         <a href="{{ route('products.show', $related->id) }}" class="shot">
                             @if($related->images && count($related->images) > 0)
-                                <img src="{{ $related->image_urls[0] }}" alt="{{ $related->name }}" loading="lazy">
+                                <img src="{{ $related->image_urls[0] }}" alt="{{ $related->name }}" loading="lazy" decoding="async">
                             @else
                                 <div class="no-image">
                                     <svg width="28" height="28" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>

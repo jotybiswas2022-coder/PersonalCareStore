@@ -2,6 +2,7 @@
 
 @section('title', 'Page Not Found')
 @section('meta_description', 'The page you are looking for could not be found.')
+@section('robots', 'noindex, follow')
 
 @section('content')
 <div style="min-height: 60vh; display: flex; align-items: center; justify-content: center; padding: 1rem;">

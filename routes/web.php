@@ -20,6 +20,7 @@ use App\Http\Controllers\Admin\ReviewController as AdminReviewController;
 use App\Http\Controllers\Admin\MessageController as AdminMessageController;
 use App\Http\Controllers\Frontend\ContactMessageController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SeoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +29,16 @@ use App\Http\Controllers\ProfileController;
 */
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::view('/privacy-policy', 'frontend.pages.privacy-policy')->name('privacy-policy');
+
+/*
+|--------------------------------------------------------------------------
+| SEO files
+|--------------------------------------------------------------------------
+| Served dynamically so the sitemap and robots.txt always point at the
+| domain configured in APP_URL and include newly added products.
+*/
+Route::get('/robots.txt', [SeoController::class, 'robots'])->name('seo.robots');
+Route::get('/sitemap.xml', [SeoController::class, 'sitemap'])->name('seo.sitemap');
 
 /*
 |--------------------------------------------------------------------------

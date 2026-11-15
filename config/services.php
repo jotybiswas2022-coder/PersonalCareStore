@@ -35,4 +35,11 @@ return [
         ],
     ],
 
+    'google' => [
+        // GA4 measurement ID, e.g. G-XXXXXXXXXX
+        'analytics_id' => env('GOOGLE_ANALYTICS_ID'),
+        // Google Search Console HTML tag verification token
+        'search_console_id' => env('GOOGLE_SEARCH_CONSOLE_ID'),
+    ],
+
 ];

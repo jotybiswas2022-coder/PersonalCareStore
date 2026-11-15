@@ -7,17 +7,24 @@
     <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
     <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
     <meta name="description" content="@yield('meta_description', 'PersonalCareStore - Premium personal care and home care products. Quality you can trust, delivered to your door.')">
+    <meta name="robots" content="@yield('robots', 'index, follow, max-image-preview:large')">
+    <meta name="theme-color" content="#07301E">
     <link rel="canonical" href="@yield('canonical', url()->current())">
+    <meta property="og:site_name" content="PersonalCareStore">
+    <meta property="og:locale" content="en_US">
     <meta property="og:title" content="@yield('title', 'PersonalCareStore')">
     <meta property="og:description" content="@yield('meta_description', 'Premium personal care and home care products.')">
     <meta property="og:type" content="@yield('og_type', 'website')">
     <meta property="og:url" content="@yield('canonical', url()->current())">
-    <meta property="og:image" content="@yield('og_image', asset('logo.svg'))">
+    <meta property="og:image" content="@yield('og_image', asset('og-default.png'))">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="@yield('title', 'PersonalCareStore')">
     <meta name="twitter:description" content="@yield('meta_description', 'Premium personal care and home care products.')">
-    <meta name="twitter:image" content="@yield('og_image', asset('logo.svg'))">
+    <meta name="twitter:image" content="@yield('og_image', asset('og-default.png'))">
     <title>@yield('title', 'PersonalCareStore') - PersonalCareStore</title>
+    @if(config('services.google.search_console_id'))
+    <meta name="google-site-verification" content="{{ config('services.google.search_console_id') }}">
+    @endif
     @if(config('services.google.analytics_id'))
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id={{ config('services.google.analytics_id') }}"></script>
@@ -28,6 +35,40 @@
         gtag('config', '{{ config('services.google.analytics_id') }}');
     </script>
     @endif
+    @php
+        $schemaSiteName = 'PersonalCareStore';
+        $schemaSiteUrl = rtrim(config('app.url'), '/');
+        $schemaSetting = settings();
+        $organizationSchema = array_filter([
+            '@context' => 'https://schema.org',
+            '@type' => 'Organization',
+            'name' => $schemaSiteName,
+            'url' => $schemaSiteUrl,
+            'logo' => asset('og-default.png'),
+            'description' => 'Premium personal care and home care products, delivered across Bangladesh.',
+            'email' => $schemaSetting?->contact_email,
+            'telephone' => $schemaSetting?->contact_phone,
+            'address' => $schemaSetting?->contact_address ? [
+                '@type' => 'PostalAddress',
+                'streetAddress' => $schemaSetting->contact_address,
+                'addressCountry' => 'BD',
+            ] : null,
+        ]);
+        $websiteSchema = [
+            '@context' => 'https://schema.org',
+            '@type' => 'WebSite',
+            'name' => $schemaSiteName,
+            'url' => $schemaSiteUrl,
+            'potentialAction' => [
+                '@type' => 'SearchAction',
+                'target' => route('products.index') . '?search={search_term_string}',
+                'query-input' => 'required name=search_term_string',
+            ],
+        ];
+    @endphp
+    <script type="application/ld+json">{!! json_encode($organizationSchema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) !!}</script>
+    <script type="application/ld+json">{!! json_encode($websiteSchema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) !!}</script>
+    @stack('head')
     <style>
         * {
             margin: 0;

@@ -1,6 +1,9 @@
 @extends('frontend.layouts.app')
 
 @section('title', isset($order) ? 'Order ' . $order->order_number : (isset($orders) ? 'Your Orders' : 'Track Order'))
+@if(isset($order) || isset($orders))
+    @section('robots', 'noindex, nofollow')
+@endif
 
 @php
     $lookupEmail = $email ?? old('email');

@@ -1,6 +1,7 @@
 @extends('frontend.layouts.app')
 
 @section('title', 'Checkout')
+@section('robots', 'noindex, nofollow')
 
 @push('styles')
 <style>
@@ -726,7 +727,7 @@
             <div class="summary-item">
                 <div class="thumb">
                     @if($item->product->images && count($item->product->images) > 0)
-                        <img src="{{ $item->product->image_urls[0] }}" alt="{{ $item->product->name }}">
+                        <img src="{{ $item->product->image_urls[0] }}" alt="{{ $item->product->name }}" loading="lazy" decoding="async">
                     @else
                         <div class="no-img">
                             <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
