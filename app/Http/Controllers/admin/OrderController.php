@@ -71,13 +71,27 @@ class OrderController extends Controller
 
         $order->update($updateData);
 
-        if ($validated['status'] === 'delivered') {
+        if ($validated['status'] === 'cancelled') {
+            // Give the reserved units back to the catalog.
+            $order->releaseStock();
+        }
+
+        // Orders placed before stock reservation existed never deducted at
+        // checkout, so deduct when such a legacy order is delivered.
+        if ($validated['status'] === 'delivered' && ! $order->fresh()->stock_reserved_at) {
             $order->load('items');
+
             foreach ($order->items as $item) {
+                if (! $item->product_id) {
+                    continue;
+                }
+
                 Product::where('id', $item->product_id)
                     ->where('stock_quantity', '>=', $item->quantity)
                     ->decrement('stock_quantity', $item->quantity);
             }
+
+            $order->forceFill(['stock_reserved_at' => now()])->save();
         }
 
         return redirect()->route('admin.orders.show', $order->id)
@@ -104,6 +118,8 @@ class OrderController extends Controller
             'status' => 'cancelled',
             'cancelled_by' => 'admin',
         ]);
+
+        $order->releaseStock();
 
         return redirect()->route('admin.orders.show', $order->id)
             ->with('success', 'Payment rejected and order cancelled.');
