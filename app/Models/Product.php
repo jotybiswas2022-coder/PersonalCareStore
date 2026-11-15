@@ -70,6 +70,17 @@ class Product extends Model
         return $base;
     }
 
+    public function getDescriptionHtmlAttribute(): string
+    {
+        $description = (string) $this->description;
+
+        if ($description === strip_tags($description)) {
+            return nl2br(e($description));
+        }
+
+        return strip_tags($description, '<p><br><strong><b><em><i><u><s><ul><ol><li><h2><h3><h4><h5><blockquote><a><span>');
+    }
+
     public function getImageUrlsAttribute(): array
     {
         if (!$this->images) return [];

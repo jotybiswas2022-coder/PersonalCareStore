@@ -506,6 +506,16 @@
         color: #374151;
         max-width: 62rem;
     }
+    .pdp-prose > *:first-child { margin-top: 0; }
+    .pdp-prose > *:last-child { margin-bottom: 0; }
+    .pdp-prose p { margin: 0 0 0.875rem; }
+    .pdp-prose ul,
+    .pdp-prose ol { margin: 0 0 0.875rem; padding-left: 1.25rem; }
+    .pdp-prose ul { list-style: disc; }
+    .pdp-prose ol { list-style: decimal; }
+    .pdp-prose li { margin-bottom: 0.3125rem; }
+    .pdp-prose a { color: var(--green-deep); text-decoration: underline; }
+    .pdp-prose strong { color: var(--ink); font-weight: 700; }
 
     /* ─────────────── REVIEWS ─────────────── */
     .pdp-avg {
@@ -1128,7 +1138,7 @@
                 <h2>About this <em>product</em></h2>
             </div>
             <div class="pdp-card">
-                <div class="pdp-prose">{!! nl2br(e($product->description)) !!}</div>
+                <div class="pdp-prose">{!! $product->description_html !!}</div>
             </div>
         </section>
     @endif
