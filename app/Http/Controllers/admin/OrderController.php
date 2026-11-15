@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Mail\OrderStatusMail;
 use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -64,6 +65,8 @@ class OrderController extends Controller
                 ->with('error', 'Cannot change status. Order is already ' . $order->status . '.');
         }
 
+        $previousStatus = $order->status;
+
         $updateData = $validated;
         if ($validated['status'] === 'cancelled') {
             $updateData['cancelled_by'] = 'admin';
@@ -94,6 +97,13 @@ class OrderController extends Controller
             $order->forceFill(['stock_reserved_at' => now()])->save();
         }
 
+        if ($previousStatus !== $validated['status']) {
+            sendNotificationEmail(
+                $order->guest_email ?? $order->user?->email,
+                new OrderStatusMail($order->fresh(), $validated['status'])
+            );
+        }
+
         return redirect()->route('admin.orders.show', $order->id)
             ->with('success', 'Order status updated successfully.');
     }
@@ -105,6 +115,11 @@ class OrderController extends Controller
             'payment_status' => 'approved',
             'status' => 'processing',
         ]);
+
+        sendNotificationEmail(
+            $order->guest_email ?? $order->user?->email,
+            new OrderStatusMail($order->fresh(), 'processing')
+        );
 
         return redirect()->route('admin.orders.show', $order->id)
             ->with('success', 'Payment approved successfully.');
@@ -120,6 +135,11 @@ class OrderController extends Controller
         ]);
 
         $order->releaseStock();
+
+        sendNotificationEmail(
+            $order->guest_email ?? $order->user?->email,
+            new OrderStatusMail($order->fresh(), 'cancelled')
+        );
 
         return redirect()->route('admin.orders.show', $order->id)
             ->with('success', 'Payment rejected and order cancelled.');

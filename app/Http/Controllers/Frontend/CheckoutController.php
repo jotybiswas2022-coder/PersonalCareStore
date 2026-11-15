@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Exceptions\CheckoutException;
+use App\Mail\OrderPlacedMail;
+use App\Mail\PaymentProofReceivedMail;
 use App\Http\Controllers\Controller;
 use App\Models\Cart;
 use App\Models\Order;
@@ -161,6 +163,8 @@ class CheckoutController extends Controller
         // Store email in session for guest success page access
         session()->put('checkout_email', $validated['email']);
 
+        sendNotificationEmail($validated['email'], new OrderPlacedMail($order));
+
         return redirect()->route('checkout.success', $order->id);
     }
 
@@ -216,6 +220,11 @@ class CheckoutController extends Controller
             'proof_image' => $path,
             'payment_status' => 'paid',
         ]);
+
+        sendNotificationEmail(
+            $order->guest_email ?? $order->user?->email,
+            new PaymentProofReceivedMail($order)
+        );
 
         return redirect()->route('checkout.success', $order->id)
             ->with('success', 'Payment proof submitted successfully.');

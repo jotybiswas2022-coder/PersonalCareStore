@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Mail\ContactAutoReplyMail;
 use App\Models\ContactMessage;
 use Illuminate\Http\Request;
 
@@ -17,6 +18,8 @@ class ContactMessageController extends Controller
         ]);
 
         $contactMessage = ContactMessage::create($validated);
+
+        sendNotificationEmail($contactMessage->email, new ContactAutoReplyMail($contactMessage));
 
         return redirect()->route('contact.my-messages', ['email' => $contactMessage->email])
             ->with('success', 'Your message has been sent successfully! We will get back to you soon.');
