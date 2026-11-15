@@ -8,6 +8,7 @@ use App\Http\Controllers\Frontend\CheckoutController;
 use App\Http\Controllers\Frontend\OrderController as FrontendOrderController;
 use App\Http\Controllers\Frontend\TrackOrderController;
 use App\Http\Controllers\Frontend\ReviewController;
+use App\Http\Controllers\Frontend\WishlistController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProductController as AdminProductController;
 use App\Http\Controllers\Admin\OrderController;
@@ -131,6 +132,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/orders', [FrontendOrderController::class, 'index'])->name('orders.index');
     Route::get('/orders/{id}', [FrontendOrderController::class, 'show'])->name('orders.show');
     Route::patch('/orders/{id}/cancel', [FrontendOrderController::class, 'cancel'])->name('orders.cancel');
+
+    // Wishlist
+    Route::get('/wishlist', [WishlistController::class, 'index'])->name('wishlist.index');
+    Route::post('/wishlist/toggle', [WishlistController::class, 'toggle'])->name('wishlist.toggle');
+    Route::delete('/wishlist/{wishlist}', [WishlistController::class, 'destroy'])->name('wishlist.destroy');
 
     // Reviews
     Route::post('/reviews', [ReviewController::class, 'store'])->name('reviews.store');

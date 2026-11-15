@@ -222,6 +222,12 @@
         background: #FFFFFF;
         transform: scale(1.08);
     }
+    .pdp-like.is-active {
+        color: #E11D48;
+        background: #FFF1F4;
+        border-color: #FBD5D5;
+    }
+    .pdp-like.is-active svg { fill: currentColor; }
 
     /* Thumbnails */
     .pdp-thumbs {
@@ -1078,13 +1084,18 @@
                         </div>
                     @endif
 
-                    @if($product->images && count($product->images) > 0)
-                        <button class="pdp-like" title="Add to wishlist" aria-label="Add to wishlist">
+                    <form method="POST" action="{{ route('wishlist.toggle') }}">
+                        @csrf
+                        <input type="hidden" name="product_id" value="{{ $product->id }}">
+                        <button type="submit" class="pdp-like {{ $inWishlist ? 'is-active' : '' }}"
+                                title="{{ $inWishlist ? 'Remove from wishlist' : 'Save to wishlist' }}"
+                                aria-label="{{ $inWishlist ? 'Remove from wishlist' : 'Save to wishlist' }}"
+                                aria-pressed="{{ $inWishlist ? 'true' : 'false' }}">
                             <svg width="17" height="17" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
                                 <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/>
                             </svg>
                         </button>
-                    @endif
+                    </form>
                 </div>
 
                 @if($product->images && count($product->images) > 1)

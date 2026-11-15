@@ -35,6 +35,14 @@
                         <span class="nav-link-text">My Orders</span>
                         <svg class="nav-link-chevron" aria-hidden="true" width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.4"><polyline points="9 18 15 12 9 6"/></svg>
                     </a>
+                    <a href="{{ route('wishlist.index') }}" class="nav-link {{ request()->routeIs('wishlist.*') ? 'is-active' : '' }}"
+                       @if(request()->routeIs('wishlist.*')) aria-current="page" @endif>
+                        <span class="nav-link-icon" aria-hidden="true">
+                            <svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+                        </span>
+                        <span class="nav-link-text">Wishlist</span>
+                        <svg class="nav-link-chevron" aria-hidden="true" width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.4"><polyline points="9 18 15 12 9 6"/></svg>
+                    </a>
                 @endauth
             </div>
 
@@ -73,6 +81,10 @@
                             <a href="{{ route('orders.index') }}" class="nav-dropdown-item">
                                 <svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M16 4h2a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M9 12h6M9 16h6"/></svg>
                                 My Orders
+                            </a>
+                            <a href="{{ route('wishlist.index') }}" class="nav-dropdown-item">
+                                <svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+                                My Wishlist
                             </a>
                             @if(Auth::user()->is_admin)
                                 <a href="{{ route('admin.dashboard') }}" class="nav-dropdown-item is-admin">

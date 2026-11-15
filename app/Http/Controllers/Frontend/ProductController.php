@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\Wishlist;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -47,7 +48,11 @@ class ProductController extends Controller
             ->take(4)
             ->get();
 
-        return view('frontend.products.show', compact('product', 'relatedProducts'));
+        $inWishlist = auth()->check() && Wishlist::where('user_id', auth()->id())
+            ->where('product_id', $product->id)
+            ->exists();
+
+        return view('frontend.products.show', compact('product', 'relatedProducts', 'inWishlist'));
     }
 
     /**

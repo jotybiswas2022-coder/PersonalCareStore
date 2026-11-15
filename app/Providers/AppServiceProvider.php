@@ -2,9 +2,12 @@
 
 namespace App\Providers;
 
+use App\Listeners\MergeGuestCart;
 use App\Models\Cart;
-use Illuminate\Support\ServiceProvider;
+use Illuminate\Auth\Events\Login;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -15,8 +18,10 @@ class AppServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
+        Event::listen(Login::class, MergeGuestCart::class);
+
         View::composer('frontend.partials.nav', function ($view) {
-            $count = Cart::where('session_id', session()->getId())->count();
+            $count = Cart::forCurrentOwner()->count();
             $view->with('cartCount', $count);
         });
     }

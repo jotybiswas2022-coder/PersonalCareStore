@@ -15,8 +15,7 @@ class CartController extends Controller
      */
     public function index()
     {
-        $sessionId = session()->getId();
-        $cartItems = Cart::where('session_id', $sessionId)
+        $cartItems = Cart::forCurrentOwner()
             ->with('product')
             ->get();
 
@@ -48,7 +47,7 @@ class CartController extends Controller
             'code' => 'required|string|max:50',
         ]);
 
-        $cartItems = Cart::where('session_id', session()->getId())->with('product')->get();
+        $cartItems = Cart::forCurrentOwner()->with('product')->get();
 
         if ($cartItems->isEmpty()) {
             return back()->with('error', 'Add something to your cart before applying a coupon.');
@@ -98,9 +97,7 @@ class CartController extends Controller
             return back()->with('error', 'Not enough stock available.');
         }
 
-        $sessionId = session()->getId();
-
-        $cartItem = Cart::where('session_id', $sessionId)
+        $cartItem = Cart::forCurrentOwner()
             ->where('product_id', $productId)
             ->first();
 
@@ -111,11 +108,10 @@ class CartController extends Controller
             }
             $cartItem->update(['quantity' => $newQuantity]);
         } else {
-            Cart::create([
-                'session_id' => $sessionId,
+            Cart::create(array_merge(Cart::currentOwnerAttributes(), [
                 'product_id' => $productId,
                 'quantity' => $quantity,
-            ]);
+            ]));
         }
 
         return redirect()->route('cart.index')->with('success', 'Item added to cart!');
@@ -130,11 +126,9 @@ class CartController extends Controller
             'quantity' => 'required|integer|min:0|max:99',
         ]);
 
-        $sessionId = session()->getId();
-        $cartItem = Cart::where('id', $cartId)
-            ->where('session_id', $sessionId)
+        $cartItem = Cart::forCurrentOwner()
             ->with('product')
-            ->firstOrFail();
+            ->findOrFail($cartId);
 
         $quantity = $request->input('quantity');
 
@@ -155,7 +149,7 @@ class CartController extends Controller
 
         $cartItem->update(['quantity' => $quantity]);
 
-        $subtotal = Cart::where('session_id', $sessionId)
+        $subtotal = Cart::forCurrentOwner()
             ->with('product')
             ->get()
             ->sum(fn($i) => ($i->product->final_price ?? 0) * $i->quantity);
@@ -166,7 +160,7 @@ class CartController extends Controller
                 'quantity' => $quantity,
                 'subtotal' => currencyFormat($cartItem->product->final_price * $quantity),
                 'cartSubtotal' => currencyFormat($subtotal),
-                'itemCount' => Cart::where('session_id', $sessionId)->count(),
+                'itemCount' => Cart::forCurrentOwner()->count(),
             ]);
         }
 
@@ -188,21 +182,18 @@ class CartController extends Controller
      */
     public function remove(string $cartId)
     {
-        $sessionId = session()->getId();
-        $cartItem = Cart::where('id', $cartId)
-            ->where('session_id', $sessionId)
-            ->firstOrFail();
+        $cartItem = Cart::forCurrentOwner()->findOrFail($cartId);
 
         $cartItem->delete();
 
-        $remainingCount = Cart::where('session_id', $sessionId)->count();
+        $remainingCount = Cart::forCurrentOwner()->count();
 
         if (request()->wantsJson()) {
             return response()->json([
                 'removed' => true,
                 'itemCount' => $remainingCount,
                 'cartSubtotal' => currencyFormat(
-                    Cart::where('session_id', $sessionId)
+                    Cart::forCurrentOwner()
                         ->with('product')
                         ->get()
                         ->sum(fn($i) => ($i->product->final_price ?? 0) * $i->quantity)

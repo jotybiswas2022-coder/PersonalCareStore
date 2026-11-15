@@ -24,8 +24,7 @@ class CheckoutController extends Controller
      */
     public function index()
     {
-        $sessionId = session()->getId();
-        $cartItems = Cart::where('session_id', $sessionId)
+        $cartItems = Cart::forCurrentOwner()
             ->with('product')
             ->get();
 
@@ -66,8 +65,7 @@ class CheckoutController extends Controller
      */
     public function process(Request $request)
     {
-        $sessionId = session()->getId();
-        $cartItems = Cart::where('session_id', $sessionId)
+        $cartItems = Cart::forCurrentOwner()
             ->with('product')
             ->get();
 
@@ -89,7 +87,7 @@ class CheckoutController extends Controller
         ]);
 
         try {
-            $order = DB::transaction(function () use ($cartItems, $sessionId, $validated) {
+            $order = DB::transaction(function () use ($cartItems, $validated) {
                 // Lock the ordered rows so two checkouts cannot oversell the same units.
                 $products = Product::whereIn('id', $cartItems->pluck('product_id')->unique()->values())
                     ->lockForUpdate()
@@ -193,7 +191,7 @@ class CheckoutController extends Controller
                 }
 
                 // Clear the cart only once the order is safely stored
-                Cart::where('session_id', $sessionId)->delete();
+                Cart::forCurrentOwner()->delete();
 
                 return $order;
             });
