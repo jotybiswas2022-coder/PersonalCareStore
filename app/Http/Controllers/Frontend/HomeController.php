@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Models\Category;
+use App\Models\Product;
 
 class HomeController extends Controller
 {
@@ -12,6 +13,21 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('frontend.home');
+        $featuredProducts = Product::query()
+            ->where('is_active', true)
+            ->with('category')
+            ->orderByDesc('is_featured')
+            ->latest()
+            ->take(8)
+            ->get();
+
+        $navCategories = Category::query()
+            ->where('is_active', true)
+            ->withCount('products')
+            ->orderBy('sort_order')
+            ->take(8)
+            ->get();
+
+        return view('frontend.home', compact('featuredProducts', 'navCategories'));
     }
 }

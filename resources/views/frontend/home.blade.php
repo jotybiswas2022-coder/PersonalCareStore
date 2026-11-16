@@ -1086,6 +1086,232 @@
     .feature-wide p { max-width: 46rem; margin-bottom: 0; }
     .feature-wide .head-link { flex-shrink: 0; }
 
+    /* ─────────────── CATEGORIES ─────────────── */
+    .cat-section {
+        padding: 5.5rem 1.5rem 0;
+        background: #F6FAF7;
+    }
+    .cat-inner { max-width: 1280px; margin: 0 auto; }
+    .cat-head,
+    .featured-head {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: 1.5rem;
+        margin-bottom: 1.75rem;
+        flex-wrap: wrap;
+    }
+    .cat-head h2,
+    .featured-head h2 {
+        font-size: clamp(1.75rem, 3vw, 2.375rem);
+        font-weight: 800;
+        line-height: 1.06;
+        letter-spacing: -0.04em;
+        color: var(--ink);
+    }
+    .cat-head h2 em,
+    .featured-head h2 em {
+        font-family: 'Instrument Serif', Georgia, 'Times New Roman', serif;
+        font-style: italic;
+        font-weight: 500;
+        letter-spacing: -0.02em;
+        background: linear-gradient(100deg, #2E8B57 0%, #4EB47C 55%, #7BCB9B 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        color: transparent;
+        padding-right: 0.04em;
+    }
+    .cat-scroll {
+        display: grid;
+        grid-auto-flow: column;
+        grid-auto-columns: minmax(200px, 1fr);
+        gap: 1rem;
+        overflow-x: auto;
+        padding-bottom: 0.75rem;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+    }
+    .cat-scroll::-webkit-scrollbar { height: 6px; }
+    .cat-scroll::-webkit-scrollbar-thumb { background: #D3E4DA; border-radius: 999px; }
+    .cat-card {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        gap: 0.1875rem;
+        min-height: 168px;
+        padding: 1.25rem;
+        border-radius: 1.25rem;
+        overflow: hidden;
+        text-decoration: none;
+        color: #F2FBF5;
+        background:
+            radial-gradient(120% 100% at 100% 0%, rgba(72,199,132,0.38), transparent 60%),
+            linear-gradient(160deg, #0C3D28 0%, #062719 100%);
+        border: 1px solid rgba(255,255,255,0.08);
+        scroll-snap-align: start;
+        transition: transform 0.35s var(--ease), box-shadow 0.35s ease;
+    }
+    .cat-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 24px 44px -26px rgba(6, 40, 24, 0.7);
+    }
+    .cat-mark {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        width: 2.125rem;
+        height: 2.125rem;
+        border-radius: 0.75rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: 'Instrument Serif', Georgia, 'Times New Roman', serif;
+        font-style: italic;
+        font-size: 1.125rem;
+        color: #0B2E1D;
+        background: linear-gradient(135deg, #FFE08A, #FFD166);
+    }
+    .cat-name {
+        font-size: 1.0625rem;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        line-height: 1.25;
+    }
+    .cat-count {
+        font-size: 0.75rem;
+        color: rgba(226,245,232,0.72);
+    }
+
+    /* ─────────────── FEATURED PRODUCTS ─────────────── */
+    .featured-section {
+        padding: 4.5rem 1.5rem 5rem;
+        background: #F6FAF7;
+    }
+    .featured-inner { max-width: 1280px; margin: 0 auto; }
+    .feat-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 1.25rem;
+    }
+    .feat-card {
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 1.25rem;
+        transition: transform 0.35s var(--ease), box-shadow 0.35s ease, border-color 0.3s ease;
+    }
+    .feat-card:hover {
+        transform: translateY(-5px);
+        border-color: #CDEBD8;
+        box-shadow: 0 26px 48px -32px rgba(9, 50, 32, 0.45);
+    }
+    .feat-media {
+        position: relative;
+        display: block;
+        aspect-ratio: 4 / 3;
+        overflow: hidden;
+        background: #F3F8F4;
+    }
+    .feat-media img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.6s var(--ease);
+    }
+    .feat-card:hover .feat-media img { transform: scale(1.05); }
+    .feat-noimg {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #C7D6CD;
+        background: #F3F8F4;
+    }
+    .feat-save {
+        position: absolute;
+        top: 0.75rem;
+        left: 0.75rem;
+        padding: 0.25rem 0.5625rem;
+        border-radius: 9999px;
+        font-size: 0.625rem;
+        font-weight: 800;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: #FFFFFF;
+        background: linear-gradient(135deg, #E05252, #C43D3D);
+    }
+    .feat-body {
+        display: flex;
+        flex-direction: column;
+        gap: 0.1875rem;
+        padding: 1rem 1.125rem 1.125rem;
+    }
+    .feat-cat {
+        font-size: 0.6875rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--green-deep);
+    }
+    .feat-name {
+        font-size: 0.9375rem;
+        font-weight: 700;
+        letter-spacing: -0.015em;
+        line-height: 1.3;
+        color: var(--ink);
+        text-decoration: none;
+    }
+    .feat-name:hover { color: var(--green-deep); }
+    .feat-price {
+        display: flex;
+        align-items: baseline;
+        gap: 0.4375rem;
+        margin-top: 0.4375rem;
+    }
+    .feat-price .now { font-size: 0.9375rem; font-weight: 800; color: var(--ink); }
+    .feat-price .was { font-size: 0.75rem; color: #6F8073; text-decoration: line-through; }
+    .feat-cta {
+        display: inline-flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.5rem;
+        margin-top: 0.875rem;
+        padding: 0.625rem 0.875rem;
+        border-radius: 0.75rem;
+        background: #0E3D27;
+        color: #F1FBF5;
+        font-size: 0.8125rem;
+        font-weight: 600;
+        text-decoration: none;
+        transition: background 0.25s ease;
+    }
+    .feat-cta:hover { background: #15603C; }
+    .feat-cta.is-out { background: #E8EFEA; color: #5C6B62; }
+    @media (max-width: 1024px) {
+        .feat-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    }
+    @media (max-width: 760px) {
+        .cat-section { padding: 4rem 1.25rem 0; }
+        .featured-section { padding: 3rem 1.25rem 4rem; }
+        .feat-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+        .cat-scroll { grid-auto-columns: minmax(168px, 1fr); }
+    }
+    @media (max-width: 560px) {
+        .cat-section { padding: 3rem 1rem 0; }
+        .featured-section { padding: 2.5rem 1rem 3.5rem; }
+        .cat-head h2,
+        .featured-head h2 { font-size: 1.75rem; }
+        .cat-card { min-height: 148px; padding: 1rem; }
+        .feat-body { padding: 0.875rem; }
+        .feat-name { font-size: 0.875rem; }
+        .feat-media { aspect-ratio: 1 / 1; }
+    }
+
     /* ─────────────── CTA ─────────────── */
     .cta-section {
         padding: 0 1.5rem 5rem;
@@ -1860,6 +2086,98 @@
             </article>
         </div>
     </section>
+
+    <!-- ════════ CATEGORIES ════════ -->
+    @if($navCategories->isNotEmpty())
+    <section class="cat-section">
+        <div class="cat-inner" data-reveal>
+            <div class="cat-head">
+                <div>
+                    <span class="eyebrow-label">Browse</span>
+                    <h2>Shop by <em>category</em>.</h2>
+                </div>
+                <a href="{{ route('products.index') }}" class="head-link">
+                    All products
+                    <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.4">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 12h15m0 0l-6-6m6 6l-6 6"/>
+                    </svg>
+                </a>
+            </div>
+            <div class="cat-scroll">
+                @foreach($navCategories as $category)
+                    <a href="{{ route('products.byCategory', $category->id) }}" class="cat-card">
+                        <span class="cat-mark" aria-hidden="true">{{ strtoupper(mb_substr($category->name, 0, 1)) }}</span>
+                        <span class="cat-name">{{ $category->name }}</span>
+                        <span class="cat-count">{{ $category->products_count }} {{ Str::plural('product', $category->products_count) }}</span>
+                    </a>
+                @endforeach
+            </div>
+        </div>
+    </section>
+    @endif
+
+    <!-- ════════ FEATURED ════════ -->
+    @if($featuredProducts->isNotEmpty())
+    <section class="featured-section">
+        <div class="featured-inner" data-reveal>
+            <div class="featured-head">
+                <div>
+                    <span class="eyebrow-label">The edit</span>
+                    <h2>Featured <em>this week</em>.</h2>
+                </div>
+                <a href="{{ route('products.index') }}" class="head-link">
+                    View all products
+                    <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.4">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 12h15m0 0l-6-6m6 6l-6 6"/>
+                    </svg>
+                </a>
+            </div>
+            <div class="feat-grid">
+                @foreach($featuredProducts as $product)
+                    @php $featuredImage = $product->image_urls[0] ?? null; @endphp
+                    <article class="feat-card">
+                        <a href="{{ route('products.show', $product->id) }}" class="feat-media">
+                            @if($featuredImage)
+                                <img src="{{ $featuredImage }}" alt="{{ $product->name }}" loading="lazy" decoding="async">
+                            @else
+                                <span class="feat-noimg">
+                                    <svg width="34" height="34" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                                        <path d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                                    </svg>
+                                </span>
+                            @endif
+                            @if($product->discount_percent)
+                                <span class="feat-save">-{{ $product->discount_percent }}%</span>
+                            @endif
+                        </a>
+                        <div class="feat-body">
+                            <span class="feat-cat">{{ $product->category->name ?? 'Care' }}</span>
+                            <a href="{{ route('products.show', $product->id) }}" class="feat-name">{{ $product->name }}</a>
+                            <div class="feat-price">
+                                @if($product->sale_price)
+                                    <span class="now">{{ currencyFormat($product->final_price) }}</span>
+                                    <span class="was">{{ currencyFormat($product->sale_price) }}</span>
+                                @else
+                                    <span class="now">{{ currencyFormat($product->price) }}</span>
+                                @endif
+                            </div>
+                            @if($product->stock_quantity > 0)
+                                <a href="{{ route('products.show', $product->id) }}" class="feat-cta">
+                                    <span>View product</span>
+                                    <svg width="13" height="13" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.4">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 12h15m0 0l-6-6m6 6l-6 6"/>
+                                    </svg>
+                                </a>
+                            @else
+                                <span class="feat-cta is-out">Sold out</span>
+                            @endif
+                        </div>
+                    </article>
+                @endforeach
+            </div>
+        </div>
+    </section>
+    @endif
 
     <!-- ════════ CTA ════════ -->
     <section class="cta-section">
