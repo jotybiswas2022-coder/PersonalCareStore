@@ -424,7 +424,7 @@
         font-weight: 700;
         letter-spacing: 0.1em;
         text-transform: uppercase;
-        color: #2E8B57;
+        color: var(--green-deep);
         margin-bottom: 0.125rem;
     }
     .product-card .pc-name {
@@ -743,7 +743,7 @@
         font-weight: 700;
         letter-spacing: 0.16em;
         text-transform: uppercase;
-        color: #2E8B57;
+        color: var(--green-deep);
         margin-bottom: 1rem;
     }
     .eyebrow-label::before {
@@ -963,7 +963,7 @@
         font-size: 0.6875rem;
         font-weight: 700;
         letter-spacing: 0.12em;
-        color: #B4C6BB;
+        color: #647467;
     }
 
     /* Feature: large dark card */
@@ -1327,7 +1327,7 @@
         font-size: 0.9375rem;
         color: #10261A;
     }
-    .newsletter-form input::placeholder { color: #93A39A; }
+    .newsletter-form input::placeholder { color: #5F7368; }
     .newsletter-form button {
         flex-shrink: 0;
         border: none;
@@ -1353,9 +1353,9 @@
         margin-top: 0.75rem;
         padding-left: 0.5rem;
         font-size: 0.75rem;
-        color: #7A8B82;
+        color: #5F7368;
     }
-    .nl-note svg { color: #2E8B57; }
+    .nl-note svg { color: var(--green-deep); }
 
     @keyframes spinSlow {
         to { transform: rotate(360deg); }
