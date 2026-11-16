@@ -1238,15 +1238,6 @@
         border-color: rgba(255,255,255,0.34);
         transform: translateY(-3px);
     }
-    .cta-note {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.5rem;
-        margin-top: 1.5rem;
-        font-size: 0.75rem;
-        color: rgba(226,245,232,0.45);
-    }
-    .cta-note svg { color: #9DF3BE; }
 
     /* ─────────────── NEWSLETTER ─────────────── */
     .newsletter-section {
@@ -1699,17 +1690,13 @@
         <div class="hero-marquee" aria-hidden="true">
             <div class="track">
                 <div class="m-set">
-                    <span><svg width="9" height="9" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 7.6L22 12l-7.6 2.4L12 22l-2.4-7.6L2 12l7.6-2.4z"/></svg> Free delivery over BDT 2,000</span>
                     <span><svg width="9" height="9" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 7.6L22 12l-7.6 2.4L12 22l-2.4-7.6L2 12l7.6-2.4z"/></svg> 100% authentic products</span>
                     <span><svg width="9" height="9" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 7.6L22 12l-7.6 2.4L12 22l-2.4-7.6L2 12l7.6-2.4z"/></svg> Cruelty-free &amp; vegan</span>
-                    <span><svg width="9" height="9" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 7.6L22 12l-7.6 2.4L12 22l-2.4-7.6L2 12l7.6-2.4z"/></svg> 7-day easy returns</span>
                     <span><svg width="9" height="9" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 7.6L22 12l-7.6 2.4L12 22l-2.4-7.6L2 12l7.6-2.4z"/></svg> Trusted by 1,200+ customers</span>
                 </div>
                 <div class="m-set">
-                    <span><svg width="9" height="9" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 7.6L22 12l-7.6 2.4L12 22l-2.4-7.6L2 12l7.6-2.4z"/></svg> Free delivery over BDT 2,000</span>
                     <span><svg width="9" height="9" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 7.6L22 12l-7.6 2.4L12 22l-2.4-7.6L2 12l7.6-2.4z"/></svg> 100% authentic products</span>
                     <span><svg width="9" height="9" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 7.6L22 12l-7.6 2.4L12 22l-2.4-7.6L2 12l7.6-2.4z"/></svg> Cruelty-free &amp; vegan</span>
-                    <span><svg width="9" height="9" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 7.6L22 12l-7.6 2.4L12 22l-2.4-7.6L2 12l7.6-2.4z"/></svg> 7-day easy returns</span>
                     <span><svg width="9" height="9" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 7.6L22 12l-7.6 2.4L12 22l-2.4-7.6L2 12l7.6-2.4z"/></svg> Trusted by 1,200+ customers</span>
                 </div>
             </div>
