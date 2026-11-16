@@ -1900,12 +1900,6 @@
                         Track your order
                     </a>
                 </div>
-                <div class="cta-note">
-                    <svg width="13" height="13" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.6">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M20 6L9 17l-5-5"/>
-                    </svg>
-                    Free delivery over BDT 2,000 · 7-day easy returns
-                </div>
             </div>
         </div>
     </section>
