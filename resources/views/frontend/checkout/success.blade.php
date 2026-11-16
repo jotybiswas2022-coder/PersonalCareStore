@@ -7,7 +7,7 @@
 <style>
     /* ─────────────── TOKENS ─────────────── */
     .success-page {
-        background: #F6FAF7;
+        background: var(--page-bg);
         padding-bottom: 4.5rem;
     }
 
@@ -306,7 +306,7 @@
         justify-content: center;
         border-radius: 50%;
         border: 1px solid var(--line);
-        background: #F6FAF7;
+        background: var(--page-bg);
         color: #93A39A;
         font-size: 0.6875rem;
         font-weight: 800;
@@ -367,7 +367,7 @@
 
     /* ─────────────── LAYOUT ─────────────── */
     .success-layout {
-        max-width: 1180px;
+        max-width: var(--container);
         margin: 1.75rem auto 0;
         padding: 0 1.5rem;
         display: grid;

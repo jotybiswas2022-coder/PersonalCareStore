@@ -172,7 +172,7 @@
     .footer-inner {
         position: relative;
         z-index: 1;
-        max-width: 1280px;
+        max-width: var(--container);
         margin: 0 auto;
         padding: 3.75rem 1.5rem 2rem;
     }

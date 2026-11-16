@@ -81,11 +81,11 @@
 <style>
     /* ═══════════════ TOKENS / SHELL ═══════════════ */
     .pdp {
-        background: #F6FAF7;
+        background: var(--page-bg);
         padding-bottom: 4.5rem;
     }
     .pdp-container {
-        max-width: 1280px;
+        max-width: var(--container);
         margin: 0 auto;
         padding: 0 1.5rem;
     }
@@ -514,7 +514,7 @@
 
     /* ─────────────── SECTIONS ─────────────── */
     .pdp-section {
-        max-width: 1280px;
+        max-width: var(--container);
         margin: 3.75rem auto 0;
         padding: 0 1.5rem;
     }
@@ -687,7 +687,7 @@
         line-height: 1.65;
         color: #374151;
     }
-    .pdp-reply--form { background: #F6FAF7; border-left-color: #B9E2C9; }
+    .pdp-reply--form { background: var(--page-bg); border-left-color: #B9E2C9; }
     .pdp-reply--form .label { color: var(--green-deep); }
     .pdp-textarea {
         width: 100%;

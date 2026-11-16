@@ -168,7 +168,7 @@
     .nav-inner {
         position: relative;
         z-index: 1;
-        max-width: 1280px;
+        max-width: var(--container);
         min-height: var(--nav-h);
         margin: 0 auto;
         padding: 0 1.5rem;

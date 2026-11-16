@@ -92,7 +92,7 @@
     .shop-hero-inner {
         position: relative;
         z-index: 1;
-        max-width: 1280px;
+        max-width: var(--container);
         margin: 0 auto;
         display: grid;
         grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
@@ -234,10 +234,10 @@
     /* ─────────────── MAIN ─────────────── */
     .shop-main {
         padding: 2rem 1.5rem 5rem;
-        background: #F6FAF7;
+        background: var(--page-bg);
     }
     .shop-toolbar {
-        max-width: 1280px;
+        max-width: var(--container);
         margin: 0 auto 1.25rem;
         display: flex;
         align-items: center;
@@ -288,7 +288,7 @@
         white-space: nowrap;
     }
     .shop-search-note {
-        max-width: 1280px;
+        max-width: var(--container);
         margin: 0 auto 1rem;
         display: flex;
         align-items: center;
@@ -308,7 +308,7 @@
 
     /* ─────────────── PRODUCT GRID ─────────────── */
     .shop-grid {
-        max-width: 1280px;
+        max-width: var(--container);
         margin: 0 auto;
         display: grid;
         grid-template-columns: repeat(4, minmax(0, 1fr));

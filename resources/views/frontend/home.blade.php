@@ -66,13 +66,13 @@
     .hero-inner {
         position: relative;
         z-index: 1;
-        max-width: 1280px;
+        max-width: var(--container);
         margin: 0 auto;
         display: grid;
         grid-template-columns: minmax(0, 1.02fr) minmax(0, 0.98fr);
         align-items: center;
         gap: 3.5rem;
-        padding: 0 1.5rem 3.25rem;
+        padding: 0 var(--gutter) 3.25rem;
     }
     .hero-copy { position: relative; }
 
@@ -759,7 +759,7 @@
         position: relative;
         overflow: hidden;
         background: linear-gradient(180deg, #03190F 0%, #052A1A 55%, #07331F 100%);
-        padding: 2rem 1.5rem 4rem;
+        padding: var(--section-y-tight) var(--gutter) var(--section-y);
     }
     .stats-section::before {
         content: '';
@@ -771,7 +771,7 @@
     .stats-panel {
         position: relative;
         z-index: 1;
-        max-width: 1280px;
+        max-width: var(--container);
         margin: 0 auto;
         display: grid;
         grid-template-columns: repeat(5, minmax(0, 1fr));
@@ -840,8 +840,8 @@
     .features-section {
         position: relative;
         overflow: hidden;
-        padding: 5.5rem 1.5rem;
-        background: #F6FAF7;
+        padding: var(--section-y) var(--gutter);
+        background: var(--page-bg);
     }
     .features-section::before {
         content: '';
@@ -856,7 +856,7 @@
     }
     .section-head {
         position: relative;
-        max-width: 1280px;
+        max-width: var(--container);
         margin: 0 auto 3rem;
         display: grid;
         grid-template-columns: 1.15fr 0.85fr;
@@ -905,7 +905,7 @@
 
     .features-grid {
         position: relative;
-        max-width: 1280px;
+        max-width: var(--container);
         margin: 0 auto;
         display: grid;
         grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -1088,10 +1088,10 @@
 
     /* ─────────────── CATEGORIES ─────────────── */
     .cat-section {
-        padding: 5.5rem 1.5rem 0;
-        background: #F6FAF7;
+        padding: var(--section-y) var(--gutter) 0;
+        background: var(--page-bg);
     }
-    .cat-inner { max-width: 1280px; margin: 0 auto; }
+    .cat-inner { max-width: var(--container); margin: 0 auto; }
     .cat-head,
     .featured-head {
         display: flex;
@@ -1230,10 +1230,10 @@
 
     /* ─────────────── FEATURED PRODUCTS ─────────────── */
     .featured-section {
-        padding: 4.5rem 1.5rem 5rem;
-        background: #F6FAF7;
+        padding: var(--section-y) var(--gutter);
+        background: var(--page-bg);
     }
-    .featured-inner { max-width: 1280px; margin: 0 auto; }
+    .featured-inner { max-width: var(--container); margin: 0 auto; }
     .feat-grid {
         display: grid;
         grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -1416,13 +1416,13 @@
 
     /* ─────────────── CTA ─────────────── */
     .cta-section {
-        padding: 0 1.5rem 5rem;
-        background: #F6FAF7;
+        padding: 0 var(--gutter) var(--section-y);
+        background: var(--page-bg);
     }
     .cta-panel {
         position: relative;
         overflow: hidden;
-        max-width: 1280px;
+        max-width: var(--container);
         margin: 0 auto;
         padding: 4.5rem 2rem;
         border-radius: 2rem;
@@ -1569,13 +1569,13 @@
 
     /* ─────────────── NEWSLETTER ─────────────── */
     .newsletter-section {
-        padding: 0 1.5rem 5.5rem;
-        background: #F6FAF7;
+        padding: 0 var(--gutter) var(--section-y);
+        background: var(--page-bg);
     }
     .newsletter-inner {
         position: relative;
         overflow: hidden;
-        max-width: 1180px;
+        max-width: var(--container);
         margin: 0 auto;
         display: grid;
         grid-template-columns: 1.02fr 0.98fr;

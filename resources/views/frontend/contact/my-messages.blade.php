@@ -7,7 +7,7 @@
 <style>
     .inbox-page {
         padding: 3.5rem 1.5rem 5rem;
-        background: #F6FAF7;
+        background: var(--page-bg);
     }
     .inbox-inner { max-width: 1060px; margin: 0 auto; }
 

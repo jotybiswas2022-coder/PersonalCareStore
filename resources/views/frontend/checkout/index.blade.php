@@ -7,7 +7,7 @@
 <style>
     /* ─────────────── TOKENS / HERO ─────────────── */
     .checkout-page {
-        background: #F6FAF7;
+        background: var(--page-bg);
         padding-bottom: 4.5rem;
     }
     .checkout-hero {
@@ -37,7 +37,7 @@
     .checkout-hero-inner {
         position: relative;
         z-index: 1;
-        max-width: 1280px;
+        max-width: var(--container);
         margin: 0 auto;
         display: flex;
         flex-direction: column;
@@ -135,7 +135,7 @@
         justify-content: center;
         border-radius: 50%;
         border: 1px solid var(--line);
-        background: #F6FAF7;
+        background: var(--page-bg);
         color: #93A39A;
         font-size: 0.6875rem;
         font-weight: 800;
@@ -165,7 +165,7 @@
 
     /* ─────────────── ALERT ─────────────── */
     .checkout-alert-wrap {
-        max-width: 1280px;
+        max-width: var(--container);
         margin: 0 auto;
         padding: 1.5rem 1.5rem 0;
     }
@@ -186,7 +186,7 @@
 
     /* ─────────────── LAYOUT ─────────────── */
     .checkout-layout {
-        max-width: 1280px;
+        max-width: var(--container);
         margin: 1.75rem auto 0;
         padding: 0 1.5rem;
         display: grid;

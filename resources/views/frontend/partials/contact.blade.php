@@ -4,7 +4,7 @@
         position: relative;
         overflow: hidden;
         padding: 5rem 1.5rem 5.5rem;
-        background: #F6FAF7;
+        background: var(--page-bg);
     }
     .contact-section::before {
         content: '';
@@ -19,7 +19,7 @@
     }
     .contact-wrap {
         position: relative;
-        max-width: 1280px;
+        max-width: var(--container);
         margin: 0 auto;
         display: grid;
         grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);

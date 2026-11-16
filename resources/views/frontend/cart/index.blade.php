@@ -7,7 +7,7 @@
 <style>
     /* ═══════════════ TOKENS ═══════════════ */
     .cart-page {
-        background: #F6FAF7;
+        background: var(--page-bg);
         padding-bottom: 4.5rem;
     }
 
@@ -39,7 +39,7 @@
     .cart-hero-inner {
         position: relative;
         z-index: 1;
-        max-width: 1280px;
+        max-width: var(--container);
         margin: 0 auto;
         display: flex;
         flex-direction: column;
@@ -118,7 +118,7 @@
 
     /* ═══════════════ ALERTS ═══════════════ */
     .alert-wrap {
-        max-width: 1280px;
+        max-width: var(--container);
         margin: 0 auto;
         padding: 1.5rem 1.5rem 0;
     }
@@ -146,7 +146,7 @@
 
     /* ═══════════════ LAYOUT ═══════════════ */
     .cart-layout {
-        max-width: 1280px;
+        max-width: var(--container);
         margin: 0 auto;
         padding: 2.25rem 1.5rem 0;
         display: grid;
@@ -293,7 +293,7 @@
         width: 2.5rem;
         border-left: 1px solid var(--line);
         border-right: 1px solid var(--line);
-        background: #F6FAF7;
+        background: var(--page-bg);
         text-align: center;
         line-height: 2.375rem;
         font-size: 0.8125rem;
@@ -478,7 +478,7 @@
         transition: background 0.25s var(--ease), border-color 0.25s var(--ease);
     }
     .dd-option + .dd-option { margin-top: 0.25rem; }
-    .dd-option:hover { background: #F6FAF7; }
+    .dd-option:hover { background: var(--page-bg); }
     .dd-option input {
         position: absolute;
         opacity: 0;
@@ -590,7 +590,7 @@
         padding: 0.5625rem 0.75rem;
         border: 1px solid var(--line);
         border-radius: 0.625rem;
-        background: #F6FAF7;
+        background: var(--page-bg);
         font-family: inherit;
         font-size: 0.75rem;
         font-weight: 600;

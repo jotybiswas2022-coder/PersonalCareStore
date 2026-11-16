@@ -39,7 +39,7 @@
 @push('styles')
 <style>
     .trk-page {
-        background: #F6FAF7;
+        background: var(--page-bg);
     }
 
     /* ─────────────── HERO ─────────────── */
@@ -93,7 +93,7 @@
     .trk-hero-inner {
         position: relative;
         z-index: 1;
-        max-width: 1120px;
+        max-width: var(--container-narrow);
         margin: 0 auto;
     }
     .trk-top {
@@ -259,7 +259,7 @@
     .trk-wrap {
         position: relative;
         z-index: 1;
-        max-width: 1120px;
+        max-width: var(--container-narrow);
         margin: -2.75rem auto 0;
         padding: 0 1.5rem 4.5rem;
         display: flex;

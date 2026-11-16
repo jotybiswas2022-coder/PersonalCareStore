@@ -7,7 +7,7 @@
 @push('styles')
 <style>
     .wl-page {
-        background: #F6FAF7;
+        background: var(--page-bg);
         padding-bottom: 4rem;
     }
     .wl-hero {
@@ -19,7 +19,7 @@
             radial-gradient(900px 400px at 84% 0%, rgba(46,139,87,0.42), transparent 64%),
             linear-gradient(158deg, #07301E 0%, #062718 48%, #03190F 100%);
     }
-    .wl-hero-inner { max-width: 1280px; margin: 0 auto; }
+    .wl-hero-inner { max-width: var(--container); margin: 0 auto; }
     .wl-eyebrow {
         display: inline-flex;
         align-items: center;
@@ -54,7 +54,7 @@
     }
     .wl-hero p { margin-top: 0.625rem; font-size: 0.875rem; color: rgba(233,247,238,0.8); }
 
-    .wl-wrap { max-width: 1280px; margin: 0 auto; padding: 2.25rem 1.5rem 0; }
+    .wl-wrap { max-width: var(--container); margin: 0 auto; padding: 2.25rem 1.5rem 0; }
     .wl-grid {
         display: grid;
         grid-template-columns: repeat(4, minmax(0, 1fr));

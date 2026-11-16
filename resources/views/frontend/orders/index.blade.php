@@ -6,7 +6,7 @@
 @push('styles')
 <style>
     .orders-page {
-        background: #F6FAF7;
+        background: var(--page-bg);
     }
 
     /* ─────────────── HERO ─────────────── */
@@ -60,7 +60,7 @@
     .orders-hero-inner {
         position: relative;
         z-index: 1;
-        max-width: 1180px;
+        max-width: var(--container);
         margin: 0 auto;
         display: flex;
         flex-direction: column;
@@ -132,7 +132,7 @@
     .orders-wrap {
         position: relative;
         z-index: 1;
-        max-width: 1180px;
+        max-width: var(--container);
         margin: -2.75rem auto 0;
         padding: 0 1.5rem 4.5rem;
         display: flex;

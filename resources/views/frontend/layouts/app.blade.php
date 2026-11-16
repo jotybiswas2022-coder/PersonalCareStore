@@ -81,6 +81,12 @@
             box-sizing: border-box;
         }
         :root {
+            --container: 1280px;
+            --container-narrow: 1120px;
+            --gutter: 1.5rem;
+            --section-y: clamp(3.5rem, 5vw, 5.5rem);
+            --section-y-tight: clamp(1.5rem, 3vw, 3rem);
+            --page-bg: #F6FAF7;
             --ink: #10261A;
             --muted: #617067;
             --green: #2E8B57;
@@ -96,7 +102,7 @@
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
-            background-color: #F8F9FA;
+            background-color: var(--page-bg);
             color: #212529;
             min-height: 100vh;
             display: flex;
@@ -111,7 +117,7 @@
             outline-offset: 3px;
         }
         .container {
-            max-width: 1280px;
+            max-width: var(--container);
             margin: 0 auto;
             padding: 0 1rem;
         }
