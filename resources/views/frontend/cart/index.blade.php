@@ -604,7 +604,7 @@
         text-transform: none;
         letter-spacing: 0;
         font-weight: 400;
-        color: #93A39A;
+        color: #5F7368;
     }
     .coupon-form input:focus {
         border-color: #7BCB9B;

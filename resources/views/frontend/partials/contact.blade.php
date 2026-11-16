@@ -262,7 +262,7 @@
         outline: none;
         transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
     }
-    .c-input::placeholder { color: #9AA9A0; }
+    .c-input::placeholder { color: #5F7368; }
     .c-input:focus {
         border-color: #7BCB9B;
         background: #FFFFFF;

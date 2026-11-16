@@ -676,7 +676,7 @@
         height: 3rem;
         padding: 0 0.9375rem;
     }
-    .proof-form input[type="text"]::placeholder { color: #A9BBAF; }
+    .proof-form input[type="text"]::placeholder { color: #5F7368; }
     .proof-form input[type="file"] {
         padding: 0.5rem 0.625rem;
         font-size: 0.8125rem;

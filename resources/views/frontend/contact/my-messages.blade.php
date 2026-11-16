@@ -250,7 +250,7 @@
         font-family: inherit;
         padding: 0.5rem 0.625rem;
     }
-    .lookup-row input::placeholder { color: rgba(226,245,232,0.4); }
+    .lookup-row input::placeholder { color: rgba(226,245,232,0.62); }
     .lookup-row button {
         flex-shrink: 0;
         border: none;

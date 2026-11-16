@@ -271,7 +271,7 @@
         outline: none;
         transition: border-color 0.25s var(--ease), box-shadow 0.25s var(--ease), background 0.25s var(--ease);
     }
-    .form-group input::placeholder { color: #A9BBAF; }
+    .form-group input::placeholder { color: #5F7368; }
     .form-group input:hover,
     .form-group select:hover { border-color: #CFD8DD; }
     .form-group input:focus,

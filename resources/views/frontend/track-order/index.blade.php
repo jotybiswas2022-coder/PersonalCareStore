@@ -381,7 +381,7 @@
         outline: none;
         transition: border-color 0.25s var(--ease), box-shadow 0.25s var(--ease), background 0.25s var(--ease);
     }
-    .trk-field input::placeholder { color: #A3B3A9; }
+    .trk-field input::placeholder { color: #5F7368; }
     .trk-field input:focus {
         background: #FFFFFF;
         border-color: #8FD3AA;

@@ -192,7 +192,7 @@
         font-family: inherit;
         padding: 0.5rem 0.25rem;
     }
-    .shop-search-row input::placeholder { color: rgba(226,245,232,0.4); }
+    .shop-search-row input::placeholder { color: rgba(226,245,232,0.62); }
     .shop-search-row input[type="search"]::-webkit-search-cancel-button { -webkit-appearance: none; }
     .shop-search-row button {
         flex-shrink: 0;
