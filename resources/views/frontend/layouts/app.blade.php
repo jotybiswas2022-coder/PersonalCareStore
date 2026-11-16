@@ -80,6 +80,18 @@
             padding: 0;
             box-sizing: border-box;
         }
+        :root {
+            --ink: #10261A;
+            --muted: #617067;
+            --green: #2E8B57;
+            --green-deep: #17603C;
+            --gold: #FFD166;
+            --gold-light: #FFE08A;
+            --mint: #9DF3BE;
+            --line: #E4EEE8;
+            --surface: #FFFFFF;
+            --ease: cubic-bezier(0.22, 1, 0.36, 1);
+        }
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
             -webkit-font-smoothing: antialiased;

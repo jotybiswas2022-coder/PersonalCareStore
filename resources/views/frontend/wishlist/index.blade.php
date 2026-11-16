@@ -7,15 +7,6 @@
 @push('styles')
 <style>
     .wl-page {
-        --ink: #10261A;
-        --muted: #617067;
-        --green: #2E8B57;
-        --green-deep: #17603C;
-        --gold: #FFD166;
-        --line: #E4EEE8;
-        --surface: #FFFFFF;
-        --ease: cubic-bezier(0.22, 1, 0.36, 1);
-
         background: #F6FAF7;
         padding-bottom: 4rem;
     }
