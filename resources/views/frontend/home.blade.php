@@ -1446,24 +1446,15 @@
         .newsletter-form button { width: 100%; }
         .nl-note { justify-content: center; padding-left: 0; }
     }
-    /* ─────────────── MOBILE: essentials only ─────────────── */
+    /* ─────────────── MOBILE: compact hero, full content ─────────────── */
     @media (max-width: 640px) {
-        /* The short page lets the hero take any leftover height */
-        main { display: flex; flex-direction: column; }
-
-        /* Compact hero: headline and one clear action */
-        .hero {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            padding: 2rem 0 2.5rem;
-        }
+        /* Compact hero: headline, one clear action, then the page continues */
+        .hero { padding: 2rem 0 2.5rem; }
         .hero-inner { padding: 0 1rem; gap: 0; }
         .hero-eyebrow { margin-bottom: 1rem; }
         .hero-title { font-size: clamp(1.875rem, 8.6vw, 2.375rem); margin-bottom: 0.75rem; }
         .hero-sub {
-            max-width: 21rem;
+            max-width: 24rem;
             margin-bottom: 1.375rem;
             font-size: 0.875rem;
             line-height: 1.65;
@@ -1476,15 +1467,21 @@
         }
         .hero-actions .btn-ghost { display: none; }
 
-        /* Secondary and decorative blocks are desktop-only */
-        .hero-trust,
-        .hero-stage,
-        .hero-marquee,
-        .stats-section,
-        .features-section,
-        .cta-section,
-        .newsletter-section,
-        .contact-section { display: none !important; }
+        /* Only the decorative product stage stays desktop-only */
+        .hero-stage { display: none !important; }
+
+        /* Social proof and marquee keep working, just tighter */
+        .hero-trust { margin-top: 1.75rem; padding-top: 1.25rem; gap: 0.75rem; }
+        .avatar-stack .av { width: 2rem; height: 2rem; font-size: 0.625rem; }
+        .trust-text p { font-size: 0.6875rem; }
+        .hero-marquee { padding: 0.75rem 0; }
+
+        /* Sections below the hero stay on mobile — trim the vertical rhythm */
+        .stats-section { padding-top: 1.25rem; }
+        .features-section { padding-top: 3rem; }
+        .cta-section { padding-bottom: 3rem; }
+        .newsletter-section { padding-bottom: 3rem; }
+        .feature-hero { min-height: 0; }
     }
     @media (prefers-reduced-motion: reduce) {
         [data-reveal] {
