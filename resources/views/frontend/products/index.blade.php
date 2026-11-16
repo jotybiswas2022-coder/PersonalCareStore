@@ -312,17 +312,18 @@
         margin: 0 auto;
         display: grid;
         grid-template-columns: repeat(4, minmax(0, 1fr));
-        gap: 1.25rem;
+        gap: 1.375rem;
     }
     .shop-card {
+        position: relative;
         display: flex;
         flex-direction: column;
         overflow: hidden;
         background: #FFFFFF;
         border: 1px solid #E4EEE8;
-        border-radius: 1.25rem;
+        border-radius: 1.375rem;
         box-shadow: 0 16px 36px -42px rgba(9, 50, 32, 0.4);
-        transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease, border-color 0.3s ease;
+        transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s ease, border-color 0.3s ease;
         animation: shopRise 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
     }
     .shop-card:nth-child(2) { animation-delay: 0.05s; }
@@ -337,24 +338,28 @@
     .shop-card:nth-child(11) { animation-delay: 0.5s; }
     .shop-card:nth-child(12) { animation-delay: 0.55s; }
     .shop-card:hover {
-        transform: translateY(-5px);
-        border-color: #CDEBD8;
-        box-shadow: 0 26px 48px -32px rgba(9, 50, 32, 0.45);
+        transform: translateY(-6px);
+        border-color: #B9E2C9;
+        box-shadow: 0 30px 56px -34px rgba(9, 50, 32, 0.5);
     }
     .shop-media {
         position: relative;
-        display: block;
-        aspect-ratio: 4 / 3;
+        aspect-ratio: 1 / 1;
         overflow: hidden;
         background: #F3F8F4;
+    }
+    .shop-shot {
+        display: block;
+        width: 100%;
+        height: 100%;
     }
     .shop-media img {
         width: 100%;
         height: 100%;
         object-fit: cover;
-        transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+        transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
     }
-    .shop-card:hover .shop-media img { transform: scale(1.06); }
+    .shop-card:hover .shop-media img { transform: scale(1.07); }
     .shop-noimg {
         width: 100%;
         height: 100%;
@@ -385,30 +390,38 @@
         text-transform: uppercase;
         box-shadow: 0 4px 10px -4px rgba(0,0,0,0.3);
     }
-    .shop-badge.deal { background: linear-gradient(135deg, #E05252, #C43D3D); color: #FFFFFF; }
+    .shop-badge.deal {
+        background: linear-gradient(135deg, #E05252, #C43D3D);
+        color: #FFFFFF;
+        box-shadow: 0 6px 14px -8px rgba(196,61,61,0.8);
+    }
     .shop-badge.out { background: rgba(16,38,26,0.78); color: #FFFFFF; }
-    .shop-view {
+    .shop-quick-form {
         position: absolute;
-        left: 50%;
-        bottom: 0.75rem;
+        top: 0.625rem;
+        right: 0.625rem;
         z-index: 2;
+    }
+    .shop-quick {
         display: inline-flex;
         align-items: center;
-        gap: 0.3125rem;
-        padding: 0.4375rem 0.75rem;
-        border-radius: 9999px;
-        background: rgba(255,255,255,0.94);
-        border: 1px solid rgba(255,255,255,0.7);
-        box-shadow: 0 10px 24px -12px rgba(0,0,0,0.4);
+        justify-content: center;
+        width: 2.375rem;
+        height: 2.375rem;
+        padding: 0;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
         color: #10261A;
-        font-size: 0.6875rem;
-        font-weight: 600;
-        white-space: nowrap;
-        opacity: 0;
-        transform: translate(-50%, 8px);
-        transition: opacity 0.3s ease, transform 0.3s ease;
+        background: rgba(255,255,255,0.95);
+        box-shadow: 0 10px 22px -12px rgba(0,0,0,0.45);
+        transition: background 0.25s ease, color 0.25s ease, transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
     }
-    .shop-card:hover .shop-view { opacity: 1; transform: translate(-50%, 0); }
+    .shop-quick:hover {
+        background: #17603C;
+        color: #FFFFFF;
+        transform: scale(1.06);
+    }
     .shop-body {
         display: flex;
         flex-direction: column;
@@ -420,7 +433,7 @@
         font-weight: 700;
         letter-spacing: 0.1em;
         text-transform: uppercase;
-        color: #2E8B57;
+        color: #17603C;
         margin-bottom: 0.3125rem;
     }
     .shop-name {
@@ -436,7 +449,7 @@
         text-decoration: none;
         transition: color 0.2s ease;
     }
-    .shop-name:hover { color: #2E8B57; }
+    .shop-name:hover { color: #17603C; }
     .shop-deal {
         margin-top: 0.375rem;
         font-size: 0.6875rem;
@@ -475,56 +488,42 @@
     .shop-stock {
         display: inline-flex;
         align-items: center;
-        gap: 0.3125rem;
-        font-size: 0.625rem;
-        font-weight: 700;
-        letter-spacing: 0.06em;
-        text-transform: uppercase;
+        gap: 0.375rem;
+        font-size: 0.6875rem;
+        font-weight: 600;
+        color: #17603C;
         white-space: nowrap;
     }
-    .shop-stock.in { color: #17603C; }
-    .shop-stock.in::before {
+    .shop-stock::before {
         content: '';
         width: 0.375rem;
         height: 0.375rem;
         border-radius: 50%;
         background: #2E8B57;
-        box-shadow: 0 0 0 3px rgba(46,139,87,0.12);
     }
-    .shop-stock.out { color: #B45309; }
-    .shop-form { margin-top: 0.75rem; }
-    .shop-add {
-        position: relative;
-        overflow: hidden;
+    .shop-stock.out { color: #9C4A4A; }
+    .shop-stock.out::before { background: #C43D3D; }
+    .shop-foot {
         display: flex;
         align-items: center;
-        justify-content: center;
-        gap: 0.375rem;
-        width: 100%;
-        padding: 0.625rem 0.875rem;
-        border: none;
-        border-radius: 0.625rem;
-        background: linear-gradient(135deg, #FFE08A 0%, #FFD166 60%, #F5C14E 100%);
-        color: #12261B;
+        justify-content: space-between;
+        gap: 0.5rem;
+        margin-top: 0.875rem;
+        padding-top: 0.75rem;
+        border-top: 1px dashed #E4EEE8;
+    }
+    .shop-view-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.3125rem;
         font-size: 0.75rem;
         font-weight: 700;
-        font-family: inherit;
-        cursor: pointer;
-        box-shadow: inset 0 1px 0 rgba(255,255,255,0.55);
-        transition: transform 0.22s ease, box-shadow 0.22s ease;
+        color: #17603C;
+        text-decoration: none;
+        white-space: nowrap;
     }
-    .shop-add:hover {
-        transform: translateY(-1px);
-        box-shadow: 0 10px 20px -12px rgba(255,209,102,0.9), inset 0 1px 0 rgba(255,255,255,0.55);
-    }
-    .shop-add:active { transform: translateY(0); }
-    .shop-add.is-disabled {
-        background: #EEF3EF;
-        color: #9AA9A0;
-        cursor: not-allowed;
-        box-shadow: none;
-        transform: none;
-    }
+    .shop-view-link svg { transition: transform 0.25s ease; }
+    .shop-card:hover .shop-view-link svg { transform: translateX(3px); }
 
     /* ─────────────── EMPTY ─────────────── */
     .shop-empty {
@@ -655,10 +654,9 @@
         .shop-bottom { padding-top: 0.5rem; gap: 0.375rem; }
         .shop-price .now { font-size: 0.9375rem; }
         .shop-price .was { font-size: 0.6875rem; }
-        .shop-stock.in { display: none; }
-        .shop-stock.out { font-size: 0.5625rem; }
-        .shop-add { padding: 0.5rem; font-size: 0.6875rem; }
-        .shop-view { display: none; }
+        .shop-stock { font-size: 0.625rem; }
+        .shop-view-link { font-size: 0.6875rem; }
+        .shop-quick { width: 2.125rem; height: 2.125rem; }
         .shop-badges { top: 0.5rem; left: 0.5rem; }
         .shop-badge { font-size: 0.5625rem; padding: 0.1875rem 0.4375rem; }
         .shop-empty { padding: 2.5rem 1.25rem; border-radius: 1rem; }
@@ -753,16 +751,18 @@
         <div class="shop-grid">
             @forelse($products as $product)
                 <article class="shop-card">
-                    <a href="{{ route('products.show', $product->id) }}" class="shop-media">
-                        @if($product->images && count($product->images) > 0)
-                            <img src="{{ $product->image_urls[0] }}" alt="{{ $product->name }}" loading="lazy" decoding="async">
-                        @else
-                            <div class="shop-noimg">
-                                <svg width="38" height="38" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
-                                    <path d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-                                </svg>
-                            </div>
-                        @endif
+                    <div class="shop-media">
+                        <a href="{{ route('products.show', $product->id) }}" class="shop-shot" aria-label="View {{ $product->name }}">
+                            @if($product->images && count($product->images) > 0)
+                                <img src="{{ $product->image_urls[0] }}" alt="{{ $product->name }}" loading="lazy" decoding="async">
+                            @else
+                                <div class="shop-noimg">
+                                    <svg width="38" height="38" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                                        <path d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                                    </svg>
+                                </div>
+                            @endif
+                        </a>
 
                         <div class="shop-badges">
                             @if($product->discount_percent)
@@ -773,14 +773,18 @@
                             @endif
                         </div>
 
-                        <span class="shop-view">
-                            <svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-                                <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-                                <path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
-                            </svg>
-                            Quick view
-                        </span>
-                    </a>
+                        @if($product->stock_quantity > 0)
+                            <form class="shop-quick-form" action="{{ route('cart.add', $product->id) }}" method="POST">
+                                @csrf
+                                <button type="submit" class="shop-quick" aria-label="Add {{ $product->name }} to cart">
+                                    <svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                                        <path d="M9 20a1 1 0 100 2 1 1 0 000-2zM20 20a1 1 0 100 2 1 1 0 000-2z"/>
+                                        <path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/>
+                                    </svg>
+                                </button>
+                            </form>
+                        @endif
+                    </div>
 
                     <div class="shop-body">
                         <div class="shop-cat">{{ $product->category->name ?? 'Uncategorized' }}</div>
@@ -803,27 +807,21 @@
                                     <span class="now">{{ currencyFormat($product->price) }}</span>
                                 @endif
                             </div>
+                        </div>
+
+                        <div class="shop-foot">
                             @if($product->stock_quantity > 0)
-                                <span class="shop-stock in">In stock</span>
+                                <span class="shop-stock">In stock</span>
                             @else
                                 <span class="shop-stock out">Sold out</span>
                             @endif
+                            <a href="{{ route('products.show', $product->id) }}" class="shop-view-link">
+                                View
+                                <svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.4">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M4 12h15m0 0l-6-6m6 6l-6 6"/>
+                                </svg>
+                            </a>
                         </div>
-
-                        <form class="shop-form" action="{{ route('cart.add', $product->id) }}" method="POST">
-                            @csrf
-                            @if($product->stock_quantity > 0)
-                                <button type="submit" class="shop-add">
-                                    <svg width="13" height="13" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-                                        <path d="M9 20a1 1 0 100 2 1 1 0 000-2zM20 20a1 1 0 100 2 1 1 0 000-2z"/>
-                                        <path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/>
-                                    </svg>
-                                    Add to cart
-                                </button>
-                            @else
-                                <button type="button" class="shop-add is-disabled" disabled>Unavailable</button>
-                            @endif
-                        </form>
                     </div>
                 </article>
             @empty
