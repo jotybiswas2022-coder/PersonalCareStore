@@ -203,7 +203,7 @@
         animation: sFadeUp 0.6s var(--ease) 0.28s both;
     }
     .success-hero h1 em {
-        font-family: Georgia, 'Times New Roman', serif;
+        font-family: 'Instrument Serif', Georgia, 'Times New Roman', serif;
         font-style: italic;
         font-weight: 500;
         letter-spacing: -0.02em;

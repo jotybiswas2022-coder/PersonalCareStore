@@ -145,7 +145,7 @@
     .hero-title .line:nth-child(2) > span { animation-delay: 0.3s; }
     .hero-title .line:nth-child(3) > span { animation-delay: 0.42s; }
     .hero-title em {
-        font-family: Georgia, 'Times New Roman', serif;
+        font-family: 'Instrument Serif', Georgia, 'Times New Roman', serif;
         font-style: italic;
         font-weight: 500;
         letter-spacing: -0.025em;
@@ -871,7 +871,7 @@
         color: #10261A;
     }
     .section-head h2 em {
-        font-family: Georgia, 'Times New Roman', serif;
+        font-family: 'Instrument Serif', Georgia, 'Times New Roman', serif;
         font-style: italic;
         font-weight: 500;
         letter-spacing: -0.025em;
@@ -1158,7 +1158,7 @@
         margin-bottom: 1rem;
     }
     .cta-inner h2 em {
-        font-family: Georgia, 'Times New Roman', serif;
+        font-family: 'Instrument Serif', Georgia, 'Times New Roman', serif;
         font-style: italic;
         font-weight: 500;
         letter-spacing: -0.02em;

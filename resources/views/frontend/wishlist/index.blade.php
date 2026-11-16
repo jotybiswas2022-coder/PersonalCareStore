@@ -52,7 +52,7 @@
         color: #FFFFFF;
     }
     .wl-hero h1 em {
-        font-family: Georgia, 'Times New Roman', serif;
+        font-family: 'Instrument Serif', Georgia, 'Times New Roman', serif;
         font-style: italic;
         font-weight: 500;
         background: linear-gradient(100deg, #FFEFC2 0%, #FFD166 45%, #9DF3BE 100%);

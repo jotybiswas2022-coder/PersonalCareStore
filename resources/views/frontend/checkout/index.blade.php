@@ -94,7 +94,7 @@
         color: #FFFFFF;
     }
     .checkout-hero h1 em {
-        font-family: Georgia, 'Times New Roman', serif;
+        font-family: 'Instrument Serif', Georgia, 'Times New Roman', serif;
         font-style: italic;
         font-weight: 500;
         letter-spacing: -0.02em;

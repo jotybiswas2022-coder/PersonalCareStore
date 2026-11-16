@@ -545,7 +545,7 @@
         color: var(--ink);
     }
     .pdp-section-head h2 em {
-        font-family: Georgia, 'Times New Roman', serif;
+        font-family: 'Instrument Serif', Georgia, 'Times New Roman', serif;
         font-style: italic;
         font-weight: 500;
         letter-spacing: -0.025em;
