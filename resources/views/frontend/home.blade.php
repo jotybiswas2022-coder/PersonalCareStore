@@ -1123,10 +1123,8 @@
         padding-right: 0.04em;
     }
     .cat-scroll {
-        display: grid;
-        grid-auto-flow: column;
-        grid-auto-columns: minmax(200px, 1fr);
-        gap: 1rem;
+        display: flex;
+        gap: 1.125rem;
         overflow-x: auto;
         padding-bottom: 0.75rem;
         scroll-snap-type: x mandatory;
@@ -1136,52 +1134,98 @@
     .cat-scroll::-webkit-scrollbar-thumb { background: #D3E4DA; border-radius: 999px; }
     .cat-card {
         position: relative;
+        isolation: isolate;
+        flex: 1 1 0;
+        min-width: 248px;
+        min-height: 216px;
         display: flex;
         flex-direction: column;
         justify-content: flex-end;
-        gap: 0.1875rem;
-        min-height: 168px;
-        padding: 1.25rem;
-        border-radius: 1.25rem;
+        align-items: flex-start;
+        padding: 1.5rem;
+        border-radius: 1.5rem;
         overflow: hidden;
         text-decoration: none;
         color: #F2FBF5;
-        background:
-            radial-gradient(120% 100% at 100% 0%, rgba(72,199,132,0.38), transparent 60%),
-            linear-gradient(160deg, #0C3D28 0%, #062719 100%);
+        background: linear-gradient(160deg, #0C3D28 0%, #072B1C 100%);
         border: 1px solid rgba(255,255,255,0.08);
         scroll-snap-align: start;
-        transition: transform 0.35s var(--ease), box-shadow 0.35s ease;
+        transition: transform 0.4s var(--ease), box-shadow 0.4s ease;
+    }
+    .cat-card::before {
+        content: '';
+        position: absolute;
+        top: -38%;
+        right: -22%;
+        width: 250px;
+        height: 250px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(72,199,132,0.45), transparent 62%);
+        filter: blur(12px);
+        z-index: -1;
+        transition: transform 0.7s var(--ease);
+    }
+    .cat-card::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        background-image:
+            linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+        background-size: 32px 32px;
+        -webkit-mask-image: radial-gradient(circle at 100% 0%, #000, transparent 72%);
+        mask-image: radial-gradient(circle at 100% 0%, #000, transparent 72%);
     }
     .cat-card:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 24px 44px -26px rgba(6, 40, 24, 0.7);
+        transform: translateY(-5px);
+        box-shadow: 0 30px 56px -30px rgba(4, 32, 20, 0.85);
     }
-    .cat-mark {
+    .cat-card:hover::before { transform: scale(1.14) translate(-10px, 12px); }
+    .cat-glyph {
         position: absolute;
-        top: 1rem;
-        right: 1rem;
-        width: 2.125rem;
-        height: 2.125rem;
-        border-radius: 0.75rem;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        top: -1.75rem;
+        right: 0.75rem;
         font-family: 'Instrument Serif', Georgia, 'Times New Roman', serif;
         font-style: italic;
-        font-size: 1.125rem;
-        color: #0B2E1D;
-        background: linear-gradient(135deg, #FFE08A, #FFD166);
-    }
-    .cat-name {
-        font-size: 1.0625rem;
-        font-weight: 700;
-        letter-spacing: -0.02em;
-        line-height: 1.25;
+        font-size: 7rem;
+        line-height: 1;
+        color: rgba(255,255,255,0.08);
+        z-index: -1;
+        pointer-events: none;
     }
     .cat-count {
-        font-size: 0.75rem;
-        color: rgba(226,245,232,0.72);
+        font-size: 0.625rem;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: #9DF3BE;
+        margin-bottom: 0.375rem;
+    }
+    .cat-name {
+        font-size: 1.5rem;
+        font-weight: 700;
+        letter-spacing: -0.035em;
+        line-height: 1.15;
+    }
+    .cat-go {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 2.375rem;
+        height: 2.375rem;
+        margin-top: 1rem;
+        border-radius: 50%;
+        background: rgba(255,255,255,0.1);
+        border: 1px solid rgba(255,255,255,0.18);
+        color: #F2FBF5;
+        transition: background 0.3s ease, color 0.3s ease, transform 0.3s var(--ease);
+    }
+    .cat-card:hover .cat-go {
+        background: var(--gold);
+        border-color: var(--gold);
+        color: #0B2E1D;
+        transform: translateX(3px);
     }
 
     /* ─────────────── FEATURED PRODUCTS ─────────────── */
@@ -1193,36 +1237,41 @@
     .feat-grid {
         display: grid;
         grid-template-columns: repeat(4, minmax(0, 1fr));
-        gap: 1.25rem;
+        gap: 1.375rem;
     }
     .feat-card {
+        position: relative;
         display: flex;
         flex-direction: column;
         overflow: hidden;
         background: var(--surface);
         border: 1px solid var(--line);
-        border-radius: 1.25rem;
-        transition: transform 0.35s var(--ease), box-shadow 0.35s ease, border-color 0.3s ease;
+        border-radius: 1.375rem;
+        transition: transform 0.4s var(--ease), box-shadow 0.4s ease, border-color 0.3s ease;
     }
     .feat-card:hover {
-        transform: translateY(-5px);
-        border-color: #CDEBD8;
-        box-shadow: 0 26px 48px -32px rgba(9, 50, 32, 0.45);
+        transform: translateY(-6px);
+        border-color: #B9E2C9;
+        box-shadow: 0 30px 56px -34px rgba(9, 50, 32, 0.5);
     }
     .feat-media {
         position: relative;
-        display: block;
-        aspect-ratio: 4 / 3;
+        aspect-ratio: 1 / 1;
         overflow: hidden;
         background: #F3F8F4;
+    }
+    .feat-shot {
+        display: block;
+        width: 100%;
+        height: 100%;
     }
     .feat-media img {
         width: 100%;
         height: 100%;
         object-fit: cover;
-        transition: transform 0.6s var(--ease);
+        transition: transform 0.65s var(--ease);
     }
-    .feat-card:hover .feat-media img { transform: scale(1.05); }
+    .feat-card:hover .feat-media img { transform: scale(1.07); }
     .feat-noimg {
         width: 100%;
         height: 100%;
@@ -1244,12 +1293,38 @@
         text-transform: uppercase;
         color: #FFFFFF;
         background: linear-gradient(135deg, #E05252, #C43D3D);
+        box-shadow: 0 6px 14px -8px rgba(196,61,61,0.8);
+    }
+    .feat-quick-form {
+        position: absolute;
+        top: 0.625rem;
+        right: 0.625rem;
+    }
+    .feat-quick {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 2.375rem;
+        height: 2.375rem;
+        padding: 0;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        color: #10261A;
+        background: rgba(255,255,255,0.95);
+        box-shadow: 0 10px 22px -12px rgba(0,0,0,0.45);
+        transition: background 0.25s ease, color 0.25s ease, transform 0.25s var(--ease);
+    }
+    .feat-quick:hover {
+        background: var(--green-deep);
+        color: #FFFFFF;
+        transform: scale(1.06);
     }
     .feat-body {
         display: flex;
         flex-direction: column;
         gap: 0.1875rem;
-        padding: 1rem 1.125rem 1.125rem;
+        padding: 1rem 1.125rem 1.0625rem;
     }
     .feat-cat {
         font-size: 0.6875rem;
@@ -1265,6 +1340,11 @@
         line-height: 1.3;
         color: var(--ink);
         text-decoration: none;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        min-height: 2.6em;
     }
     .feat-name:hover { color: var(--green-deep); }
     .feat-price {
@@ -1275,23 +1355,44 @@
     }
     .feat-price .now { font-size: 0.9375rem; font-weight: 800; color: var(--ink); }
     .feat-price .was { font-size: 0.75rem; color: #6F8073; text-decoration: line-through; }
-    .feat-cta {
-        display: inline-flex;
+    .feat-foot {
+        display: flex;
         align-items: center;
         justify-content: space-between;
         gap: 0.5rem;
         margin-top: 0.875rem;
-        padding: 0.625rem 0.875rem;
-        border-radius: 0.75rem;
-        background: #0E3D27;
-        color: #F1FBF5;
-        font-size: 0.8125rem;
-        font-weight: 600;
-        text-decoration: none;
-        transition: background 0.25s ease;
+        padding-top: 0.75rem;
+        border-top: 1px dashed var(--line);
     }
-    .feat-cta:hover { background: #15603C; }
-    .feat-cta.is-out { background: #E8EFEA; color: #5C6B62; }
+    .feat-stock {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.375rem;
+        font-size: 0.6875rem;
+        font-weight: 600;
+        color: var(--green-deep);
+    }
+    .feat-stock::before {
+        content: '';
+        width: 0.375rem;
+        height: 0.375rem;
+        border-radius: 50%;
+        background: #2E8B57;
+    }
+    .feat-stock.is-out { color: #9C4A4A; }
+    .feat-stock.is-out::before { background: #C43D3D; }
+    .feat-view {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.3125rem;
+        font-size: 0.75rem;
+        font-weight: 700;
+        color: var(--green-deep);
+        text-decoration: none;
+        white-space: nowrap;
+    }
+    .feat-view svg { transition: transform 0.25s ease; }
+    .feat-card:hover .feat-view svg { transform: translateX(3px); }
     @media (max-width: 1024px) {
         .feat-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
     }
@@ -1299,17 +1400,18 @@
         .cat-section { padding: 4rem 1.25rem 0; }
         .featured-section { padding: 3rem 1.25rem 4rem; }
         .feat-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
-        .cat-scroll { grid-auto-columns: minmax(168px, 1fr); }
+        .cat-card { flex: 0 0 240px; min-height: 200px; }
     }
     @media (max-width: 560px) {
         .cat-section { padding: 3rem 1rem 0; }
         .featured-section { padding: 2.5rem 1rem 3.5rem; }
         .cat-head h2,
         .featured-head h2 { font-size: 1.75rem; }
-        .cat-card { min-height: 148px; padding: 1rem; }
+        .cat-card { flex: 0 0 210px; min-height: 184px; padding: 1.125rem; }
+        .cat-name { font-size: 1.25rem; }
         .feat-body { padding: 0.875rem; }
         .feat-name { font-size: 0.875rem; }
-        .feat-media { aspect-ratio: 1 / 1; }
+        .feat-quick { width: 2.125rem; height: 2.125rem; }
     }
 
     /* ─────────────── CTA ─────────────── */
@@ -2106,9 +2208,14 @@
             <div class="cat-scroll">
                 @foreach($navCategories as $category)
                     <a href="{{ route('products.byCategory', $category->id) }}" class="cat-card">
-                        <span class="cat-mark" aria-hidden="true">{{ strtoupper(mb_substr($category->name, 0, 1)) }}</span>
-                        <span class="cat-name">{{ $category->name }}</span>
+                        <span class="cat-glyph" aria-hidden="true">{{ strtoupper(mb_substr($category->name, 0, 1)) }}</span>
                         <span class="cat-count">{{ $category->products_count }} {{ Str::plural('product', $category->products_count) }}</span>
+                        <span class="cat-name">{{ $category->name }}</span>
+                        <span class="cat-go" aria-hidden="true">
+                            <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.4">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M4 12h15m0 0l-6-6m6 6l-6 6"/>
+                            </svg>
+                        </span>
                     </a>
                 @endforeach
             </div>
@@ -2136,20 +2243,33 @@
                 @foreach($featuredProducts as $product)
                     @php $featuredImage = $product->image_urls[0] ?? null; @endphp
                     <article class="feat-card">
-                        <a href="{{ route('products.show', $product->id) }}" class="feat-media">
-                            @if($featuredImage)
-                                <img src="{{ $featuredImage }}" alt="{{ $product->name }}" loading="lazy" decoding="async">
-                            @else
-                                <span class="feat-noimg">
-                                    <svg width="34" height="34" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
-                                        <path d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-                                    </svg>
-                                </span>
-                            @endif
+                        <div class="feat-media">
+                            <a href="{{ route('products.show', $product->id) }}" class="feat-shot" aria-label="View {{ $product->name }}">
+                                @if($featuredImage)
+                                    <img src="{{ $featuredImage }}" alt="{{ $product->name }}" loading="lazy" decoding="async">
+                                @else
+                                    <span class="feat-noimg">
+                                        <svg width="34" height="34" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                                            <path d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                                        </svg>
+                                    </span>
+                                @endif
+                            </a>
                             @if($product->discount_percent)
                                 <span class="feat-save">-{{ $product->discount_percent }}%</span>
                             @endif
-                        </a>
+                            @if($product->stock_quantity > 0)
+                                <form class="feat-quick-form" method="POST" action="{{ route('cart.add', $product->id) }}">
+                                    @csrf
+                                    <button type="submit" class="feat-quick" aria-label="Add {{ $product->name }} to cart">
+                                        <svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                                            <path d="M9 20a1 1 0 100 2 1 1 0 000-2zM20 20a1 1 0 100 2 1 1 0 000-2z"/>
+                                            <path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/>
+                                        </svg>
+                                    </button>
+                                </form>
+                            @endif
+                        </div>
                         <div class="feat-body">
                             <span class="feat-cat">{{ $product->category->name ?? 'Care' }}</span>
                             <a href="{{ route('products.show', $product->id) }}" class="feat-name">{{ $product->name }}</a>
@@ -2161,16 +2281,19 @@
                                     <span class="now">{{ currencyFormat($product->price) }}</span>
                                 @endif
                             </div>
-                            @if($product->stock_quantity > 0)
-                                <a href="{{ route('products.show', $product->id) }}" class="feat-cta">
-                                    <span>View product</span>
-                                    <svg width="13" height="13" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.4">
+                            <div class="feat-foot">
+                                @if($product->stock_quantity > 0)
+                                    <span class="feat-stock">In stock</span>
+                                @else
+                                    <span class="feat-stock is-out">Sold out</span>
+                                @endif
+                                <a href="{{ route('products.show', $product->id) }}" class="feat-view">
+                                    View
+                                    <svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.4">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M4 12h15m0 0l-6-6m6 6l-6 6"/>
                                     </svg>
                                 </a>
-                            @else
-                                <span class="feat-cta is-out">Sold out</span>
-                            @endif
+                            </div>
                         </div>
                     </article>
                 @endforeach
